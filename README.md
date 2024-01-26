@@ -41,7 +41,8 @@ Video: <a href="https://youtu.be/d1oIlVedyVw">Demo of the request management sys
 ## Deployment
 
 Rename the config.json file to appsettings.json and replace the text with square brackets.
-WARNING: If you deploy the application to the Linux system, you must change the MySQL configuration using the lower_case_table_names=1 parameter.
+
+WARNING: If you deploy the application to the Linux system, you must change the MySQL configuration using the <a href="https://askubuntu.com/questions/1261422/how-to-install-mysql-8-0-with-lower-case-table-names-1-on-ubuntu-server-20-04-lt">lower_case_table_names=1</a> parameter.
 
 ## License
 
