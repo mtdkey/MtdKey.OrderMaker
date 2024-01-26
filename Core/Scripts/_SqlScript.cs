@@ -11,12 +11,12 @@ namespace MtdKey.OrderMaker.Core.Scripts
     internal static class SqlScript
     {
 
-        public static string GetStoreIds(FilterSQLparams filter)
+        public static string GetStoreIds(FilterSQLparams filterParams)
         {
             var storeIdsScript = new StoreIdsScript();
-            var factory = new FilterScriptFactory(storeIdsScript, filter);
+            var factory = new FilterScriptFactory(storeIdsScript, filterParams);
 
-            if (filter.FormId == string.Empty)
+            if (filterParams.FormId == string.Empty)
                 return factory.Script;
 
             return factory.BuildScript();
