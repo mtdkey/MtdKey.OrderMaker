@@ -1,0 +1,77 @@
+﻿@model DetailsModel
+@inject IHtmlLocalizer<SharedResource> Localizer
+
+
+<div id="dialog-start" class="mtd-dialog mtd-dialog-hidden">
+    <div class="mtd-dialog-container">
+        <div class="mtd-dialog-title">
+            <div>
+                <span>@Localizer["Approval process"]</span>
+            </div>
+            <div>
+                <button mtd-dialog-cancel class="mdc-icon-button material-icons">close</button>
+            </div>
+        </div>
+        <div class="mtd-dialog-content">
+            <form mtd-data-form method="post" autocomplete='off' enctype='multipart/form-data' action='/api/store/approval/start'>
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="id-store" value="@Model.MtdStore.Id" />
+                <div class="mtd-dialog-info">
+                    @if (Model.ApprovalStatus == Core.ApprovalStatus.Iteraction)
+                    {
+                        <div style="color: darkred">
+                            @Localizer["Before approval, make sure that the document is filled in correctly and the comments made are corrected."]
+                        </div>
+                    }
+                    else
+                    {
+                        @Localizer["This document must be agreed upon.<br/> Send the document for approval by clicking the Apply button."]
+                    }
+                </div>
+
+                @if (Model.ListResolutions != null && Model.ListResolutions.Count > 0)
+                {
+                    <div class="mtd-dialog-space"></div>
+
+                    @await Component.InvokeAsync(typeof(MTDSelectList), new MTDSelectListTags
+                    {
+                        Id = "select-decision",
+                        Name = "id-resolution",
+                        Label = "Decision Result",
+                        LabelLocalized = true,
+                        Items = Model.ListResolutions,
+                        ValueId = Model.ListResolutions.Select(x => x.Id).FirstOrDefault(),
+                        MTDSelectListView = MTDSelectListViews.Outlined
+                    })
+                }
+
+                <div class="mtd-dialog-space"></div>
+
+                @await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags
+                   {
+                       Id = "comment-start",
+                       Name = "comment-start-id",
+                       Label = "Comment",
+                       LabelLocalized = true,
+                       Placeholder = "Create a comment if necessary",
+                       PlaceholderLocalized = true,
+                       Cols = 40,
+                       Rows = 3,
+                       MaxLength = 250,
+                       MTDTexFieldView = MTDTextFieldViews.TextArea,
+                   })
+                <div class="mtd-dialog-buttons">
+                    <button mtd-dialog-cancel mtd-data-clicker class="mdc-button mdc-button--raised mdc-theme--secondary-bg" type="button" mtd-data-message="@Localizer["Approval process was started."]">
+                        <div class="mdc-button__ripple"></div>
+                        <span class="mdc-button__label">@Localizer["Apply"]</span>
+                    </button>
+                    <button mtd-dialog-cancel class="mdc-button" type="button">
+                        <div class="mdc-button__ripple"></div>
+                        <span class="mdc-button__label">@Localizer["Cancel"]</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,14 @@
+﻿@model Models.Index.RowsModelView
+
+@await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags
+{
+    Id = "search-text",
+    Name = "search-text",  
+    Placeholder = "Search for words in text fields",
+    PlaceholderLocalized = true,
+    IconLeading = "fa fa-search",
+    Value = Model.SearchText,
+    MtdInputClicker = true,    
+    //HelperText = "A plus sign between words means logical AND",
+    HelperTextLocalizer = true,
+})

@@ -1,0 +1,109 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using MtdKey.OrderMaker.Areas.Identity.Data
+@inject SignInManager<WebAppUser> SignInManager
+@inject UserManager<WebAppUser> UserManager
+@inject Services.ConfigHandler configHandler;
+
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> Localizer
+
+@{
+    string userName = "";
+    string userEmail = "";
+    string userCheck = "";
+    bool isAdmin = false;
+    var user = await UserManager.GetUserAsync(User);
+
+    if (user != null)
+    {
+        userName = user.Title;
+        userEmail = user.Email;
+        userCheck = user.EmailConfirmed ? "green" : "red";
+        isAdmin = User.IsInRole("Admin");
+  
+        var list = await UserManager.GetClaimsAsync(user);
+
+        if (list.Where(x => x.Type == "revoke").Any())
+        {
+            string location = $"/Identity/Account/Relogin?returnUrl={Context.Request.Path}{Context.Request.QueryString}";
+            Context.Response.Redirect(location);
+        }
+    }
+}
+
+<aside class="mdc-drawer mdc-drawer--modal">
+    <div class="mdc-drawer__content">
+        <div style="padding-top: 16px; padding-bottom: 16px;">
+            <div style="display:flex; flex-direction: column; align-items: center">
+                <div>
+                    @{
+                        var imgMenu = await configHandler.GetImageFromConfig(configHandler.CodeImgMenu);
+                    }
+                    @if (imgMenu != string.Empty)
+                    {
+                        <img src="@imgMenu" width="235" />
+                    }
+                    else
+                    {
+                        <img src="~/lib/mtd-ordermaker/images/logo-mtd.png" width="235" />
+                    }
+
+                </div>
+                <div style="display: flex; flex-direction: column; margin-top: 16px; align-items: center">
+                    <div style="background-color: lightgray;   width: 52px; height: 52px; border-radius: 50%; text-align: center">
+                        <i class="material-icons" style="font-size: 48px; color: white">person</i>
+                    </div>
+                    <div style="color: gray; text-align: center">
+                        <div>
+                            @userName
+                        </div>
+                        <div>
+                            @userEmail
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <nav class="mdc-list" tabindex="0">
+            <a class="mdc-list-item" href="~/"  name="mainMenuItem">
+                <span class="mdc-list-item__ripple"></span>
+                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">dashboard</i>
+                <span class="mdc-list-item__text">@Localizer["Desktop"]</span>
+            </a>
+
+            <a class="mdc-list-item" href="~/Identity/Account/Manage" name="mainMenuItem">
+                <span class="mdc-list-item__ripple"></span>
+                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">person_outline</i>
+                <span class="mdc-list-item__text">@Localizer["Account"]</span>
+            </a>
+
+            @if (isAdmin)
+            {
+                <a class="mdc-list-item" href="~/Config" name="mainMenuItem">
+                    <span class="mdc-list-item__ripple"></span>
+                    <i class="material-icons mdc-list-item__graphic" aria-hidden="true">settings</i>
+                    <span class="mdc-list-item__text">@Localizer["Configurator"]</span>
+                </a>
+            }
+
+            @if (isAdmin)
+            {
+                <a  class="mdc-list-item" href="~/Identity/Users" name="mainMenuItem">
+                    <span class="mdc-list-item__ripple"></span>
+                    <i class="material-icons mdc-list-item__graphic" aria-hidden="true">supervisor_account</i>
+                    <span class="mdc-list-item__text">@Localizer["Users"]</span>
+                </a>
+            }
+
+            <hr style="display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0; " />
+
+            @*<a  class="mdc-list-item" href="~/Support/Feedback" name="mainMenuItem">
+                <span class="mdc-list-item__ripple"></span>
+                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">announcement</i>
+                <span class="mdc-list-item__text">@Localizer["Send feedback"]</span>
+            </a>*@
+
+        </nav>
+    </div>
+</aside>

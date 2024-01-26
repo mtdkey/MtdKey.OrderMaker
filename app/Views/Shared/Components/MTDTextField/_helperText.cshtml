@@ -1,0 +1,16 @@
+﻿@model MTDTextFieldTagsModel
+
+
+@if (Model.HelperText != null)
+{
+    <div id="@Model.Id-helper-text" class="mdc-text-field-helper-line">
+        <div class="mdc-text-field-helper-text" id="@Model.IdHelper" aria-hidden="true">@Model.HelperText</div>
+    </div>
+}
+
+@if (Model.HelperError != null)
+{
+    <div id="@Model.Id-helper-error" class="mdc-text-field-helper-line">
+        <div class="mdc-text-field-helper-text mdc-text-field-helper-text--validation-msg" id="@Model.IdHelperError" aria-hidden="true">@Model.HelperError</div>
+    </div>
+}

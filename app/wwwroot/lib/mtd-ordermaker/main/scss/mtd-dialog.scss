@@ -1,0 +1,85 @@
+﻿.mtd-dialog-hidden {
+    display: none;
+}
+
+.mtd-dialog {
+    position: absolute;
+    animation-name: mtd-dialog-action;
+    animation-duration: 0.2s;
+    animation-delay: 0.1s;
+    animation-fill-mode: backwards;
+    margin-left: auto;
+    margin-right: auto;
+    left: 8px;
+    right: 8px;
+    width: 100%;
+    z-index: 8;       
+}
+
+
+.mtd-dialog-container {
+    margin-right: 16px;
+    background-color: white;
+    @include elevation(16);
+
+}
+
+.mtd-dialog-title {
+    background: linear-gradient(90deg, rgba(228,228,228,1) 0%, rgba(235,233,233,1) 47%, rgba(255,255,255,1) 81%);
+    text-transform: uppercase;
+    color: gray;
+    margin-bottom: 8px;
+    font-weight: bold;
+    display: flex;
+    padding: 2px;
+}
+
+.mtd-dialog-title div:first-child {
+    flex-grow: 1;
+    align-self: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding-left: 6px;
+}
+
+.mtd-dialog-content {
+    //padding: 0 8px 8px 8px;
+    padding: 16px;
+}
+
+.mtd-dialog-info {
+    padding-bottom: 12px;
+ /*   margin: 8px 0 8px 0;*/
+    color: gray;
+    text-align: center;
+}
+
+.mtd-dialog-info--border {
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    padding: 8px 0 8px 0;
+    color: gray;
+    text-align: center;
+}
+
+.mtd-dialog-buttons {
+    padding: 16px 0 16px 0;
+}
+
+.mtd-dialog-space{
+    height: 16px;
+}
+
+
+@keyframes mtd-dialog-action {
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

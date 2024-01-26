@@ -1,0 +1,33 @@
+﻿
+<div style="display:flex; width: 100%">
+    <div style="padding: 2px; width: 50%">
+
+        @await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags
+            {
+                Id = "index-filter-custom-date-start-value",
+                Label = "Date start",
+                Value = DateTime.UtcNow.Date.ToShortDateString(),
+                LabelLocalized = true,
+                IconLeading = "far fa-calendar-alt",
+                Name = "date-value",
+                Class = " mtd-data-datepicker ",
+                MTDTexFieldView = MTDTextFieldViews.Outlined
+            })
+    </div>
+    <div style="padding: 2px;width: 50%">
+        @await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags
+            {
+                Id = "index-filter-custom-date-finish-value",
+                Label = "Date finish",
+                Value = DateTime.UtcNow.Date.ToShortDateString(),
+                LabelLocalized = true,
+                IconLeading = "far fa-calendar-alt",
+                Name = "date-end",
+                Class = " mtd-data-datepicker ",
+                MTDTexFieldView = MTDTextFieldViews.Outlined
+            })
+
+    </div>
+</div>
+
+

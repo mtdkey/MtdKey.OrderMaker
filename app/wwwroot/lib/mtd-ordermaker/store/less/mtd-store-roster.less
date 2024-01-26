@@ -1,0 +1,108 @@
+﻿
+
+.mtd-store-roster {
+    position: relative;
+    width: 100%;
+    overflow: hidden;    
+    overflow-x: auto;
+}
+
+.mtd-store-roster table {
+    width: 100%;
+}
+
+.mtd-store-roster table th:not(:first-child) {
+    font-weight:100;
+    color: gray;
+}
+.mtd-store-roster table th:first-child {    
+    color: gray;
+}
+
+
+
+.mtd-store-roster table td, th {
+    padding-left: 16px;
+    padding-right: 12px;
+    white-space: nowrap;
+    min-width: 145px;
+}
+
+.mtd-store-roster table tbody tr {
+    height: 48px;
+    border-top: 1px solid lightgray;
+    cursor: default;
+}
+
+.mtd-store-roster-selected {
+    background-color: whitesmoke !important;
+}
+
+.mtd-store-roster table tbody tr:hover {
+    background-color: whitesmoke;
+    opacity: 1 !important;
+}
+
+.mtd-store-roster table th:first-child {
+    text-align: center;
+}
+
+.mtd-store-roster table td:first-child {
+    width: 3rem;
+}
+
+
+.mtd-store-roster-actions {
+    background-color: whitesmoke;
+    position: relative;
+    animation-name: mtd-data-action-roster-action;
+    animation-duration: 0.2s;
+    animation-delay: 0.1s;
+    animation-fill-mode: backwards;
+}
+
+@keyframes mtd-data-action-roster-action {
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.mtd-store-roster-actions a {    
+    text-decoration: none;
+}
+.mtd-store-roster-actions:hover {
+    background-color: whitesmoke !important;
+}
+
+:root {
+    --mdc-theme-primary: navy;
+    --mdc-theme-secondary: cornflowerblue;
+}
+
+.mtd-store-roster-card{
+    position: relative;
+
+}
+
+.mtd-store-roster-creater{
+    position: absolute;
+    top: -1.5em;
+    left: -0.8em;
+    z-index: 1;
+}
+
+.mtd-store-roster-search{     
+    padding-top:8px;
+    padding-left: 48px;
+    width: 100%;
+}
+
+#rosterSearch {  
+   padding-left: 50px;
+}

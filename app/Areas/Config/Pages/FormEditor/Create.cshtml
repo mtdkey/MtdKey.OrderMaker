@@ -1,0 +1,74 @@
+﻿@*
+    MTD OrderMaker - http://mtdkey.com
+    Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
+
+*@
+
+@page
+@model CreateModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> Localizer
+
+@{
+    ViewData["Title"] = Localizer["New form"];
+    ViewData["SecondTitle"] = Localizer["Creating new form pattern"];
+}
+
+
+@section Breadcrumb {
+    <li><a href="~/config">@Localizer["Configurator"]</a></li>
+    <li><a href="~/config/formeditor">@Localizer["Forms"]</a></li>
+    <li>@ViewBag.Title</li>
+}
+
+<div class="mtd-desk">
+    <div class="mtd-desk-panel">
+        <div style="padding-left: 16px">
+            <button mtd-data-clicker-by="clicker-create" type="button" class="mdc-fab mdc-fab--extended">
+                <span class="material-icons mdc-fab__icon">add</span>
+                <span class="mdc-fab__label">@Localizer["Create"]</span>
+            </button>
+        </div>
+    </div>
+
+    <form mtd-data-form method="post" autocomplete="off" enctype="multipart/form-data" action="">
+        <input type="hidden" asp-for="MtdForm.Id" />
+        <input type="hidden" id="clicker-create" mtd-data-clicker mtd-data-location="/config/formeditor/edit?formId=@Model.MtdForm.Id" 
+                mtd-data-message="@Localizer["New form created"]." />
+        <div class="mtd-desk-field">
+            @await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags
+               {
+                   Id = "form-name",
+                   Name = "MtdForm.Name",
+                   Required = true,
+                   Label = "Name",
+                   LabelLocalized = true,
+                   MTDTexFieldView = MTDTextFieldViews.Outlined,
+                   Value = Model.MtdForm.Name,
+               })
+        </div>
+
+        <div class="mtd-desk-field">
+            @await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags
+               {
+                   Id = "form-note",
+                   Name = "MtdForm.Description",
+                   Required = true,
+                   Label = "Description",
+                   LabelLocalized = true,
+                   MTDTexFieldView = MTDTextFieldViews.TextArea,
+                   Value = Model.MtdForm.Description,
+                   Cols = 40,
+                   Rows = 5,
+                   MaxLength = 250
+               })
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <script>
+        new MTDTextField("form-name");
+        new MTDTextField("form-note");
+    </script>
+}

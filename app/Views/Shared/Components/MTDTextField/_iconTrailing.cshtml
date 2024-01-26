@@ -1,0 +1,36 @@
+﻿@model MTDTextFieldTagsModel
+
+
+@if (Model.IconTrailing != null)
+{
+    if (Model.IconTrailing.Contains("fas ") || Model.IconTrailing.Contains("far "))
+    {
+        if (Model.IconTrailingString != null)
+        {
+            <i class="mdc-text-field__icon mdc-text-field__icon--trailing @Model.IconTrailing"
+               tabindex="0" role="button" onclick="@Model.IconTrailingString" style="color:cornflowerblue"></i>
+        }
+        else
+        {
+            <i class="mdc-text-field__icon mdc-text-field__icon--trailing @Model.IconTrailing" @if (Model.IconTrailingColor != null) { <text> style="color:@Model.IconTrailingColor" </text> }></i>
+        }
+
+    }
+    else
+    {
+        if (Model.IconTrailingString != null)
+        {
+            <i class="material-icons mdc-text-field__icon mdc-text-field__icon--trailing"
+               tabindex="0" role="button" onclick="@Model.IconTrailingString" style="color:cornflowerblue">
+                @Model.IconTrailing
+            </i>
+        }
+        else
+        {       
+            <i class="material-icons mdc-text-field__icon mdc-text-field__icon--trailing" @if (Model.IconTrailingColor != null) { <text> style="color:@Model.IconTrailingColor" </text> }>
+                @Model.IconTrailing
+            </i>
+        }
+    }
+
+}

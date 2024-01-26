@@ -1,0 +1,225 @@
+﻿@*
+    MTD OrderMaker - http://mtdkey.com
+    Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
+*@
+
+@page
+@model DetailsModel
+@namespace MtdKey.OrderMaker.Components.Store
+@using Microsoft.AspNetCore.Mvc.Localization
+@using MtdKey.OrderMaker.Core;
+@inject IHtmlLocalizer<SharedResource> Localizer
+
+@{
+    ViewData["Title"] = Localizer["Document view"];
+    ViewData["SecondTitle"] = Model.MtdForm.Name;    
+}
+
+@section Head{
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/mtd-ordermaker/store/css/mtd-store-view.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/lib/xdan/dist/jquery.datetimepicker.min.css" asp-append-version="true" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/lib/mtd-ordermaker/store/css/mtd-store-view.min.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/lib/xdan/dist/jquery.datetimepicker.min.css" asp-append-version="true" />
+    </environment>
+}
+
+@section Breadcrumb {
+    <li mtd-data-url="/"><a href="~/">@Localizer["Desktop"]</a></li>
+    <li mtd-data-url="/workplace/store/index?indexForm=@Model.MtdForm.Id"><a href="~/workplace/store/index?indexForm=@Model.MtdForm.Id">@Localizer["Data List"]</a></li>
+    <li>@ViewBag.Title</li>
+}
+
+@section Action  {
+    @await Html.PartialAsync("./Partials/ActionMenu")
+}
+
+@if (Model.IsReviewer && Model.MtdApproval != null && (Model.ApprovalStatus == ApprovalStatus.Approved || Model.ApprovalStatus == ApprovalStatus.Rejected))
+{
+    @await Html.PartialAsync("./Partials/DialogApprovalRestart")
+}
+
+@if (Model.IsReviewer && Model.MtdApproval != null && (Model.ApprovalStatus != ApprovalStatus.Approved && Model.ApprovalStatus != ApprovalStatus.Rejected))
+{
+    @await Html.PartialAsync("./Partials/DialogConsiderApproved")
+}
+
+
+<div class="mtd-desk" style="margin-bottom: 24px">
+    <div class="mtd-desk-panel">
+        <div>
+            @await Html.PartialAsync("./Partials/DetailsNavButtons")
+        </div>
+    </div>
+
+    @await Html.PartialAsync("./Partials/DialogPrint")
+    @if (Model.IsSign)
+    {
+        @await Html.PartialAsync("~/Areas/Workplace/Pages/Store/Partials/DialogConfirmSign.cshtml")
+        @await Html.PartialAsync("~/Areas/Workplace/Pages/Store/Partials/DialogReturnSign.cshtml")
+        @await Html.PartialAsync("~/Areas/Workplace/Pages/Store/Partials/DialogRejectSign.cshtml")
+    }
+    else
+    {
+        @await Html.PartialAsync("~/Areas/Workplace/Pages/Store/Partials/DialogStart.cshtml")
+        @await Html.PartialAsync("~/Areas/Workplace/Pages/Store/Partials/DialogReject.cshtml")
+        @await Html.PartialAsync("~/Areas/Workplace/Pages/Store/Partials/DialogReturn.cshtml")
+        @await Html.PartialAsync("~/Areas/Workplace/Pages/Store/Partials/DialogConfirm.cshtml")
+    }
+
+    @await Html.PartialAsync("~/Areas/Workplace/Pages/Store/Partials/DialogRequest.cshtml")
+
+
+    <div class="mtd-desk-blocks">
+        <div class="mtd-desk-block mtd-desk-block--pull mdc-elevation--z4" style="max-width: 797px;">
+            <div class="mtd-desk-block-content">
+                <div class="mtd-desk-block-title">
+                    <div class="mtd-desk-block-title-icon">
+                    </div>
+                    <div class="mtd-desk-block-title-label">
+                        @Localizer["Document form"]
+                    </div>
+                    <div class="mtd-desk-block-title-button">
+                        <button onclick="clickBlockToogle(this)"
+                                class="mdc-icon-button"
+                                aria-label="Add to favorites"
+                                aria-hidden="true"
+                                aria-pressed="false"
+                                data="block-view">
+                            <i class="material-icons mdc-icon-button__icon mdc-icon-button__icon--on">expand_more</i>
+                            <i class="material-icons mdc-icon-button__icon">expand_less</i>
+                        </button>
+                    </div>
+                </div>
+                @await Component.InvokeAsync("StoreForm", new { store = Model.MtdStore, type = FormType.Details })
+            </div>
+            <div class="mtd-desk-block-content">
+                <div class="mtd-desk-block-title">
+                    <div class="mtd-desk-block-title-icon"></div>
+                    <div class="mtd-desk-block-title-label">
+                        @Localizer["Document information"]
+                    </div>
+                    <div class="mtd-desk-block-title-button">
+                        <button onclick="clickBlockToogle(this)"
+                                class="mdc-icon-button"
+                                aria-label="Add to favorites"
+                                aria-hidden="true"
+                                aria-pressed="false"
+                                data="block-info">
+                            <i class="material-icons mdc-icon-button__icon mdc-icon-button__icon--on">expand_more</i>
+                            <i class="material-icons mdc-icon-button__icon">expand_less</i>
+                        </button>
+                    </div>
+                </div>
+                <div id="block-info" class="mtd-desk-block-body">
+                    @await Html.PartialAsync("./Partials/DetailsInfo")
+                </div>
+            </div>
+        </div>
+
+        @if (Model.IsFormApproval)
+        {
+            <div class="mtd-desk-block mdc-elevation--z4">
+
+                @if (Model.IsFormApproval)
+                {
+                    @await Html.PartialAsync("./Partials/BlockApproval")
+                }
+
+            </div>
+        }
+    </div>
+
+</div>
+
+@if (Model.IsInstallerOwner)
+{
+    @await Html.PartialAsync("./Partials/DialogOwner")
+}
+
+
+<form mtd-data-form method="post" autocomplete='off' enctype='multipart/form-data' action='/api/store/delete'>
+    @Html.AntiForgeryToken()
+    <input id="store-delete-id" name="store-delete-id" type="hidden" value="@Model.MtdStore.Id" />
+    <input id="deleteClicker" mtd-data-clicker mtd-data-location="/workplace/store?indexform=@Model.MtdStore.MtdFormId" mtd-data-message="@Localizer[" The document was deleted."]" type="hidden" />
+</form>
+
+<div id="dialog-store-delete" class="mdc-dialog"
+     role="alertdialog"
+     aria-modal="true"
+     aria-labelledby="my-dialog-title"
+     aria-describedby="my-dialog-content">
+    <div class="mdc-dialog__container">
+        <div class="mdc-dialog__surface">
+            <h2 class="mdc-dialog__title" id="delete-dialog-title">
+                @Localizer["Delete document?"]
+            </h2>
+            <div class="mdc-dialog__content" id="delete-dialog-content">
+                @Localizer["The document will be permanently deleted."]
+            </div>
+            <footer class="mdc-dialog__actions">
+                <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="no">
+                    <span class="mdc-button__label">@Localizer["Cancel"]</span>
+                </button>
+                <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="yes">
+                    <span class="mdc-button__label" onclick="document.getElementById('deleteClicker').click();">@Localizer["Delete"]</span>
+                </button>
+            </footer>
+        </div>
+    </div>
+    <div class="mdc-dialog__scrim"></div>
+</div>
+
+@section Scripts{
+    <environment include="Development">
+        <script src="~/lib/mtd-ordermaker/store/js/mtd-store-view.js" asp-append-version="true"></script>
+        <script src="~/lib/mtd-ordermaker/store/js/mtd-store-nav.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+        <script src="~/lib/moment/dist/js/moment-with-locales.min.js" asp-append-version="true"></script>
+        <script src="~/lib/xdan/dist/jquery.datetimepicker.full.min.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/lib/mtd-ordermaker/store/js/mtd-store-view.min.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+        <script src="~/lib/moment/dist/js/moment-with-locales.min.js" asp-append-version="true"></script>
+        <script src="~/lib/xdan/dist/jquery.datetimepicker.full.min.js" asp-append-version="true"></script>
+    </environment>
+
+    <script>
+        const dcs = document.getElementById("dcs");
+        if (dcs) {
+            new mdc.textField.MDCTextField(dcs);
+        }
+
+        const dReturn = document.getElementById("d-return");
+        if (dReturn) {
+            new mdc.textField.MDCTextField(dReturn);
+        }
+
+        const dReject = document.getElementById("d-reject");
+        if (dReject) {
+            new mdc.textField.MDCTextField(dReject);
+        }
+
+
+            $("input.mtd-data-datetimepicker").each(function () {
+            $(this).datetimepicker({
+                timepicker: true,
+                formatTime: @Localizer["'h:i A'"],
+                validateOnBlur: false,
+                mask: @Localizer["'19/39/9999 29:59'"],
+                format: @Localizer["'m/d/Y h:i A'"],
+                defaultDate: new Date(),
+            });
+        });
+
+        $.datetimepicker.setLocale(@Localizer["'en'"]);
+
+    </script>
+
+}
+
+
+

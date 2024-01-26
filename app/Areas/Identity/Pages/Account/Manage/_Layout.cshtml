@@ -1,0 +1,21 @@
+﻿@{
+    Layout = "/Pages/Shared/_Layout.cshtml";
+}
+
+@section Breadcrumb {
+    @RenderSection("Breadcrumb", required: false)
+}
+
+
+@if (IsSectionDefined("Action"))
+{
+    @section Action {
+        @RenderSection("Action", required: false)
+    }
+}
+
+    @RenderBody()
+
+    @section Scripts {
+        @RenderSection("Scripts", required: false)
+    }

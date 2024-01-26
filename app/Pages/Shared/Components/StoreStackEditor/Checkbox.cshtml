@@ -1,0 +1,32 @@
+﻿@*
+    MTD OrderMaker - http://mtdkey.com
+    Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
+*@
+
+@model Core.DocFieldModel
+
+@{
+    var result = Model.Value != null && ((int)Model.Value) == 1 ? "checked" : string.Empty;
+}
+@if(!Model.Readonly)
+{
+    <div class="text-center">
+        <div class="mtd-store-edit-row-name">
+            @Model.Name
+        </div>
+        <div class="mtd-store-edit-row-value">
+            <div class="mtd-ui-material-check">
+                <input type="checkbox" id="@Model.Id"
+                       name="field-@Model.Id"
+                @result />
+                <label for="@Model.Id"></label>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+
+
+

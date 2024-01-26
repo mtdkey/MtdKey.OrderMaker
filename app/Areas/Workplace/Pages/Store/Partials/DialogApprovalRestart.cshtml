@@ -1,0 +1,38 @@
+﻿@model DetailsModel
+@namespace MtdKey.OrderMaker.Components.Store
+@using MtdKey.OrderMaker.Core
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> Localizer
+
+<form mtd-data-form method="post" autocomplete='off' enctype='multipart/form-data' action='/api/store/approval/restart'>
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="id-store" value="@Model.MtdStore.Id" />
+    <input type="hidden" name="id-form" value="@Model.MtdStore.MtdFormId" />
+
+    <div id="dialog-new-approval" class="mdc-dialog"
+         role="alertdialog"
+         aria-modal="true"
+         aria-labelledby="dialog-accept-title"
+         aria-describedby="dialog-accept-content">
+        <div class="mdc-dialog__container">
+            <div class="mdc-dialog__surface">
+                <h2 class="mdc-dialog__title" id="new-form-title">
+                    @Localizer["Restart Approval"]
+                </h2>
+                <div class="mdc-dialog__content" id="new-dialog-content">
+                    @Localizer["Do you confirm the restart of the workflow?"]
+                </div>
+                <footer class="mdc-dialog__actions">
+                    <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="no">
+                        <span class="mdc-button__label">@Localizer["Cancel"]</span>
+                    </button>
+                    <button type="button" id="clicker-new-approve" mtd-data-clicker mtd-data-message="@Localizer["The workflow was restarted."]" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="yes" style="color:green">
+                        <span class="mdc-button__label">@Localizer["Apply"]</span>
+                    </button>
+                </footer>
+            </div>
+        </div>
+        <div class="mdc-dialog__scrim"></div>
+    </div>
+
+</form>

@@ -1,0 +1,76 @@
+﻿@*
+    MTD OrderMaker - http://mtdkey.com
+    Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
+*@
+
+@page
+@model MtdKey.OrderMaker.Areas.Identity.Pages.Users.Group.CreateModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> Localizer
+
+@{
+    ViewData["Title"] = Localizer["New group"];
+    ViewData["SecondTitle"] = Localizer["Creating a new group"];
+}
+
+@section Breadcrumb {
+    <li><a href="~/identity/users">@Localizer["Users"]</a></li>
+    <li><a href="~/identity/users/group">@Localizer["Groups"]</a></li>
+    <li>@ViewBag.Title</li>
+}
+
+<div class="mtd-desk">
+
+    <div class="mtd-desk-panel">
+        <div style="padding-left: 16px">
+            <button mtd-data-clicker-by="clicker-save" type="button" class="mdc-fab mdc-fab--extended">
+                <div class="mdc-fab__ripple"></div>
+                <span class="material-icons mdc-fab__icon">group_add</span>
+                <span class="mdc-fab__label">@Localizer["Create"]</span>
+            </button>
+        </div>
+    </div>
+
+    <form mtd-data-form method="post" autocomplete="off" action="~/api/users/admin/groups/add" novalidate>
+        @Html.AntiForgeryToken()
+        <input type="hidden" id="clicker-save" mtd-data-clicker mtd-data-message="@Localizer["New group was created."]" mtd-data-location="/identity/users/group" />
+
+        <div class="mtd-desk-field">
+            @await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags
+               {
+                   Id = "group-name",
+                   Name = "group-name",
+                   Required = true,
+                   Value = Model.MtdGroup.Name,
+                   Label = "Name",
+                   LabelLocalized = true,
+                   MTDTexFieldView = MTDTextFieldViews.Outlined
+               })
+        </div>
+
+
+        <div class="mtd-desk-field">
+            @await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags
+       {
+           Id = "group-note",
+           Name = "group-note",
+           Required = true,
+           Value = Model.MtdGroup.Description,
+           Label = "Description",
+           LabelLocalized = true,
+           MTDTexFieldView = MTDTextFieldViews.TextArea,
+           Cols = 40,
+           Rows = 3,
+           MaxLength = 250
+       })
+        </div>
+
+    </form>
+</div>
+
+@section Scripts {
+    <script>
+        new MTDTextField("group-name");
+        new MTDTextField("group-note");
+    </script>
+}

@@ -1,0 +1,24 @@
+﻿@using MtdKey.OrderMaker
+@model ImageSelectorModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<FormBuilderLocalizer> localizer
+
+<div id="@Model.Id" class="file-upload">
+    <div class="file-upload_title">
+        @localizer[Model.Title]
+    </div>
+    <div class="image-upload-wrap">
+        <input class="file-upload-input" type='file'  accept="image/*" />
+        <div class="drag-text">
+           @localizer["Click to add an image"]
+        </div>
+    </div>
+    <div class="file-upload-content">
+        <img class="file-upload-image" src="#" alt="your image" />
+        <div class="image-title-wrap">
+            <button type="button" class="btn btn-danger mdc-elevation--z4 btn-sm">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+    </div>
+</div>

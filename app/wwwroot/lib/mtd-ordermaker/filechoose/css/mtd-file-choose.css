@@ -1,0 +1,112 @@
+.mtd-file-upload {
+  display: flex;
+  text-align: center;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  width: 100%;
+  border: 2px solid #dce4ec;
+  z-index: 1;
+}
+.mtd-file-upload .mtd-file-select {
+  display: block;
+  flex-grow: 1;
+  color: #34495e;
+  cursor: pointer;
+  height: 48px;
+  line-height: 48px;
+  text-align: left;
+  background: #FFFFFF;
+  overflow: hidden;
+  position: relative;
+}
+.mtd-file-upload .mtd-file-select .mtd-file-select-button {
+  background: #dce4ec;
+  padding: 0 10px;
+  display: inline-block;
+  height: 48px;
+  line-height: 48px;
+}
+.mtd-file-upload .mtd-file-select .mtd-file-select-title {
+  line-height: 0.9em;
+  width: 110px;
+  display: inline-block;
+  text-wrap: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mtd-file-upload:hover {
+  border-color: #34495e;
+  transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+}
+.mtd-file-upload:hover .mtd-file-select-button {
+  background: #34495e;
+  color: #FFFFFF;
+  transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+}
+.mtd-file-upload.active:hover {
+  border-color: #3fa46a;
+  transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+}
+.mtd-file-upload.active .mtd-file-select .mtd-file-select-button {
+  background: #3fa46a;
+  color: #FFFFFF;
+  transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+}
+.mtd-file-upload .mtd-file-select input[type=file] {
+  z-index: 100;
+  cursor: pointer;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+.mtd-file-upload .mtd-file-select.mtd-file-select-disabled {
+  opacity: 0.65;
+}
+.mtd-file-upload .mtd-file-select.mtd-file-select-disabled:hover {
+  cursor: default;
+  display: block;
+  border: 2px solid #dce4ec;
+  color: #34495e;
+  cursor: pointer;
+  height: 48px;
+  line-height: 48px;
+  margin-top: 5px;
+  text-align: left;
+  background: #FFFFFF;
+  overflow: hidden;
+  position: relative;
+}
+.mtd-file-upload .mtd-file-select.mtd-file-select-disabled:hover .mtd-file-select-button {
+  background: #dce4ec;
+  color: #666666;
+  padding: 0 10px;
+  display: inline-block;
+  height: 48px;
+  line-height: 48px;
+}
+.mtd-file-upload .mtd-file-select.mtd-file-select-disabled:hover .mtd-file-select-title {
+  flex-grow: 1;
+  line-height: 48px;
+  display: inline-block;
+  padding: 0 10px;
+}
+.mtd-file-select-cancel {
+  background-color: white;
+}

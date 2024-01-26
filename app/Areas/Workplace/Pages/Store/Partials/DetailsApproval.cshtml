@@ -1,0 +1,419 @@
+﻿@model MtdKey.OrderMaker.Areas.Workplace.Pages.Store.DetailsModel
+@namespace MtdKey.OrderMaker.Components.Store
+@using MtdKey.OrderMaker.Core
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> Localizer
+
+@{
+    string path = ViewContext.HttpContext.Request.Path;
+    bool isPrint = path == "/workplace/store/detailsprint";
+}
+
+
+<table style="white-space: nowrap; border-collapse:collapse">
+    @if (Model.IsApprover)
+    {
+        <tr>
+            <td>@Localizer["Approval status"]</td>
+            <td style="width:100%;"></td>
+            <td style="text-align:right">
+                <div class="mtd-store-view-status">
+                    <div>
+                        @if (Model.MtdApproval.ImgRequired == null)
+                        {<i style="vertical-align:middle; font-size: 28px; color: red" class="material-icons">notification_important</i>}
+                        else
+                        {
+                            var modelRequired = new
+                            {
+                                maxHeight = 24,
+                                maxWidth = 24,
+                                imgArray = Model.MtdApproval.ImgRequired,
+                                imgType = Model.MtdApproval.ImgRequiredType
+                            };
+                            @await Component.InvokeAsync("MTDImgViewer", modelRequired);
+                        }
+                    </div>
+                    <div style="color: red;">
+                        @if (Model.MtdApproval.ImgRequiredText == null)
+                        {@Localizer["Approval is required"]}
+                    else
+                    {@Model.MtdApproval.ImgRequiredText}
+                    </div>
+                </div>
+            </td>
+        </tr>
+
+    }
+    else
+    {
+        @switch (Model.ApprovalStatus)
+        {
+            case ApprovalStatus.Rejected:
+                {
+                    <tr>
+                        <td>@Localizer["Approval status"]</td>
+                        <td style="width:100%"></td>
+                        <td>
+                            <div class="mtd-store-view-status">
+                                <div>
+                                    @if (Model.MtdApproval.ImgRejected == null)
+                                    {<i style="vertical-align:middle" class="material-icons">thumb_down</i> }
+                                    else
+                                    {
+                                        var modelRejected = new
+                                        {
+                                            maxHeight = 24,
+                                            maxWidth = 24,
+                                            imgArray = Model.MtdApproval.ImgRejected,
+                                            imgType = Model.MtdApproval.ImgRejectedType
+                                        };
+                                        @await Component.InvokeAsync("MTDImgViewer", modelRejected);
+                                    }
+                                </div>
+                                <div>
+                                    @if (Model.MtdApproval.ImgRejectedText == null)
+                                    {@Localizer["Rejected"]}
+                                else
+                                {@Model.MtdApproval.ImgRejectedText}
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    break;
+                }
+            case ApprovalStatus.Approved:
+                {
+                    <tr>
+                        <td>@Localizer["Approval status"]</td>
+                        <td style="width:100%"></td>
+                        <td>
+                            <div class="mtd-store-view-status">
+                                <div>
+                                    @if (Model.MtdApproval.ImgApproved == null)
+                                    {<i style="vertical-align:middle" class="material-icons">thumb_up</i> }
+                                    else
+                                    {
+                                        var modelApproved = new
+                                        {
+                                            maxHeight = 24,
+                                            maxWidth = 24,
+                                            imgArray = Model.MtdApproval.ImgApproved,
+                                            imgType = Model.MtdApproval.ImgApprovedType
+                                        };
+                                        @await Component.InvokeAsync("MTDImgViewer", modelApproved);
+                                    }
+                                </div>
+                                <div>
+                                    @if (Model.MtdApproval.ImgApprovedText == null)
+                                    {@Localizer["Approved"]}
+                                else
+                                {@Model.MtdApproval.ImgApprovedText}
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    break;
+                }
+            case ApprovalStatus.Waiting:
+                {
+                    <tr>
+                        <td>@Localizer["Approval status"]</td>
+                        <td style="width:100%"></td>
+                        <td>
+                            <div class="mtd-store-view-status">
+                                <div>
+                                    @if (Model.MtdApproval.ImgWaiting == null)
+                                    {<i style="vertical-align:middle" class="material-icons">hourglass_top</i> }
+                                    else
+                                    {
+                                        var modelWaiting = new
+                                        {
+                                            maxHeight = 24,
+                                            maxWidth = 24,
+                                            imgArray = Model.MtdApproval.ImgWaiting,
+                                            imgType = Model.MtdApproval.ImgWaitingType
+                                        };
+                                        @await Component.InvokeAsync("MTDImgViewer", modelWaiting);
+                                    }
+                                </div>
+                                <div>
+                                    @if (Model.MtdApproval.ImgWaitingText == null)
+                                    {@Localizer["Waiting"]}
+                                else
+                                {@Model.MtdApproval.ImgWaitingText}
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    break;
+                }
+            case ApprovalStatus.Start:
+                {
+                    <tr>
+                        <td>@Localizer["Approval status"]</td>
+                        <td style="width:100%"></td>
+                        <td>
+                            <div class="mtd-store-view-status">
+                                <div>
+                                    @if (Model.MtdApproval == null || Model.MtdApproval.ImgStart == null)
+                                    {<i style="vertical-align:middle" class="material-icons">new_releases</i> }
+                                    else
+                                    {
+                                        var modelStart = new
+                                        {
+                                            maxHeight = 24,
+                                            maxWidth = 24,
+                                            imgArray = Model.MtdApproval.ImgStart,
+                                            imgType = Model.MtdApproval.ImgStartType
+                                        };
+                                        @await Component.InvokeAsync("MTDImgViewer", modelStart);
+                                    }
+                                </div>
+                                <div>
+                                    @if (Model.MtdApproval == null || Model.MtdApproval.ImgStartText == null)
+                                    {@Localizer["Not started"]}
+                                else
+                                {@Model.MtdApproval.ImgStartText}
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    break;
+                }
+            case ApprovalStatus.Iteraction:
+                {
+                    <tr>
+                        <td>@Localizer["Approval status"]</td>
+                        <td style="width:100%"></td>
+                        <td>
+                            <div class="mtd-store-view-status">
+                                <div>
+                                    @if (Model.MtdApproval.ImgIteraction == null)
+                                    {<i style="vertical-align:middle" class="material-icons">new_releases</i> }
+                                    else
+                                    {
+                                        var modelIteraction = new
+                                        {
+                                            maxHeight = 24,
+                                            maxWidth = 24,
+                                            imgArray = Model.MtdApproval.ImgIteraction,
+                                            imgType = Model.MtdApproval.ImgIteractionType
+                                        };
+                                        @await Component.InvokeAsync("MTDImgViewer", modelIteraction);
+                                    }
+                                </div>
+                                <div>
+                                    @if (Model.MtdApproval.ImgIteractionText == null)
+                                    {@Localizer["Returned"]}
+                                else
+                                {@Model.MtdApproval.ImgIteractionText}
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    break;
+                }
+            case ApprovalStatus.Required:
+                {
+                    <tr>
+                        <td>@Localizer["Approval status"]</td>
+                        <td style="width:100%"></td>
+                        <td>
+                            <div class="mtd-store-view-status">
+                                <div>
+                                    @if (Model.MtdApproval.ImgRequired == null)
+                                    {<i style="vertical-align:middle; font-size: 28px; color: red" class="material-icons">notification_important</i>}
+                                    else
+                                    {
+                                        var modelRequired = new
+                                        {
+                                            maxHeight = 24,
+                                            maxWidth = 24,
+                                            imgArray = Model.MtdApproval.ImgRequired,
+                                            imgType = Model.MtdApproval.ImgRequiredType
+                                        };
+                                        @await Component.InvokeAsync("MTDImgViewer", modelRequired);
+                                    }
+                                </div>
+                                <div style="color: red">
+                                    @if (Model.MtdApproval.ImgRequiredText == null)
+                                    {@Localizer["Approval is required"]}
+                                else
+                                {@Model.MtdApproval.ImgRequiredText}
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    break;
+                }
+        }
+    }
+</table>
+
+@if (Model.IsApprover && Model.IsFirstStage && Model.ApprovalStatus == ApprovalStatus.Start)
+{
+    <div style="color: red; text-align: center">@Localizer["Click the 'Approve Document' button to begin the approval process."]</div>
+}
+
+<table id="block-approval-table" style="white-space: nowrap; border-collapse:collapse">
+    <thead><tr><th></th><th style="width:100%"></th><th></th></tr></thead>
+    <tbody>
+        @{ int counter = 0;}
+
+        @foreach (var item in Model.ApprovalHistory)
+        {
+            counter++;
+
+            string none = Model.ApprovalHistory.Count - counter > 1 ? "none" : "";
+            if (isPrint) { none = ""; }
+
+            if (!item.IsSign)
+            {
+
+                <tr style=" border-top: 1px solid #ccc; display: @none">
+                    <td align="center" style="min-width: 56px">
+                        @if (item.Result == 1)
+                        {
+                            if (item.ImgData != null)
+                            {
+                                @await Component.InvokeAsync("MTDImgViewer", new { maxHeight = 32, maxWidth = 32, imgArray = item.ImgData, imgType = item.ImgType })
+                            }
+                            else
+                            {
+                                <i class="material-icons" style="color:green">thumb_up_alt</i>
+                            }
+                        }
+                        @if (item.Result < 0)
+                        {
+                            if (item.ImgData != null)
+                            {
+                                @await Component.InvokeAsync("MTDImgViewer", new { maxHeight = 32, maxWidth = 32, imgArray = item.ImgData, imgType = item.ImgType })
+                            }
+                            else
+                            {
+
+                                if (item.Result == -2)
+                                {
+                                    <i class="fas fa-reply-all" style="padding-bottom: 6px;  font-size: 20px; color:brown"></i>
+                                }
+                                else
+                                {
+                                    <i class="material-icons" style="color:red">thumb_down_alt</i>
+                                }
+                            }
+                        }
+                    </td>
+
+                    <td style="width:100%; max-width: 250px; white-space:normal;">
+                        @if (item.Result == -2)
+                        {
+                            <div>
+                                <span>@Localizer["Document returned for review"]</span>
+                            </div>
+                        }
+                        else
+                        {
+                            <div>
+                                <strong style="color: @item.Color">@item.Note</strong>
+                            </div>
+                        }
+
+                        <div>
+                            @item.UserName
+                        </div>
+                        @if (item.Comment.Length > 0)
+                        {
+                            <div style="font-style:italic; font-size:small;">
+                                <i class="material-icons" aria-hidden="true" style="color: slategray">comment</i>
+                                @item.Comment
+                            </div>
+                        }
+
+                    </td>
+                    <td>
+                        <div>@item.Time</div>
+                    </td>
+                </tr>
+            }
+            else
+            {
+                <tr style=" border-top: 1px solid #ccc; display: @none">
+                    <td align="center">
+                        @if (item.Result == 0 && item.UserRecipient != null)
+                        {
+                            if (item.ImgData != null)
+                            {
+                                @await Component.InvokeAsync("MTDImgViewer", new { maxHeight = 32, maxWidth = 32, imgArray = item.ImgData, imgType = item.ImgType })
+                            }
+                            else
+                            {
+                                <i class="fas fa-share-square" style="font-size: 20px;"></i>
+                            }
+                        }
+
+                        @if (item.Result == 0 && item.UserRecipient == null)
+                        {
+                            if (item.ImgData != null)
+                            {
+                                @await Component.InvokeAsync("MTDImgViewer", new { maxHeight = 32, maxWidth = 32, imgArray = item.ImgData, imgType = item.ImgType })
+                            }
+                            else
+                            {
+                                <i class="fas fa-reply" style="padding-bottom: 6px;  font-size: 20px;"></i>
+                            }
+                        }
+
+                        @if (item.Result == 1)
+                        {
+                            if (item.ImgData != null)
+                            {
+                                @await Component.InvokeAsync("MTDImgViewer", new { maxHeight = 32, maxWidth = 32, imgArray = item.ImgData, imgType = item.ImgType })
+                            }
+                            else
+                            {
+                                <i class="material-icons" style="color:green">thumb_up_alt</i>
+                            }
+                        }
+                        @if (item.Result == -1)
+                        {
+                            if (item.ImgData != null)
+                            {
+                                @await Component.InvokeAsync("MTDImgViewer", new { maxHeight = 32, maxWidth = 32, imgArray = item.ImgData, imgType = item.ImgType })
+                            }
+                            else
+                            {
+                                <i class="material-icons" style="color:red">thumb_down_alt</i>
+
+                            }
+                        }
+                    </td>
+
+                    <td style="width:100%; max-width: 250px; white-space:normal">
+                        @if (item.UserRecipient != null)
+                        {
+                            <div>
+                                <span style="color: @item.Color">@Localizer["User Resolution Request"] - @item.UserRecipient</span>
+                            </div>
+                        }
+                        <div>
+                            @item.UserName
+                        </div>
+                        @if (item.Comment.Length > 0)
+                        {
+                            <div style="font-style:italic; font-size:small;">
+                                <i class="material-icons" aria-hidden="true" style="color: slategray;">comment</i>
+                                @item.Comment
+                            </div>
+                        }
+
+                    </td>
+                    <td>
+                        <div>@item.Time</div>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+

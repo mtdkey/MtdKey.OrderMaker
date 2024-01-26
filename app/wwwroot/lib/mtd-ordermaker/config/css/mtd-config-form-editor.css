@@ -1,0 +1,110 @@
+﻿.tools_title {
+    padding: 8px;
+    user-select: none;
+}
+
+.element {
+    padding: 12px;
+    user-select: none;
+    cursor: move;
+    margin: 4px;
+    border: 1px solid #ccc;
+}
+
+    .element:hover {
+        -webkit-box-shadow: 1px 1px 8px 0px rgba(34, 60, 80, 0.2);
+        -moz-box-shadow: 1px 1px 8px 0px rgba(34, 60, 80, 0.2);
+        box-shadow: 1px 1px 8px 0px rgba(34, 60, 80, 0.2);
+        background-color: whitesmoke;
+    }
+
+
+.placeSelected {
+    background-color: aliceblue;
+    border: 2px solid blue;
+    user-select: none;
+}
+
+.form_title {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.form_name {
+    font-weight: bold;
+    flex-grow: 1;
+}
+
+.formPart {
+    border: 1px solid transparent;
+    user-select: none;
+}
+
+.overFromPart {
+   border-top: 1px solid blue !important;
+}
+
+.overFromField {
+   border: 1px solid blue !important;
+}
+
+.formPart_header {
+    display: flex;
+    align-items: center;
+    background-color: whitesmoke;
+    padding: 0px 8px 0px 8px;
+}
+
+.formPart_title {
+    flex-grow: 1;
+    font-weight: 600;
+    
+}
+
+.btn_editor{
+    padding: 4px;
+    margin-right: 12px;
+}
+
+.btn_drag {       
+    font-size: large;
+    cursor: move !important;
+}
+
+.formPart_items {
+    padding: 8px;
+    user-select: none;   
+/*    display: flex;
+    overflow: hidden;
+    overflow-x: auto;*/
+}
+
+.formPart_item {
+    border: 1px solid transparent;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    padding: 4px 8px 4px 8px;     
+}
+
+.formPart_item_title {
+    flex-grow: 1;
+}
+
+.formPart_item_title_type{
+    color: darkgrey;
+}
+
+.builder-place{
+    position: relative;
+    margin: 4px;
+}
+.editor-place {
+    position:absolute;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    z-index: 4;
+
+}

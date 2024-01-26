@@ -1,0 +1,23 @@
+﻿
+.mtd-button-hint {
+    position: relative;
+}
+
+.mtd-button-hint .mtd-button-hint_info {
+    visibility: hidden;
+    position: absolute;
+    font-size: 0.7em;
+    width: 68px;
+    text-align: center;
+    margin-left: -12px;
+    padding: 4px;
+    background-color: gray;
+    color: white;
+    z-index: 2;
+    border-radius: 4px;
+    @include elevation(3);
+}
+
+.mtd-button-hint:hover .mtd-button-hint_info {
+    visibility: visible;
+}

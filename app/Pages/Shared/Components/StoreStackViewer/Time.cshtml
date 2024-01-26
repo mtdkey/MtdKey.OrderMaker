@@ -1,0 +1,33 @@
+﻿@*
+    MTD OrderMaker - http://mtdkey.com
+    Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
+*@
+
+@model Core.DocFieldModel
+
+@if (Model != null && Model.Value != null)
+{
+    switch (ViewBag.typeStyle)
+    {
+        case "Columns":
+            <div class="mtd-store-view-col-root">
+                <div class="mtd-store-view-col-name">
+                    @Model.Name
+                </div>
+                <div class="mtd-store-view-col-value" style="height: 3em;">
+                    @Model.Value
+                </div>
+            </div>
+            break;
+        default:
+            <div class="mtd-store-view-row-line">
+                <div class="mtd-store-view-row-name">
+                    @Model.Name
+                </div>
+                <div class="mtd-store-view-row-value" style="height: 3em;">
+                    @Model.Value
+                </div>
+            </div>
+            break;
+    }
+}

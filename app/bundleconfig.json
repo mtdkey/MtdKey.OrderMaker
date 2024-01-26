@@ -1,0 +1,78 @@
+[
+  {
+    "outputFileName": "wwwroot/lib/mtd-ordermaker/main/js/mtd-main.min.js",
+    "inputFiles": [
+      "wwwroot/lib/mtd-ordermaker/main/js/mtd-main.js",
+      "wwwroot/lib/mtd-ordermaker/main/js/mtd-main-desk.js",
+      "wwwroot/lib/mtd-ordermaker/main/js/mtd-draggable.js",
+      "wwwroot/lib/mtd-ordermaker/main/js/mtd-select-list.js",
+      "wwwroot/lib/mtd-ordermaker/main/js/mtd-text-field.js",
+      "wwwroot/lib/mtd-ordermaker/main/js/mtd-dialog.js",
+      "wwwroot/lib/mtd-ordermaker/main/js/mtd-api-list.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/mtd-ordermaker/index/js/mtd-index.min.js",
+    "inputFiles": [
+      "wwwroot/lib/mtd-ordermaker/index/js/mtd-index.js",
+      "wwwroot/lib/mtd-ordermaker/index/js/mtd-index-filters.js",
+      "wwwroot/lib/mtd-ordermaker/index/js/mtd-index-columns.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/mtd-ordermaker/index/css/mtd-index.min.css",
+    "inputFiles": [
+      "wwwroot/lib/mtd-ordermaker/index/css/mtd-index.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/mtd-ordermaker/main/css/mtd-main.min.css",
+    "inputFiles": [
+      "wwwroot/lib/mtd-ordermaker/main/css/mtd-main.css",
+      "wwwroot/lib/mtd-ordermaker/main/css/mtd-app.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/mtd-ordermaker/store/css/mtd-store-view.min.css",
+    "inputFiles": [
+      "wwwroot/lib/mtd-ordermaker/store/css/mtd-store-view.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/mtd-ordermaker/store/js/mtd-store-view.min.js",
+    "inputFiles": [
+      "wwwroot/lib/mtd-ordermaker/store/js/mtd-store-view.js",
+      "wwwroot/lib/mtd-ordermaker/store/js/mtd-store-nav.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/mtd-ordermaker/mtd-checkbox/js/mtd-checkbox.min.js",
+    "inputFiles": [
+      "wwwroot/lib/mtd-ordermaker/mtd-checkbox/js/mtd-checkbox.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/mtd-ordermaker/mtd-img-selector/js/mtd-img-selector.min.js",
+    "inputFiles": [
+      "wwwroot/lib/mtd-ordermaker/mtd-img-selector/js/mtd-img-selector.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/mtd-ordermaker/mtd-img-selector/css/mtd-img-selector.min.css",
+    "inputFiles": [
+      "wwwroot/lib/mtd-ordermaker/mtd-img-selector/css/mtd-img-selector.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/mtd-ordermaker/mtd-checkbox/css/mtd-checkbox.min.css",
+    "inputFiles": [
+      "wwwroot/lib/mtd-ordermaker/mtd-checkbox/css/mtd-checkbox.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/mtd-ordermaker/config/js/mtd-config-register.min.js",
+    "inputFiles": [
+      "wwwroot/lib/mtd-ordermaker/config/js/mtd-config-register.js"
+    ]
+  }
+]

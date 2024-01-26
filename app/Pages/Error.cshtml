@@ -1,0 +1,24 @@
+﻿@*
+    MTD OrderMaker - http://mtdkey.com
+    Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
+*@
+
+@page
+@model ErrorModel
+
+
+@if (Model.ShowRequestId)
+{
+    <div class="mdc-elevation--z2" style="background-color: white; margin: 0 auto; left: 50%; max-width: 650px; padding: 16px;">
+        <h3 style="color: red;">ОШИБКА СЕРВЕРА</h3>
+        <hr />
+        <p>
+            <strong>Request ID:</strong> <code>@Model.RequestId</code>
+        </p>
+        <p>Произошла ошибка на сервере.</p>
+        <p>Сообщение было отправлено администратору в ближайшее вермя ошибка будет исправлена.</p>
+        <p>Попробуйте повторить операцию позднее.</p>
+    </div>
+}
+
+

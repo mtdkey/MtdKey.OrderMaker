@@ -1,0 +1,170 @@
+﻿@*
+    MTD OrderMaker - http://mtdkey.com
+    Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
+*@
+
+@page
+@model IndexModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> Localizer
+
+
+@{
+    ViewData["Title"] = Localizer["Interface"];
+    ViewData["SecondTitle"] = Localizer["Display elements"];
+}
+
+@section Head {
+    <link rel="stylesheet" href="~/lib/mtd-ordermaker/filechoose/css/mtd-file-choose.css" asp-append-version="true" />
+}
+
+@section Breadcrumb {
+    <li><a href="~/config">@Localizer["Configurator"]</a></li>
+    <li>@ViewBag.Title</li>
+}
+
+<div class="mtd-desk">
+    <div class="mtd-desk-panel">
+        <div style="padding-left: 16px;">
+            <button mtd-data-clicker-by="clicker-save" type="button" class="mdc-fab mdc-fab--extended">
+                <div class="mdc-fab__ripple"></div>
+                <span class="material-icons mdc-fab__icon">save</span>
+                <span class="mdc-fab__label">@Localizer["Save"]</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="mtd-desk">
+    <form mtd-data-form method="post" autocomplete="off" enctype="multipart/form-data">
+        <input type="hidden" id="clicker-save" mtd-data-clicker mtd-data-message="@Localizer["Changes saved."]" />
+        <div class="mtd-desk-fields">
+            <div class="mtd-desk-field">
+                <label>@Localizer["Image for main menu"]</label>
+                <div style="display: flex; margin-top: 8px;">
+                    @{
+                        <div style="max-width: 48px; overflow:hidden">
+                            <img src="@ViewBag.ImgMenu" height="48" />
+                        </div>
+                        string shadow = "";
+                        if (ViewBag.ImgMenu != string.Empty) { shadow = "mdc-elevation--z2"; }
+                    }
+
+                    <div mtd-file-upload="1" class="mtd-file-upload @shadow">
+                        <div class="mtd-file-select">
+                            <div class="mtd-file-select-button" id="1-file-upload-title">@Localizer["Select file"]</div>
+                            <div class="mtd-file-select-title" id="1-file-upload-result" mtd-file-upload-text="@Localizer["File not selected..."]">
+                                @Localizer["File not selected..."]
+                            </div>
+                            <input type="file" id="1-file-upload-input" name="1-file-upload-input">
+                        </div>
+                        <div class="mtd-file-select-cancel">
+                            <button id="1-file-upload-cancel" class="mdc-icon-button material-icons" type="button">close</button>
+                        </div>
+                    </div>
+                </div>
+                @if (@ViewBag.ImgMenu != string.Empty)
+                {
+                    <div class="mdc-form-field">
+                        <div class="mdc-checkbox">
+                            <input type="checkbox"
+                                   class="mdc-checkbox__native-control"
+                                   id="1-delete"
+                                   name="1-delete" />
+                            <div class="mdc-checkbox__background">
+                                <svg class="mdc-checkbox__checkmark"
+                                     viewBox="0 0 24 24">
+                                    <path class="mdc-checkbox__checkmark-path"
+                                          fill="none"
+                                          d="M1.73,12.91 8.1,19.28 22.79,4.59" />
+                                </svg>
+                                <div class="mdc-checkbox__mixedmark"></div>
+                            </div>
+                        </div>
+                        <label for="1-delete">@Localizer["Delete image"]</label>
+                    </div>
+                }
+                else
+                {
+                    <div style="height:40px;"></div>
+                }
+
+            </div>
+
+            <div class="mtd-desk-field">
+                <label>@Localizer["Image for application bar"]</label>
+                <div style="display: flex; margin-top: 8px;">
+                    @{
+                        <div style="max-width: 48px; overflow:hidden">
+                            <img src="@ViewBag.ImgAppBar" height="48" />
+                        </div>
+                        string shadow2 = "";
+                        if (ViewBag.ImgAppBar != string.Empty) { shadow2 = "mdc-elevation--z2"; }
+                    }
+
+                    <div mtd-file-upload="2" class="mtd-file-upload @shadow2">
+                        <div class="mtd-file-select">
+                            <div class="mtd-file-select-button" id="2-file-upload-title">@Localizer["Select file"]</div>
+                            <div class="mtd-file-select-title" id="2-file-upload-result" mtd-file-upload-text="@Localizer["File not selected..."]">
+                                @Localizer["File not selected..."]
+                            </div>
+                            <input type="file" id="2-file-upload-input" name="2-file-upload-input">
+                        </div>
+                        <div class="mtd-file-select-cancel">
+                            <button id="2-file-upload-cancel" class="mdc-icon-button material-icons" type="button">close</button>
+                        </div>
+                    </div>
+                </div>
+                @if (ViewBag.ImgAppBar != string.Empty)
+                {
+                    <div class="mdc-form-field">
+                        <div class="mdc-checkbox">
+                            <input type="checkbox"
+                                   class="mdc-checkbox__native-control"
+                                   id="2-delete"
+                                   name="2-delete" />
+                            <div class="mdc-checkbox__background">
+                                <svg class="mdc-checkbox__checkmark"
+                                     viewBox="0 0 24 24">
+                                    <path class="mdc-checkbox__checkmark-path"
+                                          fill="none"
+                                          d="M1.73,12.91 8.1,19.28 22.79,4.59" />
+                                </svg>
+                                <div class="mdc-checkbox__mixedmark"></div>
+                            </div>
+                        </div>
+                        <label for="2-delete">@Localizer["Delete image"]</label>
+                    </div>
+                }
+                else
+                {
+                    <div style="height:40px;"></div>
+                }
+            </div>
+
+        </div>
+        <div class="mtd-desk-fields">
+            <div class="mtd-desk-field  mtd-desk-field--border">
+                <div>
+                    <label for="color-bar">@Localizer["App bar - backround collor"]  </label>
+                    <input type="color" id="color-bar" name="color-bar" value=@ViewBag.BarColor>
+                </div>
+            </div>
+            <div class="mtd-desk-field  mtd-desk-field--border">
+                <div>
+                    <label for="color-icon">@Localizer["App bar - icons collor"]  </label>
+                    <input type="color" id="color-icon" name="color-icon" value=@ViewBag.IconColor>
+                </div>
+            </div>
+
+        </div>
+    </form>
+
+</div>
+
+
+@section Scripts {
+    <script src="~/lib/mtd-ordermaker/config/js/mtd-config-form.js" asp-append-version="true"></script>
+    <script src="~/lib/mtd-ordermaker/filechoose/js/mtd-file-choose.js" asp-append-version="true"></script>
+}
+

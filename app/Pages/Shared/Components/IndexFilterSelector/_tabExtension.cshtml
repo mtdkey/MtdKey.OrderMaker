@@ -1,0 +1,27 @@
+﻿@model Models.Index.SelectorModelView
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> Localizer
+
+<div id="index-filter-extension" class="index-filter-content-tab" style="display: none">
+    <div class="index-filter-content-tab-first">
+        @await Html.PartialAsync("./_tabExtensionList.cshtml")
+    </div>
+    <div class="index-filter-content-tab-second--hole"></div>
+    <form mtd-data-form  method="post" action="~/api/filter/extension/add" enctype="multipart/form-data" autocomplete='off'>
+        @Html.AntiForgeryToken()
+        
+        <input type="hidden" name="form-id" value="@Model.FormId"  />
+        <input id="index-filter-extension-script" type="hidden" name="script-id" />
+
+        <div class="index-filter-content-tab-foot">
+            <button mtd-dialog-cancel mtd-data-clicker class="mdc-button mdc-button--raised mdc-theme--secondary-bg" type="button">
+                <div class="mdc-button__ripple"></div>
+                <span class="mdc-button__label">@Localizer["Apply"]</span>
+            </button>
+            <button mtd-dialog-cancel class="mdc-button" type="button">
+                <div class="mdc-button__ripple"></div>
+                <span class="mdc-button__label">@Localizer["Cancel"]</span>
+            </button>
+        </div>
+    </form>
+</div>

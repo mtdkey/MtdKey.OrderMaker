@@ -1,0 +1,66 @@
+﻿@using MtdKey.OrderMaker;
+@using Microsoft.AspNetCore.Mvc.Localization
+@using MtdKey.OrderMaker.Components.Controls;
+@using MtdKey.OrderMaker.Models.Controls.MTDTextField;
+@inject IHtmlLocalizer<FormBuilderLocalizer> localizer;
+
+<div class="modal fade" id="partDialog" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">@localizer["Form Part Attribute Editor"]</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                @await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags
+                {
+                    Id = "partName",
+                    Name = "partName",
+                    MTDTexFieldView = MTDTextFieldViews.Outlined,
+                    Label = "Form Part Name",
+                    LabelLocalized = true,
+                    Required = true,
+                })
+
+                <div class="row pt-2">
+                    <div class="col">
+                        @{
+                            var titleImagePart = localizer["Image for section"];
+                        }
+                        @await Html.PartialAsync("/src/imageSelector/frontend/_ImageSelector.cshtml",
+                        new ImageSelectorModel{ Id="imagePart", Title=titleImagePart.Value })
+                    </div>
+                    <div class="col">
+                        <div class="block-editor">
+                            <div class="block-editor-title">@localizer["Part Style"]</div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="partStyle" id="radioColumns">
+                                <label class="form-check-label" for="radioColumns">
+                                    @localizer["Columns"]
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="partStyle" id="radioLines" checked>
+                                <label class="form-check-label" for="radioLines">
+                                    @localizer["Lines"]
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="block-editor">
+                    <div class="block-editor-title">@localizer["Title Style"]</div>
+                    <div class="form-check form-switch block-editor-checker">
+                        <input class="form-check-input" type="checkbox" role="switch" id="swithTitle" checked>
+                        <label class="form-check-label" for="swithTitle"> @localizer["Title is visible"]</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">@localizer["Close"]</button>
+                    @*<button type="button" class="btn btn-light text-primary">@localizer["Apply"]</button>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

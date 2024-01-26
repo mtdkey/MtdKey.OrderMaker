@@ -1,0 +1,27 @@
+﻿@import "@material/list";
+@import "@material/elevation";
+@import "@material/density";
+
+@import "mtd-button-hint.scss";
+@import "mtd-desk.scss";
+@import "mtd-dialog.scss";
+@import "mtd-material.scss";
+
+.mtd-density-list {
+   // font-size: small;
+    @include single-line-density(-3);
+}
+
+.noselect {
+    -webkit-touch-callout: none; 
+    -webkit-user-select: none; 
+    -khtml-user-select: none; 
+    -moz-user-select: none; 
+    -ms-user-select: none; 
+    user-select: none; 
+}
+
+
+.mtd-list-item {
+    border-bottom: 1px solid lightgray;
+}

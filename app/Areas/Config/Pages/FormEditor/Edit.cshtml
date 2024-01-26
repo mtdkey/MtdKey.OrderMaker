@@ -1,0 +1,81 @@
+﻿@*
+    MTD OrderMaker - http://mtdkey.com
+    Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
+*@
+
+@page
+@model EditModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> Localizer
+
+@{
+    ViewData["Title"] = Localizer["Form editor"];
+    ViewData["SecondTitle"] = Localizer["Editing form parameters"];
+    ViewData["FieldID"] = "config-image-form";
+}
+
+@section Head {
+    <link rel="stylesheet" href="~/lib/mtd-ordermaker/config/css/mtd-config-form-edit.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/mtd-ordermaker/dist/css/configFormBuilder.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+}
+
+@section Breadcrumb {
+    <li><a href="~/config">@Localizer["Configurator"]</a></li>
+    <li><a href="~/config/formeditor">@Localizer["Forms"]</a></li>
+    <li>@ViewBag.Title</li>
+}
+
+@section Action {
+
+    <li mtd-data-delete class="mdc-list-item" role="menuitem">
+        <span class="mdc-list-item__ripple"></span>
+        <span class="mdc-list-item__graphic material-icons" aria-hidden="true">delete</span>
+        <span class="mdc-list-item__text">@Localizer["Delete form"]</span>
+    </li>
+}
+
+@await Html.PartialAsync("/src/formBuilder/frontend/_Index.cshtml")
+
+<form mtd-data-form method="post" autocomplete="off">
+    <input type="hidden" id="jsonData" name="jsonData" value="@Model.JsonData" />
+    <input type="hidden" id="clicker-save" mtd-data-clicker mtd-data-message="@Localizer["Changes saved."]" />
+</form>
+
+<form mtd-data-form method="post" autocomplete='off' enctype='multipart/form-data' action='/api/config/form/delete'>
+    @Html.AntiForgeryToken()
+    <input id="config-delete-id" name="form-id" type="hidden" value="@Model.MtdForm.Id" />
+    <input id="deleteClicker" mtd-data-clicker mtd-data-location="/config/formeditor" mtd-data-message="@Localizer["The form"] '@Model.MtdForm.Name' @Localizer["was deleted."]" type="hidden" />
+</form>
+
+<div id="dialog-form-delete" class="mdc-dialog"
+     role="alertdialog"
+     aria-modal="true"
+     aria-labelledby="my-dialog-title"
+     aria-describedby="my-dialog-content">
+    <div class="mdc-dialog__container">
+        <div class="mdc-dialog__surface">
+            <h2 class="mdc-dialog__title" id="delete-form-title">
+                @Localizer["Delete form"]?
+            </h2>
+            <div class="mdc-dialog__content" id="delete-dialog-content">
+                @Localizer["The form and all data associated with it will be permanently deleted."]
+            </div>
+            <footer class="mdc-dialog__actions">
+                <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="no">
+                    <span class="mdc-button__label">@Localizer["Cancel"]</span>
+                </button>
+                <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="yes">
+                    <span class="mdc-button__label" onclick="document.getElementById('deleteClicker').click();">
+                        @Localizer["Delete"]</span>
+                </button>
+            </footer>
+        </div>
+    </div>
+    <div class="mdc-dialog__scrim"></div>
+</div>
+
+@section Scripts {
+    <script src="~/lib/mtd-ordermaker/config/js/mtd-config-form-edit.js" asp-append-version="true"></script>
+    <script src="~/lib/mtd-ordermaker/dist/js/configFormBuilder.js" asp-append-version="true"></script>
+}

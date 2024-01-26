@@ -1,0 +1,56 @@
+﻿@model DetailsModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> Localizer
+
+
+<div id="dialog-accept-sign" class="mtd-dialog mtd-dialog-hidden" style="max-width: 670px">
+    <div class="mtd-dialog-container">
+        <div class="mtd-dialog-title">
+            <div>
+                @Localizer["Positive response to the request"]
+            </div>
+            <div>
+                <button mtd-dialog-cancel class="mdc-icon-button material-icons">close</button>
+            </div>
+        </div>
+        <div class="mtd-dialog-content">
+            <form mtd-data-form method="post" autocomplete='off' action='/api/store/approval/response/1' novalidate>
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="id-store" value="@Model.MtdStore.Id" />
+
+                <div class="mtd-dialog-info">
+                    @Localizer["A positive response to a user’s request will be recorded in the list of approval history."]
+                </div>
+                
+                <div class="mtd-dialog-space"></div>
+
+                @await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags
+                   {
+                       Id = "comment-request-id",
+                       Name = "comment-request-id",
+                       Label = "Comment",
+                       LabelLocalized = true,
+                       Placeholder = "Create a comment if necessary",
+                       PlaceholderLocalized = true,
+                       Cols = 40,
+                       Rows = 3,
+                       MaxLength = 250,
+                       MTDTexFieldView = MTDTextFieldViews.TextArea,
+                   })
+
+                <div class="mtd-dialog-buttons">
+                    <button mtd-dialog-cancel mtd-data-clicker class="mdc-button mdc-button--raised mdc-theme--secondary-bg" type="button" mtd-data-message="@Localizer["Request sent successfully."]">
+                        <div class="mdc-button__ripple"></div>
+                        <span class="mdc-button__label">@Localizer["Apply"]</span>
+                    </button>
+                    <button mtd-dialog-cancel class="mdc-button" type="button">
+                        <div class="mdc-button__ripple"></div>
+                        <span class="mdc-button__label">@Localizer["Cancel"]</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+

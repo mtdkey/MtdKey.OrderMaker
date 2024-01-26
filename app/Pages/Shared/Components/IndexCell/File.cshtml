@@ -1,0 +1,15 @@
+﻿@*
+    MTD OrderMaker - http://mtdkey.com
+    Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
+*@
+
+@model Core.DocFieldModel
+
+<div>
+    @if (Model.Value != null)
+    {
+        <a href="~/api/store/stack/form/@Model.FormId/file/@Model.Id/store/@Model.StoreId" download>
+            @Model.FileName
+        </a>
+    }
+</div>

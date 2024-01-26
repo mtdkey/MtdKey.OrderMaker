@@ -1,0 +1,99 @@
+﻿@*
+    MTD OrderMaker - http://mtdkey.com
+    Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
+*@
+
+@page
+@model IndexModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> Localizer
+
+@{
+    ViewData["Title"] = Localizer["Forms"];
+    ViewData["SecondTitle"] = Localizer["Templates setting"];
+}
+
+@section Head {
+    <link rel="stylesheet" href="~/lib/mtd-ordermaker/config/css/mtd-config-form.css" asp-append-version="true" />
+}
+
+@section Breadcrumb {
+    <li><a href="~/config">@Localizer["Configurator"]</a></li>
+    <li>@ViewBag.Title</li>
+}
+
+
+<div class="mtd-desk">
+    <div class="mtd-desk-panel">
+        <div style="padding-left: 16px">
+            <button mtd-data-url="/config/formeditor/create" class="mdc-fab mdc-fab--extended" aria-label="Create">
+                <div class="mdc-fab__ripple"></div>
+                <span class="material-icons mdc-fab__icon">add</span>
+                <span class="mdc-fab__label">@Localizer["Create"]</span>
+            </button>
+        </div>
+    </div>
+    <form method="get" autocomplete='off' novalidate>
+        @await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags
+        {
+            Id = "search-text",
+            Name = "searchText",
+            Placeholder = "Search for text",
+            PlaceholderLocalized = true,
+            IconLeading = "fas fa-search",
+            Value = Model.SearchText
+        })
+    </form>
+</div>
+
+<div class="mtd-config-form-place">
+
+    <form mtd-data-form="sequence" method="post" action="~/api/config/form/sequence">
+        @Html.AntiForgeryToken()
+        <input mtd-data-sequence name="formSeqData" type="hidden" />
+        <input mtd-data-clicker type="hidden" />
+    </form>
+
+    <ul mtd-data-draggable class="mdc-list mdc-list--two-line">
+        @foreach (var form in Model.MtdForms.OrderBy(x => x.Sequence))
+        {
+        <li mtd-data-url="/config/formeditor/edit?formId=@form.Id" class="mtd-list-item mdc-list-item" draggable="true" 
+            data-value="@form.Id" aria-checked="false">
+            <span class="mdc-list-item__ripple"></span>
+            @if (form.MtdFormDesk != null)
+            {
+
+                var base64 = Convert.ToBase64String(form.MtdFormDesk.Image);
+                var imgSrc = String.Format(" data:{0};base64,{1}", form.MtdFormDesk.ImageType, base64);
+
+                <span class="mdc-list-item__graphic" aria-hidden="true">
+                    <img src="@imgSrc" width="32" />
+                </span>
+            }
+            else
+            {
+                <span class="mdc-list-item__graphic material-icons" aria-hidden="true" style="font-size:32px">folder</span>
+            }
+
+            <span class="mdc-list-item__text pt-3">
+                    @form.Name
+            </span>
+            <span class="mdc-list-item__meta material-icons" aria-hidden="true" style="cursor: all-scroll">drag_handle</span>
+            <div class="mtd-desk-draggable-bedit">
+                <button class="mdc-icon-button"
+                        aria-label="edit"
+                        aria-hidden="true"
+                        aria-pressed="false">
+                    <i class="material-icons mdc-icon-button__icon">edit</i>
+                </button>
+            </div>
+        </li>
+        }
+    </ul>
+</div>
+
+
+@section Scripts {
+    <script src="~/lib/mtd-ordermaker/config/js/mtd-config-form.js" asp-append-version="true"></script>
+}
+

@@ -1,0 +1,13 @@
+﻿@model DetailsModel
+@namespace MtdKey.OrderMaker.Components.Store
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> Localizer
+
+
+<button mtd-dialog-button="dialog-start" class="mdc-button mdc-button--outlined">
+    <div class="mdc-button__ripple"></div>
+    <i class="mdc-button__icon far fa-thumbs-up fa-2x"></i>
+    <span class="mdc-button__label">@Localizer["Approve Document"]</span>
+</button>
+
+

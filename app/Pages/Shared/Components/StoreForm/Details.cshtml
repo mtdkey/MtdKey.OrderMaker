@@ -1,0 +1,67 @@
+﻿@*
+    MTD OrderMaker - http://mtdkey.com
+    Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
+*@
+
+@model Core.DocModel
+
+@using System.Globalization;
+@using Microsoft.AspNetCore.Http;
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> Localizer
+@inject Services.UserHandler userHandler
+@{
+
+    var user = await userHandler.GetUserAsync(User);    
+}
+
+<div id="block-view" class="mtd-store-style-blank">
+
+    <div class="mtd-store-style-header">
+        <div class="mtd-store-style-badge">
+            @if (Model.Image != null)
+            {
+                var base64 = Convert.ToBase64String(Model.Image);
+                var imgSrc = String.Format("data:{0};base64,{1}", "image/png", base64);
+
+                <img src="@imgSrc" />
+            }
+            <div class="mtd-store-style-title">
+               @Model.FormName
+            </div>
+        </div>
+
+        <div class="mtd-store-style-attribute">
+                <span class="mtd-store-style-number">№ @Model.Sequence.ToString("D9")</span>
+                <hr />
+                <span class="mtd-store-style-date">@Localizer["Date"] @Model.Created.ToShortDateString()</span>
+
+        </div>
+
+    </div>
+
+
+    @foreach (var part in Model.Parts.OrderBy(x=>x.Sequence))
+    {
+        if (Model.Fields.Where(x => x.PartId == part.Id && x.IsEmptyData == false).Count() == 0)
+            continue;
+
+        if (part.ShowTitle)
+        {
+            <div class="mtd-store-style-part">
+                @part.Name
+            </div>
+        }
+        else
+        { <div class="mtd-store-style-separator"></div>
+        }
+
+        @await Component.InvokeAsync("StorePartViewer", new { docModel = Model, partModel = part})
+    }
+
+</div>
+
+
+
+
+

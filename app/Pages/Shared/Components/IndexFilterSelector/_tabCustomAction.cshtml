@@ -1,0 +1,13 @@
+﻿@model Models.Index.SelectorModelView
+
+@await Component.InvokeAsync(typeof(MTDSelectList), new MTDSelectListTags
+{
+     Id = "index-filter-custom-action",
+     Name = "index-filter-custom-action",
+     Items = Model.TermItems,
+     Label = "Action",
+     LabelLocalized = true,
+     ValueId = "4",
+     MTDSelectListView = MTDSelectListViews.Outlined
+
+})

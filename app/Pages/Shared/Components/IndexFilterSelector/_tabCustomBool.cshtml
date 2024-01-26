@@ -1,0 +1,12 @@
+﻿
+@await Component.InvokeAsync(typeof(MTDSelectList), new MTDSelectListTags
+{
+    Id = "index-filter-custom-bool-value",
+    Items = new List<MTDSelectListItem> {
+        new MTDSelectListItem { Id = "1", Value = "ON", Localized = true },
+        new MTDSelectListItem { Id = "0", Value = "OFF", Localized = true } },
+     Label = "Checkbox status",
+     LabelLocalized = true,
+     ValueId = "0",
+     MTDSelectListView = MTDSelectListViews.Outlined,
+})

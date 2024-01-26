@@ -1,0 +1,277 @@
+﻿@*
+    MTD OrderMaker - http://mtdkey.com
+    Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
+*@
+@page
+@model EditModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> Localizer
+@using  Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> SLocalizer
+
+@{
+    ViewData["Title"] = Localizer["Approval editor"];
+    ViewData["SecondTitle"] = $"{SLocalizer["Approval flow for:"]} {Model.MtdApproval.MtdFormNavigation.Name}";
+}
+@section Head {
+    <link rel="stylesheet" href="~/lib/mtd-ordermaker/config/css/mtd-config-form-edit.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/mtd-ordermaker/filechoose/css/mtd-file-choose.css" asp-append-version="true" />
+}
+@section Breadcrumb {
+    <li><a href="~/config">@Localizer["Configurator"]</a></li>
+    <li><a href="~/config/approval">@Localizer["Approvals"]</a></li>
+    <li>@ViewBag.Title</li>
+}
+@section Action {
+    <li mtd-data-url="/config/approval/stages?idApproval=@Model.MtdApproval.Id" class="mdc-list-item" role="menuitem">
+        <span class="mdc-list-item__ripple"></span>
+        <span class="mdc-list-item__graphic material-icons" aria-hidden="true">timeline</span>
+        <span class="mdc-list-item__text">@Localizer["Edit chain"]</span>
+    </li>
+    <li class="mdc-list-item" role="menuitem" onclick="document.getElementById('updateClicker').click()">
+        <span class="mdc-list-item__ripple"></span>
+        <span class="mdc-list-item__graphic material-icons" aria-hidden="true">sync</span>
+        <span class="mdc-list-item__text">@Localizer["Update first stages"]</span>
+    </li>
+    <hr class="mdc-list-divider">
+    <li mtd-data-delete class="mdc-list-item" role="menuitem">
+        <span class="mdc-list-item__ripple"></span>
+        <span class="mdc-list-item__graphic material-icons" aria-hidden="true">delete</span>
+        <span class="mdc-list-item__text">@Localizer["Delete approval flow"]</span>
+    </li>
+}
+
+<div class="mtd-desk">
+    <div class="mtd-desk-panel">
+        <div style="padding-left: 16px">
+            <button mtd-data-clicker-by="clicker-save" type="button" class="mdc-fab mdc-fab--extended">
+                <div class="mdc-fab__ripple"></div>
+                <span class="material-icons mdc-fab__icon">save</span>
+                <span class="mdc-fab__label">@Localizer["Save"]</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="mtd-desk-block" style="margin-left: auto; margin-right:auto; padding-bottom: 32px">
+
+        <form mtd-data-form method="post" autocomplete="off" novalidate>
+            <input type="hidden" asp-for="MtdApproval.Id" />
+            <input type="hidden" id="clicker-save" mtd-data-clicker mtd-data-message="@Localizer["Changes saved."]" />
+
+            <div class="mtd-desk-fields">
+                <div class="mtd-desk-field">
+                    @await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags
+                       {
+                           Id = "field-name",
+                           Name = "MtdApproval.Name",
+                           Required = true,
+                           Label = "Name",
+                           LabelLocalized = true,
+                           MTDTexFieldView = MTDTextFieldViews.Outlined,
+                           Value = Model.MtdApproval.Name
+                       })
+                </div>
+                <div class="mtd-desk-field-grow">
+                    @await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags
+                       {
+                           Id = "field-note",
+                           Name = "MtdApproval.Description",
+                           Required = true,
+                           Label = "Description",
+                           LabelLocalized = true,
+                           MTDTexFieldView = MTDTextFieldViews.Outlined,
+                           MaxLength = 250,
+                           Value = Model.MtdApproval.Description
+                       })
+                </div>
+            </div>
+
+            <div class="mtd-desk-fields" style="display: none">
+                <div class="mtd-desk-field">
+                    <span>@Localizer["Startup process image"]</span>
+                    @await Component.InvokeAsync("MTDImgSelector", new
+                    {
+                            id = "img-start",
+                            imgArray = Model.MtdApproval.ImgStart,
+                            imgType = Model.MtdApproval.ImgStartType
+                    })
+                </div>
+                <div class="mtd-desk-field-grow" style="padding-top: 32px;">
+
+                    @await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags
+                       {
+                           Id = "field-name-start",
+                           Name = "MtdApproval.ImgStartText",
+                           Label = "Startup process name",
+                           LabelLocalized = true,
+                           MTDTexFieldView = MTDTextFieldViews.Outlined,
+                           Value = Model.MtdApproval.ImgStartText
+                       })
+                </div>
+            </div>
+
+            <div class="mtd-desk-fields">
+                <div class="mtd-desk-field">
+                    <span>@Localizer["Image for Returned status"]</span>
+                    @await Component.InvokeAsync("MTDImgSelector", new
+                    {
+                            id = "img-iteraction",
+                            imgArray = Model.MtdApproval.ImgIteraction,
+                            imgType = Model.MtdApproval.ImgRequiredType
+                    })
+                </div>
+                <div class="mtd-desk-field-grow" style="padding-top: 32px;">
+
+                    @await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags
+                       {
+                           Id = "field-name-returned",
+                           Name = "MtdApproval.ImgIteractionText",
+                           Label = "Text for Returned status",
+                           LabelLocalized = true,
+                           MTDTexFieldView = MTDTextFieldViews.Outlined,
+                           Value = Model.MtdApproval.ImgIteractionText
+                       })
+                </div>
+            </div>
+
+            <div class="mtd-desk-fields">
+                <div class="mtd-desk-field">
+                    <span>@Localizer["Image for Required status"]</span>
+                    @await Component.InvokeAsync("MTDImgSelector", new
+                    {
+                            id = "img-required",
+                            imgArray = Model.MtdApproval.ImgRequired,
+                            imgType = Model.MtdApproval.ImgRequiredType
+                    })
+                </div>
+                <div class="mtd-desk-field-grow" style="padding-top: 32px;">
+
+                    @await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags
+                       {
+                           Id = "field-name-required",
+                           Name = "MtdApproval.ImgRequiredText",
+                           Label = "Text for Required status",
+                           LabelLocalized = true,
+                           MTDTexFieldView = MTDTextFieldViews.Outlined,
+                           Value = Model.MtdApproval.ImgRequiredText
+                       })
+                </div>
+            </div>
+
+            <div class="mtd-desk-fields">
+                <div class="mtd-desk-field">
+                    <span>@Localizer["Image for Waiting status"]</span>
+                    @await Component.InvokeAsync("MTDImgSelector", new
+                    {
+                        id = "img-waiting",
+                        imgArray = Model.MtdApproval.ImgWaiting,
+                        imgType = Model.MtdApproval.ImgWaitingType
+                    })
+                </div>
+                <div class="mtd-desk-field-grow" style="padding-top: 32px;">
+
+                    @await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags
+                   {
+                       Id = "field-name-waiting",
+                       Name = "MtdApproval.ImgWaitingText",
+                       Label = "Text for Waiting status",
+                       LabelLocalized = true,
+                       MTDTexFieldView = MTDTextFieldViews.Outlined,
+                       Value = Model.MtdApproval.ImgWaitingText
+                   })
+                </div>
+            </div>
+
+            <div class="mtd-desk-fields">
+                <div class="mtd-desk-field">
+                    <span>@Localizer["Image for Approved status"]</span>
+                    @await Component.InvokeAsync("MTDImgSelector", new
+                    {
+                        id = "img-approved",
+                        imgArray = Model.MtdApproval.ImgApproved,
+                        imgType = Model.MtdApproval.ImgApprovedType
+                    })
+                </div>
+                <div class="mtd-desk-field-grow" style="padding-top: 32px;">
+                    @await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags
+                   {
+                       Id = "field-name-approved",
+                       Name = "MtdApproval.ImgApprovedText",
+                       Label = "Text for Approved status",
+                       LabelLocalized = true,
+                       MTDTexFieldView = MTDTextFieldViews.Outlined,
+                       Value = Model.MtdApproval.ImgApprovedText
+                   })
+                </div>
+            </div>
+
+            <div class="mtd-desk-fields">
+                <div class="mtd-desk-field">
+                    <span>@Localizer["Image for Rejected status"]</span>
+                    @await Component.InvokeAsync("MTDImgSelector", new
+                       {
+                           id = "img-rejected",
+                           imgArray = Model.MtdApproval.ImgRejected,
+                           imgType = Model.MtdApproval.ImgRejectedType
+                       })
+                </div>
+                <div class="mtd-desk-field-grow" style="padding-top: 32px;">
+                    @await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags
+                   {
+                       Id = "field-name-rejected",
+                       Name = "MtdApproval.ImgRejectedText",
+                       Label = "Text for Rejected status",
+                       LabelLocalized = true,
+                       MTDTexFieldView = MTDTextFieldViews.Outlined,
+                       Value = Model.MtdApproval.ImgRejectedText
+                   })
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+
+
+
+
+<form mtd-data-form method="post" autocomplete='off' enctype='multipart/form-data' action='/api/config/approval/stage/update'>
+    @Html.AntiForgeryToken()
+    <input name="approval-id" type="hidden" value="@Model.MtdApproval.Id" />
+    <input id="updateClicker" mtd-data-clicker mtd-data-message="@Localizer["The approval "] '@Model.MtdApproval.Name' @Localizer["was updated"]" type="hidden" />
+</form>
+
+<form mtd-data-form method="post" autocomplete='off' enctype='multipart/form-data' action='/api/config/approval/delete'>
+    @Html.AntiForgeryToken()
+    <input id="config-delete-id" name="idApproval" type="hidden" value="@Model.MtdApproval.Id" />
+    <input id="deleteClicker" mtd-data-clicker mtd-data-location="/config/approval" mtd-data-message="@Localizer["The approval "] '@Model.MtdApproval.Name' @Localizer["was deleted"]" type="hidden" />
+</form>
+<div id="dialog-delete" class="mdc-dialog"
+     role="alertdialog"
+     aria-modal="true"
+     aria-labelledby="my-dialog-title"
+     aria-describedby="my-dialog-content">
+    <div class="mdc-dialog__container">
+        <div class="mdc-dialog__surface">
+            <h2 class="mdc-dialog__title" id="delete-form-title">
+                @Localizer["Delete approval chain"]?
+            </h2>
+            <div class="mdc-dialog__content" id="delete-dialog-content">
+                @Localizer["The approval and all data associated with it will be permanently deleted."]
+            </div>
+            <footer class="mdc-dialog__actions">
+                <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="no">
+                    <span class="mdc-button__label">@Localizer["Cancel"]</span>
+                </button>
+                <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="yes">
+                    <span class="mdc-button__label" onclick="document.getElementById('deleteClicker').click();">@Localizer["Delete"]</span>
+                </button>
+            </footer>
+        </div>
+    </div>
+    <div class="mdc-dialog__scrim"></div>
+</div>
+@section Scripts{
+    <script src="~/lib/mtd-ordermaker/config/js/mtd-config-approval.js" asp-append-version="true"></script>
+}

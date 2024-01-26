@@ -1,0 +1,15 @@
+﻿@model MTDSelectListTagsModel
+
+
+@{ 
+    string classList = "mdc-floating-label ";
+    if (Model.ValueId != null) { classList += "mdc-floating-label--float-above "; }
+}
+
+@if (Model.Label != null)
+{       
+    <span id="@Model.IdLabel" class="@classList">&nbsp;@Model.Label&nbsp;</span>
+}
+
+
+

@@ -1,0 +1,25 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@using MtdKey.OrderMaker;
+@inject IHtmlLocalizer<FormBuilderLocalizer> localizer
+
+<template id="fieldTemplate">
+    <div data-type="activeField" class="formPart_item mdc-elevation--z1" draggable="true">
+        <div data-btn-editor class="btn_editor">
+            <button class="btn btn-light text-primary"><i class="bi bi-pencil-square"></i></button>
+        </div>
+        <div class="formPart_item_title">
+            <div class="formPart_item_title_type">
+                type field
+            </div>
+            <div class="formPart_item_title_name">
+                Field Name
+            </div>
+        </div>
+        <div class="btn_editor">
+            <button data-btn-remover class="btn btn-light text-danger"><i class="bi bi-x-circle"></i></button>
+        </div>
+        <div class="btn_drag">
+            <i class="bi bi-grip-horizontal"></i>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,44 @@
+﻿
+@model MtdKey.OrderMaker.Areas.Workplace.Pages.Store.DetailsModel
+@namespace MtdKey.OrderMaker.Components.Store
+@using MtdKey.OrderMaker.Core
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> Localizer
+
+
+@{
+    string disabledRequest = (!Model.IsFirstStage && Model.UsersRequest.Count > 0) ? "" : "disabled";
+}
+
+<div class="mtd-store-view-approvals">
+    <div class="mtd-button-hint">
+        <button mtd-dialog-button="dialog-accept-sign" class="mdc-icon-button material-icons">thumb_up</button>
+        <div class="mtd-button-hint_info">
+            <span>@Localizer["Positive response"]</span>
+        </div>
+    </div>
+    <div class="mtd-button-hint">
+        <button mtd-dialog-button="dialog-return-sign" class="mdc-icon-button">
+            <i class="fas fa-reply" style="padding-bottom: 6px;"></i>
+        </button>
+        <div class="mtd-button-hint_info">
+            <span>@Localizer["Simple answer"]</span>
+        </div>
+    </div>
+    <div  class="mtd-button-hint">
+        <button mtd-dialog-button="dialog-reject-sign" class="mdc-icon-button material-icons">thumb_down</button>
+        <div class="mtd-button-hint_info">
+            <span>@Localizer["Negative response"]</span>
+        </div>
+    </div>
+
+    <div class="mtd-button-hint">
+        <button mtd-dialog-button="dialog-request" class="mdc-icon-button" @disabledRequest>
+            <i class="fas fa-share-square" style="padding-bottom: 6px;"></i>
+        </button>
+        <div class="mtd-button-hint_info">
+            <span>@Localizer["Signature request"]</span>
+        </div>
+    </div>
+</div>
+

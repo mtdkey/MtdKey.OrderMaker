@@ -1,0 +1,94 @@
+.mtd-users-rights-place {
+  background-color: white;
+  position: relative;
+  padding: 8px;
+}
+.mtd-users-rights-wrapper {
+  width: 100%;
+  overflow: hidden;
+  overflow-x: auto;
+}
+.mtd-users-rights-place table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.mtd-users-rights-place table td {
+  padding: 8px;
+  border: 1px solid #ccc;
+}
+.mtd-users-rights-place table th {
+  padding: 8px;
+  border: 1px solid #ccc;
+  background-color: whitesmoke;
+  color: dimgray;
+}
+.mtd-users-rights-place table tbody tr:hover {
+  background-color: rgba(100, 149, 237, 0.08);
+}
+.mtd-users-rights-place table td:not(:first-child) {
+  text-align: center;
+}
+.mtd-users-rights-control {
+  position: absolute;
+  top: 16px;
+  width: 100%;
+  text-align: center;
+}
+.mtd-users-rights-title {
+  display: flex;
+  padding: 16px;
+  background-image: linear-gradient(to right, white, lightgray);
+}
+.mtd-users-rights-logo {
+  background-color: lightgray;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  text-align: center;
+  align-self: center;
+}
+.mtd-users-rights-name {
+  padding-left: 8px;
+}
+.mtd-users-rights-formname {
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+.mdc-form-field label {
+  font-size: smaller;
+  white-space: nowrap;
+}
+.mtd-users-rights-header {
+  display: flex;
+  padding: 6px;
+}
+@media (max-width: 1024px) {
+  .mtd-users-rights-header {
+    flex-wrap: wrap;
+  }
+}
+.mtd-users-rights-header-first {
+  padding: 2px;
+  width: 30%;
+}
+@media (max-width: 1024px) {
+  .mtd-users-rights-header-first {
+    width: 100%;
+  }
+}
+.mtd-users-rights-header-second {
+  flex-grow: 1;
+  padding: 2px;
+  width: 70%;
+}
+@media (max-width: 1024px) {
+  .mtd-users-rights-header-second {
+    padding-top: 12px;
+    width: 100%;
+  }
+}
+.mtd-users-rights-td {
+  display: flex;
+  flex-direction: column;
+}

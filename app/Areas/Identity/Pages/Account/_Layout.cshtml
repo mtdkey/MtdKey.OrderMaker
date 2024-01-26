@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no">
+
+    <title>@ViewData["Title"] | OrderMaker</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href="https://unpkg.com/material-components-web@6.0.0/dist/material-components-web.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="~/lib/fontawesome/css/fontawesome.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/fontawesome/css/solid.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/fontawesome/css/regular.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/mtd-ordermaker/main/css/mtd-main.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/mtd-ordermaker/main/css/mtd-app.css" asp-append-version="true" />
+
+    <link rel="stylesheet" href="~/lib/mtd-ordermaker/identity/css/mtd-identity.css" asp-append-version="true" />
+</head>
+<body class="mdc-typography">
+    @*<partial name="_CookieConsentPartial" />*@
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+
+    @RenderBody()
+
+
+    <div id="main-snack" class="mdc-snackbar">
+        <div class="mdc-snackbar__surface">
+            <div class="mdc-snackbar__label"
+                 role="status"
+                 aria-live="polite">
+            </div>
+            <div class="mdc-snackbar__actions">
+                <button class="mdc-icon-button mdc-snackbar__dismiss material-icons">close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/material-components-web@6.0.0/dist/material-components-web.min.js"></script>
+    <script src="~/lib/fontawesome/js/fontawesome.min.js" asp-append-version="true"></script>
+    <script src="~/lib/fontawesome/js/solid.min.js" asp-append-version="true"></script>
+    <script src="~/lib/fontawesome/js/regular.min.js" asp-append-version="true"></script>    
+    <script src="~/lib/mtd-ordermaker/main/js/mtd-text-field.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

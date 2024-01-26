@@ -1,0 +1,123 @@
+﻿@model StageEditModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> Localizer
+
+<input type="hidden" id="dialog-rejection-id" />
+
+<div id="dialog-rejection" class="mdc-dialog"
+     role="alertdialog"
+     aria-modal="true"
+     aria-labelledby="dialog-rejection-title"
+     aria-describedby="dialog-rejection-content">
+    <div class="mdc-dialog__container">
+        <div class="mdc-dialog__surface">
+            <h2 class="mdc-dialog__title">
+                @Localizer["Rejection"]
+            </h2>
+            <div class="mdc-dialog__content" id="dialog-rejection-content">
+                <label>Image</label>
+                @await Component.InvokeAsync("MTDImgSelector",new {id="ID-image"})
+
+                <div style="padding:4px;">
+                    <div class="mdc-text-field mdc-text-field--fullwidth">
+                        <input id="dialog-rejection-name" name="dialog-rejection-name" class="mdc-text-field__input"
+                               type="text"
+                               placeholder="Name rejection"
+                               aria-label="Name rejection">
+                    </div>
+                </div>
+                <div style="display: flex;">
+                    <div style="display: flex; flex-direction:column;">
+                        <div style="padding:4px;">
+                            <div class="mdc-text-field mdc-text-field--fullwidth">
+                                <input id="dialog-rejection-number" name="dialog-rejection-number" class="mdc-text-field__input"
+                                       type="number"
+                                       placeholder="Number"
+                                       aria-label="Number">
+                            </div>
+                        </div>
+                        <div style="padding: 12px 4px 4px 4px; height: 100%;">
+                            <label for="dialog-rejection-color">@Localizer["Color"]</label>
+                            <input id="dialog-rejection-color" name="dialog-rejection-color" type="color">
+                        </div>
+                    </div>
+                    <div style="padding: 4px;">
+                        <div class="mdc-text-field mdc-text-field--textarea mdc-text-field--no-label">
+                            <textarea id="dialog-rejection-note" name="dialog-rejection-note" class="mdc-text-field__input" rows="3" cols="40" aria-label="Label" placeholder="Note"></textarea>
+                            <div class="mdc-notched-outline">
+                                <div class="mdc-notched-outline__leading"></div>
+                                <div class="mdc-notched-outline__trailing"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="mdc-dialog__actions">
+                <div style="display: flex">
+                    <div>
+                        <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="no">
+                            <span class="mdc-button__label">@Localizer["Cancel"]</span>
+                        </button>
+                    </div>
+                    <div style="display: none">
+                        <button id="button-dialog-create-rejection" type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="yes" onclick="createRejection()">
+                            <span class="mdc-button__label">@Localizer["Create"]</span>
+                        </button>
+                    </div>
+                    <div style="display: none">
+                        <button id="button-dialog-apply-rejection" type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="yes" onclick="changeRejection()">
+                            <span class="mdc-button__label">@Localizer["Apply"]</span>
+                        </button>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <div class="mdc-dialog__scrim"></div>
+</div>
+
+<div id="dialog-rejection-delete" class="mdc-dialog"
+     role="alertdialog"
+     aria-modal="true"
+     aria-labelledby="rejection-dialog-title"
+     aria-describedby="rejection-dialog--content">
+    <div class="mdc-dialog__container">
+        <div class="mdc-dialog__surface">
+            <h2 class="mdc-dialog__title">
+                @Localizer["Deleting rejection"]
+            </h2>
+            <div class="mdc-dialog__content">
+                @Localizer["Delete rejection from list?"]
+                <input id="dialog-rejection-delete-guid" type="hidden" />
+            </div>
+            <footer class="mdc-dialog__actions">
+                <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="no">
+                    <span class="mdc-button__label">@Localizer["No"]</span>
+                </button>
+                <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="yes" onclick="deleteRejection()">
+                    <span class="mdc-button__label">@Localizer["Yes"]</span>
+                </button>
+            </footer>
+        </div>
+    </div>
+    <div class="mdc-dialog__scrim"></div>
+</div>
+
+
+<ul id="ul-rejection-fake" style="display:none">
+    <li id="ID-rejection-li" class="mdc-list-item" tabindex="0" onclick="clickRejectionEdit(event)">
+        <span class="mdc-list-item__ripple"></span>
+        <span class="mdc-list-item__text" style="padding: 4px;">
+            <span id="ID-span-name-rejection" style="color: BLACK" class="mdc-list-item__primary-text">NAME</span>
+            <span id="ID-span-note-rejection" style="color: BLACK" class="mdc-list-item__secondary-text">NOTE</span>
+        </span>
+        <span class="mdc-list-item__meta material-icons" aria-hidden="true">
+            <button id="ID-delete-button-rejection" type="button" class="mdc-icon-button material-icons" onclick="clickDeleteRejectionDialog(event)">delete</button>
+        </span>
+        <input id="ID-rejection" name="ID-rejection-id" value="ID" style="display:none" />
+        <input id="ID-rejection-name" name="ID-rejection-name" value="NAME" style="display:none" />
+        <input id="ID-rejection-note" name="ID-rejection-note" value="NOTE" style="display:none" />
+        <input id="ID-rejection-number" name="ID-rejection-number" value="NUMBER" style="display:none" />
+        <input id="ID-rejection-color" name="ID-rejection-color" value="BLACK" style="display:none" />
+    </li>
+</ul>

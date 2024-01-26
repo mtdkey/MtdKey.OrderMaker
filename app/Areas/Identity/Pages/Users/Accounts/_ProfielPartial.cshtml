@@ -1,0 +1,114 @@
+﻿@*
+    MTD OrderMaker - http://mtdkey.com
+    Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
+*@
+@model EditModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> Localizer
+@{
+    ViewData["IsConfirm"] = Model.Input.IsConfirm ? "green" : "red";
+}
+
+
+
+<div class="mtd-desk-fields">
+    <div class="mtd-desk-field">
+        @await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags
+        {
+            Id = "login-title",
+            Name = "Input.Title",
+            IconLeading = "fas fa-user fa-lg",
+            Label = "Display user name",
+            LabelLocalized = true,
+            Value = Model.Input.Title,
+            Required = true
+        })
+    </div>
+    <div class="mtd-desk-field">
+        @await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags
+           {
+               Id = "login-title-group",
+               Name = "Input.TitleGroup",
+               IconLeading = "fas fa-user-friends fa-lg",
+               Label = "Display group name",
+               LabelLocalized = true,
+               Value = Model.Input.TitleGroup,
+           })
+    </div>
+    <div class="mtd-desk-field">
+        @await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags
+       {
+           Id = "login-phone",
+           Name = "Input.PhoneNumber",
+           Label = "Phone",
+           LabelLocalized = true,
+           IconLeading = "fas fa-phone fa-lg",
+           Placeholder = "+0 000 000 0000",
+           HelperText = "Phone number pattern: +0 000 000 0000",
+           HelperTextLocalizer = true,
+           Type = "tel",
+           Pattern = RegexPatterns.Phone,
+           Value = Model.Input.PhoneNumber
+       })
+    </div>
+</div>
+
+<div class="mtd-desk-fields">
+
+    <div class="mtd-desk-field">
+        @await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags
+           {
+               Id = "login-email",
+               Name = "Input.Email",
+               IconLeading = "fas fa-envelope fa-lg",
+               Label = "Email",
+               LabelLocalized = true,
+               Value = Model.Input.Email,
+               IconTrailing = "verified_user",
+               IconTrailingColor = ViewBag.IsConfirm
+           })
+        @if (!Model.Input.IsConfirm)
+        {
+            <div class="mdc-form-field noselect">
+                <div class="mdc-checkbox">
+                    <input type="checkbox" asp-for="Input.IsConfirm"
+                           class="mdc-checkbox__native-control"
+                           id="checkbox-1" />
+                    <div class="mdc-checkbox__background">
+                        <svg class="mdc-checkbox__checkmark"
+                             viewBox="0 0 24 24">
+                            <path class="mdc-checkbox__checkmark-path"
+                                  fill="none"
+                                  d="M1.73,12.91 8.1,19.28 22.79,4.59" />
+                        </svg>
+                        <div class="mdc-checkbox__mixedmark"></div>
+                    </div>
+                </div>
+                <label for="checkbox-1">@Localizer["Consider Email Confirmed."]</label>
+            </div>
+        }
+    </div>
+    <div class="mtd-desk-field">
+        @await Component.InvokeAsync(typeof(MTDSelectList), new MTDSelectListTags
+       {
+           Id = "select-role",
+           Name = "Input.Role",
+           Items = Model.Roles,
+           Label = "Role",
+           LabelLocalized = true,
+           ValueId = Model.Input.Role
+       })
+    </div>
+    <div class="mtd-desk-field">
+        @await Component.InvokeAsync(typeof(MTDSelectList), new MTDSelectListTags
+       {
+           Id = "select-policy",
+           Name = "Input.Policy",
+           Items = Model.Policies,
+           Label = "Policy",
+           LabelLocalized = true,
+           ValueId = Model.Input.Policy
+       })
+    </div>
+
+</div>

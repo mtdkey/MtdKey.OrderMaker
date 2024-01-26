@@ -1,0 +1,1605 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Approval event" xml:space="preserve">
+    <value>Событие процесса согласования</value>
+  </data>
+  <data name="Approval process event" xml:space="preserve">
+    <value>Оповещение о событии процесса согласования</value>
+  </data>
+  <data name="Approval required" xml:space="preserve">
+    <value>Требуется согласование документа</value>
+  </data>
+  <data name="approved the document at" xml:space="preserve">
+    <value>согласовал документ </value>
+  </data>
+  <data name="Click on the link to view the document that required to approve." xml:space="preserve">
+    <value>Нажмите на ссылку, чтобы посмотреть документ, который требуется утвердить.</value>
+  </data>
+  <data name="Click on the link to view the document." xml:space="preserve">
+    <value>Нажмите на ссылку, чтобы просмотреть документ.</value>
+  </data>
+  <data name="Document" xml:space="preserve">
+    <value>Документ</value>
+  </data>
+  <data name="Document link" xml:space="preserve">
+    <value>Ссылка на документ</value>
+  </data>
+  <data name="rejected the document at" xml:space="preserve">
+    <value>отклонил документ</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>Пользователь</value>
+  </data>
+  <data name="Approval process is complete. Click on the link to view the document." xml:space="preserve">
+    <value>Процесс согласования завершен. Нажмите на ссылку, чтобы просмотреть документ.</value>
+  </data>
+  <data name="Click on the link to view the document and start new approval." xml:space="preserve">
+    <value>Нажмите на ссылку, чтобы посмотреть документ и начать новый процесс согласования.</value>
+  </data>
+  <data name="restarted approval workflow at" xml:space="preserve">
+    <value>изменил статус согласования </value>
+  </data>
+  <data name="started a new approval at" xml:space="preserve">
+    <value>начал новый процесс согласования</value>
+  </data>
+  <data name="Confirm the ownership of the mailbox by clicking on the link below" xml:space="preserve">
+    <value>Подтвердите право собственности на почтовый ящик, нажав на ссылку ниже</value>
+  </data>
+  <data name="Create account password" xml:space="preserve">
+    <value>Создать новый пароль</value>
+  </data>
+  <data name="Email Verification" xml:space="preserve">
+    <value>Подтверждение адреса электронной почты</value>
+  </data>
+  <data name="Email Verification Procedure" xml:space="preserve">
+    <value>Процедура проверки электронной почты</value>
+  </data>
+  <data name="Error sending message. Perhaps this address does not exist." xml:space="preserve">
+    <value>Ошибка при отправке сообщения. Возможно, этот адрес не существует.</value>
+  </data>
+  <data name="Password reset" xml:space="preserve">
+    <value>Восстановление пароля</value>
+  </data>
+  <data name="To change your account password, follow the link below" xml:space="preserve">
+    <value>Чтобы изменить пароль своей учетной записи, перейдите по ссылке ниже</value>
+  </data>
+  <data name="Verification email sent. Please check your email." xml:space="preserve">
+    <value>Письмо с подтверждением отправлено. Пожалуйста, проверьте вашу электронную почту.</value>
+  </data>
+  <data name="Your login" xml:space="preserve">
+    <value>Ваш логин</value>
+  </data>
+  <data name="New password" xml:space="preserve">
+    <value>Новый пароль доступа</value>
+  </data>
+  <data name="Web-application address" xml:space="preserve">
+    <value>Адрес для входа в систему</value>
+  </data>
+  <data name="You have been granted access to the system and a new password has been created" xml:space="preserve">
+    <value>Вам предоставлен доступ к системе и создан новый пароль</value>
+  </data>
+  <data name="Your new password" xml:space="preserve">
+    <value>Ваш новый пароль</value>
+  </data>
+  <data name="User's comment" xml:space="preserve">
+    <value>Комментарий пользователя</value>
+  </data>
+  <data name="answered to request signature document at" xml:space="preserve">
+    <value>ответил на запрос резолюции</value>
+  </data>
+  <data name="Approval process event - answer to request" xml:space="preserve">
+    <value>Событие процесса согласования - ответ на запрос</value>
+  </data>
+  <data name="Approval process event - signature request" xml:space="preserve">
+    <value>Событие процесса согласования - запрос резолюции</value>
+  </data>
+  <data name="requested a signature to approve the document at" xml:space="preserve">
+    <value>запросил резолюцию для утверждения документа </value>
+  </data>
+  <data name="ERROR! There are documents owned by the user. Before deleting, transfer of documents to another user." xml:space="preserve">
+    <value>ОШИБКА! Есть документы, принадлежащие пользователю. Перед удалением передайте документы другому пользователю.</value>
+  </data>
+  <data name="Search for text" xml:space="preserve">
+    <value>Поиск по тексту</value>
+  </data>
+  <data name="Desktop" xml:space="preserve">
+    <value>Рабочий стол</value>
+  </data>
+  <data name="Database selection" xml:space="preserve">
+    <value>Выбор базы данных</value>
+  </data>
+  <data name="Account" xml:space="preserve">
+    <value>Учетная запись</value>
+  </data>
+  <data name="Configurator" xml:space="preserve">
+    <value>Конфигуратор</value>
+  </data>
+  <data name="Decision support system" xml:space="preserve">
+    <value>Система поддержки принятия решений</value>
+  </data>
+  <data name="Describe the problem that you encountered when using the web application, or write suggestions for improving the capabilities of the service." xml:space="preserve">
+    <value>Опишите проблему, с которой вы столкнулись при использовании веб-приложения, или напишите предложения по улучшению возможностей сервиса.</value>
+  </data>
+  <data name="Feedback" xml:space="preserve">
+    <value>Обратная связь</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Выйти</value>
+  </data>
+  <data name="Message text" xml:space="preserve">
+    <value>Текст сообщения</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Пароль</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Профиль</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Отправить</value>
+  </data>
+  <data name="Send a message to MTD OrderMaker web application developers." xml:space="preserve">
+    <value>Отправьте сообщение разработчикам веб-приложения MTD OrderMaker.</value>
+  </data>
+  <data name="Send feedback" xml:space="preserve">
+    <value>Отправить отзыв</value>
+  </data>
+  <data name="Service support" xml:space="preserve">
+    <value>Служба поддержки</value>
+  </data>
+  <data name="Technical support is provided by" xml:space="preserve">
+    <value>Техническая поддержка предоставляется компанией</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>Пользователи</value>
+  </data>
+  <data name="Action" xml:space="preserve">
+    <value>Операция</value>
+  </data>
+  <data name="Actions" xml:space="preserve">
+    <value>Действия</value>
+  </data>
+  <data name="Add filter" xml:space="preserve">
+    <value>Добавить фильтр</value>
+  </data>
+  <data name="Advanced filter" xml:space="preserve">
+    <value>Расширенный фильтр</value>
+  </data>
+  <data name="Apply" xml:space="preserve">
+    <value>Применить</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
+  <data name="contains (~)" xml:space="preserve">
+    <value>содержит (~)</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Создать</value>
+  </data>
+  <data name="Custom fields" xml:space="preserve">
+    <value>Пользовательские</value>
+  </data>
+  <data name="Date Created" xml:space="preserve">
+    <value>Дата создания</value>
+  </data>
+  <data name="Date finish" xml:space="preserve">
+    <value>Дата окончания</value>
+  </data>
+  <data name="Date of creation" xml:space="preserve">
+    <value>Дата создания</value>
+  </data>
+  <data name="Date start" xml:space="preserve">
+    <value>Дата начала</value>
+  </data>
+  <data name="Document owner" xml:space="preserve">
+    <value>Владелец документа</value>
+  </data>
+  <data name="equal (=)" xml:space="preserve">
+    <value>равно (=)</value>
+  </data>
+  <data name="Extension" xml:space="preserve">
+    <value>Расширения</value>
+  </data>
+  <data name="Form fields" xml:space="preserve">
+    <value>Поля формы</value>
+  </data>
+  <data name="ID Number" xml:space="preserve">
+    <value>Номер</value>
+  </data>
+  <data name="less (&lt;)" xml:space="preserve">
+    <value>меньше (&lt;)</value>
+  </data>
+  <data name="List columns" xml:space="preserve">
+    <value>Колонки списка</value>
+  </data>
+  <data name="Data List" xml:space="preserve">
+    <value>Список</value>
+  </data>
+  <data name="more (&gt;)" xml:space="preserve">
+    <value>больше (&gt;)</value>
+  </data>
+  <data name="no equal (&lt;&gt;)" xml:space="preserve">
+    <value>не равно (&lt;&gt;)</value>
+  </data>
+  <data name="Page" xml:space="preserve">
+    <value>Страница</value>
+  </data>
+  <data name="Page size:" xml:space="preserve">
+    <value>Размер страницы:</value>
+  </data>
+  <data name="Search for words in text fields" xml:space="preserve">
+    <value>Поиск слов в текстовых полях</value>
+  </data>
+  <data name="Service fields" xml:space="preserve">
+    <value>Служебные</value>
+  </data>
+  <data name="Text value" xml:space="preserve">
+    <value>Текстовое значение</value>
+  </data>
+  <data name="Wait list" xml:space="preserve">
+    <value>Лист ожидания</value>
+  </data>
+  <data name="of" xml:space="preserve">
+    <value>из</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Назад</value>
+  </data>
+  <data name="Changes history" xml:space="preserve">
+    <value>История изменений</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Дата</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="Document information" xml:space="preserve">
+    <value>Информация о документе</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Редактировать</value>
+  </data>
+  <data name="Document view" xml:space="preserve">
+    <value>Просмотр</value>
+  </data>
+  <data name="List" xml:space="preserve">
+    <value>Список</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Далее</value>
+  </data>
+  <data name="Print" xml:space="preserve">
+    <value>Печать</value>
+  </data>
+  <data name="Document form" xml:space="preserve">
+    <value>Форма документа</value>
+  </data>
+  <data name="Restart Approval" xml:space="preserve">
+    <value>Перезапустить согласование</value>
+  </data>
+  <data name="Set owner" xml:space="preserve">
+    <value>Назначить владельца</value>
+  </data>
+  <data name="There are no documents requiring approval." xml:space="preserve">
+    <value>Нет документов, требующих согласования.</value>
+  </data>
+  <data name="19/39/9999" xml:space="preserve">
+    <value>39.19.9999</value>
+  </data>
+  <data name="en" xml:space="preserve">
+    <value>ru</value>
+  </data>
+  <data name="m/d/Y" xml:space="preserve">
+    <value>d.m.Y</value>
+  </data>
+  <data name="MM/dd/yyyy" xml:space="preserve">
+    <value>dd.MM.yyyy</value>
+  </data>
+  <data name="Value" xml:space="preserve">
+    <value>Значение</value>
+  </data>
+  <data name="Approval status" xml:space="preserve">
+    <value>Статус согласования</value>
+  </data>
+  <data name="Created by" xml:space="preserve">
+    <value>Создано</value>
+  </data>
+  <data name="Id" xml:space="preserve">
+    <value>Номер</value>
+  </data>
+  <data name="Edited by" xml:space="preserve">
+    <value>Изменено</value>
+  </data>
+  <data name="Owner" xml:space="preserve">
+    <value>Владелец</value>
+  </data>
+  <data name="Approve Document" xml:space="preserve">
+    <value>Согласовать</value>
+  </data>
+  <data name="Forgot your password?" xml:space="preserve">
+    <value>Забыли Ваш пароль?</value>
+  </data>
+  <data name="Invalid email address." xml:space="preserve">
+    <value>Неверный адрес электронной почты.</value>
+  </data>
+  <data name="Password recovery" xml:space="preserve">
+    <value>Восстановление пароля</value>
+  </data>
+  <data name="Remember Me" xml:space="preserve">
+    <value>Запомнить на этом устройстве</value>
+  </data>
+  <data name="Sign In" xml:space="preserve">
+    <value>Войти в систему</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Логин</value>
+  </data>
+  <data name="Your account email address" xml:space="preserve">
+    <value>Адрес электронной почты Вашей учетной записи</value>
+  </data>
+  <data name="Approval process" xml:space="preserve">
+    <value>Процесс согласования</value>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>Комментарий</value>
+  </data>
+  <data name="Create a comment if necessary" xml:space="preserve">
+    <value>Сделайте комментарий если это необходимо</value>
+  </data>
+  <data name="Decision Result" xml:space="preserve">
+    <value>Резолюция</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Начать</value>
+  </data>
+  <data name="To approve the document, you need to start the approval process." xml:space="preserve">
+    <value>Чтобы утвердить документ, вам нужно начать процесс согласования.</value>
+  </data>
+  <data name="Document returned for review" xml:space="preserve">
+    <value>Документ возвращен на пересмотр</value>
+  </data>
+  <data name="'en'" xml:space="preserve">
+    <value>'ru'</value>
+  </data>
+  <data name="A positive decision on the current document will complete the approval process or forward the document to the next user." xml:space="preserve">
+    <value>Положительное решение по текущему документу завершит процесс утверждения или перенаправит документ следующему пользователю.</value>
+  </data>
+  <data name="Approve" xml:space="preserve">
+    <value>Согласовать</value>
+  </data>
+  <data name="Confirmation of approval" xml:space="preserve">
+    <value>Одобрение документа</value>
+  </data>
+  <data name="Document Rejection" xml:space="preserve">
+    <value>Отклонение документа</value>
+  </data>
+  <data name="Document return" xml:space="preserve">
+    <value>Вернуть документ</value>
+  </data>
+  <data name="Make a request for the resolution of the user to whom this document is available." xml:space="preserve">
+    <value>Сделайте запрос резолюции у пользователя, которому этот документ доступен.</value>
+  </data>
+  <data name="Reject" xml:space="preserve">
+    <value>Отклонить</value>
+  </data>
+  <data name="Select a stage from the list:" xml:space="preserve">
+    <value>Выберите этап согласования на который будет возвращен документ:</value>
+  </data>
+  <data name="Select a user from the list:" xml:space="preserve">
+    <value>Выберите пользователя из списка:</value>
+  </data>
+  <data name="Stage approval" xml:space="preserve">
+    <value>Этап согласования</value>
+  </data>
+  <data name="This operation does not complete the approval process and returns the document to the user for correction of errors." xml:space="preserve">
+    <value>Эта операция не завершает процесс утверждения и возвращает документ пользователю для исправления ошибок.</value>
+  </data>
+  <data name="User Signature Request" xml:space="preserve">
+    <value>Запрос резолюции пользователя</value>
+  </data>
+  <data name="Your decision to complete the approval process with a Reject status." xml:space="preserve">
+    <value>Ваше решение завершит процесс согласования со статусом Отказ.</value>
+  </data>
+  <data name="Signature request" xml:space="preserve">
+    <value>Запрос резолюции</value>
+  </data>
+  <data name="Delete document?" xml:space="preserve">
+    <value>Удалить документ</value>
+  </data>
+  <data name="Editor" xml:space="preserve">
+    <value>Редактор</value>
+  </data>
+  <data name="Negative response" xml:space="preserve">
+    <value>Негативный ответ</value>
+  </data>
+  <data name="Positive response" xml:space="preserve">
+    <value>Позитивный ответ</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Сохранить</value>
+  </data>
+  <data name="Simple answer" xml:space="preserve">
+    <value>Простой ответ</value>
+  </data>
+  <data name="The document was deleted." xml:space="preserve">
+    <value>Документ был удален.</value>
+  </data>
+  <data name="The document will be permanently deleted." xml:space="preserve">
+    <value>Документ будет окончательно удален.</value>
+  </data>
+  <data name="A negative answer response to a user’s request will be recorded in the list of approval history." xml:space="preserve">
+    <value>Отрицательный ответ на запрос пользователя будет занесен в список истории согласования.</value>
+  </data>
+  <data name="A positive response to a user’s request will be recorded in the list of approval history." xml:space="preserve">
+    <value>Положительный ответ на запрос пользователя будет занесен в список истории согласования.</value>
+  </data>
+  <data name="A simple answer response to a user’s request will be recorded in the list of approval history." xml:space="preserve">
+    <value>Нейтральный ответ на запрос пользователя будет занесен в список истории одобрений.</value>
+  </data>
+  <data name="Appoint Document Owner" xml:space="preserve">
+    <value>Назначение отвественного</value>
+  </data>
+  <data name="Approval is required" xml:space="preserve">
+    <value>Требуется резолюция</value>
+  </data>
+  <data name="Approval process was started." xml:space="preserve">
+    <value>Процесс согласования начат.</value>
+  </data>
+  <data name="Document is approved." xml:space="preserve">
+    <value>Документ согласован.</value>
+  </data>
+  <data name="Document is rejected." xml:space="preserve">
+    <value>Документ отклонен.</value>
+  </data>
+  <data name="In this answer option, comment is required" xml:space="preserve">
+    <value>В этом варианте ответа, комментарий обязателен</value>
+  </data>
+  <data name="Negative response to the request" xml:space="preserve">
+    <value>Отрицательный ответ на запрос</value>
+  </data>
+  <data name="Not started" xml:space="preserve">
+    <value>Не начато</value>
+  </data>
+  <data name="Positive response to the request" xml:space="preserve">
+    <value>Положительный ответ на запрос</value>
+  </data>
+  <data name="Request sent successfully." xml:space="preserve">
+    <value>Запрос успешно отправлен.</value>
+  </data>
+  <data name="Response sent." xml:space="preserve">
+    <value>Ответ отправлен</value>
+  </data>
+  <data name="Select the user who will own the document." xml:space="preserve">
+    <value>Выберите пользователя, которому будет принадлежать документ.</value>
+  </data>
+  <data name="Simple response to the request" xml:space="preserve">
+    <value>Нейтральный ответ на запрос</value>
+  </data>
+  <data name="Period" xml:space="preserve">
+    <value>Период</value>
+  </data>
+  <data name="'m/d/Y'" xml:space="preserve">
+    <value>'d.m.Y'</value>
+  </data>
+  <data name="Document creation" xml:space="preserve">
+    <value>Создание документа</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>Чтение</value>
+  </data>
+  <data name="User Resolution Request" xml:space="preserve">
+    <value>Запрос резолюции пользователя</value>
+  </data>
+  <data name="Also contain at least one character or punctuation mark: ! # @ $ % ^ &amp; * ( ) _ - +" xml:space="preserve">
+    <value>А также содержать хотя бы один символ или знак пунктуации: ! # @ $% ^ &amp; * () _ - +</value>
+  </data>
+  <data name="Change account password" xml:space="preserve">
+    <value>Изменение пароля учетной записи</value>
+  </data>
+  <data name="Profile change" xml:space="preserve">
+    <value>Изменение данных профиля</value>
+  </data>
+  <data name="Clear all" xml:space="preserve">
+    <value>Очистить все</value>
+  </data>
+  <data name="Click on the icon to create a strong password." xml:space="preserve">
+    <value>Нажмите на значок, чтобы создать надежный пароль.</value>
+  </data>
+  <data name="Confirm password" xml:space="preserve">
+    <value>Подтверждение пароля</value>
+  </data>
+  <data name="Current password" xml:space="preserve">
+    <value>Действующий пароль</value>
+  </data>
+  <data name="Login name" xml:space="preserve">
+    <value>Логин</value>
+  </data>
+  <data name="Message sent. Check your Email." xml:space="preserve">
+    <value>Сообщение отправлено. Проверьте свою электронную почту.</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Телефон</value>
+  </data>
+  <data name="Phone number pattern: +0 000 000 0000" xml:space="preserve">
+    <value>Шаблон телефонного номера: +0 000 000 0000</value>
+  </data>
+  <data name="Reset password" xml:space="preserve">
+    <value>Сброс пароля</value>
+  </data>
+  <data name="Send token to create a password" xml:space="preserve">
+    <value>Отправить токен для создания пароля</value>
+  </data>
+  <data name="The password must be strong and consist of eight or more characters of the Latin alphabet, contain uppercase and lowercase letters, numbers." xml:space="preserve">
+    <value>Пароль должен быть надежным и состоять из восьми или более символов латинского алфавита, содержать прописные и строчные буквы, цифры.</value>
+  </data>
+  <data name="You must enter your password in order to change your profile." xml:space="preserve">
+    <value>Вы должны ввести свой пароль, чтобы изменить свой профиль.</value>
+  </data>
+  <data name="Your password has been changed." xml:space="preserve">
+    <value>Ваш пароль был изменен.</value>
+  </data>
+  <data name="Your profile has been updated." xml:space="preserve">
+    <value>Ваш профиль был обновлен.</value>
+  </data>
+  <data name="A password recovery link was sent to the specified mailbox." xml:space="preserve">
+    <value>Ссылка для восстановления пароля была отправлена на указанный почтовый ящик.</value>
+  </data>
+  <data name="Locked out" xml:space="preserve">
+    <value>Заблокирован</value>
+  </data>
+  <data name="Password has been changed successfully." xml:space="preserve">
+    <value>Пароль был успешно изменен.</value>
+  </data>
+  <data name="This account has been locked out, please try again later." xml:space="preserve">
+    <value>Этот аккаунт заблокирован, повторите попытку позже.</value>
+  </data>
+  <data name="To sign in click on the link." xml:space="preserve">
+    <value>Для входа нажмите на ссылку.</value>
+  </data>
+  <data name="A plus sign between words means logical AND" xml:space="preserve">
+    <value>Знак плюс между словами означает логическое "И"</value>
+  </data>
+  <data name="Approval Completion" xml:space="preserve">
+    <value>Завершение согласования</value>
+  </data>
+  <data name="Consider Approved" xml:space="preserve">
+    <value>Считать утвержденным</value>
+  </data>
+  <data name="Display group name" xml:space="preserve">
+    <value>Отображаемое имя группы</value>
+  </data>
+  <data name="Display user name" xml:space="preserve">
+    <value>Отображаемое имя пользователя</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Нет</value>
+  </data>
+  <data name="This action will complete the approval process in whatever state it is in with the resolution you selected: YES - Approve; NO - Reject." xml:space="preserve">
+    <value>Это действие завершит процесс согласования на любом этапе с выбранным Вами итогом: ДА - Утвердить; НЕТ - Отклонить.</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Да</value>
+  </data>
+  <data name="Limit **** lines! Use a filter to shrink the list." xml:space="preserve">
+    <value>Лимит **** строк! Используйте фильтр, чтобы уменьшить список. </value>
+  </data>
+  <data name="Approval history" xml:space="preserve">
+    <value>История согласования</value>
+  </data>
+  <data name="Form printing" xml:space="preserve">
+    <value>Печать формы</value>
+  </data>
+  <data name="Please follow the links and complete the approval process.&lt;br/&gt; Or use the filter 'Wait list' to get a list of documents awaiting approval." xml:space="preserve">
+    <value>Пожалуйста, перейдите по ссылкам и завершите процесс согласования.&lt;br/&gt; Или используйте фильтр «Лист ожидания», чтобы получить список документов, ожидающих согласования.</value>
+  </data>
+  <data name="The following documents are awaiting your approval:" xml:space="preserve">
+    <value>Следующие документы ожидают Вашего утверждения:</value>
+  </data>
+  <data name="This document must be agreed upon.&lt;br/&gt; Send the document for approval by clicking the Apply button." xml:space="preserve">
+    <value>Этот документ должен быть согласован.&lt;br/&gt; Отправьте документ на согласование, нажав кнопку «Применить».</value>
+  </data>
+  <data name="Before approval, make sure that the document is filled in correctly and the comments made are corrected." xml:space="preserve">
+    <value>Перед согласованием убедитесь, что документ заполнен правильно и сделанные замечания исправлены.</value>
+  </data>
+  <data name="Create Document-based On" xml:space="preserve">
+    <value>Создание документа на основании</value>
+  </data>
+  <data name="Document-based on" xml:space="preserve">
+    <value>Документ основание</value>
+  </data>
+  <data name="Select the form of the Document creation, which will depend on the current document." xml:space="preserve">
+    <value>Выберите форму создаваемого документа, которая будет зависеть от текущего документа.</value>
+  </data>
+  <data name="at" xml:space="preserve">
+    <value>от</value>
+  </data>
+  <data name="Document-based" xml:space="preserve">
+    <value>Документ основание</value>
+  </data>
+  <data name="No documents" xml:space="preserve">
+    <value>Нет документов</value>
+  </data>
+  <data name="No selected" xml:space="preserve">
+    <value>Не выбран</value>
+  </data>
+  <data name="No." xml:space="preserve">
+    <value>№</value>
+  </data>
+  <data name="Number" xml:space="preserve">
+    <value>Номер</value>
+  </data>
+  <data name="Only numbers" xml:space="preserve">
+    <value>Только цифры</value>
+  </data>
+  <data name="Related documents" xml:space="preserve">
+    <value>Связанные документы</value>
+  </data>
+  <data name="The current document is the basis for the following documents:" xml:space="preserve">
+    <value>Текущий документ является основанием для следующих документов:</value>
+  </data>
+  <data name="Do you confirm the restart of the workflow?" xml:space="preserve">
+    <value>Вы подтверждаете перезапуск процесса согласования?</value>
+  </data>
+  <data name="Cyclic link! A document cannot be a basis for itself." xml:space="preserve">
+    <value>Циклическая ссылка! Документ не может быть основанием для самого себя.</value>
+  </data>
+  <data name="Cyclic link! This document cannot be selected." xml:space="preserve">
+    <value>Циклическая ссылка! Этот документ нельзя выбрать.</value>
+  </data>
+  <data name="This form is the basis for the following documents:" xml:space="preserve">
+    <value>Эта форма является основанием для следующих документов:</value>
+  </data>
+  <data name="Expense" xml:space="preserve">
+    <value>Расход</value>
+  </data>
+  <data name="Field Name" xml:space="preserve">
+    <value>Название поля</value>
+  </data>
+  <data name="Form Name" xml:space="preserve">
+    <value>Имя формы</value>
+  </data>
+  <data name="Income" xml:space="preserve">
+    <value>Доход</value>
+  </data>
+  <data name="Limit for Register:" xml:space="preserve">
+    <value>Ограничение регистра:</value>
+  </data>
+  <data name="Linked" xml:space="preserve">
+    <value>Связан</value>
+  </data>
+  <data name="List of digital form fields controlled by this register" xml:space="preserve">
+    <value>Список полей цифровой формы, которые контролируются этим регистром</value>
+  </data>
+  <data name="'19/39/9999 29:59'" xml:space="preserve">
+    <value>'39.19.9999 29:59'</value>
+  </data>
+  <data name="'h:i A'" xml:space="preserve">
+    <value>'H:i'</value>
+  </data>
+  <data name="'m/d/Y h:i A'" xml:space="preserve">
+    <value>'d.m.Y H:i'</value>
+  </data>
+  <data name="Deadline for tasks" xml:space="preserve">
+    <value>Задачи ожидающие завершения</value>
+  </data>
+  <data name="Please follow the links and close the tasks." xml:space="preserve">
+    <value>Пожалуйста, пройдите по ссылкам и закройте задачи.</value>
+  </data>
+  <data name="Task management event" xml:space="preserve">
+    <value>Событие управления задачами</value>
+  </data>
+  <data name="Activites" xml:space="preserve">
+    <value>Активности</value>
+  </data>
+  <data name="Activity added." xml:space="preserve">
+    <value>Событие добавлено.</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Добавить</value>
+  </data>
+  <data name="Add activity dialog" xml:space="preserve">
+    <value>Добавление события</value>
+  </data>
+  <data name="Add task dialog" xml:space="preserve">
+    <value>Добавление задачи</value>
+  </data>
+  <data name="Close task" xml:space="preserve">
+    <value>Закрыть</value>
+  </data>
+  <data name="Deadline" xml:space="preserve">
+    <value>Срок</value>
+  </data>
+  <data name="Deadline:" xml:space="preserve">
+    <value>Срок:</value>
+  </data>
+  <data name="Delete activity?" xml:space="preserve">
+    <value>Удалить событие?</value>
+  </data>
+  <data name="Delete task" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="Delete task?" xml:space="preserve">
+    <value>Удалить задачу?</value>
+  </data>
+  <data name="Error saving object." xml:space="preserve">
+    <value>Ошибка записи объекта.</value>
+  </data>
+  <data name="Error sending message." xml:space="preserve">
+    <value>Ошибка отправки сообщения.</value>
+  </data>
+  <data name="Event date" xml:space="preserve">
+    <value>Дата и время собятия</value>
+  </data>
+  <data name="Event name" xml:space="preserve">
+    <value>Наименование события</value>
+  </data>
+  <data name="Executor" xml:space="preserve">
+    <value>Исполнитель</value>
+  </data>
+  <data name="has closed the task at" xml:space="preserve">
+    <value>закрыл задачу в</value>
+  </data>
+  <data name="has created task for you at" xml:space="preserve">
+    <value>создал задачу для Вас в</value>
+  </data>
+  <data name="Initiator" xml:space="preserve">
+    <value>Инициатор</value>
+  </data>
+  <data name="New Task" xml:space="preserve">
+    <value>Новая задача</value>
+  </data>
+  <data name="Private task" xml:space="preserve">
+    <value>Частная задача</value>
+  </data>
+  <data name="Responsible for execution" xml:space="preserve">
+    <value>Исполнитель</value>
+  </data>
+  <data name="Status:" xml:space="preserve">
+    <value>Статус:</value>
+  </data>
+  <data name="Task" xml:space="preserve">
+    <value>Задача</value>
+  </data>
+  <data name="Task added." xml:space="preserve">
+    <value>Задача создана</value>
+  </data>
+  <data name="Task close" xml:space="preserve">
+    <value>Закрытие задачи</value>
+  </data>
+  <data name="Task closed" xml:space="preserve">
+    <value>Задача закрыта</value>
+  </data>
+  <data name="Task complete" xml:space="preserve">
+    <value>Задача выполнена</value>
+  </data>
+  <data name="Task refused" xml:space="preserve">
+    <value>Задача отклонена</value>
+  </data>
+  <data name="Task:" xml:space="preserve">
+    <value>Задача:</value>
+  </data>
+  <data name="Tasks" xml:space="preserve">
+    <value>Задачи</value>
+  </data>
+  <data name="The activity was deleted" xml:space="preserve">
+    <value>Событие удалено</value>
+  </data>
+  <data name="The activity will be permanently deleted." xml:space="preserve">
+    <value>Событие будет удалено без возможности восстановления.</value>
+  </data>
+  <data name="The task was deleted" xml:space="preserve">
+    <value>Задача удалена</value>
+  </data>
+  <data name="The task will be permanently deleted." xml:space="preserve">
+    <value>Задача будет удалена без возможности восстановления.</value>
+  </data>
+  <data name="This action will close the task. Use the action buttons:" xml:space="preserve">
+    <value>Это действие закроет задачу. Используйте кнопки:</value>
+  </data>
+  <data name="YES - complete the task; NO - refuse the assignment." xml:space="preserve">
+    <value>ДА - задача выполнена; НЕТ - отказаться от выполнения</value>
+  </data>
+  <data name="In this option, comment is required" xml:space="preserve">
+    <value>Для этого события  комментарий обязателен</value>
+  </data>
+  <data name="Click the 'Approve Document' button to begin the approval process." xml:space="preserve">
+    <value>Нажмите кнопку «Согласовать», чтобы начать процесс утверждения документа.</value>
+  </data>
+  <data name="Approval" xml:space="preserve">
+    <value>Согласование</value>
+  </data>
+  <data name="Approval flows" xml:space="preserve">
+    <value>Рабочие процессы</value>
+  </data>
+  <data name="Configuration and setup" xml:space="preserve">
+    <value>Конфигурация и настройка</value>
+  </data>
+  <data name="Display elements" xml:space="preserve">
+    <value>Элементы дисплея</value>
+  </data>
+  <data name="Forms" xml:space="preserve">
+    <value>Формы</value>
+  </data>
+  <data name="Interface" xml:space="preserve">
+    <value>Интерфейс</value>
+  </data>
+  <data name="Register set" xml:space="preserve">
+    <value>Настройка учета</value>
+  </data>
+  <data name="Registers" xml:space="preserve">
+    <value>Регистры</value>
+  </data>
+  <data name="Templates setting" xml:space="preserve">
+    <value>Шаблоны форм</value>
+  </data>
+  <data name="Access policies" xml:space="preserve">
+    <value>Уровни доступа</value>
+  </data>
+  <data name="Access template" xml:space="preserve">
+    <value>Уровни доступа</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>Все</value>
+  </data>
+  <data name="Assignment" xml:space="preserve">
+    <value>Назначение</value>
+  </data>
+  <data name="Delete group" xml:space="preserve">
+    <value>Удалить группу</value>
+  </data>
+  <data name="Deny group" xml:space="preserve">
+    <value>Собственный не доступен группе</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Описание</value>
+  </data>
+  <data name="Export" xml:space="preserve">
+    <value>Экспорт</value>
+  </data>
+  <data name="Group" xml:space="preserve">
+    <value>Группа</value>
+  </data>
+  <data name="Groups" xml:space="preserve">
+    <value>Группы</value>
+  </data>
+  <data name="List groups" xml:space="preserve">
+    <value>Список групп</value>
+  </data>
+  <data name="List of policies" xml:space="preserve">
+    <value>Список уровней доступа</value>
+  </data>
+  <data name="List user groups" xml:space="preserve">
+    <value>Список групп</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Наименование</value>
+  </data>
+  <data name="Only own" xml:space="preserve">
+    <value>Только свои</value>
+  </data>
+  <data name="Own docs" xml:space="preserve">
+    <value>Собственные документы</value>
+  </data>
+  <data name="Policy" xml:space="preserve">
+    <value>Политика</value>
+  </data>
+  <data name="Policy editor" xml:space="preserve">
+    <value>Редактор политик</value>
+  </data>
+  <data name="Reviewer" xml:space="preserve">
+    <value>Ревизор</value>
+  </data>
+  <data name="Rights" xml:space="preserve">
+    <value>Права</value>
+  </data>
+  <data name="Set Date" xml:space="preserve">
+    <value>Редактировать дату создания</value>
+  </data>
+  <data name="Export to Excel" xml:space="preserve">
+    <value>Экспорт в Excel</value>
+  </data>
+  <data name="User list" xml:space="preserve">
+    <value>Список пользователей</value>
+  </data>
+  <data name="User Management" xml:space="preserve">
+    <value>Управление пользвателями</value>
+  </data>
+  <data name="Accounts" xml:space="preserve">
+    <value>Учетные записи</value>
+  </data>
+  <data name="Additionally" xml:space="preserve">
+    <value>Дополнительно</value>
+  </data>
+  <data name="Documents" xml:space="preserve">
+    <value>Документы</value>
+  </data>
+  <data name="Create related" xml:space="preserve">
+    <value>Создать на основании</value>
+  </data>
+  <data name="Document reviever" xml:space="preserve">
+    <value>Ревизия документа</value>
+  </data>
+  <data name="Edit related" xml:space="preserve">
+    <value>Изменить основание</value>
+  </data>
+  <data name="Owner person" xml:space="preserve">
+    <value>Назначение владелеца документа</value>
+  </data>
+  <data name="Delete policy" xml:space="preserve">
+    <value>Удалить политику</value>
+  </data>
+  <data name="Select all" xml:space="preserve">
+    <value>Выделить все</value>
+  </data>
+  <data name="Unselect all" xml:space="preserve">
+    <value>Очистить все</value>
+  </data>
+  <data name="Changes saved." xml:space="preserve">
+    <value>Изменения сохранены.</value>
+  </data>
+  <data name="Creating a new group" xml:space="preserve">
+    <value>Создание новой группы</value>
+  </data>
+  <data name="Editing access template" xml:space="preserve">
+    <value>Редактирвоание шаблона доступа</value>
+  </data>
+  <data name="New group" xml:space="preserve">
+    <value>Новая группа</value>
+  </data>
+  <data name="The group" xml:space="preserve">
+    <value>Группа</value>
+  </data>
+  <data name="The group and all data associated with it will be permanently deleted." xml:space="preserve">
+    <value>Группа и все связанные с ней данные будут удалены без возможности восстановления.</value>
+  </data>
+  <data name="was deleted" xml:space="preserve">
+    <value>была удалена</value>
+  </data>
+  <data name="Editing group" xml:space="preserve">
+    <value>Редактирование группы</value>
+  </data>
+  <data name="New group was created." xml:space="preserve">
+    <value>Новая группа была создана успешно.</value>
+  </data>
+  <data name="The policy will be permanently deleted." xml:space="preserve">
+    <value>Политика будет удалена без возможности восстановления.</value>
+  </data>
+  <data name="All Groups" xml:space="preserve">
+    <value>Все группы</value>
+  </data>
+  <data name="Display names" xml:space="preserve">
+    <value>Отображаемое имя</value>
+  </data>
+  <data name="Email status" xml:space="preserve">
+    <value>Подтвержденный Email</value>
+  </data>
+  <data name="Login &amp; Email" xml:space="preserve">
+    <value>Логин и Email</value>
+  </data>
+  <data name="New policy was created." xml:space="preserve">
+    <value>Новая политика была создана успешно.</value>
+  </data>
+  <data name="No Group" xml:space="preserve">
+    <value>Пользователи без групп</value>
+  </data>
+  <data name="Role" xml:space="preserve">
+    <value>Роль</value>
+  </data>
+  <data name="Add group" xml:space="preserve">
+    <value>Добавить в группу</value>
+  </data>
+  <data name="Delete user" xml:space="preserve">
+    <value>Удалить пользователя</value>
+  </data>
+  <data name="Editing profile parameters" xml:space="preserve">
+    <value>Редактирование параметров профиля</value>
+  </data>
+  <data name="Group not selected" xml:space="preserve">
+    <value>Группы не выбраны</value>
+  </data>
+  <data name="Groups user" xml:space="preserve">
+    <value>Группы пользователя</value>
+  </data>
+  <data name="Send link for Email" xml:space="preserve">
+    <value>Отправить ссылку для подтверждения Email</value>
+  </data>
+  <data name="Send link for password" xml:space="preserve">
+    <value>Отправить ссылку для создания пароля</value>
+  </data>
+  <data name="Send new password" xml:space="preserve">
+    <value>Создать и отправить новый пароль</value>
+  </data>
+  <data name="Transfer all documents" xml:space="preserve">
+    <value>Передать все документы другому пользователю</value>
+  </data>
+  <data name="Add group for user" xml:space="preserve">
+    <value>Добавить группу для пользователя</value>
+  </data>
+  <data name="No group selected" xml:space="preserve">
+    <value>Группа не выбрана</value>
+  </data>
+  <data name="A new password has been sent to the user." xml:space="preserve">
+    <value>Новый пароль отправлен пользователю.</value>
+  </data>
+  <data name="Creating a new user" xml:space="preserve">
+    <value>Создание нового пользователя</value>
+  </data>
+  <data name="Message sent." xml:space="preserve">
+    <value>Сообщение отправлено.</value>
+  </data>
+  <data name="New user" xml:space="preserve">
+    <value>Новый пользователь</value>
+  </data>
+  <data name="The user will be permanently deleted." xml:space="preserve">
+    <value>Пользователь будет удален без возможости восстановления.</value>
+  </data>
+  <data name="User daleted." xml:space="preserve">
+    <value>Пользователь удален.</value>
+  </data>
+  <data name="Creating new form pattern" xml:space="preserve">
+    <value>Создание новой формы</value>
+  </data>
+  <data name="Delete form" xml:space="preserve">
+    <value>Удалить форму</value>
+  </data>
+  <data name="Edit fields" xml:space="preserve">
+    <value>Редактировать поля</value>
+  </data>
+  <data name="Edit parts" xml:space="preserve">
+    <value>Редактировать разделы</value>
+  </data>
+  <data name="Editing form parameters" xml:space="preserve">
+    <value>Редактирование параметров формы</value>
+  </data>
+  <data name="Form editor" xml:space="preserve">
+    <value>Редактор формы</value>
+  </data>
+  <data name="Image for card background" xml:space="preserve">
+    <value>Картинка - фон карточки</value>
+  </data>
+  <data name="Image for the form header" xml:space="preserve">
+    <value>Картинка - логотип</value>
+  </data>
+  <data name="New form" xml:space="preserve">
+    <value>Новая форма</value>
+  </data>
+  <data name="New form created." xml:space="preserve">
+    <value>Создана новая форма</value>
+  </data>
+  <data name="Delete image" xml:space="preserve">
+    <value>Удалить картинку</value>
+  </data>
+  <data name="File not selected..." xml:space="preserve">
+    <value>Файл не выбран</value>
+  </data>
+  <data name="Select file" xml:space="preserve">
+    <value>Выбрать</value>
+  </data>
+  <data name="The form" xml:space="preserve">
+    <value>Форма</value>
+  </data>
+  <data name="The form and all data associated with it will be permanently deleted." xml:space="preserve">
+    <value>Форма и все зависимые элементы будут удалены без возможности восстановления.</value>
+  </data>
+  <data name="Visible" xml:space="preserve">
+    <value>Видимый</value>
+  </data>
+  <data name="was deleted." xml:space="preserve">
+    <value>была удалена</value>
+  </data>
+  <data name="Columns" xml:space="preserve">
+    <value>Колонки</value>
+  </data>
+  <data name="Creating a new form section" xml:space="preserve">
+    <value>Создание нового раздела формы</value>
+  </data>
+  <data name="Delete part" xml:space="preserve">
+    <value>Удалить раздел</value>
+  </data>
+  <data name="Form parts management" xml:space="preserve">
+    <value>Управление разделами формы</value>
+  </data>
+  <data name="Image for section" xml:space="preserve">
+    <value>Картинка раздела</value>
+  </data>
+  <data name="Lines" xml:space="preserve">
+    <value>Строки</value>
+  </data>
+  <data name="New form part" xml:space="preserve">
+    <value>Новый раздел формы</value>
+  </data>
+  <data name="Part style" xml:space="preserve">
+    <value>Стиль отображения раздела</value>
+  </data>
+  <data name="Parts editor" xml:space="preserve">
+    <value>Редактор разделов</value>
+  </data>
+  <data name="The partition and all data associated with it will be permanently deleted." xml:space="preserve">
+    <value>Раздел и все зависимые элементы будут удалены без возможности восстановления.</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Заголовок</value>
+  </data>
+  <data name="Visibility" xml:space="preserve">
+    <value>Отображение</value>
+  </data>
+  <data name="Editing section parameters" xml:space="preserve">
+    <value>Редактирование параметров раздела</value>
+  </data>
+  <data name="On child forms" xml:space="preserve">
+    <value>В подчиненных формах</value>
+  </data>
+  <data name="Part editor" xml:space="preserve">
+    <value>Редактор раздела формы</value>
+  </data>
+  <data name="Delete part?" xml:space="preserve">
+    <value>Удалить раздел?</value>
+  </data>
+  <data name="Form fields management" xml:space="preserve">
+    <value>Управление полями формы</value>
+  </data>
+  <data name="Form part" xml:space="preserve">
+    <value>Раздел формы</value>
+  </data>
+  <data name="New field" xml:space="preserve">
+    <value>Новое поле</value>
+  </data>
+  <data name="New form section created." xml:space="preserve">
+    <value>Создан новый раздел формы.</value>
+  </data>
+  <data name="Creating form field" xml:space="preserve">
+    <value>Создание поля формы</value>
+  </data>
+  <data name="Default data" xml:space="preserve">
+    <value>Значение по умолчанию</value>
+  </data>
+  <data name="Delete field" xml:space="preserve">
+    <value>Удалить поле</value>
+  </data>
+  <data name="Editing form field parameters" xml:space="preserve">
+    <value>Редактирование параметров поля</value>
+  </data>
+  <data name="Field" xml:space="preserve">
+    <value>Поле</value>
+  </data>
+  <data name="Field editor" xml:space="preserve">
+    <value>Редактор поля</value>
+  </data>
+  <data name="Field type" xml:space="preserve">
+    <value>Тип поля</value>
+  </data>
+  <data name="Fields editor" xml:space="preserve">
+    <value>Редактор полей</value>
+  </data>
+  <data name="has been removed" xml:space="preserve">
+    <value>было удалено</value>
+  </data>
+  <data name="List from" xml:space="preserve">
+    <value>Список из формы:</value>
+  </data>
+  <data name="New form field created." xml:space="preserve">
+    <value>Создано новое поле формы.</value>
+  </data>
+  <data name="Readonly" xml:space="preserve">
+    <value>Только для чтения</value>
+  </data>
+  <data name="Required" xml:space="preserve">
+    <value>Обязательное</value>
+  </data>
+  <data name="The field and all data associated with it will be permanently deleted" xml:space="preserve">
+    <value>Поле и все связанные с ним данные будут удалены без возможности восстановления.</value>
+  </data>
+  <data name="Trigger" xml:space="preserve">
+    <value>Триггер</value>
+  </data>
+  <data name="Datetime now" xml:space="preserve">
+    <value>Текущая дата и время</value>
+  </data>
+  <data name="No Trigger" xml:space="preserve">
+    <value>Без триггера</value>
+  </data>
+  <data name="User group" xml:space="preserve">
+    <value>Отоборажаемое имя группы пользователя</value>
+  </data>
+  <data name="User name" xml:space="preserve">
+    <value>Имя пользователя</value>
+  </data>
+  <data name="Activity editor" xml:space="preserve">
+    <value>Редактор активности</value>
+  </data>
+  <data name="Activity image" xml:space="preserve">
+    <value>Картинка для отображения активности</value>
+  </data>
+  <data name="Editing activity parameters" xml:space="preserve">
+    <value>Редактирование параметров активности</value>
+  </data>
+  <data name="Form activites management" xml:space="preserve">
+    <value>Редактирование активностей формы</value>
+  </data>
+  <data name="App bar - backround collor" xml:space="preserve">
+    <value>Панель приложения цвет фона</value>
+  </data>
+  <data name="App bar - icons collor" xml:space="preserve">
+    <value>Панель приложения цвет текста</value>
+  </data>
+  <data name="Approval editor" xml:space="preserve">
+    <value>Редактор процесса согласования</value>
+  </data>
+  <data name="Approvals" xml:space="preserve">
+    <value>Согласования</value>
+  </data>
+  <data name="Approval flow for:" xml:space="preserve">
+    <value>Рабочий процесс для формы:</value>
+  </data>
+  <data name="Image for application bar" xml:space="preserve">
+    <value>Логотип для панели приложения</value>
+  </data>
+  <data name="Image for main menu" xml:space="preserve">
+    <value>Логотип для главного меню</value>
+  </data>
+  <data name="Settings chains" xml:space="preserve">
+    <value>Настройка цепочек согласования</value>
+  </data>
+  <data name="Approval flow list" xml:space="preserve">
+    <value>Список рабочих процессов</value>
+  </data>
+  <data name="Creating new approval flow" xml:space="preserve">
+    <value>Создание нового рабочего процесса</value>
+  </data>
+  <data name="New approval flow" xml:space="preserve">
+    <value>Новый рабочий процесс</value>
+  </data>
+  <data name="New approval flow created." xml:space="preserve">
+    <value>Новый процесс утверждения создан</value>
+  </data>
+  <data name="Image for Approved status" xml:space="preserve">
+    <value>Картинка для статуса Согласовано</value>
+  </data>
+  <data name="Image for Rejected status" xml:space="preserve">
+    <value>Картинка для статуса Отказано</value>
+  </data>
+  <data name="Image for Required status" xml:space="preserve">
+    <value>Картинка для статуса Требуется утверждение</value>
+  </data>
+  <data name="Image for Returned status" xml:space="preserve">
+    <value>Картинка для статуса Возвращен</value>
+  </data>
+  <data name="Image for Waiting status" xml:space="preserve">
+    <value>Картинка для статуса Ожидание</value>
+  </data>
+  <data name="Text for Approved status" xml:space="preserve">
+    <value>Текст для статуса Согласовано</value>
+  </data>
+  <data name="Text for Rejected status" xml:space="preserve">
+    <value>Текст для статуса Отказано</value>
+  </data>
+  <data name="Text for Required status" xml:space="preserve">
+    <value>Текст для статуса Требуется утверждение</value>
+  </data>
+  <data name="Text for Returned status" xml:space="preserve">
+    <value>Текст для статуса Возвращен</value>
+  </data>
+  <data name="Text for Waiting status" xml:space="preserve">
+    <value>Текст для статуса Ожидание</value>
+  </data>
+  <data name="Delete approval flow" xml:space="preserve">
+    <value>Удалить рабочий процесс</value>
+  </data>
+  <data name="Edit chain" xml:space="preserve">
+    <value>Редактировать цепочку</value>
+  </data>
+  <data name="Update first stages" xml:space="preserve">
+    <value>Обновить этапы</value>
+  </data>
+  <data name="Approval chain management" xml:space="preserve">
+    <value>Управление цепочкой согласования</value>
+  </data>
+  <data name="Stages list" xml:space="preserve">
+    <value>Список этапов</value>
+  </data>
+  <data name="Creating a stage in the chain" xml:space="preserve">
+    <value>Создание этапа в цепочке согласования</value>
+  </data>
+  <data name="Delete stage from chain" xml:space="preserve">
+    <value>Удалить этап в цепочке согласования</value>
+  </data>
+  <data name="Edit approval stage" xml:space="preserve">
+    <value>Редактор этапа согласования</value>
+  </data>
+  <data name="Editing a Stage in a Chain" xml:space="preserve">
+    <value>Редактирование этапа в цепочке</value>
+  </data>
+  <data name="New approval chain was created." xml:space="preserve">
+    <value>Создан новый этап согласования.</value>
+  </data>
+  <data name="New approval stage" xml:space="preserve">
+    <value>Новый этап согласования</value>
+  </data>
+  <data name="Parts of the form that will be uneditable after approval" xml:space="preserve">
+    <value>Разделы формы, которые нельзя будет редактировать после утверждения этого этапа</value>
+  </data>
+  <data name="Rejection list" xml:space="preserve">
+    <value>Дополнительный список отказов</value>
+  </data>
+  <data name="Resolution list" xml:space="preserve">
+    <value>Дополнительный список разрешений</value>
+  </data>
+  <data name="The stage and all data associated with it will be permanently deleted." xml:space="preserve">
+    <value>Этап и все связанные с ним данные будут удалены без возможности восстановления.</value>
+  </data>
+  <data name="The stage deleted." xml:space="preserve">
+    <value>Этап согласования удален.</value>
+  </data>
+  <data name="Approver" xml:space="preserve">
+    <value>Утверждающий</value>
+  </data>
+  <data name="Creating new resolution" xml:space="preserve">
+    <value>Создание новой резолюции</value>
+  </data>
+  <data name="Delete resolution" xml:space="preserve">
+    <value>Удалить резолюцию</value>
+  </data>
+  <data name="Header text" xml:space="preserve">
+    <value>Текст</value>
+  </data>
+  <data name="New resolution" xml:space="preserve">
+    <value>Новая резолюция</value>
+  </data>
+  <data name="Resolutions" xml:space="preserve">
+    <value>Резолюции</value>
+  </data>
+  <data name="Text color" xml:space="preserve">
+    <value>Цвет текста</value>
+  </data>
+  <data name="The resolution and all data associated with it will be permanently deleted." xml:space="preserve">
+    <value>Резолюция и все связанные с ней данные будут удалены без возможности восстановления.</value>
+  </data>
+  <data name="The resolution deleted." xml:space="preserve">
+    <value>Резолюция удалена.</value>
+  </data>
+  <data name="Editing resolution settings" xml:space="preserve">
+    <value>Редактирование параметров резолюции</value>
+  </data>
+  <data name="Resolution editor" xml:space="preserve">
+    <value>Реактор резолюции</value>
+  </data>
+  <data name="Create new rejection" xml:space="preserve">
+    <value>Создание нового варианта отказа</value>
+  </data>
+  <data name="Delete rejection" xml:space="preserve">
+    <value>Удалить вариант отказа</value>
+  </data>
+  <data name="Edit rejection" xml:space="preserve">
+    <value>Редактирование параметров отказа</value>
+  </data>
+  <data name="New rejection" xml:space="preserve">
+    <value>Новая резолюция</value>
+  </data>
+  <data name="Rejection editor" xml:space="preserve">
+    <value>Редактор варианта отказа</value>
+  </data>
+  <data name="Rejections" xml:space="preserve">
+    <value>Отрицательные резолюции</value>
+  </data>
+  <data name="Rejections list" xml:space="preserve">
+    <value>Список отрицательных резолюций</value>
+  </data>
+  <data name="The rejection and all data associated with it will be permanently deleted." xml:space="preserve">
+    <value>Вариант отказа и все связанные с ним данные будут удалены без возможности восстановления.</value>
+  </data>
+  <data name="The rejection deleted." xml:space="preserve">
+    <value>Вариант отказа был удален.</value>
+  </data>
+  <data name="Creating new register" xml:space="preserve">
+    <value>Создание нвого регистра</value>
+  </data>
+  <data name="Editing register parametr" xml:space="preserve">
+    <value>Редактирование параметров регистра</value>
+  </data>
+  <data name="New register" xml:space="preserve">
+    <value>Новый регистр</value>
+  </data>
+  <data name="New register created." xml:space="preserve">
+    <value>Новый регистр создан.</value>
+  </data>
+  <data name="Parent Limit" xml:space="preserve">
+    <value>Лимит расходов</value>
+  </data>
+  <data name="Register data list" xml:space="preserve">
+    <value>Список регистров</value>
+  </data>
+  <data name="Register editor" xml:space="preserve">
+    <value>Редактор регистра</value>
+  </data>
+  <data name="Delete register" xml:space="preserve">
+    <value>Удалить регистр</value>
+  </data>
+  <data name="The register and all data associated with it will be permanently deleted." xml:space="preserve">
+    <value>Регистр и все связанные с ним данные будут удалены без возможности восстановления.</value>
+  </data>
+  <data name="The register deleted." xml:space="preserve">
+    <value>Регистр был удален.</value>
+  </data>
+  <data name="Delete activity" xml:space="preserve">
+    <value>Удалить активность</value>
+  </data>
+  <data name="The activity and all data associated with it will be permanently deleted." xml:space="preserve">
+    <value>Активность и все связанные с ней данные будут удалены без возможности восстановления.</value>
+  </data>
+  <data name="The activity deleted." xml:space="preserve">
+    <value>Акстивность была удалена.</value>
+  </data>
+  <data name="New form activity created." xml:space="preserve">
+    <value>Создана новая активность.</value>
+  </data>
+  <data name="Consider Email Confirmed." xml:space="preserve">
+    <value>Считать подтвержденным.</value>
+  </data>
+  <data name="Creating new approval chain" xml:space="preserve">
+    <value>Создание новой цепочки согласования</value>
+  </data>
+  <data name="Form Approval Chain" xml:space="preserve">
+    <value>Согласование для документа</value>
+  </data>
+  <data name="Catalogs" xml:space="preserve">
+    <value>Справочники</value>
+  </data>
+  <data name="Title name" xml:space="preserve">
+    <value>Отображаемое имя</value>
+  </data>
+  <data name="Transfer of documents" xml:space="preserve">
+    <value>Передача документов</value>
+  </data>
+  <data name="Transfer of documents to the user." xml:space="preserve">
+    <value>Передча всех  документов другому пользователю.</value>
+  </data>
+  <data name="Display Name &amp; Email" xml:space="preserve">
+    <value>Имя &amp; Email</value>
+  </data>
+  <data name="If you want to change your password, use the password recovery service on the user management page or the 'Forgot your password?' link on the login page." xml:space="preserve">
+    <value>Если вы хотите изменить свой пароль, воспользуйтесь услугой восстановления пароля на странице управления пользователями или ссылкой "Забыли пароль?" на странице входа в систему.</value>
+  </data>
+  <data name="Please wait. Your login is being created..." xml:space="preserve">
+    <value>Пожалуйста, подождите. Ваш логин создается...</value>
+  </data>
+  <data name="The login operation was successful." xml:space="preserve">
+    <value>Операция входа в систему прошла успешно.</value>
+  </data>
+  <data name="You are logged in with a random password." xml:space="preserve">
+    <value>Вы вошли в систему с автоматически созданным паролем.</value>
+  </data>
+  <data name="Forms Limit!" xml:space="preserve">
+    <value>Лимит количества форм!</value>
+  </data>
+  <data name="Main content" xml:space="preserve">
+    <value>Основной раздел</value>
+  </data>
+  <data name="Form Part Name" xml:space="preserve">
+    <value>Название раздела</value>
+  </data>
+  <data name="Continue" xml:space="preserve">
+    <value>Продолжить</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Закрыть</value>
+  </data>
+</root>

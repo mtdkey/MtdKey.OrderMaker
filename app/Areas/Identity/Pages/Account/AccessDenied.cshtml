@@ -1,0 +1,18 @@
+﻿@page
+@model AccessDeniedModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> Localizer
+
+@{
+    ViewData["Title"] = Localizer["Access denied"];
+}
+
+
+<div class="mdc-elevation--z8 identity-box">
+    <partial name="./_ImgHeader" />
+    <div style="text-align: center">
+        <span class="mtd-main-danger" style="font-size: x-large; text-transform: uppercase">@ViewBag.Title!</span>
+    </div>
+    <hr />
+    <p>@Localizer["You do not have enough rights to perform the operation"].</p>
+</div>

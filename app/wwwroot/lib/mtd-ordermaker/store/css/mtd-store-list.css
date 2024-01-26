@@ -1,0 +1,90 @@
+.mtd-store-shadow {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  -webkit-transition: all 0.25s ease-in-out;
+  -moz-transition: all 0.25s ease-in-out;
+  -ms-transition: all 0.25s ease-in-out;
+  -o-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
+}
+.mtd-store-tile {
+  margin: 16px;
+  width: 290px;
+  /*display: flex;
+    /*flex-direction: column;*/
+  /*.mtd-store-shadow();
+    overflow: hidden;*/
+}
+/*.mtd-store-tile:hover {
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}*/
+.mtd-store-tile-header {
+  padding: 8px;
+  height: 3.2em;
+  line-height: 1.1em;
+  background-image: linear-gradient(to left, lightgray, white);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: gray;
+}
+.mtd-store-tile-header div:first-child {
+  flex-grow: 1;
+  font-weight: bold;
+  font-size: 1.1em;
+  text-align: left;
+}
+.mtd-store-tile-content {
+  position: relative;
+}
+.mtd-store-tile-field {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  color: navy;
+  padding: 8px;
+  line-height: 1.2em;
+}
+.mtd-store-tile-image {
+  display: flex;
+  text-align: center;
+}
+.mtd-store-tile-image img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: auto;
+  width: auto;
+  max-width: 290px;
+  max-height: 164px;
+  min-height: 164px;
+}
+.mtd-store-tile-field div:first-child {
+  color: gray;
+}
+.mtd-store-tile-field div {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+:root {
+  --mdc-theme-primary: navy;
+  --mdc-theme-secondary: cornflowerblue;
+}
+.mtd-store-list {
+  width: 100%;
+  overflow: hidden;
+  overflow-x: auto;
+}
+.mtd-store-list table {
+  width: 100%;
+}
+.mtd-store-list table th:first-child {
+  width: 6em;
+}
+.mtd-store-list-number {
+  background-color: lightgray;
+}

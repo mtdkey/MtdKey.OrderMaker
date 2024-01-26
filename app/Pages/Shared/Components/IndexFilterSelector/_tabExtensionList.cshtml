@@ -1,0 +1,12 @@
+﻿@model Models.Index.SelectorModelView
+
+@await Component.InvokeAsync(typeof(MTDSelectList), new MTDSelectListTags {
+
+    Id = "index-filter-extension-list",
+    Items = Model.ScriptItems,
+    Label = "Advanced filter",
+    LabelLocalized = true,
+    ValueId = Model.ScriptItems.Select(x => x.Id).FirstOrDefault(),
+    MTDSelectListView = MTDSelectListViews.Outlined,
+
+}) 

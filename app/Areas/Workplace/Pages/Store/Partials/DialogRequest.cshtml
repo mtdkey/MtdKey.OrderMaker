@@ -1,0 +1,72 @@
+﻿@model DetailsModel
+@inject IHtmlLocalizer<SharedResource> Localizer
+
+
+<div id="dialog-request" class="mtd-dialog mtd-dialog-hidden">
+    <div class="mtd-dialog-container">
+        <div class="mtd-dialog-title">
+            <div>
+                @Localizer["User Signature Request"]
+            </div>
+            <div>
+                <button mtd-dialog-cancel class="mdc-icon-button material-icons">close</button>
+            </div>
+        </div>
+        <div class="mtd-dialog-content">
+            <form mtd-data-form method="post" autocomplete='off' action='/api/store/approval/request'>
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="id-store" value="@Model.MtdStore.Id" />
+                <input type="hidden" name="id-form" value="@Model.MtdStore.MtdFormId" />
+
+                <div class="mtd-dialog-info">
+                    @Localizer["Make a request for the resolution of the user to whom this document is available."]
+                </div>
+
+                <div class="mtd-dialog-space"></div>
+
+                @Localizer["Select a user from the list:"]
+
+                <div class="mtd-dialog-space"></div>
+
+                @await Component.InvokeAsync(typeof(MTDSelectList), new MTDSelectListTags
+                   {
+                       Id = "select-recipient",
+                       Name = "id-user-recipient",
+                       Label = "User",
+                       LabelLocalized = true,
+                       Items = Model.UsersRequest,
+                       MTDSelectListView = MTDSelectListViews.Outlined
+
+                   })
+
+                <div class="mtd-dialog-space"></div>
+
+                @await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags
+           {
+               Id = "comment-request",
+               Name = "comment-request-id",
+               Label = "Comment",
+               LabelLocalized = true,
+               Placeholder = "Create a comment if necessary",
+               PlaceholderLocalized = true,
+               Cols = 40,
+               Rows = 3,
+               MaxLength = 250,
+               MTDTexFieldView = MTDTextFieldViews.TextArea,
+           })
+
+                <div class="mtd-dialog-buttons">
+                    <button mtd-dialog-cancel mtd-data-clicker class="mdc-button mdc-button--raised mdc-theme--secondary-bg" type="button" mtd-data-message="@Localizer["Request sent successfully."]">
+                        <div class="mdc-button__ripple"></div>
+                        <span class="mdc-button__label">@Localizer["Apply"]</span>
+                    </button>
+                    <button mtd-dialog-cancel class="mdc-button" type="button">
+                        <div class="mdc-button__ripple"></div>
+                        <span class="mdc-button__label">@Localizer["Cancel"]</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

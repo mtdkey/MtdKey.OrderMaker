@@ -1,0 +1,42 @@
+﻿@*
+    MTD OrderMaker - http://mtdkey.com
+    Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
+*@
+
+
+@model Core.DocFieldModel
+
+
+@if (Model != null && Model.Value != null && (DateTime) Model.Value > DateTime.MinValue)
+{
+    var value = (DateTime)Model.Value;
+
+    switch (ViewBag.typeStyle)
+    {
+
+        case "Columns":
+            {
+                <div class="mtd-store-view-col-root">
+                    <div class="mtd-store-view-col-name">
+                        @Model.Name
+                    </div>
+                    <div class="mtd-store-view-col-value">
+                        @value.ToShortDateString()
+                    </div>
+                </div>
+                break;
+            }
+
+        default:
+            <div class="mtd-store-view-row-line">
+                <div class="mtd-store-view-row-name">
+                    @Model.Name
+                </div>
+                <div class="mtd-store-view-row-value">
+                    @value.ToShortDateString()
+                </div>
+            </div>
+            break;
+    }
+
+}

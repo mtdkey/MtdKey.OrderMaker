@@ -1,2 +1,0 @@
-﻿
-new MTDTextField("search-text");

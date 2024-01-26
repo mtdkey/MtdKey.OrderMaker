@@ -1,0 +1,39 @@
+﻿@model DetailsModel
+@namespace MtdKey.OrderMaker.Components.Store
+@using MtdKey.OrderMaker.Core
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> Localizer
+
+<div id="nav-div">
+    <input type="hidden" id="nav-current-id" value="@Model.MtdStore.Id" />
+    <div id="nav-div-main">
+        <button id="nav-button-main" class="mdc-fab" aria-label="Favorite">
+            <div class="mdc-fab__ripple"></div>
+            <span class="mdc-fab__icon material-icons">menu_open</span>
+            <span class="mdc-fab__icon material-icons mtd-main-display-none">close</span>
+        </button>
+    </div>
+    <div id="nav-div-list">
+        <button id="nav-button-list" class="mdc-fab mdc-fab--mini mdc-fab--exited" aria-label="List"
+                mtd-data-url="/workplace/store/index?indexForm=@Model.MtdForm.Id">
+            <div class="mdc-fab__ripple"></div>
+            <span class="mdc-fab__icon material-icons">list</span>
+            <span class="mdc-fab__label mtd-main-display-none">@Localizer["List"]</span>
+        </button>
+    </div>
+    <div id="nav-div-back">
+        <button id="nav-button-back" class="mdc-fab mdc-fab--mini mdc-fab--exited" aria-label="Back">
+            <div class="mdc-fab__ripple"></div>
+            <span class="mdc-fab__icon material-icons">arrow_back</span>
+            <span class="mdc-fab__label mtd-main-display-none">@Localizer["Back"]</span>
+        </button>
+    </div>
+    <div id="nav-div-next">
+        <button id="nav-button-next" class="mdc-fab mdc-fab--mini mdc-fab--exited" aria-label="Next">
+            <div class="mdc-fab__ripple"></div>
+            <span class="mdc-fab__icon material-icons">arrow_forward</span>
+            <span class="mdc-fab__label mtd-main-display-none">@Localizer["Next"]</span>
+        </button>
+    </div>
+</div>
+<div id="nav-modal" class="mtd-main-display-none"></div>

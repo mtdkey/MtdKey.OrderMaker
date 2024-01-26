@@ -1,0 +1,46 @@
+﻿@using MtdKey.OrderMaker.Components
+@model MTDImgSelectorModel
+
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> Localizer
+
+
+<div>
+    <div style="display: flex; margin-top: 8px;">
+        @{
+            <div style="max-width: 48px; overflow:hidden">
+                @await Component.InvokeAsync("MTDImgViewer", new { height = 48, imgArray = @Model.ImgArray, imgType=Model.ImgType })
+            </div>
+            string shadow = "";
+            if (Model.ImgArray != null) { shadow = "mtd-img-select-shadow"; }
+        }
+
+        <div mtd-img-selector="@Model.Id" class="mtd-img-selector @shadow">
+            <div class="mtd-img-select">
+                <div class="mtd-img-select-button" id="@Model.Id-file-upload-title">@Localizer["Select file"]</div>
+                <div class="mtd-img-select-title" id="@Model.Id-file-upload-result" 
+                    mtd-img-selector-text="@Localizer["File not selected..."]">
+                    @Localizer["File not selected..."]
+                </div>
+                <input type="file" id="@Model.Id-file-upload-input" name="@Model.Id-file-upload-input" 
+                    @if (@Model.Required) { <text> required</text>}>
+            </div>
+            <div class="mtd-img-select-cancel">
+                <button type="button" id="@Model.Id-file-upload-cancel"></button>
+            </div>
+        </div>
+    </div>
+    @if (@Model.ImgArray != null)
+    {
+        <div class="pt-2">
+            <input type="checkbox" class="class=" form-control" id="@Model.Id-delete" name="@Model.Id-delete" />
+            <label for="@Model.Id-delete">@Localizer["Delete image"]</label>
+        </div>
+
+
+    }
+    else
+    {
+        <div style="height:10px;"></div>
+    }
+</div>

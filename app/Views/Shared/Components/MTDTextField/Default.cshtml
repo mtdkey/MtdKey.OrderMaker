@@ -1,0 +1,45 @@
+﻿@model MTDTextFieldTagsModel
+
+@{
+    string mainClass = "mdc-text-field mdc-text-field--filled ";
+    mainClass = Model.Label == null ? mainClass += "mdc-text-field--no-label " : mainClass;
+    mainClass = Model.IconLeading != null ? mainClass += "mdc-text-field--with-leading-icon " : mainClass;
+    mainClass = Model.IconTrailing != null ? mainClass += "mdc-text-field--with-trailing-icon " : mainClass;
+
+    string step = Model.Step != string.Empty ? $" step='{Model.Step}' " : string.Empty;
+    string clicker = Model.MtdInputClicker ? " mtd-input-clicker " : string.Empty;
+
+    if (Model.Disabled)
+    {
+        mainClass += "mdc-text-field--disabled ";
+    }
+
+}
+
+<label id="@Model.Id" class="@mainClass">
+
+    @await Html.PartialAsync("./_iconLeading.cshtml")
+
+    <input id="@Model.IdInput" class="mdc-text-field__input @Model.Class" type="@Model.Type" aria-labelledby="@Model.IdLabel"
+           name="@Model.Name"
+           value="@Model.Value"
+           aria-controls="@Model.IdHelper"
+           aria-describedby="@Model.IdHelper"
+           placeholder="@Model.Placeholder"
+           pattern="@Model.Pattern"
+           mtd-data-message="@Model.MtdDataMessage"
+           maxlength="@Model.MaxLength"
+           @step
+           @clicker
+           @Model.RDAttribute />
+
+    @await Html.PartialAsync("./_label.cshtml")
+
+    @await Html.PartialAsync("./_iconTrailing.cshtml")
+
+    <span class="mdc-line-ripple"></span>
+</label>
+
+@await Html.PartialAsync("./_helperText.cshtml")
+@await Html.PartialAsync("./_counterLine.cshtml")
+

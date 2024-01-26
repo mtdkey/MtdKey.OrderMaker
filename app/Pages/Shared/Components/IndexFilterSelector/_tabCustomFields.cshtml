@@ -1,0 +1,12 @@
+﻿@model Models.Index.SelectorModelView
+
+
+@await Component.InvokeAsync(typeof(MTDSelectList), new MTDSelectListTags
+{
+    Id = $"index-filter-custom-fields",
+    Label = "Form fields",
+    LabelLocalized = true,
+    Items = Model.CustomItems,
+    ValueId = Model.CustomItems.Select(x=>x.Id).FirstOrDefault(),
+    MTDSelectListView = MTDSelectListViews.Outlined
+})

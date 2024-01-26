@@ -1,0 +1,26 @@
+﻿@model Models.Index.SelectorModelView
+@using Microsoft.AspNetCore.Mvc.Localization
+@using MtdKey.OrderMaker.Components.Index.Filter
+
+
+<div id="index-filter-service" class="index-filter-content-tab">
+    <div class="index-filter-content-tab-first">
+        @await Component.InvokeAsync(typeof(MTDSelectList), new MTDSelectListTags
+   {
+       Id = "index-filter-service-list",
+       Name = "index-filter-service-list",
+       ValueId = ServiceFilter.DateCreated.ToString(),
+       Items = Model.ServiceItems,
+       Label = "Service fields",
+       LabelLocalized = true,
+       MTDSelectListView = MTDSelectListViews.Outlined
+   })
+    </div>
+
+    @await Html.PartialAsync("./_tabServicePeriod.cshtml")
+
+    @await Html.PartialAsync("./_tabServiceOwners.cshtml")
+
+</div>
+
+

@@ -1,0 +1,117 @@
+﻿@*
+    MTD OrderMaker - http://mtdkey.com
+    Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
+*@
+
+@page
+@model MtdKey.OrderMaker.Areas.Workplace.Pages.Store.EditModel
+@namespace MtdKey.OrderMaker.Components.Store
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> Localizer
+
+@{
+    ViewData["Title"] = Localizer["Editor"];
+    ViewData["SecondTitle"] = Model.MtdForm.Name;
+    string listGuid = Guid.NewGuid().ToString();
+}
+
+@section Head{
+    <link rel="stylesheet" href="~/lib/mtd-ordermaker/store/css/mtd-store-edit.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/mtd-ordermaker/store/css/mtd-store-view.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/mtd-ordermaker/ui/css/mtd-ui-material.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/xdan/dist/jquery.datetimepicker.min.css" asp-append-version="true" />
+}
+
+@section Breadcrumb {
+    <li mtd-data-url="/" ><a href="~/">@Localizer["Desktop"]</a></li>
+    <li mtd-data-url="/workplace/store/index?indexForm=@Model.MtdForm.Id"><a href="~/workplace/store/index?indexForm=@Model.MtdForm.Id">@Localizer["Data List"]</a></li>
+    <li mtd-data-url="/workplace/store/details?id=@Model.MtdStore.Id"><a href="~/workplace/store/details?id=@Model.MtdStore.Id">@Localizer["Document view"]</a></li>
+    <li>@ViewBag.Title</li>
+}
+
+<div class="mtd-desk">
+    <div class="mtd-desk-panel">
+        <div style="padding-left: 4px; z-index: 3; position:fixed">
+            <div style="height: 56px;">
+                <button mtd-data-clicker-by="store-edit-clicker" class="mtd-fab mdc-fab" aria-label="Create" type="button">
+                    <div class="mdc-fab__ripple"></div>
+                    <span class="material-icons mdc-fab__icon">save</span>
+                    <span class="mdc-fab__label mtd-main-display-none">@Localizer["Save"]</span>
+                </button>
+            </div>
+            <div style="padding-top: 8px; padding-left: 8px">
+                <button class="mtd-fab mdc-fab mdc-fab--mini" aria-label="List" mtd-data-url="/workplace/store/details?id=@Model.MtdStore.Id">
+                    <div class="mdc-fab__ripple"></div>
+                    <span class="mdc-fab__icon material-icons">cancel</span>
+                    <span class="mdc-fab__label mtd-main-display-none">@Localizer["Cancel"]</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="mtd-desk-blocks">
+        <div class="mtd-desk-block">
+            <div class="mdc-elevation--z4">
+                @await Component.InvokeAsync("StoreForm", new { store = Model.MtdStore, type = FormType.Edit })
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+
+    <script src="~/lib/mtd-ordermaker/store/js/mtd-store-edit.js" asp-append-version="true"></script>
+    <script src="~/lib/mtd-ordermaker/ui/js/mtd-ui-material.js" asp-append-version="true"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+    <script src="~/lib/moment/dist/js/moment-with-locales.min.js" asp-append-version="true"></script>
+    <script src="~/lib/xdan/dist/jquery.datetimepicker.full.min.js" asp-append-version="true"></script>
+
+    <script>
+        $("input.mtd-data-datepicker").each(function () {
+            $(this).datetimepicker({
+                timepicker: false,
+                @*mask: @Localizer["'19/39/9999'"],*@
+                format: @Localizer["'m/d/Y'"],
+                defaultDate: new Date(),
+            });
+        });
+
+        $("input.mtd-data-datetimepicker").each(function () {
+            $(this).datetimepicker({
+                timepicker: true,
+                formatTime: @Localizer["'h:i A'"],
+                validateOnBlur: false,
+                @*mask: @Localizer["'19/39/9999 29:59'"],*@
+                format: @Localizer["'m/d/Y h:i A'"],
+                defaultDate: new Date(),
+            });
+        });
+
+       $.datetimepicker.setLocale(@Localizer["'en'"]);
+
+       new MTDTextField("date-create");
+
+    </script>
+}
+
+<div id="dialog-info" class="mdc-dialog"
+     role="alertdialog"
+     aria-modal="true"
+     aria-labelledby="my-dialog-title"
+     aria-describedby="my-dialog-content">
+    <div class="mdc-dialog__container">
+        <div class="mdc-dialog__surface">
+            <h2 class="mdc-dialog__title" id="delete-dialog-title">
+                <span id="dialog-info-title"></span>
+            </h2>
+            <div class="mdc-dialog__content" id="dialog-info-content">
+
+            </div>
+            <footer class="mdc-dialog__actions">
+                <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="no">
+                    <span class="mdc-button__label">@Localizer["OK"]</span>
+                </button>
+            </footer>
+        </div>
+    </div>
+    <div class="mdc-dialog__scrim"></div>
+</div>

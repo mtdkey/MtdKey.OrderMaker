@@ -1,0 +1,435 @@
+﻿@*
+    MTD OrderMaker - http://mtdkey.com
+    Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
+*@
+@page
+@model EditModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> Localizer
+@{
+    ViewData["Title"] = Localizer["Policy editor"];
+    ViewData["SecondTitle"] = Localizer["Editing access template"];
+    ViewData["policyId"] = HttpContext.Request.Query["id"];
+    ViewData["ColumnQty"] = Model.ExportToExcel ? 10 : 9;
+}
+
+@section Head {
+    <link rel="stylesheet" href="~/lib/mtd-ordermaker/users/css/mtd-users-rights.css" asp-append-version="true" />
+}
+
+@section Breadcrumb {
+    <li><a href="~/Identity/Users">@Localizer["Users"]</a></li>
+    <li><a href="~/Identity/Users/Policy">@Localizer["Access policies"]</a></li>
+    <li>@ViewData["Title"]</li>
+}
+
+@section Action {
+    <li class="mdc-list-item" role="menuitem" onclick="document.getElementById('all').click()">
+        <span class="mdc-list-item__ripple"></span>
+        <span class="mdc-list-item__graphic material-icons" aria-hidden="true">done_all</span>
+        <span class="mdc-list-item__text">@Localizer["Select all"]</span>
+    </li>
+    <li class="mdc-list-item" role="menuitem" onclick="document.getElementById('clear').click()">
+        <span class="mdc-list-item__ripple"></span>
+        <span class="mdc-list-item__graphic material-icons" aria-hidden="true">select_all</span>
+        <span class="mdc-list-item__text">@Localizer["Unselect all"]</span>
+    </li>
+    <li role="separator" class="mdc-list-divider"></li>
+    <li id="policy-open-dialog" class="mdc-list-item" role="menuitem">
+        <span class="mdc-list-item__ripple"></span>
+        <span class="mdc-list-item__graphic material-icons" aria-hidden="true">delete</span>
+        <span class="mdc-list-item__text">@Localizer["Delete policy"]</span>
+    </li>
+}
+
+<form mtd-data-form method="post" enctype="multipart/form-data" action="~/api/policy/all">
+    @Html.AntiForgeryToken()
+    <input name="policy-id" type="hidden" value="@Model.MtdPolicy.Id" />
+    <input id="all" mtd-data-clicker type="hidden" />
+</form>
+
+<form mtd-data-form method="post" enctype="multipart/form-data" action="~/api/policy/clear">
+    @Html.AntiForgeryToken()
+    <input name="policy-id" type="hidden" value="@Model.MtdPolicy.Id" />
+    <input id="clear" mtd-data-clicker type="hidden" />
+</form>
+
+<div class="mtd-desk">
+    <div class="mtd-desk-panel">
+        <div style="padding-left:16px;">
+            <button mtd-data-clicker-by="clicker-save" class="mdc-fab mdc-fab--extended" aria-label="Save" type="button">
+                <div class="mdc-fab__ripple"></div>
+                <span class="material-icons mdc-fab__icon">save</span>
+                <span class="mdc-fab__label">@Localizer["Save"]</span>
+            </button>
+        </div>
+    </div>
+
+    <form mtd-data-form method="post" action="~/api/policy/edit" enctype="multipart/form-data" autocomplete="off" novalidate>
+        <input type="hidden" name="policy-id" value="@Model.MtdPolicy.Id" />
+        <input mtd-data-clicker type="hidden" id="clicker-save" value="@Model.MtdPolicy.Id" />
+        @Html.AntiForgeryToken()
+        <div class="mtd-users-rights-header">
+            <div class="mtd-users-rights-header-first">
+                @await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags
+                   {
+                       Id = "policy-name",
+                       Name = "policy-name",
+                       Required = true,
+                       Value = Model.MtdPolicy.Name,
+                       Label = "Name",
+                       LabelLocalized = true,
+                       MTDTexFieldView = MTDTextFieldViews.Outlined
+                   })
+            </div>
+            <div class="mtd-users-rights-header-second">
+                @await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags
+               {
+                   Id = "policy-note",
+                   Name = "policy-note",
+                   Required = true,
+                   Value = Model.MtdPolicy.Description,
+                   Label = "Description",
+                   LabelLocalized = true,
+                   MTDTexFieldView = MTDTextFieldViews.Outlined,
+               })
+            </div>
+        </div>
+
+        <div class="mtd-users-rights-place">
+            <div class="mtd-users-rights-wrapper">
+                <table style="font-size: smaller">
+                    <thead>
+                        <tr>
+                            <th rowspan="2">
+                                @Localizer["Form name"]
+                            </th>
+                            <th colspan="@ViewBag.ColumnQty">@Localizer["Rights"]</th>
+                        </tr>
+                        <tr>
+                            <th>
+                                @Localizer["Create"]
+                            </th>
+                            <th>
+                                @Localizer["View"]
+                            </th>
+                            <th>
+                                @Localizer["Edit"]
+                            </th>
+                            <th>
+                                @Localizer["Delete"]
+                            </th>
+                            <th>
+                                @Localizer["Documents"]
+                            </th>
+                            <th>
+                                @Localizer["Additionally"]
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var form in Model.MtdForms)
+                        {
+
+                            RightsModel rightsModel = new RightsModel
+                            {
+                                FormId = form.Id,
+                                Create = Model.MtdPolicy.MtdPolicyForms.Where(x => x.MtdForm == form.Id && x.Create == 1).Any(),
+                                ViewAll = Model.MtdPolicy.MtdPolicyForms.Where(x => x.MtdForm == form.Id && x.ViewAll == 1).Any(),
+                                ViewGroup = Model.MtdPolicy.MtdPolicyForms.Where(x => x.MtdForm == form.Id && x.ViewGroup == 1).Any(),
+                                ViewOwn = Model.MtdPolicy.MtdPolicyForms.Where(x => x.MtdForm == form.Id && x.ViewOwn == 1).Any(),
+                                EditAll = Model.MtdPolicy.MtdPolicyForms.Where(x => x.MtdForm == form.Id && x.EditAll == 1).Any(),
+                                EditGroup = Model.MtdPolicy.MtdPolicyForms.Where(x => x.MtdForm == form.Id && x.EditGroup == 1).Any(),
+                                EditOwn = Model.MtdPolicy.MtdPolicyForms.Where(x => x.MtdForm == form.Id && x.EditOwn == 1).Any(),
+                                DeleteAll = Model.MtdPolicy.MtdPolicyForms.Where(x => x.MtdForm == form.Id && x.DeleteAll == 1).Any(),
+                                DeleteGroup = Model.MtdPolicy.MtdPolicyForms.Where(x => x.MtdForm == form.Id && x.DeleteGroup == 1).Any(),
+                                DeleteOwn = Model.MtdPolicy.MtdPolicyForms.Where(x => x.MtdForm == form.Id && x.DeleteOwn == 1).Any(),
+                                SetOwner = Model.MtdPolicy.MtdPolicyForms.Where(x => x.MtdForm == form.Id && x.ChangeOwner == 1).Any(),
+                                Reviewer = Model.MtdPolicy.MtdPolicyForms.Where(x => x.MtdForm == form.Id && x.Reviewer == 1).Any(),
+                                SetDate = Model.MtdPolicy.MtdPolicyForms.Where(x => x.MtdForm == form.Id && x.ChangeDate == 1).Any(),
+                                OwnDenyGroup = Model.MtdPolicy.MtdPolicyForms.Where(x => x.MtdForm == form.Id && x.OwnDenyGroup == 1).Any(),
+                                ExportToExcel = Model.MtdPolicy.MtdPolicyForms.Where(x => x.MtdForm == form.Id && x.ExportToExcel == 1).Any(),
+                                RelatedCreate = Model.MtdPolicy.MtdPolicyForms.Where(x => x.MtdForm == form.Id && x.RelatedCreate == 1).Any(),
+                                RelatedEdit = Model.MtdPolicy.MtdPolicyForms.Where(x => x.MtdForm == form.Id && x.RelatedEdit == 1).Any(),
+                            };
+
+                            <tr>
+                                <td mtd-rights="@form.Id" style="cursor: pointer">
+                                    <div class="mtd-users-rights-formname noselect">
+                                        <div>
+                                            <i id="@form.Id-icon" class="material-icons" style="color: cornflowerblue">add_box</i>
+                                        </div>
+                                        <div>
+                                            <span>@form.Name</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    @await Html.PartialAsync("./_tdCreate", rightsModel)
+                                </td>
+                                <td>
+                                    @await Html.PartialAsync("./_tdView", rightsModel)
+                                </td>
+                                <td>
+                                    @await Html.PartialAsync("./_tdEdit", rightsModel)
+                                </td>
+                                <td>
+                                    @await Html.PartialAsync("./_tdDelete", rightsModel)
+                                </td>
+                                <td>
+                                    <div class="mtd-users-rights-td">
+                                        <div class="mdc-form-field">
+                                            <div class="mdc-checkbox">
+                                                <input type="checkbox"
+                                                       class="mdc-checkbox__native-control"
+                                                       id="@form.Id-deny-group" name="@form.Id-deny-group" @if (rightsModel.OwnDenyGroup) { <text> checked</text>} />
+                                                <div class="mdc-checkbox__background">
+                                                    <svg class="mdc-checkbox__checkmark"
+                                                         viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                              fill="none"
+                                                              d="M1.73,12.91 8.1,19.28 22.79,4.59" />
+                                                    </svg>
+                                                    <div class="mdc-checkbox__mixedmark"></div>
+                                                </div>
+                                            </div>
+                                            <label for="@form.Id-deny-group">@Localizer["Deny group"]</label>
+                                        </div>
+
+                                        <div class="mdc-form-field">
+                                            <div class="mdc-checkbox">
+                                                <input type="checkbox"
+                                                       class="mdc-checkbox__native-control"
+                                                       id="@form.Id-set-date" name="@form.Id-set-date" @if (rightsModel.SetDate) { <text> checked</text>} />
+                                                <div class="mdc-checkbox__background">
+                                                    <svg class="mdc-checkbox__checkmark"
+                                                         viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                              fill="none"
+                                                              d="M1.73,12.91 8.1,19.28 22.79,4.59" />
+                                                    </svg>
+                                                    <div class="mdc-checkbox__mixedmark"></div>
+                                                </div>
+                                            </div>
+                                            <label for="@form.Id-set-date">@Localizer["Set Date"]</label>
+                                        </div>
+
+                                        <div class="mdc-form-field d-none">
+                                            <div class="mdc-checkbox">
+                                                <input type="checkbox"
+                                                       class="mdc-checkbox__native-control"
+                                                       id="@form.Id-related-create" name="@form.Id-related-create" @if (rightsModel.RelatedCreate) { <text> checked</text>} />
+                                                <div class="mdc-checkbox__background">
+                                                    <svg class="mdc-checkbox__checkmark"
+                                                         viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                              fill="none"
+                                                              d="M1.73,12.91 8.1,19.28 22.79,4.59" />
+                                                    </svg>
+                                                    <div class="mdc-checkbox__mixedmark"></div>
+                                                </div>
+                                            </div>
+                                            <label for="@form.Id-related-create">@Localizer["Create related"]</label>
+                                        </div>
+
+                                        <div class="mdc-form-field d-none">
+                                            <div class="mdc-checkbox">
+                                                <input type="checkbox"
+                                                       class="mdc-checkbox__native-control"
+                                                       id="@form.Id-related-edit" name="@form.Id-related-edit" @if (rightsModel.RelatedEdit) { <text> checked</text>} />
+                                                <div class="mdc-checkbox__background">
+                                                    <svg class="mdc-checkbox__checkmark"
+                                                         viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                              fill="none"
+                                                              d="M1.73,12.91 8.1,19.28 22.79,4.59" />
+                                                    </svg>
+                                                    <div class="mdc-checkbox__mixedmark"></div>
+                                                </div>
+                                            </div>
+                                            <label for="@form.Id-related-edit">@Localizer["Edit related"]</label>
+                                        </div>
+
+                                    </div>
+
+                                </td>
+                                <td>
+                                    <div class="mtd-users-rights-td">
+                                        <div class="mdc-form-field">
+                                            <div class="mdc-checkbox">
+                                                <input type="checkbox"
+                                                       class="mdc-checkbox__native-control"
+                                                       id="@form.Id-set-own" name="@form.Id-set-own" @if (rightsModel.SetOwner) { <text> checked</text>} />
+                                                <div class="mdc-checkbox__background">
+                                                    <svg class="mdc-checkbox__checkmark"
+                                                         viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                              fill="none"
+                                                              d="M1.73,12.91 8.1,19.28 22.79,4.59" />
+                                                    </svg>
+                                                    <div class="mdc-checkbox__mixedmark"></div>
+                                                </div>
+                                            </div>
+                                            <label for="@form.Id-set-own">@Localizer["Owner person"]</label>
+                                        </div>
+                                        <div class="mdc-form-field">
+                                            <div class="mdc-checkbox">
+                                                <input type="checkbox"
+                                                       class="mdc-checkbox__native-control"
+                                                       id="@form.Id-reviewer" name="@form.Id-reviewer" @if (rightsModel.Reviewer) { <text> checked</text>} />
+                                                <div class="mdc-checkbox__background">
+                                                    <svg class="mdc-checkbox__checkmark"
+                                                         viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                              fill="none"
+                                                              d="M1.73,12.91 8.1,19.28 22.79,4.59" />
+                                                    </svg>
+                                                    <div class="mdc-checkbox__mixedmark"></div>
+                                                </div>
+                                            </div>
+                                            <label for="@form.Id-reviewer">@Localizer["Document reviever"]</label>
+                                        </div>
+                                        @if (Model.ExportToExcel)
+                                        {
+                                            <div class="mdc-form-field">
+                                                <div class="mdc-checkbox">
+                                                    <input type="checkbox"
+                                                           class="mdc-checkbox__native-control"
+                                                           id="@form.Id-export-excel" name="@form.Id-export-excel" @if (rightsModel.ExportToExcel) { <text> checked</text>} />
+                                                    <div class="mdc-checkbox__background">
+                                                        <svg class="mdc-checkbox__checkmark"
+                                                             viewBox="0 0 24 24">
+                                                            <path class="mdc-checkbox__checkmark-path"
+                                                                  fill="none"
+                                                                  d="M1.73,12.91 8.1,19.28 22.79,4.59" />
+                                                        </svg>
+                                                        <div class="mdc-checkbox__mixedmark"></div>
+                                                    </div>
+                                                </div>
+                                                <label for="@form.Id-export-excel">@Localizer["Export to Excel"]</label>
+                                            </div>
+
+                                        }
+                                    </div>
+                                </td>
+
+
+
+                            </tr>
+
+                            foreach (var part in form.MtdFormParts.OrderBy(x => x.Sequence))
+                            {
+                                <tr mtd-rights-parts="@part.Id" mtd-rights-parent="@form.Id" style="display: none">
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;@part.Name</td>
+                                    <td>
+                                        @{
+                                            bool checkPartCreate = Model.MtdPolicy.MtdPolicyParts.Where(x => x.MtdFormPart == part.Id && x.Create == 1).Any();
+                                        }
+                                        <div class="mdc-form-field">
+                                            <div class="mdc-checkbox">
+                                                <input type="checkbox"
+                                                       class="mdc-checkbox__native-control"
+                                                       id="@part.Id-part-create" name="@part.Id-part-create" @if (checkPartCreate) { <text> checked</text>} />
+                                                <div class="mdc-checkbox__background">
+                                                    <svg class="mdc-checkbox__checkmark"
+                                                         viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                              fill="none"
+                                                              d="M1.73,12.91 8.1,19.28 22.79,4.59" />
+                                                    </svg>
+                                                    <div class="mdc-checkbox__mixedmark"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        @{
+                                            bool checkPartView = Model.MtdPolicy.MtdPolicyParts.Where(x => x.MtdFormPart == part.Id && x.View == 1).Any();
+                                        }
+                                        <div class="mdc-form-field">
+                                            <div class="mdc-checkbox">
+                                                <input type="checkbox"
+                                                       class="mdc-checkbox__native-control"
+                                                       id="@part.Id-part-view" name="@part.Id-part-view" @if (checkPartView) { <text> checked</text>} />
+                                                <div class="mdc-checkbox__background">
+                                                    <svg class="mdc-checkbox__checkmark"
+                                                         viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                              fill="none"
+                                                              d="M1.73,12.91 8.1,19.28 22.79,4.59" />
+                                                    </svg>
+                                                    <div class="mdc-checkbox__mixedmark"></div>
+                                                </div>
+                                            </div>
+                                            <label for="@part.Id-part-view"></label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        @{
+                                            bool checkPartEdit = Model.MtdPolicy.MtdPolicyParts.Where(x => x.MtdFormPart == part.Id && x.Edit == 1).Any();
+                                        }
+                                        <div class="mdc-form-field">
+                                            <div class="mdc-checkbox">
+                                                <input type="checkbox"
+                                                       class="mdc-checkbox__native-control"
+                                                       id="@part.Id-part-edit" name="@part.Id-part-edit" @if (checkPartEdit) { <text> checked</text>} />
+                                                <div class="mdc-checkbox__background">
+                                                    <svg class="mdc-checkbox__checkmark"
+                                                         viewBox="0 0 24 24">
+                                                        <path class="mdc-checkbox__checkmark-path"
+                                                              fill="none"
+                                                              d="M1.73,12.91 8.1,19.28 22.79,4.59" />
+                                                    </svg>
+                                                    <div class="mdc-checkbox__mixedmark"></div>
+                                                </div>
+                                            </div>
+                                            <label for="@part.Id-part-edit"></label>
+                                        </div>
+                                    </td>
+                                    <td colspan="3"></td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<form mtd-data-form method="post" autocomplete='off' enctype='multipart/form-data' action='/api/policy/delete'>
+    @Html.AntiForgeryToken()
+    <input id="policy-delete-id" name="policy-delete-id" type="hidden" value="@ViewBag.PolicyId" />
+    <input id="deleteClicker" mtd-data-clicker mtd-data-location="/identity/users/policy" type="hidden" />
+</form>
+
+<div id="dialog-policy-delete" class="mdc-dialog"
+     role="alertdialog"
+     aria-modal="true"
+     aria-labelledby="my-dialog-title"
+     aria-describedby="my-dialog-content">
+    <div class="mdc-dialog__container">
+        <div class="mdc-dialog__surface">
+            <h2 class="mdc-dialog__title" id="delete-dialog-title">
+                @Localizer["Delete policy"]?
+            </h2>
+            <div class="mdc-dialog__content" id="delete-dialog-content">
+                @Localizer["The policy will be permanently deleted."].
+            </div>
+            <footer class="mdc-dialog__actions">
+                <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="no">
+                    <span class="mdc-button__label">@Localizer["Cancel"]</span>
+                </button>
+                <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="yes">
+                    <span class="mdc-button__label" onclick="document.getElementById('deleteClicker').click();">@Localizer["Delete"]</span>
+                </button>
+            </footer>
+        </div>
+    </div>
+    <div class="mdc-dialog__scrim"></div>
+</div>
+
+@section Scripts{
+    <script src="~/lib/mtd-ordermaker/users/js/mtd-user-rights.js" asp-append-version="true"></script>
+}

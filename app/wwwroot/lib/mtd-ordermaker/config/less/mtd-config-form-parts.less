@@ -1,0 +1,79 @@
+﻿.mtd-config-form-parts {
+    position: relative;
+    background-color: white;
+    padding: 16px;
+}
+
+.mtd-config-form-parts__title {
+    padding-top: 8px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.mtd-config-form-parts__header {
+    flex-grow: 1;
+}
+
+.mtd-config-form-parts__header img {
+    max-width: 260px;
+    max-height: 72px;
+}
+
+.mtd-config-form-parts__fname span {
+    text-transform: uppercase;
+    font-size: medium;
+    font-weight: bold;
+}
+
+.mtd-config-form-parts__parts {
+    display: flex;
+    height: 56px;
+    align-items: center;
+    margin-top: 16px;
+    color: cornflowerblue;
+}
+
+.mtd-config-form-parts__plist {
+    flex-grow: 1;
+}
+
+
+
+.mtd-config-form-parts__pact {
+    width: 56px;
+}
+
+
+
+#partsCreator {
+    position: absolute;
+    top: -2em;
+    left: -0.8em;
+    z-index: 1;
+
+    @media(max-width: 410px) {
+        left: -0.3em;
+    }
+}
+
+
+.mtd-config-form-parts__bdrag {
+    position: absolute;
+    right: 16px;
+    cursor: all-scroll; 
+    @media(max-width: 410px) {
+        display: none;
+    }
+}
+
+.mtd-config-form-parts__bedit {
+    position: absolute;
+    right: 56px;
+    color: cornflowerblue;
+
+    @media(max-width: 410px) {
+        right: 16px;
+    }
+}

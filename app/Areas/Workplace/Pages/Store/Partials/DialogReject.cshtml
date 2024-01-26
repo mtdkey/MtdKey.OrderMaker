@@ -1,0 +1,73 @@
+﻿@model DetailsModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> Localizer
+
+<div id="dialog-reject" class="mtd-dialog mtd-dialog-hidden">
+    <div class="mtd-dialog-container">
+        <div class="mtd-dialog-title">
+            <div>
+                @Localizer["Document Rejection"]
+            </div>
+            <div>
+                <button mtd-dialog-cancel class="mdc-icon-button material-icons">close</button>
+            </div>
+        </div>
+        <div class="mtd-dialog-content">
+            <form mtd-data-form method="post" autocomplete='off' action='/api/store/approval/reject/0'>
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="id-store" value="@Model.MtdStore.Id" />
+                
+                <input type="checkbox" class="mdc-checkbox__native-control" id="checkbox-complete" name="checkbox-complete" checked style="display: none" />
+                <input name="next-stage" type="hidden" value="0" />
+
+                <div class="mtd-dialog-info">
+                    @Localizer["Your decision to complete the approval process with a Reject status."]
+                </div>
+
+                @if (Model.ListRejections != null && Model.ListRejections.Count > 0)
+                {
+                    <div class="mtd-dialog-space"></div>
+
+                    @await Component.InvokeAsync(typeof(MTDSelectList), new MTDSelectListTags
+                       {
+                            Id = "select-decision-reject",
+                            Name = "id-resolution",
+                            Label = "Decision Result",
+                            LabelLocalized = true,
+                            Items = Model.ListRejections,
+                            ValueId = Model.ListRejections.Select(x => x.Id).FirstOrDefault(),
+                            MTDSelectListView = MTDSelectListViews.Outlined
+                       })
+                }
+
+                <div class="mtd-dialog-space"></div>
+
+                @await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags
+                   {
+                       Id = "comment-reject",
+                       Name = "comment-reject-id",
+                       Label = "Comment",
+                       LabelLocalized = true,
+                       Placeholder = "Create a comment if necessary",
+                       PlaceholderLocalized = true,
+                       Cols = 40,
+                       Rows = 3,
+                       MaxLength = 250,
+                       MTDTexFieldView = MTDTextFieldViews.TextArea,
+                   })
+
+                <div class="mtd-dialog-buttons">
+                    <button mtd-dialog-cancel mtd-data-clicker class="mdc-button mdc-button--raised mdc-theme--secondary-bg" type="button" mtd-data-message="@Localizer["Document is rejected."]">
+                        <div class="mdc-button__ripple"></div>
+                        <span class="mdc-button__label">@Localizer["Apply"]</span>
+                    </button>
+                    <button mtd-dialog-cancel class="mdc-button" type="button">
+                        <div class="mdc-button__ripple"></div>
+                        <span class="mdc-button__label">@Localizer["Cancel"]</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

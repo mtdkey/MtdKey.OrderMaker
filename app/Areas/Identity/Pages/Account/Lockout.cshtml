@@ -1,0 +1,20 @@
+﻿@page
+@model LockoutModel
+
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> Localizer
+
+@{
+    ViewData["Title"] = "Locked out";
+}
+
+
+<div class="mdc-elevation--z8 identity-box">
+    <partial name="./_ImgHeader" />
+    <div style="text-align: center">
+        <span style="font-size:large; text-transform:uppercase; padding-top: 24px;">@ViewBag.Title</span>
+    </div>
+    <hr />
+    <p>@Localizer["This account has been locked out, please try again later."]</p>
+</div>
+

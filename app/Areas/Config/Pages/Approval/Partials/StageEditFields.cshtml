@@ -1,0 +1,60 @@
+﻿@model MtdApprovalStage
+
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> Localizer
+
+    <div class="mtd-desk-fields">
+        <div class="mtd-desk-field">
+            @await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags
+               {
+                   Id = "field-name",
+                   Name = "fieldName",
+                   Required = true,
+                   Label = "Name",
+                   LabelLocalized = true,
+                   MTDTexFieldView = MTDTextFieldViews.Outlined,
+                   Value = Model.Name
+               })
+        </div>
+        <div class="mtd-desk-field-grow">
+            @await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags
+               {
+                   Id = "field-note",
+                   Name = "fieldNote",
+                   Required = true,
+                   Label = "Description",
+                   LabelLocalized = true,
+                   MTDTexFieldView = MTDTextFieldViews.Outlined,
+                   Value = Model.Description,
+                   MaxLength = 250
+               })
+        </div>
+        <div class="mtd-desk-field">
+            @await Component.InvokeAsync(typeof(MTDSelectList), new MTDSelectListTags
+                   {
+                       Id = "select-user",
+                       Name = "fieldUser",
+                       Label = "Approver",
+                       LabelLocalized = true,
+                       MTDSelectListView = MTDSelectListViews.Outlined,
+                       Items = ViewBag.UserItems
+                   })
+        </div>
+    </div>
+
+
+<div class="mtd-desk-field" style="display: none">
+    @await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags
+           {
+               Id = "field-stage",
+               Name = "fieldStage",
+               Required = true,
+               Label = "Stage",
+               LabelLocalized = true,
+               MTDTexFieldView = MTDTextFieldViews.Outlined,
+               Value = Model.Stage.ToString(),
+           })
+</div>
+
+
+

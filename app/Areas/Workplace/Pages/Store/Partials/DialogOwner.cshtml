@@ -1,0 +1,51 @@
+﻿@model DetailsModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@using MtdKey.OrderMaker.Components.Controls
+@using MtdKey.OrderMaker.Models.Controls.MTDSelectList
+@inject IHtmlLocalizer<SharedResource> Localizer
+
+
+<div id="dialog-owner" class="mtd-dialog mtd-dialog-hidden">
+    <div class="mtd-dialog-container">
+        <div class="mtd-dialog-title">
+            <div>
+                <span>@Localizer["Appoint Document Owner"]</span>
+            </div>
+            <div>
+                <button mtd-dialog-cancel class="mdc-icon-button material-icons">close</button>
+            </div>
+        </div>
+        <div class="mtd-dialog-content">
+            <form mtd-data-form method="post" autocomplete='off' enctype='multipart/form-data' action='/api/store/setowner'>
+                @Html.AntiForgeryToken()
+                <input id="setowner-id-store" name="setowner-id-store" value="@Model.MtdStore.Id" type="hidden" />
+                <div class="mtd-dialog-info">
+                    @Localizer["Select the user who will own the document."]
+                </div>
+
+                @await Component.InvokeAsync(typeof(MTDSelectList), new MTDSelectListTags
+                    {
+                        Id = "select-owner",
+                        Name = "setowner-id-user",
+                        Label = "User",
+                        LabelLocalized = true,
+                        Items = Model.UsersList,
+                        MTDSelectListView = MTDSelectListViews.Outlined
+                    })
+
+                <div class="mtd-dialog-buttons">
+                    <button mtd-dialog-cancel mtd-data-clicker class="mdc-button mdc-button--raised mdc-theme--secondary-bg" type="button">
+                        <div class="mdc-button__ripple"></div>
+                        <span class="mdc-button__label">@Localizer["Apply"]</span>
+                    </button>
+                    <button mtd-dialog-cancel class="mdc-button" type="button">
+                        <div class="mdc-button__ripple"></div>
+                        <span class="mdc-button__label">@Localizer["Cancel"]</span>
+                    </button>
+                </div>
+            </form>
+
+        </div>
+
+    </div>
+</div>

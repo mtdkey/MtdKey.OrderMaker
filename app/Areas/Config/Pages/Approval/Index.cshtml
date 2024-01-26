@@ -1,0 +1,85 @@
+﻿@*
+    MTD OrderMaker - http://mtdkey.com
+    Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
+*@
+
+@page
+@model IndexModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> Localizer
+
+@{
+    ViewData["Title"] = Localizer["Approvals"];
+    ViewData["SecondTitle"] = Localizer["Approval flow list"];
+}
+
+@section Head {
+    <link rel="stylesheet" href="~/lib/mtd-ordermaker/config/css/mtd-config-form.css" asp-append-version="true" />
+}
+
+@section Breadcrumb {
+    <li><a href="~/config">@Localizer["Configurator"]</a></li>
+    <li>@ViewBag.Title</li>
+}
+
+<div class="mtd-desk">
+    <div class="mtd-desk-panel">
+        <div style="padding-left:16px">
+            <button mtd-data-url="/config/approval/create" class="mdc-fab mdc-fab--extended" aria-label="Create">
+                <div class="mdc-fab__ripple"></div>
+                <span class="material-icons mdc-fab__icon">add</span>
+                <span class="mdc-fab__label">@Localizer["Create"]</span>
+            </button>
+        </div>
+    </div>
+    <form method="get" autocomplete='off'>
+        @await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags
+        {
+            Id = "search-text",
+            Name = "searchText",
+            Placeholder = "Search for text",
+            PlaceholderLocalized = true,
+            Value = Model.SearchText,
+            IconLeading = "fas fa-search"
+        })
+    </form>
+    <ul id="configListForms" class="mdc-list mdc-list--two-line">
+        @foreach (var approval in Model.MtdApprovals.OrderBy(x => x.Name))
+        {
+        <li mtd-data-url="/config/approval/edit?id=@approval.Id" class="mdc-list-item" aria-checked="false">
+            <span class="mdc-list-item__ripple"></span>
+            <span class="mdc-list-item__text">
+                <span class="mdc-list-item__primary-text">@approval.Name</span>
+                <span class="mdc-list-item__secondary-text">@approval.Description</span>
+            </span>
+
+            <div class="mtd-desk-draggable-bedit">
+                <button class="mdc-icon-button"
+                        aria-label="edit"
+                        aria-hidden="true"
+                        aria-pressed="false">
+                    <i class="material-icons mdc-icon-button__icon">edit</i>
+                </button>
+                <button mtd-data-url="/config/approval/stages?idApproval=@approval.Id" class="mdc-icon-button" onclick="event.stopPropagation();"
+                        aria-label="edit"
+                        aria-hidden="true"
+                        aria-pressed="false">
+                    <i class="material-icons mdc-icon-button__icon">timeline</i>
+                </button>
+            </div>
+        </li>
+        }
+    </ul>
+</div>
+
+
+
+
+
+
+
+@section Scripts{
+    <script>
+        new MTDTextField("search-text");
+    </script>
+}

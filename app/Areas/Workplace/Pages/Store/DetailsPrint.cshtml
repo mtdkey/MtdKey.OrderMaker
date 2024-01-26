@@ -1,0 +1,79 @@
+﻿@*
+    MTD OrderMaker - http://mtdkey.com
+    Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
+*@
+
+@page
+@model MtdKey.OrderMaker.Areas.Workplace.Pages.Store.DetailsModel
+@namespace MtdKey.OrderMaker.Components.Store
+@inject IHtmlLocalizer<SharedResource> Localizer
+
+@{
+    Layout = "";
+    string PrintForm = HttpContext.Request.Query["printForm"];
+    bool printForm = (PrintForm ?? string.Empty) == "true";
+
+    string PrintInfo = HttpContext.Request.Query["printInfo"];
+    bool printInfo = (PrintInfo ?? string.Empty) == "true";
+
+    string PrintApproval = HttpContext.Request.Query["printApproval"];
+    bool printApproval = (PrintApproval ?? string.Empty) == "true";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/google/css/material-components-web.min.css" asp-append-version="true" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="~/lib/fontawesome/css/fontawesome.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/fontawesome/css/solid.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/fontawesome/css/regular.min.css" asp-append-version="true" />
+
+    <link rel="stylesheet" href="~/lib/mtd-ordermaker/main/css/mtd-main.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/mtd-ordermaker/store/css/mtd-store-view.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/mtd-ordermaker/ui/css/mtd-ui-material.css" asp-append-version="true" />
+
+    <link rel="stylesheet" href="~/lib/mtd-ordermaker/mtd-checkbox/css/mtd-checkbox.css" asp-append-version="true" />
+
+</head>
+<body onload="window.print()" style="overflow:auto">
+
+    @if (printForm)
+    {
+        <div style="display: flex; align-items: center; justify-content: center; width: 21cm">
+            @await Component.InvokeAsync("StoreForm", new { store = Model.MtdStore, type = FormType.Print })
+        </div>
+        <div style="page-break-after: always;"></div>
+    }
+
+    @if (printInfo)
+    {
+        @Localizer["Document information"]
+        <hr />
+        <div style="width: 21cm">
+            @await Html.PartialAsync("./Partials/Header")
+            @await Html.PartialAsync("./Partials/DetailsInfo")
+        </div>
+        <div style="page-break-after: always;"></div>
+    }
+
+    @if (printApproval)
+    {
+        <div style="width: 21cm">
+            @await Html.PartialAsync("./Partials/Header")
+            @await Html.PartialAsync("./Partials/DetailsApproval")
+        </div>
+    }
+
+
+</body>
+</html>
+
+<script src="~/lib/google/js/material-components-web.min.js" asp-append-version="true"></script>
+
+<script src="~/lib/fontawesome/js/fontawesome.min.js" asp-append-version="true"></script>
+<script src="~/lib/fontawesome/js/solid.min.js" asp-append-version="true"></script>
+<script src="~/lib/fontawesome/js/regular.min.js" asp-append-version="true"></script>
+<script src="~/lib/mtd-ordermaker/mtd-checkbox/js/mtd-checkbox.js" asp-append-version="true"></script>

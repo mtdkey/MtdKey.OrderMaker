@@ -1,0 +1,27 @@
+﻿@*
+    MTD OrderMaker - http://mtdkey.com
+    Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
+*@
+
+@model Core.DocFieldModel
+
+@{
+    string required = Model.Required ? "required" : string.Empty;
+}
+
+@if (!Model.Readonly)
+{
+    <div style="display: flex; padding: 8px;">
+        <div style="width: 120px">
+            @Html.DisplayFor(model => model.Name)
+        </div>
+        <div style="flex-grow:1;padding-left: 8px; align-self:center">
+            <input type="time" id="@Model.Id"
+                   name="field-@Model.Id"
+                   value="@Model.Value"
+                   style="width: 100%;" />
+        </div>
+    </div>
+}
+
+

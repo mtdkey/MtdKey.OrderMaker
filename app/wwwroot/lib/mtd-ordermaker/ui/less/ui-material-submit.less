@@ -1,0 +1,80 @@
+﻿@green: gray;
+@gray: #bbbbbb;
+
+.mtd-ui-material-submit {    
+    width: 100%;
+    height: 40px;
+    text-align: center;
+}
+
+.mtd-ui-material-submit button {
+    outline: none;
+    height: 40px;
+    text-align: center;
+    width: 130px;
+    border: 0px;   
+    border-radius: 40px;
+    background-color: cornflowerblue;    
+    color: lightcyan;
+    letter-spacing: 1px;
+    text-shadow: 0;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    text-transform: uppercase;
+    -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    -moz-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    -ms-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    -o-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    margin-top: 15px;
+    &:hover {
+        color: white;
+        //  background: @green;
+    }
+
+    &:active {
+        letter-spacing: 2px;
+    }
+}
+
+.mtd-ui-material-submit-onclick {
+    width: 40px !important;
+    font-size: 0 !important;
+    border: 3px solid white !important;
+    border-left-color: cornflowerblue !important;
+    animation: rotating 2s 0.25s linear infinite;
+    box-shadow: none !important;
+    margin-top: 0 !important;
+    background-color: lightgray !important;
+    cursor: default !important;
+    &:after {
+        content: "" !important;
+    }
+
+    &:hover {
+        color: @green;       
+    }
+}
+
+.mtd-ui-material-submit-validate {   
+    color: white;
+    background: @green;
+
+    &:after {     
+        content: "\f00c";
+    }
+}
+
+@keyframes rotating {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+

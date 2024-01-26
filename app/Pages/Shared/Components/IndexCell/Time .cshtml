@@ -1,0 +1,14 @@
+﻿@*
+    MTD OrderMaker - http://mtdkey.com
+    Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
+*@
+
+@model Core.DocFieldModel
+
+<div>
+    @if (Model.Value != null)
+    {
+        var value = (DateTime)Model.Value;
+        <text>@value.ToShortTimeString()</text>
+    }
+</div>

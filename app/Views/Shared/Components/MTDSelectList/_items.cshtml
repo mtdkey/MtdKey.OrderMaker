@@ -1,0 +1,34 @@
+﻿@model MTDSelectListTagsModel
+
+    <ul id="@Model.Id-ul" class="mdc-list">
+
+        <li data-value="search-li">
+            <div style="padding: 4px 16px 4px 16px;">
+                <input id="@Model.Id-search" style="width: 100%; height: 32px; padding-left: 4px;  border: 1px solid #ccc" type="text" placeholder="@Model.SearchTextPlaceHolder" />
+            </div>
+        </li>
+
+        @foreach (var entry in Model.Items)
+        {
+
+            if (entry.Id == Model.ValueId || entry.Selectded)
+            {
+
+                <li @entry.Attributes class="mdc-list-item mdc-list-item--selected" data-value="@entry.Id" aria-selected="true" role="option">
+                    <span class="mdc-list-item__ripple"></span>
+                    <span class="mdc-list-item__text">
+                        @entry.Value
+                    </span>
+                </li>
+            }
+            else
+            {
+                <li @entry.Attributes class="mdc-list-item" data-value="@entry.Id" role="option">
+                    <span class="mdc-list-item__ripple"></span>
+                    <span class="mdc-list-item__text">
+                        @entry.Value
+                    </span>
+                </li>
+            }
+        }
+    </ul>

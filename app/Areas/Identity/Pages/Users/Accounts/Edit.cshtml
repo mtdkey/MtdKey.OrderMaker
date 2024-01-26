@@ -1,0 +1,206 @@
+﻿@*
+    MTD OrderMaker - http://mtdkey.com
+    Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
+*@
+@page
+@model EditModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> Localizer
+@{
+    ViewData["Title"] = Localizer["Profile"];
+    ViewData["SecondTitle"] = Localizer["Editing profile parameters"];
+    ViewData["userId"] = HttpContext.Request.Query["id"];
+}
+@section Head {
+    <link rel="stylesheet" href="~/lib/mtd-ordermaker/users/css/mtd-users.css" asp-append-version="true" />
+}
+@section Breadcrumb {
+    <li><a style="cursor:pointer" mtd-data-url="/Identity/Users">@Localizer["Users"]</a></li>
+    <li><a style="cursor:pointer" mtd-data-url="/Identity/Users/Accounts">@Localizer["Accounts"]</a></li>
+    <li>@ViewData["Title"]</li>
+}
+@section Action  {
+    <li class="mdc-list-item" role="menuitem" onclick="document.getElementById('users-confirm-email').click()">
+        <span class="mdc-list-item__ripple"></span>
+        <span class="mdc-list-item__graphic material-icons" aria-hidden="true">link</span>
+        <span class="mdc-list-item__text">@Localizer["Send link for Email"]</span>
+    </li>
+    @if (Model.Input.IsConfirm)
+    {
+        <li class="mdc-list-item" role="menuitem" onclick="document.getElementById('users-confirm-password').click()">
+            <span class="mdc-list-item__ripple"></span>
+            <span class="mdc-list-item__graphic material-icons" aria-hidden="true">link</span>
+            <span class="mdc-list-item__text">@Localizer["Send link for password"]</span>
+        </li>
+        <li class="mdc-list-item" role="menuitem" onclick="document.getElementById('users-create-password').click()">
+            <span class="mdc-list-item__ripple"></span>
+            <span class="mdc-list-item__graphic material-icons" aria-hidden="true">send</span>
+            <span class="mdc-list-item__text">@Localizer["Send new password"]</span>
+        </li>
+    }
+    else
+    {
+        <li class="mdc-list-item mdc-list-item--disabled" role="menuitem">
+            <span class="mdc-list-item__ripple"></span>
+            <span class="mdc-list-item__graphic material-icons" aria-hidden="true">link</span>
+            <span class="mdc-list-item__text">@Localizer["Password recovery"]</span>
+        </li>
+        <li class="mdc-list-item mdc-list-item--disabled" role="menuitem">
+            <span class="mdc-list-item__ripple"></span>
+            <span class="mdc-list-item__graphic material-icons" aria-hidden="true">send</span>
+            <span class="mdc-list-item__text">@Localizer["Generating a password"]</span>
+        </li>
+    }
+    <li id="transfer-open-dialog" mtd-dialog-button="dialog-user-transfer" class="mdc-list-item" role="menuitem">
+        <span class="mdc-list-item__ripple"></span>
+        <span class="mdc-list-item__graphic material-icons" aria-hidden="true">sync_alt</span>
+        <span class="mdc-list-item__text">@Localizer["Transfer all documents"]</span>
+    </li>
+    <li role="separator" class="mdc-list-divider"></li>
+    <li id="users-open-dialog" class="mdc-list-item" role="menuitem">
+        <span class="mdc-list-item__ripple"></span>
+        <span class="mdc-list-item__graphic material-icons" aria-hidden="true">delete</span>
+        <span class="mdc-list-item__text">@Localizer["Delete user"]</span>
+    </li>
+}
+
+<div id="dialog-user-transfer" class="mtd-dialog mtd-dialog-hidden" style="max-width: 640px;">
+    <div class="mtd-dialog-container">
+        <div class="mtd-dialog-title">
+            <div>
+                @Localizer["Transfer of documents"]
+            </div>
+            <div>
+                <button mtd-dialog-cancel class="mdc-icon-button material-icons">close</button>
+            </div>
+        </div>
+        <div class="mtd-dialog-content">
+            <form mtd-data-form method="post" autocomplete='off' enctype='multipart/form-data' action='/api/users/admin/transfer'>
+                @Html.AntiForgeryToken()
+                <input id="user-owner-id" name="user-owner-id" type="hidden" value="@ViewBag.userId" />
+                <div class="mtd-dialog-info--border">
+                    @Localizer["Transfer of documents to the user."]
+                </div>
+
+                <div class="mtd-dialog-space"></div>
+                @Localizer["Select a user from the list:"]
+                <div class="mtd-dialog-space"></div>
+
+                @await Component.InvokeAsync(typeof(MTDSelectList), new MTDSelectListTags
+                    {
+                       Id = "user-recipient-id",
+                       Name = "user-recipient-id",
+                       Items = Model.Users,
+                       Label = "Users",
+                       LabelLocalized = true,
+                       ValueId = Model.Users.Select(x => x.Id).FirstOrDefault()
+                    })
+
+                <div class="mtd-dialog-buttons">
+                    <button type="button" mtd-dialog-cancel mtd-data-clicker mtd-data-message="@Localizer["Transfer process completed"]" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="yes">
+                        <div class="mdc-button__ripple"></div>
+                        <span class="mdc-button__label" style="color: red">@Localizer["Apply"]</span>
+                    </button>
+                    <button mtd-dialog-cancel type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="no">
+                        <div class="mdc-button__ripple"></div>
+                        <span class="mdc-button__label">@Localizer["Cancel"]</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="mtd-desk">
+    <div class="mtd-desk-panel">
+        <div style="padding-left: 16px">
+            <button mtd-data-clicker-by="clicker-save" class="mdc-fab mdc-fab--extended" aria-label="Save">
+                <div class="mdc-fab__ripple"></div>
+                <span class="material-icons mdc-fab__icon">save</span>
+                <span class="mdc-fab__label">@Localizer["Save"]</span>
+            </button>
+        </div>
+    </div>
+@*    <div class="mtd-users-edit-title" style="padding-left: 16px">
+        <div style="background-color: lightgray;   width: 52px; height: 52px; border-radius: 50%; text-align:center; align-self: center">
+            <i class="material-icons" style="font-size: 48px; color: white">person</i>
+        </div>
+        <div class="mtd-users-edit-names" style="align-self: center">
+            <div style="font-size: x-large; font-weight: bold">
+                @Model.UserName
+            </div>
+        </div>
+    </div>*@
+
+    <form mtd-data-form id="profile-form" method="post" action="~/api/users/admin/profile" autocomplete="off">
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="UserName" value="@Model.UserName" />
+        <input type="hidden" id="clicker-save" mtd-data-clicker mtd-data-message="@Localizer["Changes saved."]" />
+        @await Html.PartialAsync("_ProfielPartial.cshtml")
+        @await Html.PartialAsync("_editGroups.cshtml")
+    </form>
+
+</div>
+
+
+<form mtd-data-form method="post" autocomplete="off" enctype="multipart/form-data" action="~/api/users/admin/confirm/email">
+    @Html.AntiForgeryToken()
+    <input name="UserName" value="@Model.UserName" type="hidden" />
+    <input id="users-confirm-email" mtd-data-clicker mtd-data-message="@Localizer["Message sent."]" type="hidden" />
+</form>
+
+@if (Model.Input.IsConfirm)
+{
+
+    <form mtd-data-form method="post" autocomplete="off" enctype="multipart/form-data" action="~/api/users/admin/confirm/password">
+        @Html.AntiForgeryToken()
+        <input name="UserName" value="@Model.UserName" type="hidden" />
+        <input id="users-confirm-password" mtd-data-clicker mtd-data-message="@Localizer["Message sent."]" type="hidden" />
+    </form>
+
+    <form mtd-data-form method="post" autocomplete="off" enctype="multipart/form-data" action="~/api/users/admin/create/password">
+        @Html.AntiForgeryToken()
+        <input name="UserName" value="@Model.UserName" type="hidden" />
+        <input id="users-create-password" mtd-data-clicker mtd-data-message="@Localizer["A new password has been sent to the user."]" type="hidden" />
+    </form>
+
+}
+
+<form mtd-data-form method="post" autocomplete='off' enctype='multipart/form-data' action='~/api/users/admin/delete'>
+    @Html.AntiForgeryToken()
+    <input id="user-delete-id" name="user-delete-id" type="hidden" value="@ViewBag.userId" />
+    <input id="deleteClicker" mtd-data-clicker mtd-data-location="/identity/users/accounts" mtd-data-message="@Localizer["User daleted."]" type="hidden" />
+</form>
+
+<div id="dialog-users-delete" class="mdc-dialog"
+     role="alertdialog"
+     aria-modal="true"
+     aria-labelledby="my-dialog-title"
+     aria-describedby="my-dialog-content">
+    <div class="mdc-dialog__container">
+        <div class="mdc-dialog__surface">
+            <h2 class="mdc-dialog__title" id="delete-dialog-title">
+                @Localizer["Delete user"]?
+            </h2>
+            <div class="mdc-dialog__content" id="delete-dialog-content">
+                @Localizer["The user will be permanently deleted"].
+            </div>
+            <footer class="mdc-dialog__actions">
+                <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="no">
+                    <span class="mdc-button__label">@Localizer["Cancel"]</span>
+                </button>
+                <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="yes">
+                    <span class="mdc-button__label" onclick="document.getElementById('deleteClicker').click();">@Localizer["Delete"]</span>
+                </button>
+            </footer>
+        </div>
+    </div>
+    <div class="mdc-dialog__scrim"></div>
+</div>
+
+
+
+
+@section Scripts {
+    <script src="~/lib/mtd-ordermaker/users/js/mtd-users-edit.js" asp-append-version="true"></script>
+}

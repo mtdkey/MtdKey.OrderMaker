@@ -1,0 +1,37 @@
+﻿@*
+    MTD OrderMaker - http://mtdkey.com
+    Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
+*@
+
+@model Core.DocFieldModel
+
+@{
+    string value = string.Empty;
+    if (Model.Value != null && (string)Model.Value != string.Empty)
+    {
+        value = (string)Model.Value;
+    }
+
+    if ((Model.Value == null || (string)Model.Value == string.Empty) && Model.DefaultValue != null && Model.DefaultValue != string.Empty)
+        value = Model.DefaultValue;
+}
+
+
+@if (!Model.Readonly)
+{
+    @await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags
+{
+    Id = Model.Id,
+    Name = $"field-{Model.Id}",
+    Value = value,
+    Label = Model.Name,
+    Required = Model.Required,
+    MTDTexFieldView = MTDTextFieldViews.TextArea,
+    Cols = 40,
+    Rows = 6,
+    UnlimitedText = true,
+})
+}
+
+
+

@@ -1,0 +1,82 @@
+﻿@page
+@model CreateModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> Localizer
+
+@{
+    ViewData["Title"] = Localizer["New resolution"];
+    ViewData["SecondTitle"] = Localizer["Creating new resolution"];
+    string stage = Request.Query["stage"];
+}
+
+
+@section Breadcrumb {
+    <li><a href="~/config">@Localizer["Configurator"]</a></li>
+    <li><a href="~/config/approval">@Localizer["Approvals"]</a></li>
+    <li><a href="~/config/approval/edit?id=@Model.MtdApprovalStage.MtdApproval">@Localizer["Approval editor"]</a></li>
+    <li><a href="~/config/approval/stages?idApproval=@Model.MtdApprovalStage.MtdApproval">@Localizer["Stages list"]</a></li>
+    <li><a href="~/config/approval/resolutions?stage=@Model.MtdApprovalStage.Id">@Localizer["Resolutions"]</a></li>
+    <li>@ViewBag.Title</li>
+}
+
+<form mtd-data-form method="post" autocomplete="off" enctype="multipart/form-data">
+    <input type="hidden" asp-for="@Model.MtdApprovalStage.Id" />
+    <input type="hidden" asp-for="@Model.MtdApprovalResolution.Id" />
+    <div class="mtd-desk">
+        <div class="mtd-desk-panel">
+            <div style="padding-left: 16px;">
+                <button mtd-data-clicker mtd-data-location="/config/approval/resolutions?stage=@Model.MtdApprovalStage.Id" mtd-data-message="@Localizer["New approval chain was created."]" type="button" class="mdc-fab mdc-fab--extended">
+                    <span class="material-icons mdc-fab__icon">add</span>
+                    <span class="mdc-fab__label">@Localizer["Create"]</span>
+                </button>
+            </div>
+        </div>
+        <div class="mtd-desk-blocks">
+            <div class="mtd-desk-block">
+                <div class="mtd-desk-field-full">
+                    @await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags
+                   {
+                       Id = "field-name",
+                       Name = "MtdApprovalResolution.Name",
+                       Required = true,
+                       MTDTexFieldView = MTDTextFieldViews.Outlined,
+                       Label = "Header text",
+                       LabelLocalized = true
+                   })
+                </div>
+                <div class="mtd-desk-field-full">
+                    @await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags
+                   {
+                       Id = "field-note",
+                       Name = "MtdApprovalResolution.Note",
+                       Required = true,
+                       MTDTexFieldView = MTDTextFieldViews.TextArea,
+                       Label = "Description",
+                       LabelLocalized = true,
+                       MaxLength = 250,
+                       Cols=40,
+                       Rows = 4
+                   })
+                </div>
+            </div>
+            <div class="mtd-desk-block">                
+                    <div class="mtd-desk-field mtd-desk-field--border">
+                        <label>@Localizer["Text color"]</label>
+                        <div>
+                            <input asp-for="MtdApprovalResolution.Color" type="color">
+                        </div>
+                    </div>
+                    <div class="mtd-desk-field mtd-desk-field--border">
+                        @await Component.InvokeAsync("MTDImgSelector", new { id = "img" })
+                    </div>             
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts{ 
+    <script>
+        new MTDTextField("field-name");
+        new MTDTextField("field-note");
+    </script>
+}

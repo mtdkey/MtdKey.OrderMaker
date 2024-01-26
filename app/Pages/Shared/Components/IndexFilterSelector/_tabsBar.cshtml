@@ -1,0 +1,50 @@
+﻿@model Models.Index.SelectorModelView
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> Localizer
+
+<div id="index-filter-tabs" class="mdc-tab-bar " role="tablist">
+    <div class="mdc-tab-scroller">
+        <div class="mdc-tab-scroller__scroll-area">
+            <div class="mdc-tab-scroller__scroll-content" style="border-bottom: 1px solid #ccc">
+
+                <button class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0" onclick="IndexFilterShowTab('service')">
+                    <span class="mdc-tab__content">
+                        <span class="mdc-tab__icon material-icons" aria-hidden="true">
+                            folder
+                        </span>
+                        <span class="mdc-tab__text-label">@Localizer["Service fields"]</span>
+                    </span>
+                    <span class="mdc-tab-indicator mdc-tab-indicator--active">
+                        <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                    </span>
+                    <span class="mdc-tab__ripple"></span>
+                </button>
+
+                <button class="mdc-tab" role="tab" aria-selected="false" tabindex="1" onclick="IndexFilterShowTab('custom')">
+                    <span class="mdc-tab__content">
+                        <span class="mdc-tab__icon material-icons" aria-hidden="true">folder_open</span>
+                        <span class="mdc-tab__text-label">@Localizer["Custom fields"]</span>
+                    </span>
+                    <span class="mdc-tab-indicator">
+                        <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                    </span>
+                    <span class="mdc-tab__ripple"></span>
+                </button>
+                @if (Model.ScriptItems.Any())
+                {
+                    <button class="mdc-tab" role="tab" aria-selected="false" tabindex="2" onclick="IndexFilterShowTab('extension')">
+                        <span class="mdc-tab__content">
+                            <span class="mdc-tab__icon material-icons" aria-hidden="true">extension</span>
+                            <span class="mdc-tab__text-label">@Localizer["Extension"]</span>
+                        </span>
+                        <span class="mdc-tab-indicator">
+                            <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                        </span>
+                        <span class="mdc-tab__ripple"></span>
+                    </button>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+﻿@*
+    MTD OrderMaker - http://mtdkey.com
+    Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
+*@
+
+@model Core.DocFieldModel
+
+@{
+    string dateValue = Model.Value != null
+            && (DateTime)Model.Value != DateTime.MinValue ?
+            ((DateTime)Model.Value).ToString("g") : string.Empty;
+
+}
+
+@if (!Model.Readonly)
+{
+    @await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags
+    {
+        Id = Model.Id,
+        Name = $"field-{Model.Id}",
+        Label = Model.Name,
+        Value = @dateValue,
+        Required = Model.Required,
+        IconLeading = "far fa-calendar-alt",
+        Class = " mtd-data-datetimepicker ",
+        MTDTexFieldView = MTDTextFieldViews.Outlined,
+    })
+}
+
+

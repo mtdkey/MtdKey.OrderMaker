@@ -1,0 +1,150 @@
+﻿@import "store-style-image.less";
+
+.mtd-store-style-blank {
+    position: relative;
+    max-width: 21cm;
+    background-color: white;
+    padding: 8px;
+}
+
+.mtd-store-style-print {
+    .mtd-store-style-blank;
+    width: 100%;
+}
+
+.mtd-store-style-badge {
+    width: 100%;
+}
+
+.mtd-store-style-badge > img {
+
+  max-width: 270px;
+
+    @media (min-width: 1919px) {
+        max-width: 250px;
+    }
+
+    @media (max-width: 1366px) {
+        max-width: 230px;
+    }
+
+    @media (max-width: 1020px) {
+        max-width: 210px;
+    }
+
+    @media (max-width: 768px) {
+        max-width: 190px;
+    }
+
+    @media (max-width: 400px) {
+        max-width: 140px;
+    }
+}
+
+.mtd-store-style-header {
+    display: flex;
+    padding: 8px;
+}
+
+.mtd-store-style-title {
+    flex-grow: 1;
+    font-weight: bold;
+    text-transform: uppercase;
+    align-self: center;
+    color: black;
+    text-shadow: 1px 1px 2px gray;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    padding: 8px;
+  
+    @media (min-width: 1919px) {
+        font-size: 24px;
+    }
+
+    @media (max-width: 1366px) {
+        font-size: 22px;
+    }
+
+    @media (max-width: 1020px) {
+        font-size: 20px;
+    }
+
+    @media (max-width: 768px) {
+        font-size: 18px;
+    }
+}
+
+.mtd-store-style-attribute {
+    line-height: 0.6em;
+    align-self: center;
+    text-transform: uppercase;
+    color: navy;
+    text-align: left;
+    white-space: nowrap;
+    
+    @media (min-width: 1919px) {
+        font-size: 19px;
+    }
+
+    @media (max-width: 1366px) {
+        font-size: 18px;
+    }
+
+    @media (max-width: 1020px) {
+        font-size: 17px;
+    }
+
+    @media (max-width: 768px) {
+        font-size: 16px;
+    }
+}
+
+.mtd-store-style-number {
+    font-weight: bold;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.mtd-store-style-date {
+    font-weight: normal;
+    font-size:medium;
+}
+
+.mtd-store-style-part {
+    padding: 4px 4px 4px 0px;
+    text-transform: uppercase;
+    font-size: small;
+    font-weight: bold;
+    background-image: linear-gradient(to left, lightgray, white);
+    color: #757575;
+}
+
+.mtd-store-style-separator {
+    border-bottom: 1px solid #d4d4d4;
+}
+
+.mtd-store-style-modal {
+    position: absolute;
+    display: none;
+    opacity: 0.5;
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    z-index: 9;
+}
+
+.mtd-store-style-based {
+    position: relative;
+    padding: 8px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    background-color: gray;
+    color: white;
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: small;
+}

@@ -1,0 +1,92 @@
+﻿.mtd-config-form-fields {
+    position: relative;
+    background-color: white;
+    padding: 16px;
+}
+
+.mtd-config-form-fields__title {
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.mtd-config-form-fields__header{
+    flex-grow: 1;    
+}
+.mtd-config-form-fields__header img {
+    max-width: 260px;
+    max-height: 72px;
+}
+
+.mtd-config-form-fields__fname span {
+    text-transform: uppercase;    
+    font-size: medium;
+    font-weight: bold;
+}
+
+.mtd-config-form-fields__parts {
+    display: flex;
+    height: 56px;
+    align-items: center;
+    margin-top: 16px;
+    color: cornflowerblue;
+}
+
+.mtd-config-form-fields__plist {
+    flex-grow:1;
+}
+
+.mtd-config-form-fields__pact {    
+    width: 56px;
+}
+
+
+.mtd-config-form-fields__partseq{
+    padding: 8px;
+    background-color: white;
+    position: absolute;
+    width: 90%;
+    z-index: 1;
+}
+
+#configSelectPart select{
+    font-size: medium;
+    font-weight: bold;
+}
+
+#fieldsCreator {
+    position: absolute;
+    top: -2em;
+    left: -0.8em;
+    z-index: 1;
+
+    @media(max-width: 410px) {
+        left: -0.3em;
+    }
+}
+
+#fieldsCreator a {
+    text-decoration: none;
+}
+
+.mtd-config-form-fields__bdrag {
+    position: absolute;
+    right: 16px;
+    cursor: all-scroll;
+
+    @media(max-width: 410px) {
+        display: none;
+    }
+}
+
+.mtd-config-form-fields__bedit {
+    position: absolute;
+    right: 56px;
+    color: cornflowerblue;
+
+    @media(max-width: 410px) {
+        right: 16px;
+    }
+}

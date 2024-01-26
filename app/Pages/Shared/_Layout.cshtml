@@ -1,0 +1,156 @@
+﻿@*
+    MTD OrderMaker - http://mtdkey.com
+    Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
+*@
+
+@using Microsoft.AspNetCore.Identity
+@using MtdKey.OrderMaker.Areas.Identity.Data
+@inject SignInManager<WebAppUser> SignInManager
+@inject UserManager<WebAppUser> UserManager
+@inject Services.ConfigHandler configHandler;
+
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> Localizer
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no">
+    <meta name="google" content="notranslate">
+    <meta name="robots" content="noindex">
+
+    <title>@ViewData["Title"] | OrderMaker</title>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/google/css/material-components-web.min.css" asp-append-version="true" />
+    @*<link href="https://unpkg.com/material-components-web@7.0.0/dist/material-components-web.min.css" rel="stylesheet" />*@
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+    <link rel="stylesheet" href="~/lib/fontawesome/css/fontawesome.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/fontawesome/css/solid.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/fontawesome/css/regular.min.css" asp-append-version="true" />
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/mtd-ordermaker/main/css/mtd-main.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/lib/mtd-ordermaker/main/css/mtd-app.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/lib/mtd-ordermaker/mtd-img-selector/css/mtd-img-selector.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/lib/mtd-ordermaker/mtd-checkbox/css/mtd-checkbox.css" asp-append-version="true" />
+    </environment>
+
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/lib/mtd-ordermaker/main/css/mtd-main.min.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/lib/mtd-ordermaker/mtd-img-selector/css/mtd-img-selector.min.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/lib/mtd-ordermaker/mtd-checkbox/css/mtd-checkbox.min.css" asp-append-version="true" />
+    </environment>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="~/lib/mtd-ordermaker/main/css/ripple.css" asp-append-version="true" />
+
+    @RenderSection("Head", required: false)
+
+</head>
+<body class="mdc-typography">
+    @*<partial name="_CookieConsentPartial" />*@
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+
+    <div class="drawer-frame-root">
+
+        @await Html.PartialAsync("./_layoutAside.cshtml")
+        <div id="main-scrim" class="mdc-drawer-scrim"></div>
+
+        <div id="drawer-frame-app-content" class="drawer-frame-app-content">
+            @await Html.PartialAsync("./_layoutHeader")
+            <div id="drawer-main-content">
+
+                @await Html.PartialAsync("./_layoutMainModal.cshtml")
+
+                <div class="mdc-top-app-bar--fixed-adjust"></div>
+
+                <div class="mtd-main-informer-header">
+                    <div class="mtd-main-informer-title">
+                        <div>
+                            @*<div class="mtd-main-informer-title--first">@ViewBag.Title</div>*@
+                            <div class="mtd-main-informer-title--first">@ViewBag.SecondTitle</div>
+                        </div>
+
+                        @if (IsSectionDefined("Action"))
+                        {
+                            <div>
+                                <div class="mdc-menu-surface--anchor">
+                                    <button id="main-action-button" class="mdc-button mdc-button--raised mdc-theme--secondary-bg">
+                                        <div class="mdc-button__ripple"></div>
+                                        <span class="mdc-button__label">@Localizer["Actions"]</span>
+                                        <i class="mdc-button__icon fas fa-caret-down" aria-hidden="true"></i>
+                                    </button>
+                                    <div id="main-action-menu" class="mdc-menu mdc-menu-surface">
+                                        <ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical">
+                                            @RenderSection("Action")
+                                        </ul>                                        
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                    @if (IsSectionDefined("Breadcrumb"))
+                    {
+                        <ul class="mtd-main-informer-breadcrumb" style="margin-bottom: 12px;">
+                            @RenderSection("Breadcrumb")
+                        </ul>
+                    }
+                </div>             
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+    <div id="main-snack" class="mdc-snackbar">
+        <div class="mdc-snackbar__surface">
+            <div class="mdc-snackbar__label"
+                 role="status"
+                 aria-live="polite">
+            </div>
+            <div class="mdc-snackbar__actions">
+                <button class="mdc-icon-button mdc-snackbar__dismiss material-icons">close</button>
+            </div>
+        </div>
+    </div>
+
+    <input type="hidden" id="appName" value="@configHandler.AppName" />
+    <input type="hidden" id="index-dtp-locale-lang" value="@Localizer["en"]" />
+    <input type="hidden" id="index-dtp-locale-mask" value="@Localizer["19/39/9999"]" />
+    <input type="hidden" id="index-dtp-locale-format" value="@Localizer["m/d/Y"]" />
+
+    <script src="~/lib/google/js/material-components-web.min.js" asp-append-version="true"></script>
+    @*<script src="https://unpkg.com/material-components-web@7.0.0/dist/material-components-web.min.js"></script>*@
+
+    <script src="~/lib/fontawesome/js/fontawesome.min.js" asp-append-version="true"></script>
+    <script src="~/lib/fontawesome/js/solid.min.js" asp-append-version="true"></script>
+    <script src="~/lib/fontawesome/js/regular.min.js" asp-append-version="true"></script>
+
+    <environment include="Development">
+        <script src="~/lib/mtd-ordermaker/main/js/mtd-main.js" asp-append-version="true"></script>
+        <script src="~/lib/mtd-ordermaker/main/js/mtd-main-desk.js" asp-append-version="true"></script>
+        <script src="~/lib/mtd-ordermaker/main/js/mtd-draggable.js" asp-append-version="true"></script>
+        <script src="~/lib/mtd-ordermaker/main/js/mtd-select-list.js" asp-append-version="true"></script>
+        <script src="~/lib/mtd-ordermaker/main/js/mtd-text-field.js" asp-append-version="true"></script>
+        <script src="~/lib/mtd-ordermaker/main/js/mtd-dialog.js" asp-append-version="true"></script>
+        <script src="~/lib/mtd-ordermaker/mtd-img-selector/js/mtd-img-selector.js" asp-append-version="true"></script>
+        <script src="~/lib/mtd-ordermaker/mtd-checkbox/js/mtd-checkbox.js" asp-append-version="true"></script>
+        <script src="~/lib/mtd-ordermaker/main/js/mtd-api-list.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/lib/mtd-ordermaker/main/js/mtd-main.min.js" asp-append-version="true"></script>
+        <script src="~/lib/mtd-ordermaker/mtd-img-selector/js/mtd-img-selector.min.js" asp-append-version="true"></script>
+        <script src="~/lib/mtd-ordermaker/mtd-checkbox/js/mtd-checkbox.min.js" asp-append-version="true"></script>
+    </environment>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/mtd-ordermaker/main/js/ripple.js" asp-append-version="true"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,58 @@
+﻿@model DetailsModel
+@namespace MtdKey.OrderMaker.Components.Store
+@using MtdKey.OrderMaker.Core
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> Localizer
+
+
+@if (Model.IsEditor & Model.ApprovalStatus != ApprovalStatus.Rejected & Model.ApprovalStatus != ApprovalStatus.Waiting)
+{
+    <li mtd-data-url="/workplace/store/edit?id=@Model.MtdStore.Id" class="mdc-list-item" role="menuitem">
+        <span class="mdc-list-item__ripple"></span>
+        <span class="mdc-list-item__graphic material-icons" aria-hidden="true">edit</span>
+        <span class="mdc-list-item__text">@Localizer["Edit"]</span>
+    </li>
+}
+
+<li mtd-dialog-button="dialog-print" mtd_data_href-target="_blank" class="mdc-list-item" role="menuitem">
+    <span class="mdc-list-item__ripple"></span>
+    <span class="mdc-list-item__graphic material-icons" aria-hidden="true">print</span>
+    <span class="mdc-list-item__text">@Localizer["Print"]</span>
+</li>
+
+@if (Model.IsInstallerOwner)
+{
+    <li mtd-dialog-button="dialog-owner" class="mdc-list-item" role="menuitem">
+        <span class="mdc-list-item__ripple"></span>
+        <span class="mdc-list-item__graphic material-icons" aria-hidden="true">assignment_ind</span>
+        <span class="mdc-list-item__text">@Localizer["Set owner"]</span>
+    </li>
+}
+
+@if (Model.IsReviewer && Model.MtdApproval != null && (Model.ApprovalStatus != ApprovalStatus.Approved && Model.ApprovalStatus != ApprovalStatus.Rejected))
+{
+    <li mtd-dialog-button="dialog-consider-approved" class="mdc-list-item" role="menuitem">
+        <span class="mdc-list-item__ripple"></span>
+        <span class="mdc-list-item__graphic material-icons" aria-hidden="true">assignment_turned_in</span>
+        <span class="mdc-list-item__text">@Localizer["Consider Approved"]</span>
+    </li>
+}
+
+@if (Model.IsReviewer && Model.MtdApproval != null && (Model.ApprovalStatus == ApprovalStatus.Approved || Model.ApprovalStatus == ApprovalStatus.Rejected))
+{
+    <li id="new-approval" class="mdc-list-item" role="menuitem">
+        <span class="mdc-list-item__ripple"></span>
+        <span class="mdc-list-item__graphic material-icons" aria-hidden="true">sync</span>
+        <span class="mdc-list-item__text">@Localizer["Restart Approval"]</span>
+    </li>
+}
+
+@if (Model.IsEraser)
+{
+    <hr class="mdc-list-divider">
+    <li id="eraser" class="mdc-list-item" role="menuitem">
+        <span class="mdc-list-item__ripple"></span>
+        <span class="mdc-list-item__graphic material-icons" aria-hidden="true">delete</span>
+        <span class="mdc-list-item__text">@Localizer["Delete"]</span>
+    </li>
+}

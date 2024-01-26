@@ -1,0 +1,96 @@
+﻿@*
+    MTD OrderMaker - http://mtdkey.com
+    Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
+*@
+@model Core.DocModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> Localizer
+
+@{
+    string action = $"/api/store/create";
+    string idStore = Guid.NewGuid().ToString();
+}
+
+<form mtd-data-form method='post' autocomplete='off' enctype='multipart/form-data' action='@action'>
+    @Html.AntiForgeryToken()
+
+    <input type="hidden" id="store-create-clicker" mtd-data-clicker mtd-data-location="/workplace/store/details?id=@idStore" />
+    <input type="hidden" name="form-id" value="@Model.FormId" />
+    <input type="hidden" name="store-id" value="@idStore" />
+
+    <div class="mtd-store-style-blank">
+        <div id="@idStore-modal" class="mtd-store-style-modal"></div>
+
+        <div class="mtd-store-style-header">
+            <div class="mtd-store-style-badge">
+                @if (Model.Image != null)
+                {
+                    var base64 = Convert.ToBase64String(Model.Image);
+                    var imgSrc = String.Format("data:{0};base64,{1}", "image/png", base64);
+
+                    <img src="@imgSrc" />
+                }
+                <div class="mtd-store-style-title">
+                    @Model.FormName
+                </div>
+            </div>
+            <div class="mtd-store-style-attribute">
+                <span class="mtd-store-style-number" style="opacity:0.3">№ @Model.Sequence.ToString("D9")</span>
+                <hr />
+
+                @if (Model.EditDate)
+                {
+                    @await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags
+                    {
+                        Id = "date-create",
+                        Name = "date-create",
+                        Value = DateTime.UtcNow.ToShortDateString(),
+                        Class = "mtd-data-datepicker",
+                        MTDTexFieldView = MTDTextFieldViews.Outlined,
+                        Label = "Date",
+                        LabelLocalized = true,
+                    })
+                }
+                else
+                {
+                    <span class="mtd-store-style-date">@Localizer["Date"] @DateTime.UtcNow.ToShortDateString()</span>
+                    <input type="hidden" value="@DateTime.UtcNow.ToShortDateString()" name="date-create" />
+                }
+
+            </div>
+        </div>
+
+        <div>
+            @{
+                string partId = Guid.NewGuid().ToString();
+            }
+
+            @foreach (var part in Model.Parts.OrderBy(x => x.Sequence))
+            {
+                if (part.ShowTitle)
+                {
+                    partId = part.Id;
+                    <div class="mtd-store-edit-part">
+                        <div style="flex-grow:1">
+                            @part.Name
+                        </div>
+
+                        <div>
+                            <button mtd-button-toggle="@partId" class="mdc-icon-button" type="button" style="color: navy">
+                                <div class="mdc-button__ripple"></div>
+                                <i class="material-icons mdc-icon-button__icon mdc-icon-button__icon--on">expand_more</i>
+                                <i class="material-icons mdc-icon-button__icon">expand_less</i>
+                            </button>
+                        </div>
+                    </div>
+                }
+
+                <div mtd-div-toggle="@partId">
+                    @await Component.InvokeAsync("StorePartEditor", new { docModel = Model, partModel = part })
+                </div>
+            }
+
+        </div>
+    </div>
+
+</form>

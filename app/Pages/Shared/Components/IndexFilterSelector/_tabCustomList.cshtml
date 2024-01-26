@@ -1,0 +1,20 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> Localizer
+
+<form action="~/api/filter/custom/add/field" method="post">
+    @Html.AntiForgeryToken()
+
+    @await Component.InvokeAsync(typeof(MTDSelectList), new MTDSelectListTags
+    {
+         Id = "index-filter-custom-list-value",
+         Name = "index-filter-custom-list-value",
+         Label = "Value",
+         LabelLocalized = true,
+         MTDSelectListView = MTDSelectListViews.Outlined
+    })
+</form>
+
+<form id="index-filter-custom-list-form" action="~/api/filter/custom/get/list" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" id="id-field" name="id-field" />
+</form>

@@ -1,0 +1,13 @@
+﻿@*
+    MTD OrderMaker - http://mtdkey.com
+    Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
+*@
+
+@model Core.DocFieldModel
+@{
+    string value = (Model.Value != null 
+        && (string) Model.Value != string.Empty) ? (string) Model.Value : string.Empty;
+}
+<div>
+    @value
+</div>
