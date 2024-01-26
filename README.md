@@ -34,8 +34,14 @@ You can create request management systems, knowledge-based systems, decision-mak
     </tr>
 </table>
 
-
 Video: <a href="https://youtu.be/d1oIlVedyVw">Demo of the request management system</a>
+
+
+
+## Deployment
+
+Rename the config.json file to appsettings.json and replace the text with square brackets.
+WARNING: If you deploy the application to the Linux system, you must change the MySQL configuration using the lower_case_table_names=1 parameter.
 
 ## License
 
