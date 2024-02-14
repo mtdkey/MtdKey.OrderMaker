@@ -6,6 +6,7 @@
   <img alt="GitHub" src="https://img.shields.io/badge/licence-MIT-green">
   <img alt="GitHub" src="https://img.shields.io/badge/platform-.Net%208.0%20%7C%20Windows%20%7C%20Linux-blue">  
   <img alt="GitHub" src="https://img.shields.io/badge/database-MySql%208.00-blue">  
+     <img alt="GitHub" src="https://img.shields.io/badge/VS-17.9.0-purple">  
 </p>
 
 <hr>
