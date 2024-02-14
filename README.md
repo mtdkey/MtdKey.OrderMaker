@@ -4,7 +4,7 @@
 
 <p align="center">
   <img alt="GitHub" src="https://img.shields.io/badge/licence-MIT-green">
-  <img alt="GitHub" src="https://img.shields.io/badge/platform-.Net%207.0%20%7C%20Windows%20%7C%20Linux-blue">  
+  <img alt="GitHub" src="https://img.shields.io/badge/platform-.Net%208.0%20%7C%20Windows%20%7C%20Linux-blue">  
   <img alt="GitHub" src="https://img.shields.io/badge/database-MySql%208.00-blue">  
 </p>
 
