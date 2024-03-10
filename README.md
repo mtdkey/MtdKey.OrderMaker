@@ -37,13 +37,8 @@ You can create request management systems, knowledge-based systems, decision-mak
 
 Video: <a href="https://youtu.be/d1oIlVedyVw">Demo of the request management system</a>
 
-
-
-## Deployment
-
-Rename the config.json file to appsettings.json and replace the text with square brackets.
-
-⚠️ WARNING: If you deploy the application to the Linux system, you must change the MySQL configuration using the <a href="https://askubuntu.com/questions/1261422/how-to-install-mysql-8-0-with-lower-case-table-names-1-on-ubuntu-server-20-04-lt">lower_case_table_names=1</a> parameter.
+Create appsettings.json file before start the application.
+Read [wiki](https://github.com/mtdkey/MtdKey.OrderMaker/wiki) for details.
 
 ## License
 
