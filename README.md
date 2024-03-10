@@ -38,6 +38,7 @@ You can create request management systems, knowledge-based systems, decision-mak
 Video: <a href="https://youtu.be/d1oIlVedyVw">Demo of the request management system</a>
 
 Create appsettings.json file before start the application.
+
 Read [wiki](https://github.com/mtdkey/MtdKey.OrderMaker/wiki) for details.
 
 ## License
