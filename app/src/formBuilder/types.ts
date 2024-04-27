@@ -58,5 +58,10 @@ type FieldModel = {
     ListFormId: string;
 }
 
+type ListItem = {
+    Id: string;
+    Name: string;
+}
+
 
 

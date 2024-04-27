@@ -45,7 +45,7 @@
         <link rel="stylesheet" href="~/lib/mtd-ordermaker/mtd-img-selector/css/mtd-img-selector.min.css" asp-append-version="true" />
         <link rel="stylesheet" href="~/lib/mtd-ordermaker/mtd-checkbox/css/mtd-checkbox.min.css" asp-append-version="true" />
     </environment>
-    
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="~/lib/mtd-ordermaker/main/css/ripple.css" asp-append-version="true" />
@@ -56,6 +56,7 @@
 <body class="mdc-typography">
     @*<partial name="_CookieConsentPartial" />*@
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    
 
     <div class="drawer-frame-root">
 
@@ -89,7 +90,7 @@
                                     <div id="main-action-menu" class="mdc-menu mdc-menu-surface">
                                         <ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical">
                                             @RenderSection("Action")
-                                        </ul>                                        
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
@@ -102,7 +103,7 @@
                             @RenderSection("Breadcrumb")
                         </ul>
                     }
-                </div>             
+                </div>
                 @RenderBody()
             </div>
         </div>

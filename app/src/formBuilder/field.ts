@@ -91,7 +91,6 @@ export class Field {
             checkFieldHelperInfo(formPart);
             formPart.append(this.container);
         }
-
     }
 
     static DragOverHandler(values: Values) {

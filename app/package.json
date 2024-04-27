@@ -12,6 +12,7 @@
   "author": "Oleg Bruev",
   "license": "ISC",
   "devDependencies": {
+    "@material/drawer": "7.0.0",
     "@material/button": "7.0.0",
     "@material/density": "7.0.0",
     "@material/elevation": "7.0.0",

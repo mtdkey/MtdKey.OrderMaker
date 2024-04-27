@@ -6,10 +6,11 @@
 @inject IHtmlLocalizer<FormBuilderLocalizer> localizer;
 
 
-<div class="modal fade" id="fieldDialog" tabindex="-1">
+<div class="modal fade " id="fieldDialog" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
         <div class="modal-content">
             <div class="modal-header">
+                
                 <div style="display: flex; flex-wrap:wrap;">
                     <h5 class="modal-title">@localizer["Field Attribute Editor"]</h5>
                     <div class="formPart_item_title_type ps-2" style="font-size: 1em;">
@@ -48,16 +49,17 @@
                     <div class="pt-3">
                         @await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags
                         {
-                        Id = "defaultValue",
-                        Name = "defaultValue",
-                        MTDTexFieldView = MTDTextFieldViews.Outlined,
-                        Label = "Default value",
-                        LabelLocalized = true,
-                        Required = false,
+                            Id = "defaultValue",
+                            Name = "defaultValue",
+                            MTDTexFieldView = MTDTextFieldViews.Outlined,
+                            Label = "Default value",
+                            LabelLocalized = true,
+                            Required = false,
                         })
                     </div>
                 </div>
 
+                
                 <div id="listFormParam" class="pt-3">
                     <div class="form-floating">
                         <select id="selectForm" class="form-select" aria-label="Floating label select example">
@@ -65,6 +67,7 @@
                         <label for="selectForm">List of forms</label>
                     </div>
                 </div>
+
             </div>
 
             <div class="pt-2 d-none">

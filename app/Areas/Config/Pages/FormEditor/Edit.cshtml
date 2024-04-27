@@ -35,7 +35,10 @@
     </li>
 }
 
+
+
 @await Html.PartialAsync("/src/formBuilder/frontend/_Index.cshtml")
+
 
 <form mtd-data-form method="post" autocomplete="off">
     <input type="hidden" id="jsonData" name="jsonData" value="@Model.JsonData" />
@@ -79,3 +82,4 @@
     <script src="~/lib/mtd-ordermaker/config/js/mtd-config-form-edit.js" asp-append-version="true"></script>
     <script src="~/lib/mtd-ordermaker/dist/js/configFormBuilder.js" asp-append-version="true"></script>
 }
+
