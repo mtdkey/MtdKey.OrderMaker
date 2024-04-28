@@ -193,3 +193,8 @@
 .infoDragField {
     color: gray;
 }
+
+#searchItem-input {
+    padding-right: 68px;
+}
+

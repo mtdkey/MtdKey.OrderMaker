@@ -6,6 +6,7 @@ const form_1 = require("./form");
 const textfield_1 = require("@material/textfield");
 const partDialog_1 = require("./partDialog");
 const FieldDialog_1 = require("./FieldDialog");
+const FieldListDialog_1 = require("./FieldListDialog");
 class Values {
     constructor() {
         this.placeBuilder = document.getElementById("placeBuilder");
@@ -13,6 +14,7 @@ class Values {
         this.overElement = this.placeBuilder;
         this.formPartTemplate = document.getElementById("formPartTemplate");
         this.fieldTemplate = document.getElementById("fieldTemplate");
+        this.itemTemplate = document.getElementById("itemTemplate");
         this.styleTaken = "taken";
         this.styleFormPart = "formPart";
         this.styleOverFromPart = "overFromPart";
@@ -41,6 +43,7 @@ class Values {
         this.FormInfoModels = new Array();
         this.partDialog = new partDialog_1.PartDialog(this);
         this.fieldDialog = new FieldDialog_1.FieldDialog(this);
+        this.fieldListDialog = new FieldListDialog_1.FieldListDialog(this);
     }
 }
 exports.Values = Values;

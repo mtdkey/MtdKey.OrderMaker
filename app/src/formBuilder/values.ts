@@ -5,6 +5,7 @@ import { FormPart, FormPartItem } from "./formPart";
 import { MDCTextField } from '@material/textfield';
 import { PartDialog } from "./partDialog";
 import { FieldDialog } from "./FieldDialog";
+import { FieldListDialog } from "./FieldListDialog";
 
 
 export class Values {
@@ -29,6 +30,7 @@ export class Values {
     placeBuilder: HTMLDivElement;
     formPartTemplate: HTMLTemplateElement;
     fieldTemplate: HTMLTemplateElement;
+    itemTemplate: HTMLTemplateElement;
     styleFieldName: string;
     styleFormPartItem: string;
 
@@ -43,6 +45,7 @@ export class Values {
     partDialog: PartDialog;
     styleFormPartColumns: string;
     fieldDialog: FieldDialog;
+    fieldListDialog: FieldListDialog;
     FormInfoModels: FormInfoModel[];
 
     constructor() {
@@ -52,6 +55,7 @@ export class Values {
         this.overElement = this.placeBuilder;
         this.formPartTemplate = document.getElementById("formPartTemplate") as HTMLTemplateElement;
         this.fieldTemplate = document.getElementById("fieldTemplate") as HTMLTemplateElement;
+        this.itemTemplate = document.getElementById("itemTemplate") as HTMLTemplateElement;
         this.styleTaken = "taken";
         this.styleFormPart = "formPart";
         this.styleOverFromPart = "overFromPart";
@@ -85,5 +89,6 @@ export class Values {
 
         this.partDialog = new PartDialog(this);
         this.fieldDialog = new FieldDialog(this);
+        this.fieldListDialog = new FieldListDialog(this);
     }
 }

@@ -150,7 +150,7 @@ function checkPartHelperInfo(values) {
 exports.checkPartHelperInfo = checkPartHelperInfo;
 class FormPartItem {
     constructor() {
-        this.id = (0, utilities_1.generateUUID)();
+        this.id = (0, utilities_1.generateUID)();
         this.name = "New Form Part";
         this.active = true;
     }

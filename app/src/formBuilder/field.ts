@@ -1,7 +1,7 @@
 ﻿import { Values } from "./values";
 import { Actions, ChangeAction, builderDragDrop, builderDragEnd, builderDragLeave, builderDragOver, builderDragStart } from ".";
 import { addRippleEffect } from "../ripple/ripple";
-import { generateUUID } from "./utilities";
+import { generateUID } from "./utilities";
 import { FieldType, GetFileTypeInfo } from "./fieldType";
 import bootstrap = require("bootstrap");
 import { Form } from "./form";
@@ -42,8 +42,14 @@ export class Field {
         var binder = this;
 
         this.btnEditor.addEventListener("click", (e) => {
-            values.fieldDialog.setData(binder.#data);
-            values.fieldDialog.screen.show();
+
+            if (this.#data.type === 11) {
+                values.fieldListDialog.setData(binder.#data);
+                values.fieldListDialog.screen.show();
+            } else {
+                values.fieldDialog.setData(binder.#data);
+                values.fieldDialog.screen.show();
+            }
         });
 
         this.btnRemover.addEventListener("click", (e) => {
@@ -226,10 +232,12 @@ export class FieldItem {
     active: boolean;
     defaultValue: string;
     listFormId: string;
+    listItems: ListItem[];
 
     constructor() {
-        this.id = generateUUID();
+        this.id = generateUID();
         this.name = "New Field";
         this.active = true;
+        this.listItems = [];
     }
 }

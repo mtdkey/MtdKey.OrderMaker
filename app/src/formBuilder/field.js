@@ -41,8 +41,14 @@ class Field {
         (0, ripple_1.addRippleEffect)(this.container);
         var binder = this;
         this.btnEditor.addEventListener("click", (e) => {
-            values.fieldDialog.setData(__classPrivateFieldGet(binder, _Field_data, "f"));
-            values.fieldDialog.screen.show();
+            if (__classPrivateFieldGet(this, _Field_data, "f").type === 11) {
+                values.fieldListDialog.setData(__classPrivateFieldGet(binder, _Field_data, "f"));
+                values.fieldListDialog.screen.show();
+            }
+            else {
+                values.fieldDialog.setData(__classPrivateFieldGet(binder, _Field_data, "f"));
+                values.fieldDialog.screen.show();
+            }
         });
         this.btnRemover.addEventListener("click", (e) => {
             (0, _1.ChangeAction)(_1.Actions.ChangeFieldParameters, () => {
@@ -182,9 +188,10 @@ function checkFieldHelperInfo(container) {
 exports.checkFieldHelperInfo = checkFieldHelperInfo;
 class FieldItem {
     constructor() {
-        this.id = (0, utilities_1.generateUUID)();
+        this.id = (0, utilities_1.generateUID)();
         this.name = "New Field";
         this.active = true;
+        this.listItems = [];
     }
 }
 exports.FieldItem = FieldItem;

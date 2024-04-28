@@ -1,4 +1,4 @@
-﻿import { generateUUID } from "./utilities";
+﻿import { generateUID } from "./utilities";
 import { ImageSelector } from "../imageSelector/index";
 import { Values } from "./values";
 import { Actions, ChangeAction } from ".";
@@ -17,7 +17,7 @@ export class Form  {
 
 
     constructor(values: Values) {
-        this.id = generateUUID();
+        this.id = generateUID();
         this.name = "New Form";
         this.active = true;
         this.visibleDate = true;

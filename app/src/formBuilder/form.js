@@ -6,7 +6,7 @@ const index_1 = require("../imageSelector/index");
 const _1 = require(".");
 class Form {
     constructor(values) {
-        this.id = (0, utilities_1.generateUUID)();
+        this.id = (0, utilities_1.generateUID)();
         this.name = "New Form";
         this.active = true;
         this.visibleDate = true;

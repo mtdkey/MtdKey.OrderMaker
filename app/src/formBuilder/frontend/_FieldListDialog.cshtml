@@ -1,0 +1,67 @@
+﻿@using MtdKey.OrderMaker;
+@using Microsoft.AspNetCore.Mvc.Localization
+@using MtdKey.OrderMaker.Components.Controls;
+@using MtdKey.OrderMaker.Models.Controls.MTDSelectList;
+@using MtdKey.OrderMaker.Models.Controls.MTDTextField;
+@inject IHtmlLocalizer<FormBuilderLocalizer> localizer;
+
+
+<div class="modal fade " id="fieldListDialog" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <div style="display: flex; flex-wrap:wrap;">
+                    <h5 class="modal-title">@localizer["Field Attribute Editor"]</h5>
+                    <div class="formPart_item_title_type ps-2" style="font-size: 1em;">
+                    </div>
+                </div>
+
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form autocomplete="off">
+                    @await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags
+                       {
+                           Id = "fieldListName",
+                           Name = "fieldName",
+                           MTDTexFieldView = MTDTextFieldViews.Outlined,
+                           Label = "Field Name",
+                           LabelLocalized = true,
+                           Required = true,
+                       })
+                       
+                    <div style="display: flex; align-items: center; margin-top: 24px; position: relative">
+                        <div style="flex-grow:1">
+                            @await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags
+                               {
+                                   Id = "searchItem",
+                                   Name = "searchItem",
+                                   MTDTexFieldView = MTDTextFieldViews.Default,
+                                   LabelLocalized = true,
+                               })
+                        </div>
+
+                        <div style="position: absolute; right: 0;">
+                            <button type="button" id="buttonAddItem" class="mdc-button mdc-button--outlined">
+                                <div class="mdc-button__ripple"></div>
+                                <span class="mdc-button__label">
+                                    <i class="bi bi-plus-lg"></i>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+
+            
+                <div id="itemPlace"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">@localizer["Close"]</button>
+                @*<button type="button" class="btn btn-light text-primary">@localizer["Apply"]</button>*@
+            </div>
+        </div>
+    </div>
+
+

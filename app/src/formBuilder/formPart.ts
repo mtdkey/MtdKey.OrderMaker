@@ -2,7 +2,7 @@
 import { Actions, ChangeAction, builderDragDrop, builderDragEnd, builderDragLeave, builderDragOver, builderDragStart } from ".";
 import { addRippleEffect } from "../ripple/ripple";
 import { Field, FieldItem, checkFieldHelperInfo } from "./field";
-import { generateUUID } from "./utilities";
+import { generateUID } from "./utilities";
 import { Values } from "./values";
 import { ImageInfo } from "../imageSelector";
 
@@ -193,7 +193,7 @@ export class FormPartItem {
     imageType: string;
 
     constructor() {
-        this.id = generateUUID();
+        this.id = generateUID();
         this.name = "New Form Part";
         this.active = true;
     }

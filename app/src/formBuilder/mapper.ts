@@ -100,7 +100,7 @@ export function SaveHistory(values: Values) {
         FieldModels: [],
         FormInfoModels: []
     }
-    
+
     jsonData.FormModel.Id = values.Form.id;
     jsonData.FormModel.Name = values.Form.name;
     jsonData.FormModel.Description = values.Form.description;
