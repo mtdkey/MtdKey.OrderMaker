@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace MtdKey.OrderMaker.Entity.Migrations
+namespace MtdKey.OrderMaker.Migrations
 {
     /// <inheritdoc />
     public partial class InitDatabase : Migration
@@ -407,35 +407,6 @@ namespace MtdKey.OrderMaker.Entity.Migrations
                         name: "fk_mtd_form_part_mtd_sys_style1",
                         column: x => x.mtd_sys_style,
                         principalTable: "mtd_sys_style",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "mtd_form_related",
-                columns: table => new
-                {
-                    id = table.Column<string>(type: "varchar(36)", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    parent_form_id = table.Column<string>(type: "varchar(36)", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    child_form_id = table.Column<string>(type: "varchar(36)", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_mtd_form_related", x => x.id);
-                    table.ForeignKey(
-                        name: "fk_child_form",
-                        column: x => x.child_form_id,
-                        principalTable: "mtd_form",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_parent_form",
-                        column: x => x.parent_form_id,
-                        principalTable: "mtd_form",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 })
@@ -989,6 +960,29 @@ namespace MtdKey.OrderMaker.Entity.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "mtd_form_part_field_item",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    Name = table.Column<string>(type: "varchar(250)", maxLength: 250, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    FieldId = table.Column<string>(type: "varchar(36)", maxLength: 250, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    IsDeleted = table.Column<bool>(type: "tinyint(1)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_mtd_form_part_field_item", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_mtd_form_part_field_item_mtd_form_part_field_FieldId",
+                        column: x => x.FieldId,
+                        principalTable: "mtd_form_part_field",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "mtd_store_date",
                 columns: table => new
                 {
@@ -1174,6 +1168,45 @@ namespace MtdKey.OrderMaker.Entity.Migrations
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_mtd_store_text_mtd_store_StoreId",
+                        column: x => x.StoreId,
+                        principalTable: "mtd_store",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "mtd_store_item",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    StoreId = table.Column<string>(type: "varchar(36)", maxLength: 36, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    FieldId = table.Column<string>(type: "varchar(36)", maxLength: 36, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ItemId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    Result = table.Column<string>(type: "varchar(250)", maxLength: 250, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    IsDeleted = table.Column<bool>(type: "tinyint(1)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_mtd_store_item", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_mtd_store_item_mtd_form_part_field_FieldId",
+                        column: x => x.FieldId,
+                        principalTable: "mtd_form_part_field",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_mtd_store_item_mtd_form_part_field_item_ItemId",
+                        column: x => x.ItemId,
+                        principalTable: "mtd_form_part_field_item",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_mtd_store_item_mtd_store_StoreId",
                         column: x => x.StoreId,
                         principalTable: "mtd_store",
                         principalColumn: "id",
@@ -1427,24 +1460,13 @@ namespace MtdKey.OrderMaker.Entity.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_mtd_form_part_field_item_FieldId",
+                table: "mtd_form_part_field_item",
+                column: "FieldId");
+
+            migrationBuilder.CreateIndex(
                 name: "id_UNIQUE",
                 table: "mtd_form_part_header",
-                column: "id",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "fk_child_form_idx",
-                table: "mtd_form_related",
-                column: "child_form_id");
-
-            migrationBuilder.CreateIndex(
-                name: "fk_parent_form_idx",
-                table: "mtd_form_related",
-                column: "parent_form_id");
-
-            migrationBuilder.CreateIndex(
-                name: "id_UNIQUE",
-                table: "mtd_form_related",
                 column: "id",
                 unique: true);
 
@@ -1642,6 +1664,26 @@ namespace MtdKey.OrderMaker.Entity.Migrations
                 column: "StoreId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_mtd_store_item_FieldId",
+                table: "mtd_store_item",
+                column: "FieldId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_mtd_store_item_ItemId",
+                table: "mtd_store_item",
+                column: "ItemId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_mtd_store_item_StoreId",
+                table: "mtd_store_item",
+                column: "StoreId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TEXT_RESULT",
+                table: "mtd_store_item",
+                column: "Result");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_MEMO_RESULT",
                 table: "mtd_store_memo",
                 column: "Result");
@@ -1678,7 +1720,7 @@ namespace MtdKey.OrderMaker.Entity.Migrations
                 column: "StoreId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TEXT_RESULT",
+                name: "IX_TEXT_RESULT1",
                 table: "mtd_store_text",
                 column: "Result");
 
@@ -1744,9 +1786,6 @@ namespace MtdKey.OrderMaker.Entity.Migrations
                 name: "mtd_form_part_header");
 
             migrationBuilder.DropTable(
-                name: "mtd_form_related");
-
-            migrationBuilder.DropTable(
                 name: "mtd_group");
 
             migrationBuilder.DropTable(
@@ -1780,6 +1819,9 @@ namespace MtdKey.OrderMaker.Entity.Migrations
                 name: "mtd_store_int");
 
             migrationBuilder.DropTable(
+                name: "mtd_store_item");
+
+            migrationBuilder.DropTable(
                 name: "mtd_store_memo");
 
             migrationBuilder.DropTable(
@@ -1804,13 +1846,16 @@ namespace MtdKey.OrderMaker.Entity.Migrations
                 name: "mtd_approval_stage");
 
             migrationBuilder.DropTable(
-                name: "mtd_form_part_field");
+                name: "mtd_form_part_field_item");
 
             migrationBuilder.DropTable(
                 name: "mtd_store");
 
             migrationBuilder.DropTable(
                 name: "mtd_approval");
+
+            migrationBuilder.DropTable(
+                name: "mtd_form_part_field");
 
             migrationBuilder.DropTable(
                 name: "mtd_form_part");

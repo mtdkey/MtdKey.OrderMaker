@@ -7,7 +7,7 @@ using MtdKey.OrderMaker.Entity;
 
 #nullable disable
 
-namespace MtdKey.OrderMaker.Entity.Migrations
+namespace MtdKey.OrderMaker.Migrations
 {
     [DbContext(typeof(OrderMakerContext))]
     partial class OrderMakerContextModelSnapshot : ModelSnapshot
@@ -16,7 +16,7 @@ namespace MtdKey.OrderMaker.Entity.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.8")
+                .HasAnnotation("ProductVersion", "8.0.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("MtdKey.OrderMaker.Entity.MtdApproval", b =>
@@ -944,6 +944,32 @@ namespace MtdKey.OrderMaker.Entity.Migrations
                     b.ToTable("mtd_form_part_field", (string)null);
                 });
 
+            modelBuilder.Entity("MtdKey.OrderMaker.Entity.MtdFormPartFieldItem", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("FieldId")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("varchar(36)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("varchar(250)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FieldId");
+
+                    b.ToTable("mtd_form_part_field_item");
+                });
+
             modelBuilder.Entity("MtdKey.OrderMaker.Entity.MtdFormPartHeader", b =>
                 {
                     b.Property<string>("Id")
@@ -971,37 +997,6 @@ namespace MtdKey.OrderMaker.Entity.Migrations
                         .HasDatabaseName("id_UNIQUE");
 
                     b.ToTable("mtd_form_part_header", (string)null);
-                });
-
-            modelBuilder.Entity("MtdKey.OrderMaker.Entity.MtdFormRelated", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("varchar(36)")
-                        .HasColumnName("id");
-
-                    b.Property<string>("ChildFormId")
-                        .IsRequired()
-                        .HasColumnType("varchar(36)")
-                        .HasColumnName("child_form_id");
-
-                    b.Property<string>("ParentFormId")
-                        .IsRequired()
-                        .HasColumnType("varchar(36)")
-                        .HasColumnName("parent_form_id");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ChildFormId")
-                        .HasDatabaseName("fk_child_form_idx");
-
-                    b.HasIndex("Id")
-                        .IsUnique()
-                        .HasDatabaseName("id_UNIQUE");
-
-                    b.HasIndex("ParentFormId")
-                        .HasDatabaseName("fk_parent_form_idx");
-
-                    b.ToTable("mtd_form_related", (string)null);
                 });
 
             modelBuilder.Entity("MtdKey.OrderMaker.Entity.MtdGroup", b =>
@@ -1643,6 +1638,46 @@ namespace MtdKey.OrderMaker.Entity.Migrations
                     b.ToTable("mtd_store_int");
                 });
 
+            modelBuilder.Entity("MtdKey.OrderMaker.Entity.MtdStoreItem", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("FieldId")
+                        .IsRequired()
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<Guid>("ItemId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Result")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("varchar(250)");
+
+                    b.Property<string>("StoreId")
+                        .IsRequired()
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FieldId");
+
+                    b.HasIndex("ItemId");
+
+                    b.HasIndex("StoreId");
+
+                    b.HasIndex(new[] { "Result" }, "IX_TEXT_RESULT");
+
+                    b.ToTable("mtd_store_item");
+                });
+
             modelBuilder.Entity("MtdKey.OrderMaker.Entity.MtdStoreMemo", b =>
                 {
                     b.Property<long>("Id")
@@ -1736,7 +1771,8 @@ namespace MtdKey.OrderMaker.Entity.Migrations
 
                     b.HasIndex("StoreId");
 
-                    b.HasIndex(new[] { "Result" }, "IX_TEXT_RESULT");
+                    b.HasIndex(new[] { "Result" }, "IX_TEXT_RESULT")
+                        .HasDatabaseName("IX_TEXT_RESULT1");
 
                     b.ToTable("mtd_store_text");
                 });
@@ -2089,6 +2125,17 @@ namespace MtdKey.OrderMaker.Entity.Migrations
                     b.Navigation("MtdSysTypeNavigation");
                 });
 
+            modelBuilder.Entity("MtdKey.OrderMaker.Entity.MtdFormPartFieldItem", b =>
+                {
+                    b.HasOne("MtdKey.OrderMaker.Entity.MtdFormPartField", "MtdFormPartField")
+                        .WithMany("MtdFormPartFieldItems")
+                        .HasForeignKey("FieldId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("MtdFormPartField");
+                });
+
             modelBuilder.Entity("MtdKey.OrderMaker.Entity.MtdFormPartHeader", b =>
                 {
                     b.HasOne("MtdKey.OrderMaker.Entity.MtdFormPart", "IdNavigation")
@@ -2099,27 +2146,6 @@ namespace MtdKey.OrderMaker.Entity.Migrations
                         .HasConstraintName("fk_image_form_part");
 
                     b.Navigation("IdNavigation");
-                });
-
-            modelBuilder.Entity("MtdKey.OrderMaker.Entity.MtdFormRelated", b =>
-                {
-                    b.HasOne("MtdKey.OrderMaker.Entity.MtdForm", "MtdChildForm")
-                        .WithMany("MtdChildForms")
-                        .HasForeignKey("ChildFormId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_child_form");
-
-                    b.HasOne("MtdKey.OrderMaker.Entity.MtdForm", "MtdParentForm")
-                        .WithMany("MtdParentForms")
-                        .HasForeignKey("ParentFormId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_parent_form");
-
-                    b.Navigation("MtdChildForm");
-
-                    b.Navigation("MtdParentForm");
                 });
 
             modelBuilder.Entity("MtdKey.OrderMaker.Entity.MtdLogApproval", b =>
@@ -2327,6 +2353,33 @@ namespace MtdKey.OrderMaker.Entity.Migrations
                     b.Navigation("MtdStore");
                 });
 
+            modelBuilder.Entity("MtdKey.OrderMaker.Entity.MtdStoreItem", b =>
+                {
+                    b.HasOne("MtdKey.OrderMaker.Entity.MtdFormPartField", "MtdFormPartField")
+                        .WithMany("MtdStoreItems")
+                        .HasForeignKey("FieldId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MtdKey.OrderMaker.Entity.MtdFormPartFieldItem", "MtdFormPartFieldItem")
+                        .WithMany("MtdStoreItems")
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MtdKey.OrderMaker.Entity.MtdStore", "MtdStore")
+                        .WithMany("MtdStoreItems")
+                        .HasForeignKey("StoreId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("MtdFormPartField");
+
+                    b.Navigation("MtdFormPartFieldItem");
+
+                    b.Navigation("MtdStore");
+                });
+
             modelBuilder.Entity("MtdKey.OrderMaker.Entity.MtdStoreMemo", b =>
                 {
                     b.HasOne("MtdKey.OrderMaker.Entity.MtdFormPartField", "MtdFormPartField")
@@ -2422,8 +2475,6 @@ namespace MtdKey.OrderMaker.Entity.Migrations
                 {
                     b.Navigation("MtdApproval");
 
-                    b.Navigation("MtdChildForms");
-
                     b.Navigation("MtdEventSubscribes");
 
                     b.Navigation("MtdFilter");
@@ -2435,8 +2486,6 @@ namespace MtdKey.OrderMaker.Entity.Migrations
                     b.Navigation("MtdFormHeader");
 
                     b.Navigation("MtdFormParts");
-
-                    b.Navigation("MtdParentForms");
 
                     b.Navigation("MtdPolicyForms");
 
@@ -2458,6 +2507,8 @@ namespace MtdKey.OrderMaker.Entity.Migrations
 
                     b.Navigation("MtdFilterField");
 
+                    b.Navigation("MtdFormPartFieldItems");
+
                     b.Navigation("MtdStoreDates");
 
                     b.Navigation("MtdStoreDecimals");
@@ -2466,9 +2517,16 @@ namespace MtdKey.OrderMaker.Entity.Migrations
 
                     b.Navigation("MtdStoreInts");
 
+                    b.Navigation("MtdStoreItems");
+
                     b.Navigation("MtdStoreMemos");
 
                     b.Navigation("MtdStoreTexts");
+                });
+
+            modelBuilder.Entity("MtdKey.OrderMaker.Entity.MtdFormPartFieldItem", b =>
+                {
+                    b.Navigation("MtdStoreItems");
                 });
 
             modelBuilder.Entity("MtdKey.OrderMaker.Entity.MtdPolicy", b =>
@@ -2495,6 +2553,8 @@ namespace MtdKey.OrderMaker.Entity.Migrations
                     b.Navigation("MtdStoreFiles");
 
                     b.Navigation("MtdStoreInts");
+
+                    b.Navigation("MtdStoreItems");
 
                     b.Navigation("MtdStoreMemos");
 

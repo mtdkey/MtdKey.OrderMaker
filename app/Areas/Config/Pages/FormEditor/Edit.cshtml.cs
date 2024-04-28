@@ -1,28 +1,17 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using MtdKey.OrderMaker.Entity;
-using MtdKey.OrderMaker.Models.Controls.MTDSelectList;
 using MtdKey.OrderMaker.Services;
-using NPOI.SS.Formula.Functions;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace MtdKey.OrderMaker.Areas.Config.Pages.FormEditor
 {
-    public class EditModel : PageModel
+    public class EditModel(DataConnector context, UserHandler userHandler) : PageModel
     {
-        private readonly DataConnector context;
-        private readonly UserHandler userHandler;
-
-        public EditModel(DataConnector context, UserHandler userHandler)
-        {
-            this.context = context;
-            this.userHandler = userHandler;
-        }
+        private readonly DataConnector context = context;
+        private readonly UserHandler userHandler = userHandler;
 
         public MtdForm MtdForm { get; set; } = new MtdForm();
         public string JsonData { get; set; } = string.Empty;

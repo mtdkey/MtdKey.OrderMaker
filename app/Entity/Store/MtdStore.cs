@@ -22,6 +22,7 @@ namespace MtdKey.OrderMaker.Entity
             MtdStoreDecimals = new HashSet<MtdStoreDecimal>();
             MtdStoreMemos = new HashSet<MtdStoreMemo>();
             MtdStoreFiles = new HashSet<MtdStoreFile>();
+            MtdStoreItems = new HashSet<MtdStoreItem>();
         }
 
         public string Id { get; set; }
@@ -43,5 +44,6 @@ namespace MtdKey.OrderMaker.Entity
         public virtual ICollection<MtdStoreDecimal> MtdStoreDecimals { get; set; }
         public virtual ICollection<MtdStoreMemo> MtdStoreMemos { get; set;}
         public virtual ICollection<MtdStoreFile> MtdStoreFiles { get; set;}
+        public virtual ICollection<MtdStoreItem> MtdStoreItems { get; set;}
     }
 }

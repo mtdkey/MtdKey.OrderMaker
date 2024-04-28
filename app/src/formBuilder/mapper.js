@@ -59,6 +59,7 @@ function LoadJsonData(values) {
         fieldItem.triggerId = fieldModel.TriggerId;
         fieldItem.defaultValue = fieldModel.DefaultValue;
         fieldItem.listFormId = fieldModel.ListFormId;
+        fieldItem.listItems = fieldModel.ListItems;
         field.setData(fieldItem);
         values.Fields.push(field);
     });
@@ -146,7 +147,8 @@ function SaveHistory(values) {
             SysType: 0,
             TriggerId: "",
             DefaultValue: "",
-            ListFormId: ""
+            ListFormId: "",
+            ListItems: []
         };
         var fieldItem = item.getData();
         fieldModel.Id = fieldItem.id;
@@ -161,6 +163,7 @@ function SaveHistory(values) {
         fieldModel.TriggerId = fieldItem.triggerId;
         fieldModel.DefaultValue = fieldItem.defaultValue;
         fieldModel.ListFormId = fieldItem.listFormId;
+        fieldModel.ListItems = fieldItem.listItems;
         jsonData.FieldModels.push(fieldModel);
     });
     var jsonDataString = JSON.stringify(jsonData);

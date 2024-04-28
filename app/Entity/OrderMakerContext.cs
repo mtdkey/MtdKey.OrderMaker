@@ -20,6 +20,7 @@ namespace MtdKey.OrderMaker.Entity
 
         public virtual DbSet<MtdEventSubscribe> MtdEventSubscribes { get; set; }
         public virtual DbSet<MtdGroup> MtdGroup { get; set; }
+    
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

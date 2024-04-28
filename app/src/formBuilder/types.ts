@@ -56,6 +56,7 @@ type FieldModel = {
     TriggerId: string;
     DefaultValue: string;
     ListFormId: string;
+    ListItems: ListItem[];
 }
 
 type ListItem = {

@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using MtdKey.OrderMaker.Entity;
 using MtdKey.OrderMaker.Areas.Identity.Data;
 using MtdKey.OrderMaker.Services;
+using MtdKey.OrderMaker.src.formBuilder.models;
 
 
 namespace MtdKey.OrderMaker
@@ -136,11 +137,11 @@ namespace MtdKey.OrderMaker
                 .OrderBy(x => x.Sequence)
                 .ToListAsync();
 
-            foreach(var part in parts)
+            foreach (var part in parts)
             {
 
                 await context.Entry(part)
-                    .Reference(x=>x.MtdFormPartHeader)
+                    .Reference(x => x.MtdFormPartHeader)
                     .LoadAsync();
 
                 PartModel partModel = new()
@@ -186,6 +187,8 @@ namespace MtdKey.OrderMaker
 
             var fields = await context.MtdFormPartField
                 .Where(x => partIds.Contains(x.MtdFormPartId))
+                .Include(x => x.MtdFormPartFieldItems)
+                .AsSplitQuery()
                 .OrderBy(x => x.Sequence)
                 .ToListAsync();
 
@@ -203,6 +206,14 @@ namespace MtdKey.OrderMaker
                     Sequence = field.Sequence,
                     SysType = field.MtdSysType,
                     DefaultValue = field.DefaultData,
+                    ListItems = field.MtdFormPartFieldItems
+                    .Where(x=>x.IsDeleted==false)
+                    .Select(x => new ListItemModel
+                    {
+                        Id = x.Id.ToString(),
+                        Name = x.Name
+                    }).OrderBy(x=>x.Name)
+                    .ToArray(),
                 });
             });
 
@@ -368,7 +379,10 @@ namespace MtdKey.OrderMaker
         {
             foreach (var fieldModel in fieldModels)
             {
-                var field = await context.MtdFormPartField.FindAsync(fieldModel.Id) ?? new();
+                var field = await context.MtdFormPartField
+                    .Include(x => x.MtdFormPartFieldItems)
+                    .AsSplitQuery()
+                    .FirstOrDefaultAsync(x => x.Id == fieldModel.Id) ?? new();
                 field.Name = fieldModel.Name;
                 field.Description = fieldModel.Description;
                 field.Required = fieldModel.Required ? (sbyte)1 : (sbyte)0;
@@ -386,6 +400,31 @@ namespace MtdKey.OrderMaker
                 }
 
                 field.Id = fieldModel.Id;
+
+
+                if (fieldModel.SysType == 11)
+                {
+                    foreach (var item in fieldModel.ListItems)
+                    {
+                        var itemExists = field.MtdFormPartFieldItems.FirstOrDefault(x => x.Id.ToString().Equals(item.Id, StringComparison.CurrentCultureIgnoreCase));
+                        if (itemExists == null)
+                            await context.MtdFormPartFieldItems.AddAsync(new MtdFormPartFieldItem { 
+                                Id = Guid.Parse(item.Id), 
+                                Name= item.Name,
+                                FieldId = field.Id
+                            });
+                        else
+                            itemExists.Name = item.Name;
+                    }
+
+                    foreach (var item in field.MtdFormPartFieldItems.Where(x=>x.IsDeleted == false))
+                    {
+                        if (!fieldModel.ListItems.Any(x => x.Id.Equals(item.Id.ToString(), StringComparison.CurrentCultureIgnoreCase)))
+                            item.IsDeleted = true;
+                    }
+                }
+
+
                 await context.SaveChangesAsync();
 
             }
@@ -402,6 +441,8 @@ namespace MtdKey.OrderMaker
             }
 
             await context.SaveChangesAsync();
+
+
 
         }
     }

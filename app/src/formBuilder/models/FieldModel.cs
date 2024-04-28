@@ -1,4 +1,6 @@
-﻿namespace MtdKey.OrderMaker
+﻿using MtdKey.OrderMaker.src.formBuilder.models;
+
+namespace MtdKey.OrderMaker
 {
     public class FieldModel
     {
@@ -12,5 +14,7 @@
         public int Sequence { get; set; }
         public bool Active { get; set; } = true;
         public string DefaultValue { get; set; } = string.Empty;
+        public ListItemModel[] ListItems { get; set; } = [];
+   
     }
 }

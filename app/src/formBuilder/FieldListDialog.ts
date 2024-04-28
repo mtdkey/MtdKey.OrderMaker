@@ -42,6 +42,12 @@ export class FieldListDialog {
         var typeText = GetFileTypeInfo(fieldItem.type);
         this.typeInfo.innerHTML = "";
         this.typeInfo.appendChild(typeText);
+
+        this.itemPlace.innerHTML = "";
+
+        fieldItem.listItems.forEach(item => {
+            AddItemToPlace(item, this);
+        });
     }
 
     getVluesFieldData() {
@@ -57,6 +63,62 @@ export class FieldListDialog {
 
 }
 
+function AddItemToPlace(listItem: ListItem, binder: FieldListDialog) {
+
+    var template = binder.values.itemTemplate.content.cloneNode(true) as HTMLDivElement;
+    var templateItem = template.firstElementChild as HTMLDivElement;
+    var inputText = templateItem.querySelector("[data-item-id]") as HTMLInputElement;
+    var inputRadio = templateItem.querySelector("[data-item-default]") as HTMLInputElement;
+    var buttonRemover = templateItem.querySelector("[data-item-remover]") as HTMLButtonElement;      
+
+    templateItem.dataset.item = listItem.Id;
+    inputText.dataset.itemID = listItem.Id;
+    inputText.value = listItem.Name;
+    inputRadio.dataset.itemDefault = listItem.Id;
+    inputRadio.checked = binder.getData().defaultValue == listItem.Id;
+
+    binder.itemPlace.appendChild(templateItem);
+
+
+    buttonRemover.addEventListener("click", () => {
+        ChangeAction(Actions.ChangeFieldParameters, () => {
+            var currentField = binder.getVluesFieldData();
+            var index = currentField.listItems.findIndex(x => x.Id == listItem.Id);
+            currentField.listItems.splice(index, 1);
+
+            if (listItem.Id.toLowerCase() === currentField.defaultValue.toLowerCase() && currentField.listItems.length > 0) {
+                currentField.defaultValue = currentField.listItems[0].Id;
+                var radio = document.querySelector(`[data-item-default='${currentField.listItems[0].Id}']`) as HTMLInputElement;
+                radio.checked = true;
+            }
+
+            binder.setValuesFieldData(currentField);
+
+            var currentItem = document.querySelector(`[data-item="${listItem.Id}"]`);
+            binder.itemPlace.removeChild(currentItem);
+        });
+    });
+
+
+    inputRadio.addEventListener("change", () => {
+        ChangeAction(Actions.ChangeFieldParameters, () => {
+            var currentField = binder.getVluesFieldData();
+            currentField.defaultValue = inputRadio.dataset.itemDefault;
+            binder.setValuesFieldData(currentField);
+        });
+    });
+
+    inputText.addEventListener("change", () => {
+        ChangeAction(Actions.ChangeFieldParameters, () => {
+            var currentField = binder.getVluesFieldData();
+            var index = currentField.listItems.findIndex(x => x.Id == listItem.Id);
+            currentField.listItems[index].Name = inputText.value;
+            binder.setValuesFieldData(currentField);
+        });
+    });   
+
+}
+
 function EventsHandler(binder: FieldListDialog) {
 
     binder.inputName.root.addEventListener("change", () => {
@@ -68,19 +130,21 @@ function EventsHandler(binder: FieldListDialog) {
     });
 
     binder.buttonAddItem.addEventListener("click", () => {
+
+        var template = binder.values.itemTemplate.content.cloneNode(true) as HTMLDivElement;
+        var item = template.firstElementChild as HTMLDivElement;
+        var inputText = item.querySelector("[data-item-id]") as HTMLInputElement;
+        var inputRadio = item.querySelector("[data-item-default]") as HTMLInputElement;
+        var buttonRemover = item.querySelector("[data-item-remover]") as HTMLButtonElement;
+
         ChangeAction(Actions.ChangeFieldParameters, () => {
 
-            var template = binder.values.itemTemplate.content.cloneNode(true) as HTMLDivElement;
-            var item = template.firstElementChild as HTMLDivElement;
-            var inputText = item.querySelector("[data-item-id]") as HTMLInputElement;
-            var inputRadio = item.querySelector("[data-item-default]") as HTMLInputElement;
-            var buttonRemover = item.querySelector("[data-item-remover]") as HTMLButtonElement;
 
-            var uid = generateUID();
             var itemName = binder.inputSearch.value;
             var fieldItem = binder.getVluesFieldData();
             var isFirstItem = fieldItem.listItems.length === 0;
 
+            const uid = generateUID();
             item.dataset.item = uid;
             inputRadio.dataset.itemDefault = uid;
             inputText.dataset.itemId = uid;
@@ -94,7 +158,6 @@ function EventsHandler(binder: FieldListDialog) {
             fieldItem.listItems.push({ Id: uid, Name: itemName });
             binder.setValuesFieldData(fieldItem);
 
-
             binder.itemPlace.appendChild(item);
             binder.inputSearch.value = "";
 
@@ -105,7 +168,6 @@ function EventsHandler(binder: FieldListDialog) {
 
                 if (uid.toLowerCase() === currentField.defaultValue.toLowerCase() && currentField.listItems.length > 0) {
                     currentField.defaultValue = currentField.listItems[0].Id;
-                    console.log(currentField.listItems);
                     var radio = document.querySelector(`[data-item-default='${currentField.listItems[0].Id}']`) as HTMLInputElement;
                     radio.checked = true;
                 }
@@ -117,19 +179,22 @@ function EventsHandler(binder: FieldListDialog) {
             });
 
             inputRadio.addEventListener("change", () => {
-                var currentField = binder.getVluesFieldData();
-                currentField.defaultValue = uid;
-                binder.setValuesFieldData(currentField);
+                ChangeAction(Actions.ChangeFieldParameters, () => {
+                    var currentField = binder.getVluesFieldData();
+                    currentField.defaultValue = inputRadio.dataset.itemDefault;
+                    binder.setValuesFieldData(currentField);
+                });
             });
 
             inputText.addEventListener("change", () => {
-                var currentField = binder.getVluesFieldData();
-                var index = currentField.listItems.findIndex(x => x.Id == item.dataset.item);
-                currentField.listItems[index].Name = inputText.value;
-                binder.setValuesFieldData(currentField);
-            });
+                ChangeAction(Actions.ChangeFieldParameters, () => {
+                    var currentField = binder.getVluesFieldData();
+                    var index = currentField.listItems.findIndex(x => x.Id == item.dataset.item);
+                    currentField.listItems[index].Name = inputText.value;
+                    binder.setValuesFieldData(currentField);
+                });
+            });      
         });
     });
-
 
 }
