@@ -22,7 +22,6 @@ namespace MtdKey.OrderMaker.Components.Store.Stack
             return View(viewName, docField);
         }
 
-
         private static string GetViewName(int type)
         {
             string viewName;
@@ -35,7 +34,7 @@ namespace MtdKey.OrderMaker.Components.Store.Stack
                 case 6: { viewName = "DateTime"; break; }
                 case 7: { viewName = "File"; break; }
                 case 8: { viewName = "Picture"; break; }
-                case 11: { viewName = "ListForm"; break; }
+                case 11: { viewName = "List"; break; }
                 case 12: { viewName = "CheckBox"; break; }
                 case 13: { viewName = "Link"; break; }
                 default: { viewName = "Text"; break; }

@@ -25,7 +25,7 @@ namespace MtdKey.OrderMaker.Core
                 Parts = parts,
                 Fields = docFields,
                 Created = DateTime.UtcNow,
-                EditDate = await userHandler.IsReviewerAsync(appUser, request.FormId),
+                EditDate = await userHandler.IsReviewerAsync(appUser, request.FormId),                
             };
 
             return docModel;

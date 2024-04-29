@@ -10,6 +10,7 @@
         public const int DateTime = 6;
         public const int File = 7;
         public const int Image = 8;
+        public const int List = 11;
         public const int Checkbox = 12;
         public const int Link = 13;
     }

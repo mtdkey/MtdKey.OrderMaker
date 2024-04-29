@@ -54,7 +54,8 @@ namespace Mtd.OrderMaker.Web.Controllers.Index
            var requestResult =  await storeService.GetDocsBySQLRequestAsync(new() { 
                  FormId = formId,
                  UserPrincipal = User,           
-                 LimitRequest = true
+                 LimitRequest = true,
+                 UseFilter = true
             });
 
             IWorkbook workbook = CreateWorkbook(requestResult.Docs);
@@ -157,6 +158,16 @@ namespace Mtd.OrderMaker.Web.Controllers.Index
                             cell.SetCellValue(((DateTime) field.Value).ToString("g"));
                         else
                             cell.SetCellValue("");
+                        break;
+                    }
+                case 11:
+                    {
+                        string result = field.Value is not null and string ? (string)field.Value : "";
+                        string itemName = field.ListItems
+                            .Where(x => x.Id == result).Select(x => x.Name)
+                            .FirstOrDefault() ?? string.Empty;
+                        cell.SetCellType(CellType.String);
+                        cell.SetCellValue(itemName);
                         break;
                     }
 

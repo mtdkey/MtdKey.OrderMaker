@@ -63,7 +63,6 @@ namespace MtdKey.OrderMaker.Areas.Workplace.Pages.Store
 
             MtdForm = await _context.MtdForm.FindAsync(MtdStore.MtdFormId);
 
-
             return Page();
         }
 

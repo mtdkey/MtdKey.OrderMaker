@@ -39,7 +39,7 @@ namespace MtdKey.OrderMaker.Components.Store.Stack
                         viewName = partType == DocPartType.Columns ? "FileColumn" : "FileRow";
                         break;
                     }
-                case 11: { viewName = "ListForm"; break; }
+                case 11: { viewName = "List"; break; }
                 case 12: { viewName = "CheckBox"; break; }
                 case 13: { viewName = "Link"; break; }
                 default: { viewName = "Text"; break; }

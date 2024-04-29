@@ -1,5 +1,4 @@
-﻿
-using MtdKey.OrderMaker.Entity;
+﻿using MtdKey.OrderMaker.Entity;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -49,6 +48,7 @@ namespace MtdKey.OrderMaker.Core
             await context.Entry(store).Collection(x => x.MtdStoreDecimals).LoadAsync();
             await context.Entry(store).Collection(x => x.MtdStoreMemos).LoadAsync();
             await context.Entry(store).Collection(x => x.MtdStoreFiles).LoadAsync();
+            await context.Entry(store).Collection(x => x.MtdStoreItems).LoadAsync();
 
             foreach (var partField in partFields)
             {
@@ -123,6 +123,24 @@ namespace MtdKey.OrderMaker.Core
                                     StoreId = storeRequest.StoreId,
                                     Result = checkBoxResult ? 1 : 0,
                                 });
+                            break;
+                        }
+                    case FieldType.List:
+                        {
+                            if (!Guid.TryParse((string) partField.Value, out Guid guid)) break;
+
+                            var item = await context.MtdFormPartFieldItems.FindAsync(guid);
+                            if (item == null) break;
+                            
+                            MarkDeletedStoreItems(store.MtdStoreItems, partField.Key);
+
+                            await context.MtdStoreItems.AddAsync(new() {
+                                FieldId = partField.Key,
+                                StoreId = storeRequest.StoreId,
+                                ItemId = item.Id,
+                                Result = item.Name
+                            });
+
                             break;
                         }
                     case FieldType.Decimal:

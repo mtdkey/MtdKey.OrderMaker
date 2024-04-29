@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System;
 using System.Linq;
 using MtdKey.OrderMaker.Areas.Identity.Data;
+using MtdKey.OrderMaker.src.formBuilder.models;
 
 namespace MtdKey.OrderMaker.Core
 {
@@ -60,6 +61,7 @@ namespace MtdKey.OrderMaker.Core
                 .Include(x => x.MtdStoreDecimals)
                 .Include(x => x.MtdStoreMemos)
                 .Include(x => x.MtdStoreFiles)
+                .Include(x => x.MtdStoreItems)
                 .AsSplitQuery()
                 .Where(x => storeIds.Contains(x.Id))
                 .ToListAsync();
@@ -89,7 +91,7 @@ namespace MtdKey.OrderMaker.Core
                     Sequence = storeItem.Sequence,
                     Created = storeItem.Timecr,
                     Parts = allowedData.DocParts,
-                    EditDate = IsReviewer,
+                    EditDate = IsReviewer,                    
                 };
 
                 docList.Add(doc);
@@ -185,6 +187,17 @@ namespace MtdKey.OrderMaker.Core
 
                                 break;
                             }
+                            case FieldType.List:
+                            {
+                                var value = storeItem.MtdStoreItems
+                                    .Where(x => x.FieldId == docField.Id)
+                                    .Select(x => x.ItemId.ToString())
+                                    .FirstOrDefault();
+
+                                docField.IsEmptyData = value == null || value == string.Empty;
+                                AddDocField(doc, docField, value);
+                                break;
+                            }
 
                     }
                 }
@@ -258,6 +271,7 @@ namespace MtdKey.OrderMaker.Core
 
             var docFields = await context.MtdFormPartField
                 .Include(x=>x.MtdFilterColumn)
+                .Include(x=>x.MtdFormPartFieldItems)
                 .Where(x => partIds.Contains(x.MtdFormPartId))
                 .Select(x => new DocFieldModel
                 {
@@ -269,6 +283,9 @@ namespace MtdKey.OrderMaker.Core
                     Readonly = x.ReadOnly == 1,
                     Type = x.MtdSysType,
                     Required = x.Required == 1,
+                    ListItems = x.MtdFormPartFieldItems.Where(x=>x.IsDeleted == false)
+                        .Select(x=> new ListItemModel { Id = x.Id.ToString(), Name=x.Name})
+                        .ToArray(),
                 }).AsSplitQuery()
                 .OrderBy(x => x.Sequence)
                 .ToListAsync();
@@ -313,7 +330,8 @@ namespace MtdKey.OrderMaker.Core
                 IndexSequence = docField.IndexSequence,
                 Type = docField.Type,
                 Value = value,
-                IsEmptyData = docField.IsEmptyData
+                IsEmptyData = docField.IsEmptyData,
+                ListItems = docField.ListItems,
             });
         }
     }

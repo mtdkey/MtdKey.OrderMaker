@@ -406,7 +406,8 @@ namespace MtdKey.OrderMaker
                 {
                     foreach (var item in fieldModel.ListItems)
                     {
-                        var itemExists = field.MtdFormPartFieldItems.FirstOrDefault(x => x.Id.ToString().Equals(item.Id, StringComparison.CurrentCultureIgnoreCase));
+                        var itemExists = field.MtdFormPartFieldItems
+                            .FirstOrDefault(x => x.Id.ToString().ToLower() == item.Id.ToLower());
                         if (itemExists == null)
                             await context.MtdFormPartFieldItems.AddAsync(new MtdFormPartFieldItem { 
                                 Id = Guid.Parse(item.Id), 

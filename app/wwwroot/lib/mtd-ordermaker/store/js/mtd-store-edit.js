@@ -97,6 +97,11 @@ textFields.forEach((textField) => {
     new MTDTextField(textField.id)
 });
 
+const selectFields = document.querySelectorAll(".mdc-select");
+selectFields.forEach((field) => {
+    new MTDSelectList(field.id)
+});
+
 
 const divields = document.querySelectorAll(".mtd-select-list");
 divields.forEach((divField) => {

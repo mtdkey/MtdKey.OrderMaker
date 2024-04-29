@@ -101,14 +101,14 @@ namespace MtdKey.OrderMaker.Areas.Workplace.Pages.Store
             {
                 WebAppUser userEditor = await _userHandler.FindByIdAsync(edited.UserId);
                 ChangesHistory.LastEditedUser = userEditor == null ? edited.UserName : userEditor.GetFullName();
-                ChangesHistory.LastEditedTime = edited.TimeCh.ToString();
+                ChangesHistory.LastEditedTime = edited.TimeCh.ToLocalTime().ToString();
             }
 
             if (created != null)
             {
                 WebAppUser userCreator = await _userHandler.FindByIdAsync(created.UserId);
                 ChangesHistory.CreateByUser = userCreator == null ? created.UserName : userCreator.GetFullName();
-                ChangesHistory.CreateByTime = created.TimeCh.ToString();
+                ChangesHistory.CreateByTime = created.TimeCh.ToLocalTime().ToString();
             }
 
             ApprovalHandler approvalHandler = new(_context, MtdStore.Id);

@@ -1,0 +1,26 @@
+﻿@*
+    MTD OrderMaker - http://mtdkey.com
+    Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
+*@
+
+@model Core.DocFieldModel
+
+@{
+    string value = Model.Value != null ? (string)Model.Value : string.Empty;
+    List<MTDSelectListItem> items = new();
+    Model.ListItems.ToList().ForEach(item =>
+    {
+        var defaultValue = value == string.Empty ? Model.DefaultValue : value;
+        items.Add(new MTDSelectListItem { Id = item.Id, Value = item.Name, Selectded = defaultValue == item.Id });
+    });
+}
+
+@await Component.InvokeAsync(typeof(MTDSelectList), new MTDSelectListTags
+{
+    Id = Model.Id,
+    Name = $"field-{Model.Id}",
+    Label = Model.Name,
+    Items = items.OrderBy(x=>x.Value).ToList(),
+    LabelLocalized = true,
+    MTDSelectListView = MTDSelectListViews.Outlined,    
+})

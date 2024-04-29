@@ -1,5 +1,7 @@
 ﻿
 
+using MtdKey.OrderMaker.src.formBuilder.models;
+
 namespace MtdKey.OrderMaker.Core
 {
     public class DocFieldModel : DataFieldModel
@@ -18,5 +20,6 @@ namespace MtdKey.OrderMaker.Core
         public string FileType { get; set; } = string.Empty;
         public long Size { get; set; } = 0;
         public bool IsEmptyData { get; set; } = true;
+        public ListItemModel[] ListItems { get; set; } = [];
     }
 }
