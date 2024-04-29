@@ -30,7 +30,6 @@ namespace MtdKey.OrderMaker.Core.Scripts.StoreIds
                 FilterDecimalHandler(ref script, field);
             });
 
-
             return script;
         }
 
@@ -52,11 +51,15 @@ namespace MtdKey.OrderMaker.Core.Scripts.StoreIds
 
         private static void FilterTextHandler(ref string script, FilterFieldModel model)
         {
-            bool IsText = model.Type == FieldType.Text || model.Type == FieldType.Link;
+            bool IsText = model.Type == FieldType.Text 
+                || model.Type == FieldType.Link
+                || model.Type == FieldType.List;
+
             if (IsText is not true) return;
             TermHandler(ref script, model);
 
         }
+
 
         private static void FilterMemoHandler(ref string script, FilterFieldModel model)
         {
@@ -81,7 +84,7 @@ namespace MtdKey.OrderMaker.Core.Scripts.StoreIds
 
         private static void TermHandler(ref string script, FilterFieldModel model)
         {
-            var value = model.Value;
+            var value = model.Type == 11 ? model.ValueExt : model.Value;
             var term = script.Contains("and (Result") ? "or" : "and";
 
             string result = $" {term} (Result like '%{value}%' and FieldId = '{model.FieldId}') /*and Result*/";

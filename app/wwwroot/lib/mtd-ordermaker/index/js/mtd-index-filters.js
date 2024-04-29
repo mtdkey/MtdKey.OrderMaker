@@ -139,7 +139,8 @@ const GetCustomPartForType = (dataType) => {
 const RequestFieldList = (idField, selectValue) => {
 
     const form = document.getElementById('index-filter-custom-list-form');
-    const inputField = form.querySelector("input[id='id-field']");
+    const inputField = form.querySelector("input[id='field-id']");
+    
     inputField.value = idField;
     const formData = CreateFormData(form);
 
@@ -148,13 +149,14 @@ const RequestFieldList = (idField, selectValue) => {
             return response.json();
         })
         .then((data) => {
+            
             if (data.value) {
 
                 selectValue.RemoveItems();
                 data.value.forEach((item, index) => {
                     selected = false;
                     if (index === 0) { selected = true; }
-                    selectValue.AddItem(item.id, item.value, selected);
+                    selectValue.AddItem(item.id, item.name, selected);
                 });
             }
         });

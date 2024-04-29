@@ -47,13 +47,32 @@ namespace MtdKey.OrderMaker.Controllers.Index.Filter
             string dateFormat = form["date-format"];
 
             MtdFilter filter = await userHandler.GetFilterAsync(User, formId);
+            string valueExtra = dateFormat;
+
 
             bool isOk = int.TryParse (fieldAction, out int term);
             if (!isOk) { return BadRequest(_localizer["Error: Bad request."]); }
 
-            if (fieldType == "5" || fieldType == "6") { fieldValue = $"{fieldValue}***{fieldValueExt}"; } else { dateFormat = null; }
+            if (fieldType == "5" || fieldType == "6") { fieldValue = $"{fieldValue}***{fieldValueExt}"; } else { valueExtra = null; }
 
-            MtdFilterField field = new() { MtdFilter = filter.Id, MtdFormPartFieldId = fieldId, MtdTerm = term, Value = fieldValue, ValueExtra = dateFormat };
+            if (fieldType == "11")
+            {
+                var item = await context.MtdFormPartFieldItems.FirstOrDefaultAsync(x => x.Id.ToString().ToLower() == fieldValue.ToLower());
+                if (item != null)
+                {
+                    fieldValue = item.Name;
+                    valueExtra = item.Id.ToString();
+                }
+            }
+
+            MtdFilterField field = new() { 
+                MtdFilter = filter.Id, 
+                MtdFormPartFieldId = fieldId, 
+                MtdTerm = term, 
+                Value = fieldValue, 
+                ValueExtra = valueExtra 
+            };
+
             try
             {
                 await context.MtdFilterField.AddAsync(field);
@@ -64,6 +83,23 @@ namespace MtdKey.OrderMaker.Controllers.Index.Filter
 
 
             return Ok();
+        }
+
+
+        [HttpPost("get/list")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> PostFilterGetListAsync()
+        {
+            var form = await Request.ReadFormAsync();
+
+            
+            string fieldId = form["field-id"];
+            var list  = await context.MtdFormPartFieldItems
+                .Where(x => x.FieldId == fieldId && x.IsDeleted == false)
+                .OrderBy(x=>x.Name)
+                .ToListAsync();
+
+            return new JsonResult(new { value = list });
         }
 
     }
