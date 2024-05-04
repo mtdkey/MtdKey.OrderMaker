@@ -1,10 +1,12 @@
 ﻿//Start
-    const dialog = new mdc.dialog.MDCDialog(document.getElementById('dialog-form-delete'));
-
-    document.querySelector('[mtd-data-delete]').addEventListener('click', () => {
-        dialog.open();
-    });
-
-
+const dialogDeleteForm = new mdc.dialog.MDCDialog(document.getElementById('dialog-form-delete'));
 new MTDTextField("form-name");
 new MTDTextField("form-note");
+
+var actionDelete = document.querySelector('[mtd-data-delete]');
+
+actionDelete.addEventListener('click', () => {
+    dialogDeleteForm.open();
+});
+
+

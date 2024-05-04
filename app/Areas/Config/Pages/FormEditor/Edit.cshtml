@@ -35,6 +35,34 @@
     </li>
 }
 
+<div id="dialog-form-delete" class="mdc-dialog"
+     role="alertdialog"
+     aria-modal="true"
+     aria-labelledby="delete-form-title"
+     aria-describedby="delete-dialog-content">
+    <div class="mdc-dialog__container">
+        <div tabindex="0" class="mdc-dialog__surface">
+            <h2 class="mdc-dialog__title" id="delete-form-title">
+                @Localizer["Delete form"]?
+            </h2>
+            <div class="mdc-dialog__content" id="delete-dialog-content">
+                @Localizer["The form and all data associated with it will be permanently deleted."]
+            </div>
+            <footer class="mdc-dialog__actions">
+                <button tabindex="0" type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="no">
+                    <span class="mdc-button__label">@Localizer["Cancel"]</span>
+                </button>
+                <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="yes">
+                    <span class="mdc-button__label" onclick="document.getElementById('deleteClicker').click();">
+                        @Localizer["Delete"]
+                    </span>
+                </button>
+            </footer>
+        </div>
+    </div>
+    <div class="mdc-dialog__scrim"></div>
+</div>
+
 
 @await Html.PartialAsync("/src/formBuilder/frontend/_Index.cshtml")
 
@@ -50,32 +78,7 @@
     <input id="deleteClicker" mtd-data-clicker mtd-data-location="/config/formeditor" mtd-data-message="@Localizer["The form"] '@Model.MtdForm.Name' @Localizer["was deleted."]" type="hidden" />
 </form>
 
-<div id="dialog-form-delete" class="mdc-dialog"
-     role="alertdialog"
-     aria-modal="true"
-     aria-labelledby="my-dialog-title"
-     aria-describedby="my-dialog-content">
-    <div class="mdc-dialog__container">
-        <div class="mdc-dialog__surface">
-            <h2 class="mdc-dialog__title" id="delete-form-title">
-                @Localizer["Delete form"]?
-            </h2>
-            <div class="mdc-dialog__content" id="delete-dialog-content">
-                @Localizer["The form and all data associated with it will be permanently deleted."]
-            </div>
-            <footer class="mdc-dialog__actions">
-                <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="no">
-                    <span class="mdc-button__label">@Localizer["Cancel"]</span>
-                </button>
-                <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="yes">
-                    <span class="mdc-button__label" onclick="document.getElementById('deleteClicker').click();">
-                        @Localizer["Delete"]</span>
-                </button>
-            </footer>
-        </div>
-    </div>
-    <div class="mdc-dialog__scrim"></div>
-</div>
+
 
 @section Scripts {
     <script src="~/lib/mtd-ordermaker/config/js/mtd-config-form-edit.js" asp-append-version="true"></script>

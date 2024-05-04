@@ -2,7 +2,7 @@
     MTD OrderMaker - http://mtdkey.com
     Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
 */
-using System;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Hosting;
@@ -50,12 +50,15 @@ namespace MtdKey.OrderMaker
                 options.Cookie.Name = $".OrderMaker.{Configuration.GetConnectionString("ClientName")}";
             });
 
+            string orderMakerIdentity = Configuration.GetConnectionString("OrderMakerIdentity");
             services.AddDbContext<IdentityDbContext>(options =>
-                options.UseMySql(Configuration.GetConnectionString("OrderMakerIdentity"), new MySqlServerVersion(new Version(8, 0))));
+                options.UseMySql(orderMakerIdentity, ServerVersion.AutoDetect(orderMakerIdentity)));
 
+            string orderMakerData = Configuration.GetConnectionString("OrderMakerData");
             services.AddDbContext<OrderMakerContext>(options =>
-                options.UseMySql(Configuration.GetConnectionString("OrderMakerData"), new MySqlServerVersion(new Version(8, 0))));
+                options.UseMySql(orderMakerData, ServerVersion.AutoDetect(orderMakerData)));
             services.AddHostedService<MigrationService>();
+
 
             services.AddDataProtection()
             .SetApplicationName($"{Configuration.GetConnectionString("ClientName")}")
@@ -68,7 +71,7 @@ namespace MtdKey.OrderMaker
 
             }).AddRoles<WebAppRole>()
              .AddEntityFrameworkStores<IdentityDbContext>()
-                .AddDefaultTokenProviders();
+             .AddDefaultTokenProviders();
 
             Program.TemplateConnectionStaring = Configuration.GetConnectionString("Template");
 
