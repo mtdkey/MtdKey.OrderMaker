@@ -115,6 +115,7 @@ namespace MtdKey.OrderMaker.Core
                         case FieldType.Memo:
                             {
                                 var value = string.Join("", storeItem.MtdStoreMemos
+                                   .Where(x=> x.FieldId == docField.Id)
                                    .OrderBy(x => x.Id)
                                    .Select(x => x.Result)
                                    .ToList());

@@ -23,16 +23,10 @@ using MtdKey.OrderMaker.Core;
 
 namespace MtdKey.OrderMaker
 {
-    public class Startup
+    public class Startup(IConfiguration configuration, IWebHostEnvironment env)
     {
-        public Startup(IConfiguration configuration, IWebHostEnvironment env)
-        {
-            Configuration = configuration;
-            CurrentEnvironment = env;
-        }
-
-        public IConfiguration Configuration { get; }
-        public IWebHostEnvironment CurrentEnvironment { get; }
+        public IConfiguration Configuration { get; } = configuration;
+        public IWebHostEnvironment CurrentEnvironment { get; } = env;
 
         public void ConfigureServices(IServiceCollection services)
         {

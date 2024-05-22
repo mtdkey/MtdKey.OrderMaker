@@ -13,7 +13,6 @@ namespace MtdKey.OrderMaker.Components.Store.Stack
     public class Viewer : ViewComponent
     {
  
-
         public async Task<IViewComponentResult> InvokeAsync(DocPartModel docPart, DocFieldModel docField)
         {
             string viewName = await GetViewNameAsync(docField.Type);
