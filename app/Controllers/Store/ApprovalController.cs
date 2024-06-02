@@ -12,9 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.Localization;
 using Microsoft.Extensions.Localization;
-using MtdKey.OrderMaker;
 using MtdKey.OrderMaker.Core;
 
 namespace MtdKey.OrderMaker.Controllers.Store

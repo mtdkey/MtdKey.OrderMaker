@@ -6,33 +6,118 @@
 
 @*style="position: fixed; background-color: white; top:56px; left: 0; bottom: 0px; z-index:4;"*@
 
-<div class="mtd-desk-block-content " >
+
+
+@if (Model.IsApprover)
+{
+    string signClass = !Model.IsFirstStage && Model.UsersRequest.Count > 0 ? "text-black" : "disabled";
+
+    <div class="dropdown" style="position: absolute; z-index: 1; margin-top: 15px; margin-left: 15px;">
+        <button class="btn btn-danger btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i style="vertical-align:middle; font-size: 20px; color: white" class="material-icons">notification_important</i>
+            <span style="text-transform: uppercase; font-size: small">Согласование</span>
+        </button>
+        <ul id="approval" class="dropdown-menu">
+            @if (Model.IsFirstStage)
+            {
+                <li>
+                    <a mtd-dialog-button="dialog-start" class="dropdown-item text-black" href="#">
+                        <i class="bi bi-send"></i>
+                        &nbsp;
+                        Отправить на согласование
+                    </a>
+                </li>
+            }
+            @if (!Model.IsSign && !Model.IsFirstStage)
+            {
+                <li>
+                    <a mtd-dialog-button="dialog-confirm" class="dropdown-item text-black" href="#">
+                        <i class="bi bi-hand-thumbs-up"></i>
+                        &nbsp;
+                        Согласовать
+                    </a>
+                </li>
+                <li>
+                    <a mtd-dialog-button="dialog-return"  class="dropdown-item text-black" href="#">
+                        <i class="bi bi-arrow-90deg-left"></i>
+                        &nbsp;
+                        Вернуть для уточнения
+                    </a>
+                </li>
+                <li>
+                    <a mtd-dialog-button="dialog-reject"  class="dropdown-item text-black" href="#">
+                        <i class="bi bi-hand-thumbs-down"></i>
+                        &nbsp;
+                        Отклонить
+                    </a>
+                </li>
+            }
+
+            @if (Model.IsSign && !Model.IsFirstStage)
+            {
+                <li>
+                    <a mtd-dialog-button="dialog-accept-sign" class="dropdown-item text-black" href="#">
+                        <i class="bi bi-hand-thumbs-up"></i>
+                        &nbsp;
+                        Согласовать
+                    </a>
+                </li>
+                <li>
+                    <a mtd-dialog-button="dialog-return-sign" class="dropdown-item text-black" href="#">
+                        <i class="bi bi-arrow-90deg-left"></i>
+                        &nbsp;
+                        Нейтральный ответ
+                    </a>
+                </li>
+                <li>
+                    <a mtd-dialog-button="dialog-reject-sign" class="dropdown-item text-black" href="#">
+                        <i class="bi bi-hand-thumbs-down"></i>
+                        &nbsp;
+                        Отклонить
+                    </a>
+                </li>
+            }
+
+            <li><hr class="dropdown-divider"></li>
+            <li>
+                <a mtd-dialog-button="dialog-request" class="dropdown-item @signClass" href="#">
+                    <i class="bi bi-person-plus"></i>
+                    &nbsp;
+                    Запросить согласие пользователя
+                </a>
+            </li>
+
+        </ul>
+    </div>
+}
+
+<div class="mtd-desk-block-content ">
     <div class="mtd-desk-block-title">
         <div class="mtd-desk-block-title-icon">
             @*<i class="material-icons" aria-hidden="true">history</i>*@
 
 
-            @if (Model.IsApprover)
+            @*             @if (Model.IsApprover)
             {
-                <div style="color: cornflowerblue;">
+            <div style="color: cornflowerblue;">
 
-                    @if (Model.IsFirstStage)
-                    {
-                        @await Html.PartialAsync("~/Areas/Workplace/Pages/Store/Partials/ApprovalStart.cshtml")
-                    }
-
-                    @if (Model.IsSign && !Model.IsFirstStage)
-                    {
-                        @await Html.PartialAsync("~/Areas/Workplace/Pages/Store/Partials/ApprovalButtonsSign.cshtml")
-                    }
-
-                    @if (!Model.IsSign && !Model.IsFirstStage)
-                    {
-                        @await Html.PartialAsync("~/Areas/Workplace/Pages/Store/Partials/ApprovalButtons.cshtml")
-                    }
-
-                </div>
+            @if (Model.IsFirstStage)
+            {
+            @await Html.PartialAsync("~/Areas/Workplace/Pages/Store/Partials/ApprovalStart.cshtml")
             }
+
+            @if (Model.IsSign && !Model.IsFirstStage)
+            {
+            @await Html.PartialAsync("~/Areas/Workplace/Pages/Store/Partials/ApprovalButtonsSign.cshtml")
+            }
+
+            @if (!Model.IsSign && !Model.IsFirstStage)
+            {
+            @await Html.PartialAsync("~/Areas/Workplace/Pages/Store/Partials/ApprovalButtons.cshtml")
+            }
+
+            </div>
+            } *@
 
 
         </div>

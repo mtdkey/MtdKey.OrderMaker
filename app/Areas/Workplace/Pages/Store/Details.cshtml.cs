@@ -183,7 +183,7 @@ namespace MtdKey.OrderMaker.Areas.Workplace.Pages.Store
 
         private async Task SetUsersRequest(WebAppUser user, ApprovalHandler approvalHandler)
         {
-            UsersRequest = new List<MTDSelectListItem>();
+            UsersRequest = [];
             if (IsApprover && !IsFirstStage)
             {
 

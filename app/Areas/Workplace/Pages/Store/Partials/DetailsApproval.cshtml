@@ -20,7 +20,7 @@
                 <div class="mtd-store-view-status">
                     <div>
                         @if (Model.MtdApproval.ImgRequired == null)
-                        {<i style="vertical-align:middle; font-size: 28px; color: red" class="material-icons">notification_important</i>}
+                        {<i style="vertical-align:middle; font-size: 28px; color: dimgray" class="material-icons">notification_important</i>}
                         else
                         {
                             var modelRequired = new
@@ -33,7 +33,7 @@
                             @await Component.InvokeAsync("MTDImgViewer", modelRequired);
                         }
                     </div>
-                    <div style="color: red;">
+                    <div style="color: dimgray;">
                         @if (Model.MtdApproval.ImgRequiredText == null)
                         {@Localizer["Approval is required"]}
                     else
@@ -250,10 +250,10 @@
     }
 </table>
 
-@if (Model.IsApprover && Model.IsFirstStage && Model.ApprovalStatus == ApprovalStatus.Start)
+@* @if (Model.IsApprover && Model.IsFirstStage && Model.ApprovalStatus == ApprovalStatus.Start)
 {
     <div style="color: red; text-align: center">@Localizer["Click the 'Approve Document' button to begin the approval process."]</div>
-}
+} *@
 
 <table id="block-approval-table" style="white-space: nowrap; border-collapse:collapse">
     <thead><tr><th></th><th style="width:100%"></th><th></th></tr></thead>
