@@ -31,17 +31,7 @@
     <form mtd-data-form method="post" autocomplete="off" novalidate>
         <input type="hidden" id="clicker-create" mtd-data-clicker mtd-data-location="/identity/users/accounts/edit?id=@Model.Input.Id"/>
         <input type="hidden" asp-for="Input.Id"/>
-@*        <div class="mtd-desk-field">
-            @await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags
-               {
-                   Id = "login-name",
-                   Name = "Input.UserName",
-                   Label = "Login name",
-                   LabelLocalized = true,
-                   Required = true,
-                   IconLeading = "fas fa-user fa-lg"
-               })
-        </div>*@
+
         <div class="mtd-desk-field">
             @await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags
                {
@@ -50,7 +40,7 @@
                    Label = "Display user name",
                    LabelLocalized = true,
                    Required = true,
-                   IconLeading = "fas fa-user-tag fa-lg"
+                   IconLeading = "bi bi-person-badge-fill"
                })
         </div>
         <div class="mtd-desk-field">
@@ -61,7 +51,7 @@
                    Label = "Email",
                    LabelLocalized = true,
                    Required = true,
-                   IconLeading = "fas fa-envelope fa-lg"
+                   IconLeading = "bi bi-envelope-fill"
                })
         </div>
 
@@ -72,7 +62,7 @@
                    Name = "Input.PhoneNumber",
                    Label = "Phone",
                    LabelLocalized = true,
-                   IconLeading = "fas fa-phone fa-lg",
+                   IconLeading = "bi bi-telephone-fill",
                    Placeholder = "+0 000 000 0000",
                    HelperText = "Phone number pattern: +0 000 000 0000",
                    HelperTextLocalizer = true,

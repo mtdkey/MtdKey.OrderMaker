@@ -4,9 +4,6 @@
 @using Microsoft.AspNetCore.Mvc.Localization
 @inject IHtmlLocalizer<SharedResource> Localizer
 
-@*style="position: fixed; background-color: white; top:56px; left: 0; bottom: 0px; z-index:4;"*@
-
-
 
 @if (Model.IsApprover)
 {
@@ -93,34 +90,6 @@
 
 <div class="mtd-desk-block-content ">
     <div class="mtd-desk-block-title">
-        <div class="mtd-desk-block-title-icon">
-            @*<i class="material-icons" aria-hidden="true">history</i>*@
-
-
-            @*             @if (Model.IsApprover)
-            {
-            <div style="color: cornflowerblue;">
-
-            @if (Model.IsFirstStage)
-            {
-            @await Html.PartialAsync("~/Areas/Workplace/Pages/Store/Partials/ApprovalStart.cshtml")
-            }
-
-            @if (Model.IsSign && !Model.IsFirstStage)
-            {
-            @await Html.PartialAsync("~/Areas/Workplace/Pages/Store/Partials/ApprovalButtonsSign.cshtml")
-            }
-
-            @if (!Model.IsSign && !Model.IsFirstStage)
-            {
-            @await Html.PartialAsync("~/Areas/Workplace/Pages/Store/Partials/ApprovalButtons.cshtml")
-            }
-
-            </div>
-            } *@
-
-
-        </div>
         <div class="mtd-desk-block-title-label">
             @Localizer["Approval history"]
         </div>

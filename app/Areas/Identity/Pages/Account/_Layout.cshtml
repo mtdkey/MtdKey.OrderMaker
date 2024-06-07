@@ -6,12 +6,13 @@
     <meta name="format-detection" content="telephone=no">
 
     <title>@ViewData["Title"] | OrderMaker</title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-    <link href="https://unpkg.com/material-components-web@6.0.0/dist/material-components-web.min.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <link rel="stylesheet" href="~/lib/fontawesome/css/fontawesome.min.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/lib/fontawesome/css/solid.min.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/lib/fontawesome/css/regular.min.css" asp-append-version="true" />
+
+
+    <link rel="stylesheet" href="~/lib/google/css/MaterialIcons.css" />
+    <link rel="stylesheet" href="~/lib/google/css/material-components-web.min.css" />
+    <link rel="stylesheet" href="~/lib/google/css/roboto.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap-icons/font/bootstrap-icons.min.css" asp-append-version="true" />
+
     <link rel="stylesheet" href="~/lib/mtd-ordermaker/main/css/mtd-main.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/lib/mtd-ordermaker/main/css/mtd-app.css" asp-append-version="true" />
 
@@ -36,10 +37,11 @@
         </div>
     </div>
 
-    <script src="https://unpkg.com/material-components-web@6.0.0/dist/material-components-web.min.js"></script>
-    <script src="~/lib/fontawesome/js/fontawesome.min.js" asp-append-version="true"></script>
-    <script src="~/lib/fontawesome/js/solid.min.js" asp-append-version="true"></script>
-    <script src="~/lib/fontawesome/js/regular.min.js" asp-append-version="true"></script>    
+    <script src="~/lib/google/js/material-components-web.min.js" asp-append-version="true"></script>
+
+    <script src="~/lib/bootstrap-5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/mtd-ordermaker/main/js/ripple.js" asp-append-version="true"></script>
+  
     <script src="~/lib/mtd-ordermaker/main/js/mtd-text-field.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>
