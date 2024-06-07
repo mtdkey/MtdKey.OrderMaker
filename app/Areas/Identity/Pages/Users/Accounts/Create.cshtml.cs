@@ -3,25 +3,19 @@
     Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
 */
 
-using System;
-using System.ComponentModel.DataAnnotations;
-using System.IO;
-using System.Security.Cryptography;
-using System.Text.Encodings.Web;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using MtdKey.OrderMaker.Areas.Identity.Data;
 using MtdKey.OrderMaker.AppConfig;
-using Microsoft.Extensions.Localization;
+using MtdKey.OrderMaker.Areas.Identity.Data;
 using MtdKey.OrderMaker.Services;
-using System.Collections.Generic;
+using System;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace MtdKey.OrderMaker.Areas.Identity.Pages.Users.Accounts
 {

@@ -4,19 +4,14 @@
 */
 
 
-using System.Collections.Generic;
-using System.Composition;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.CodeAnalysis.Options;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using MtdKey.OrderMaker.AppConfig;
 using MtdKey.OrderMaker.Areas.Identity.Data;
 using MtdKey.OrderMaker.Entity;
 using MtdKey.OrderMaker.Services;
+using System.Threading.Tasks;
 
 namespace MtdKey.OrderMaker.Areas.Workplace.Pages.Store
 {
@@ -41,11 +36,11 @@ namespace MtdKey.OrderMaker.Areas.Workplace.Pages.Store
             WebAppUser user = await _userHandler.GetUserAsync(HttpContext.User);
             bool isViewer = await _userHandler.CheckUserPolicyAsync(user, indexForm, RightsType.ViewAll);
             bool GroupRight = await _userHandler.CheckUserPolicyAsync(user, indexForm, RightsType.ViewGroup);
-            bool OwnerRight = await _userHandler.CheckUserPolicyAsync(user, indexForm, RightsType.ViewOwn);            
+            bool OwnerRight = await _userHandler.CheckUserPolicyAsync(user, indexForm, RightsType.ViewOwn);
 
             if (!isViewer & !OwnerRight & !GroupRight)
             {
-                return Forbid(); 
+                return Forbid();
             }
 
             MtdForm = await _context.MtdForm.FindAsync(indexForm);

@@ -11,12 +11,12 @@ namespace MtdKey.OrderMaker
 
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();           
+            CreateWebHostBuilder(args).Build().Run();
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-            //.UseContentRoot(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location))
+                //.UseContentRoot(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location))
                 .UseStartup<Startup>();
     }
 }

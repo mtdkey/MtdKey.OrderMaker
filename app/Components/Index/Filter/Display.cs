@@ -3,7 +3,6 @@
     Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
 */
 
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;

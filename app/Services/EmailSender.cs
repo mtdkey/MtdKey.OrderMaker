@@ -28,12 +28,12 @@ namespace MtdKey.OrderMaker.Services
     public class EmailSender : IEmailSenderBlank
     {
         private readonly EmailSettings _emailSettings;
-        private readonly IWebHostEnvironment _hostingEnvironment;       
+        private readonly IWebHostEnvironment _hostingEnvironment;
         private readonly ConfigHandler configHandler;
         private readonly UserHandler userHandler;
 
-        public EmailSender(IOptions<EmailSettings> emailSettings, 
-            IWebHostEnvironment hostingEnvironment, 
+        public EmailSender(IOptions<EmailSettings> emailSettings,
+            IWebHostEnvironment hostingEnvironment,
             ConfigHandler configHandler, UserHandler userHandler)
         {
             _emailSettings = emailSettings.Value;
@@ -44,7 +44,7 @@ namespace MtdKey.OrderMaker.Services
 
         public async Task SendEmailAsync(string email, string subject, string message, bool mustconfirm = true)
         {
-            await ExecuteAsync(email, subject, message, mustconfirm);            
+            await ExecuteAsync(email, subject, message, mustconfirm);
         }
 
         public async Task<bool> SendEmailBlankAsync(BlankEmail blankEmail, bool mustconfirm = true)
@@ -85,12 +85,12 @@ namespace MtdKey.OrderMaker.Services
             return true;
         }
 
-        private async Task ExecuteAsync(string email, string subject, string message , bool mustconfirm = true)
+        private async Task ExecuteAsync(string email, string subject, string message, bool mustconfirm = true)
         {
-            
-            WebAppUser user = await userHandler.FindByEmailAsync(email);       
-            if (user ==null || (mustconfirm && user.EmailConfirmed == false)) { return; }
-                       
+
+            WebAppUser user = await userHandler.FindByEmailAsync(email);
+            if (user == null || (mustconfirm && user.EmailConfirmed == false)) { return; }
+
             try
             {
                 MailAddress toAddress = new(email);

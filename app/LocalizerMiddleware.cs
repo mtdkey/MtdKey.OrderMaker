@@ -13,7 +13,7 @@ namespace MtdKey.OrderMaker
         private readonly RequestDelegate _next;
         private readonly IServiceScopeFactory serviceScopeFactory;
 
-        public LocalizerMiddleware(RequestDelegate next,IServiceScopeFactory serviceScopeFactory)
+        public LocalizerMiddleware(RequestDelegate next, IServiceScopeFactory serviceScopeFactory)
         {
             _next = next;
             this.serviceScopeFactory = serviceScopeFactory;
@@ -40,7 +40,7 @@ namespace MtdKey.OrderMaker
             return builder.UseMiddleware<LocalizerMiddleware>();
         }
 
-        public static string GetBrouserLanguage(this HttpContext context) 
+        public static string GetBrouserLanguage(this HttpContext context)
         {
             var language = "en-US";
             var languages = context.Request.GetTypedHeaders()
@@ -61,7 +61,7 @@ namespace MtdKey.OrderMaker
                     language = "en-US";
 
             }
-            
+
             return language;
         }
     }

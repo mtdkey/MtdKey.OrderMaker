@@ -4,31 +4,23 @@
 
 */
 
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text.Encodings.Web;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Options;
-using MtdKey.OrderMaker.Areas.Identity.Data;
 using MtdKey.OrderMaker.AppConfig;
 using MtdKey.OrderMaker.Services;
+using System.Diagnostics;
+using System.IO;
 
 namespace MtdKey.OrderMaker.Pages
 {
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public class ErrorModel : PageModel
     {
-        
+
         private readonly IEmailSenderBlank _emailSender;
         private readonly IWebHostEnvironment _hostingEnvironment;
         private readonly ConfigSettings _emailSupport;
@@ -38,11 +30,11 @@ namespace MtdKey.OrderMaker.Pages
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
 
         public ErrorModel(
-            IEmailSenderBlank emailSender, 
-            IWebHostEnvironment hostingEnvironment, 
+            IEmailSenderBlank emailSender,
+            IWebHostEnvironment hostingEnvironment,
             IOptions<ConfigSettings> emailSupport)
         {
-            
+
             _emailSender = emailSender;
             _hostingEnvironment = hostingEnvironment;
             _emailSupport = emailSupport.Value;
@@ -57,7 +49,7 @@ namespace MtdKey.OrderMaker.Pages
             {
 
                 RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
-    
+
                 string contentRootPath = _hostingEnvironment.ContentRootPath;
                 var file = Path.Combine(contentRootPath, "wwwroot", "lib", "mtd-ordermaker", "emailform", "error.html");
                 var htmlArray = System.IO.File.ReadAllText(file);
@@ -68,11 +60,11 @@ namespace MtdKey.OrderMaker.Pages
                 htmlText = htmlText.Replace("{Path}", exceptionFeature.Path);
                 htmlText = htmlText.Replace("{Query}", HttpContext.Request.QueryString.Value);
                 htmlText = htmlText.Replace("{Message}", exceptionFeature.Error.Message);
-                htmlText = htmlText.Replace("{Sorce}", exceptionFeature.Error.Source);                
+                htmlText = htmlText.Replace("{Sorce}", exceptionFeature.Error.Source);
                 htmlText = htmlText.Replace("{UserName}", User.Identity.Name);
                 htmlText = htmlText.Replace("{StackTrace}", exceptionFeature.Error.StackTrace);
 
-                await _emailSender.SendEmailAsync(_emailSupport.EmailSupport, "Server Error", htmlText, false);                
+                await _emailSender.SendEmailAsync(_emailSupport.EmailSupport, "Server Error", htmlText, false);
             }
 
         }

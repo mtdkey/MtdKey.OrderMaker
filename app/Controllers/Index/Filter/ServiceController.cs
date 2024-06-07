@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Localization;
 using MtdKey.OrderMaker.Areas.Identity.Data;
 using MtdKey.OrderMaker.Entity;
 using MtdKey.OrderMaker.Services;
+using System;
+using System.Globalization;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace MtdKey.OrderMaker.Controllers.Index.Filter
 {
@@ -84,14 +81,14 @@ namespace MtdKey.OrderMaker.Controllers.Index.Filter
             var form = await Request.ReadFormAsync();
             string formId = form["form-id"];
             string ownerId = form["owner-id"];
-            
+
             WebAppUser user = await userHandler.GetUserAsync(User);
             MtdFilter filter = await userHandler.GetFilterAsync(User, formId);
 
             MtdFilterOwner mtdFilterOwner = new()
             {
                 Id = filter.Id,
-                OwnerId = ownerId                 
+                OwnerId = ownerId
             };
 
             bool isExists = await context.MtdFilterOwner.Where(x => x.Id == filter.Id).AnyAsync();

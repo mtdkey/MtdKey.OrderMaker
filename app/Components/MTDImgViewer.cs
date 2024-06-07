@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace MtdKey.OrderMaker.Components
@@ -7,12 +6,13 @@ namespace MtdKey.OrderMaker.Components
     [ViewComponent(Name = "MTDImgViewer")]
     public class MTDImgViewer : ViewComponent
     {
-        public async Task<IViewComponentResult> InvokeAsync (int width=-1, int height=-1, int maxWidth=-1, 
-                    int maxHeight=-1, byte[] imgArray=null, string imgType="image/png")
+        public async Task<IViewComponentResult> InvokeAsync(int width = -1, int height = -1, int maxWidth = -1,
+                    int maxHeight = -1, byte[] imgArray = null, string imgType = "image/png")
         {
-            MTDImgViewerModel model = await Task.Run(()=> new MTDImgViewerModel { 
-                Width = width, 
-                Height = height, 
+            MTDImgViewerModel model = await Task.Run(() => new MTDImgViewerModel
+            {
+                Width = width,
+                Height = height,
                 MaxWidth = maxWidth,
                 MaxHeight = maxHeight,
                 ImgArray = imgArray,

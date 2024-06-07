@@ -5,9 +5,7 @@
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using MtdKey.OrderMaker.Core;
-using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -27,16 +25,16 @@ namespace MtdKey.OrderMaker.Controllers.Store.Stack
             this.storeService = storeService;
         }
 
- 
+
         [HttpGet("form/{formId}/file/{fieldId}/store/{storeId}")]
         public async Task<ActionResult> GetStackFile(string formId, string fieldId, string storeId)
-        {            
+        {
 
             var requestResult = await storeService.GetDocsBySQLRequestAsync(new()
             {
                 FormId = formId,
                 StoreId = storeId,
-                UserPrincipal = HttpContext.User,                
+                UserPrincipal = HttpContext.User,
             });
 
             var doc = requestResult.Docs.FirstOrDefault();

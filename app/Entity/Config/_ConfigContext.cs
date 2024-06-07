@@ -1,8 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MtdKey.OrderMaker.Entity
 {
@@ -11,7 +7,8 @@ namespace MtdKey.OrderMaker.Entity
         public virtual DbSet<MtdConfigFile> MtdConfigFiles { get; set; }
         public virtual DbSet<MtdConfigParam> MtdConfigParam { get; set; }
 
-        public void ConfigModelCreating(ModelBuilder modelBuilder) {
+        public void ConfigModelCreating(ModelBuilder modelBuilder)
+        {
 
             modelBuilder.Entity<MtdConfigFile>(entity =>
             {

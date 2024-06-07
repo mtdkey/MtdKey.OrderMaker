@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace MtdKey.OrderMaker.Core
+﻿namespace MtdKey.OrderMaker.Core
 {
-    public static class DocPartType {
+    public static class DocPartType
+    {
         public const int Lines = 4;
         public const int Columns = 5;
     }
@@ -13,6 +12,6 @@ namespace MtdKey.OrderMaker.Core
         public byte[] Image { get; set; }
         public int Sequence { get; set; }
         public bool ShowTitle { get; set; }
-        public int Type { get; set; }        
+        public int Type { get; set; }
     }
 }

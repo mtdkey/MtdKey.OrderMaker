@@ -1,19 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query.Internal;
 using Microsoft.Extensions.Localization;
 using MtdKey.OrderMaker.Areas.Identity.Data;
 using MtdKey.OrderMaker.Entity;
 using MtdKey.OrderMaker.Models.Controls.MTDSelectList;
 using MtdKey.OrderMaker.Services;
-using Org.BouncyCastle.Math.EC.Rfc7748;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace MtdKey.OrderMaker.Areas.Identity.Pages.Users.Accounts
 {
@@ -31,7 +28,7 @@ namespace MtdKey.OrderMaker.Areas.Identity.Pages.Users.Accounts
             _roleManager = roleManager;
             _context = context;
             _localizer = localizer;
-           
+
         }
 
         public IList<WebAppPerson> Accounts { get; set; }
@@ -55,14 +52,14 @@ namespace MtdKey.OrderMaker.Areas.Identity.Pages.Users.Accounts
 
             if (filterGroup != null && groupId != "all")
             {
-                
+
                 if (groupId != "not")
                 {
                     IList<WebAppUser> gusers = await _userHandler.GetUsersInGroupAsync(groupId);
                     if (gusers != null)
                     {
                         query = query.Where(x => gusers.Select(x => x.Id).Contains(x.Id));
-                    }                    
+                    }
                 }
 
                 if (groupId == "not")

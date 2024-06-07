@@ -4,22 +4,22 @@
 */
 
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
-using MtdKey.OrderMaker.Entity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using MtdKey.OrderMaker.AppConfig;
-using MtdKey.OrderMaker.Services;
-using MtdKey.OrderMaker.Areas.Identity.Data;
-using Microsoft.AspNetCore.DataProtection;
-using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Hosting;
-using Microsoft.AspNetCore.HttpOverrides;
 using MtdKey.Cipher;
+using MtdKey.OrderMaker.AppConfig;
+using MtdKey.OrderMaker.Areas.Identity.Data;
 using MtdKey.OrderMaker.Core;
+using MtdKey.OrderMaker.Entity;
+using MtdKey.OrderMaker.Services;
 
 namespace MtdKey.OrderMaker
 {
@@ -155,10 +155,10 @@ namespace MtdKey.OrderMaker
                 app.UseExceptionHandler("/Error");
                 app.UseHsts();
                 app.UseHttpsRedirection();
-            }           
-            
+            }
+
             app.UseStaticFiles();
-            
+
             app.UseForwardedHeaders(new ForwardedHeadersOptions
             {
                 ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto

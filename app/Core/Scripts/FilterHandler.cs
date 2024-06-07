@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace MtdKey.OrderMaker.Core.Scripts
+﻿namespace MtdKey.OrderMaker.Core.Scripts
 {
     public abstract class FilterHandler
     {

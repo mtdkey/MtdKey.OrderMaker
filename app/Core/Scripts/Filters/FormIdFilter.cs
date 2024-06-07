@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace MtdKey.OrderMaker.Core.Scripts.StoreIds
+﻿namespace MtdKey.OrderMaker.Core.Scripts.StoreIds
 {
     public class FormIdFilter : FilterHandler
     {

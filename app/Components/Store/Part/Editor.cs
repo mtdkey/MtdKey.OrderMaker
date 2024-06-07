@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace MtdKey.OrderMaker.Components.Store.Part
 {
-    [ViewComponent (Name = "StorePartEditor")]
+    [ViewComponent(Name = "StorePartEditor")]
     public class Editor : ViewComponent
     {
         public IViewComponentResult Invoke(DocModel docModel, DocPartModel partModel)

@@ -39,13 +39,13 @@ namespace MtdKey.OrderMaker.Components.Index
                 showNumber = mtdFilter.ShowNumber == 1;
                 showDate = mtdFilter.ShowDate == 1;
             }
-            
+
             IList<MtdFilterColumn> columns = await _context.MtdFilterColumn
                 .Where(x => x.MtdFilter == mtdFilter.Id)
                 .OrderBy(x => x.Sequence)
                 .ToListAsync() ?? new List<MtdFilterColumn>();
 
-            
+
             IList<MtdFormPartField> fields = await _context.MtdFormPartField
                 .Where(x => partIds.Contains(x.MtdFormPartId))
                 .OrderBy(o => o.Sequence)
@@ -55,7 +55,7 @@ namespace MtdKey.OrderMaker.Components.Index
             List<ColumnItem> columnItems = new();
             int i = columns.Count();
             foreach (var p in parts)
-            {                
+            {
                 fields.Where(x => x.MtdFormPartId == p.Id).ToList().ForEach((fs) =>
                 {
                     i++;
@@ -67,7 +67,7 @@ namespace MtdKey.OrderMaker.Components.Index
                         FieldId = fs.Id,
                         FieldName = fs.Name,
                         IsChecked = column != null,
-                        Sequence = column != null ? column.Sequence : i,                        
+                        Sequence = column != null ? column.Sequence : i,
                     });
                 });
             }
@@ -75,7 +75,7 @@ namespace MtdKey.OrderMaker.Components.Index
             ColumnsModelView fieldsModelView = new()
             {
                 FormId = formId,
-                ColumnItems = columnItems.OrderBy(x=>x.Sequence).ToList(),
+                ColumnItems = columnItems.OrderBy(x => x.Sequence).ToList(),
                 ShowNumber = showNumber,
                 ShowDate = showDate
             };

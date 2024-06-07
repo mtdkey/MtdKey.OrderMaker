@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace MtdKey.OrderMaker.Entity
 {
@@ -19,7 +18,7 @@ namespace MtdKey.OrderMaker.Entity
         public string Color { get; set; }
         public string Note { get; set; }
         public string Comment { get; set; }
-        public sbyte IsSign { get; set; } 
+        public sbyte IsSign { get; set; }
 
 
         public virtual MtdStore MtdStoreNavigation { get; set; }

@@ -5,15 +5,15 @@
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 using MtdKey.OrderMaker.Areas.Identity.Data;
+using MtdKey.OrderMaker.Core;
 using MtdKey.OrderMaker.Entity;
 using MtdKey.OrderMaker.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Localization;
-using MtdKey.OrderMaker.Core;
 
 namespace MtdKey.OrderMaker.Controllers.Store
 {
@@ -207,7 +207,7 @@ namespace MtdKey.OrderMaker.Controllers.Store
 
             WebAppUser user = await _userHandler.GetUserAsync(HttpContext.User);
             ApprovalHandler approvalHandler = new(_context, storeId);
-            
+
             bool isReviewer = await _userHandler.IsReviewerAsync(user, formId);
             bool isFormApproval = await approvalHandler.IsApprovalFormAsync();
             bool isComplete = await approvalHandler.IsComplete();
@@ -222,7 +222,8 @@ namespace MtdKey.OrderMaker.Controllers.Store
             if (result == 1)
             {
                 await SendEmailApprove(approvalHandler, comment);
-            } else
+            }
+            else
             {
                 await SendEmailReject(approvalHandler, comment);
             }
@@ -255,9 +256,9 @@ namespace MtdKey.OrderMaker.Controllers.Store
                         }
                 };
 
-                if (comment != null && comment.Length>0)
+                if (comment != null && comment.Length > 0)
                 {
-                    blankEmail.Content.Add($"{ _localizer["User's comment"]}: <em>{comment}</em>");
+                    blankEmail.Content.Add($"{_localizer["User's comment"]}: <em>{comment}</em>");
                 }
 
                 blankEmail.Content.Add($"{_localizer["Click on the link to view the document that required to approve."]}");
@@ -293,7 +294,7 @@ namespace MtdKey.OrderMaker.Controllers.Store
 
             if (comment != null && comment.Length > 0)
             {
-                blankEmail.Content.Add($"{ _localizer["User's comment"]}: <em>{comment}</em>");
+                blankEmail.Content.Add($"{_localizer["User's comment"]}: <em>{comment}</em>");
             }
 
             blankEmail.Content.Add($"{_localizer["Click on the link to view the document and start new approval."]}");
@@ -330,7 +331,7 @@ namespace MtdKey.OrderMaker.Controllers.Store
 
                 if (comment != null && comment.Length > 0)
                 {
-                    blankEmail.Content.Add($"{ _localizer["User's comment"]}: <em>{comment}</em>");
+                    blankEmail.Content.Add($"{_localizer["User's comment"]}: <em>{comment}</em>");
                 }
 
                 blankEmail.Content.Add($"{_localizer["Click on the link to view the document that required to approve."]}");
@@ -353,7 +354,7 @@ namespace MtdKey.OrderMaker.Controllers.Store
 
                 if (comment != null && comment.Length > 0)
                 {
-                    blankEmail.Content.Add($"{ _localizer["User's comment"]}: <em>{comment}</em>");
+                    blankEmail.Content.Add($"{_localizer["User's comment"]}: <em>{comment}</em>");
                 }
 
                 blankEmail.Content.Add($"{_localizer["Approval process is complete. Click on the link to view the document."]}");
@@ -398,7 +399,7 @@ namespace MtdKey.OrderMaker.Controllers.Store
 
                 if (comment != null && comment.Length > 0)
                 {
-                    blankEmail.Content.Add($"{ _localizer["User's comment"]}: <em>{comment}</em>");
+                    blankEmail.Content.Add($"{_localizer["User's comment"]}: <em>{comment}</em>");
                 }
 
                 blankEmail.Content.Add($"{_localizer["Click on the link to view the document that required to approve."]}");
@@ -434,7 +435,7 @@ namespace MtdKey.OrderMaker.Controllers.Store
 
                 if (comment != null && comment.Length > 0)
                 {
-                    blankOwner.Content.Add($"{ _localizer["User's comment"]}: <em>{comment}</em>");
+                    blankOwner.Content.Add($"{_localizer["User's comment"]}: <em>{comment}</em>");
                 }
 
                 blankOwner.Content.Add($"{_localizer["Approval process is complete. Click on the link to view the document."]}");
@@ -466,7 +467,7 @@ namespace MtdKey.OrderMaker.Controllers.Store
 
             if (comment != null && comment.Length > 0)
             {
-                blankEmail.Content.Add($"{ _localizer["User's comment"]}: <em>{comment}</em>");
+                blankEmail.Content.Add($"{_localizer["User's comment"]}: <em>{comment}</em>");
             }
 
             blankEmail.Content.Add($"{_localizer["Click on the link to view the document."]}");
@@ -496,7 +497,7 @@ namespace MtdKey.OrderMaker.Controllers.Store
 
             if (comment != null && comment.Length > 0)
             {
-                blankEmail.Content.Add($"{ _localizer["User's comment"]}: <em>{comment}</em>");
+                blankEmail.Content.Add($"{_localizer["User's comment"]}: <em>{comment}</em>");
             }
 
             blankEmail.Content.Add($"{_localizer["Click on the link to view the document."]}");

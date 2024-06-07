@@ -10,21 +10,22 @@ namespace MtdKey.OrderMaker.Entity
 {
     public partial class OrderMakerContext : DbContext
     {
-        public OrderMakerContext(DbContextOptions<OrderMakerContext> options) : base(options) {}
+        public OrderMakerContext(DbContextOptions<OrderMakerContext> options) : base(options) { }
 
-        public OrderMakerContext(string connectionString) : 
+        public OrderMakerContext(string connectionString) :
             base(new DbContextOptionsBuilder()
-                .UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0))).Options) {}
+                .UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0))).Options)
+        { }
 
         public virtual DbSet<MtdCategoryForm> MtdCategoryForm { get; set; }
 
         public virtual DbSet<MtdEventSubscribe> MtdEventSubscribes { get; set; }
         public virtual DbSet<MtdGroup> MtdGroup { get; set; }
-    
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-                        
+
             ApprovalModelCreating(modelBuilder);
 
             FormModelCreating(modelBuilder);
@@ -71,7 +72,7 @@ namespace MtdKey.OrderMaker.Entity
                     .HasColumnName("parent")
                     .HasColumnType("varchar(36)");
             });
-                               
+
             modelBuilder.Entity<MtdGroup>(entity =>
             {
                 entity.ToTable("mtd_group");
@@ -95,7 +96,8 @@ namespace MtdKey.OrderMaker.Entity
                     .HasColumnType("varchar(255)");
             });
 
-            modelBuilder.Entity<MtdEventSubscribe>(entity => {
+            modelBuilder.Entity<MtdEventSubscribe>(entity =>
+            {
 
                 entity.ToTable("mtd_event_subscribe");
 

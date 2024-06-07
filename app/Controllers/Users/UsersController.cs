@@ -3,10 +3,6 @@
     Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
 */
 
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -17,6 +13,10 @@ using MtdKey.OrderMaker.Areas.Identity.Data;
 using MtdKey.OrderMaker.Core;
 using MtdKey.OrderMaker.Entity;
 using MtdKey.OrderMaker.Services;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace MtdKey.OrderMaker.Controllers.Users
 {
@@ -26,7 +26,7 @@ namespace MtdKey.OrderMaker.Controllers.Users
     public partial class UsersController : ControllerBase
     {
         private readonly UserHandler _userManager;
-        private readonly RoleManager<WebAppRole> _roleManager;     
+        private readonly RoleManager<WebAppRole> _roleManager;
         private readonly IEmailSenderBlank _emailSender;
         private readonly DataConnector _context;
         private readonly IStringLocalizer<SharedResource> _localizer;
@@ -34,14 +34,14 @@ namespace MtdKey.OrderMaker.Controllers.Users
 
         public UsersController(
             UserHandler userManager,
-            RoleManager<WebAppRole> roleManager,   
+            RoleManager<WebAppRole> roleManager,
             IEmailSenderBlank emailSender,
             DataConnector context,
             IStringLocalizer<SharedResource> localizer, IdentityDbContext identity
             )
         {
             _userManager = userManager;
-            _roleManager = roleManager;   
+            _roleManager = roleManager;
             _emailSender = emailSender;
             _context = context;
             _localizer = localizer;
@@ -67,15 +67,16 @@ namespace MtdKey.OrderMaker.Controllers.Users
             string userId = Request.Form["user-delete-id"];
             WebAppUser user = await _userManager.FindByIdAsync(userId);
 
-            if (user == null) {                
+            if (user == null)
+            {
                 return BadRequest(_localizer["ERROR! User not found."]);
             }
 
             bool isApprover = await _context.MtdApprovalStage.Where(x => x.UserId == user.Id).AnyAsync();
             bool isOwner = await _context.MtdStoreOwner.Where(x => x.UserId == user.Id).AnyAsync();
 
-            if (isApprover || isOwner )
-            {               
+            if (isApprover || isOwner)
+            {
                 return BadRequest(_localizer["ERROR! There are documents owned by the user. Before deleting, transfer of documents to another user."]);
             }
 
@@ -107,7 +108,7 @@ namespace MtdKey.OrderMaker.Controllers.Users
             {
                 return BadRequest(_localizer["Error. User not found."]);
             }
-           
+
             string email = form["Input.Email"];
             string title = form["Input.Title"];
             string titleGroup = form["Input.TitleGroup"];
@@ -118,7 +119,7 @@ namespace MtdKey.OrderMaker.Controllers.Users
             string groupContainer = form["groupContainer"];
 
             WebAppRole roleUser = await _roleManager.FindByIdAsync(roleId);
-   
+
 
             string[] formConfirm = form["Input.IsConfirm"];
             bool isConfirm = false;
@@ -157,12 +158,12 @@ namespace MtdKey.OrderMaker.Controllers.Users
             IList<string> roles = await _userManager.GetRolesAsync(user);
             await _userManager.RemoveFromRolesAsync(user, roles);
             await _userManager.AddToRoleAsync(user, roleUser.Name);
-  
+
 
             IEnumerable<Claim> claims = await _userManager.GetClaimsAsync(user);
             await _userManager.RemoveClaimsAsync(user, claims);
 
-            Claim claim = new ("policy", policyId);
+            Claim claim = new("policy", policyId);
             await _userManager.AddClaimAsync(user, claim);
 
             //IList<MtdGroup> groups = await _context.MtdGroup.ToListAsync();
@@ -197,21 +198,21 @@ namespace MtdKey.OrderMaker.Controllers.Users
 
             WebAppUser userOwner = await _userManager.FindByIdAsync(UserOwner);
             WebAppUser userRecipient = await _userManager.FindByIdAsync(UserRecipient);
-            
+
             if (userOwner == null || userRecipient == null)
-            {            
+            {
                 return BadRequest(_localizer["ERROR! User not found."]);
             }
 
-            IList<MtdStoreOwner> storeOwners = await _context.MtdStoreOwner.Where(x => x.UserId == userOwner.Id).ToListAsync();                
-            foreach(MtdStoreOwner owner in storeOwners)
+            IList<MtdStoreOwner> storeOwners = await _context.MtdStoreOwner.Where(x => x.UserId == userOwner.Id).ToListAsync();
+            foreach (MtdStoreOwner owner in storeOwners)
             {
                 owner.UserId = userRecipient.Id;
                 owner.UserName = userRecipient.Title;
             }
 
             IList<MtdApprovalStage> stages = await _context.MtdApprovalStage.Where(x => x.UserId == userOwner.Id).ToListAsync();
-            foreach(MtdApprovalStage stage in stages)
+            foreach (MtdApprovalStage stage in stages)
             {
                 stage.UserId = userRecipient.Id;
             }

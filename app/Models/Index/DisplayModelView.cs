@@ -10,9 +10,9 @@ namespace MtdKey.OrderMaker.Models.Index
 {
     public class DisplayData
     {
-        public long Id { get; set; }        
+        public long Id { get; set; }
         public string Header { get; set; }
-        public string  Value { get; set; }
+        public string Value { get; set; }
         public string Type { get; set; }
     }
 
@@ -21,6 +21,6 @@ namespace MtdKey.OrderMaker.Models.Index
         public string FormId { get; set; }
         public int IdFilter { get; set; }
         public List<DisplayData> DisplayDatas { get; set; }
-        
+
     }
 }

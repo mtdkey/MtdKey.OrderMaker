@@ -3,14 +3,13 @@
     Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
 */
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using MtdKey.OrderMaker.Entity;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace MtdKey.OrderMaker.Areas.Identity.Pages.Users.Group
 {
@@ -25,7 +24,7 @@ namespace MtdKey.OrderMaker.Areas.Identity.Pages.Users.Group
 
         public IList<MtdGroup> MtdGroups { get; set; }
         public string SearchText { get; set; }
-        public async  Task<IActionResult> OnGetAsync(string searchText)
+        public async Task<IActionResult> OnGetAsync(string searchText)
         {
             var query = _context.MtdGroup.AsQueryable();
 
@@ -39,7 +38,7 @@ namespace MtdKey.OrderMaker.Areas.Identity.Pages.Users.Group
             }
 
 
-            MtdGroups = await query.OrderBy(x=>x.Name).ToListAsync();
+            MtdGroups = await query.OrderBy(x => x.Name).ToListAsync();
             return Page();
         }
     }

@@ -4,7 +4,6 @@
 */
 
 using System;
-using System.Collections.Generic;
 
 namespace MtdKey.OrderMaker.Entity
 {
@@ -14,7 +13,7 @@ namespace MtdKey.OrderMaker.Entity
         public int MtdApproveStage { get; set; }
         public string PartsApproved { get; set; }
         public sbyte Complete { get; set; }
-        public int Result { get; set; }        
+        public int Result { get; set; }
         public string SignChain { get; set; }
         public DateTime LastEventTime { get; set; }
 

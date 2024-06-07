@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Diagnostics.Contracts;
 
 namespace MtdKey.OrderMaker.Entity
 {
@@ -9,7 +8,7 @@ namespace MtdKey.OrderMaker.Entity
         public virtual DbSet<MtdStoreApproval> MtdStoreApproval { get; set; }
         public virtual DbSet<MtdStoreOwner> MtdStoreOwner { get; set; }
 
-        public virtual DbSet<MtdStoreDate> MtdStoreDates{ get; set; }
+        public virtual DbSet<MtdStoreDate> MtdStoreDates { get; set; }
         public virtual DbSet<MtdStoreText> MtdStoreTexts { get; set; }
         public virtual DbSet<MtdStoreInt> MtdStoreInts { get; set; }
         public virtual DbSet<MtdStoreDecimal> MtdStoreDecimals { get; set; }

@@ -13,7 +13,7 @@ namespace MtdKey.OrderMaker.Services
         private readonly RequestDelegate _next;
         private readonly IServiceScopeFactory serviceScopeFactory;
 
-        public UsersMiddleware(RequestDelegate next,IServiceScopeFactory serviceScopeFactory)
+        public UsersMiddleware(RequestDelegate next, IServiceScopeFactory serviceScopeFactory)
         {
             _next = next;
             this.serviceScopeFactory = serviceScopeFactory;

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace MtdKey.OrderMaker.Entity
+﻿namespace MtdKey.OrderMaker.Entity
 {
     public partial class MtdFilterOwner
     {

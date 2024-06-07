@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
-using System.Text;
-using System.Text.Encodings.Web;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
-using MtdKey.OrderMaker.Areas.Identity.Data;
 using MtdKey.OrderMaker.Entity;
 using MtdKey.OrderMaker.Services;
-using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace MtdKey.OrderMaker.Controllers.Index.Filter
 {
@@ -50,7 +45,7 @@ namespace MtdKey.OrderMaker.Controllers.Index.Filter
             string valueExtra = dateFormat;
 
 
-            bool isOk = int.TryParse (fieldAction, out int term);
+            bool isOk = int.TryParse(fieldAction, out int term);
             if (!isOk) { return BadRequest(_localizer["Error: Bad request."]); }
 
             if (fieldType == "5" || fieldType == "6") { fieldValue = $"{fieldValue}***{fieldValueExt}"; } else { valueExtra = null; }
@@ -65,12 +60,13 @@ namespace MtdKey.OrderMaker.Controllers.Index.Filter
                 }
             }
 
-            MtdFilterField field = new() { 
-                MtdFilter = filter.Id, 
-                MtdFormPartFieldId = fieldId, 
-                MtdTerm = term, 
-                Value = fieldValue, 
-                ValueExtra = valueExtra 
+            MtdFilterField field = new()
+            {
+                MtdFilter = filter.Id,
+                MtdFormPartFieldId = fieldId,
+                MtdTerm = term,
+                Value = fieldValue,
+                ValueExtra = valueExtra
             };
 
             try
@@ -92,11 +88,11 @@ namespace MtdKey.OrderMaker.Controllers.Index.Filter
         {
             var form = await Request.ReadFormAsync();
 
-            
+
             string fieldId = form["field-id"];
-            var list  = await context.MtdFormPartFieldItems
+            var list = await context.MtdFormPartFieldItems
                 .Where(x => x.FieldId == fieldId && x.IsDeleted == false)
-                .OrderBy(x=>x.Name)
+                .OrderBy(x => x.Name)
                 .ToListAsync();
 
             return new JsonResult(new { value = list });

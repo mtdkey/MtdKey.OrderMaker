@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using MtdKey.OrderMaker.Components;
 using MtdKey.OrderMaker.Entity;
+using System;
+using System.Threading.Tasks;
 
 namespace MtdKey.OrderMaker.Areas.Config.Pages.Approval.Rejections
 {

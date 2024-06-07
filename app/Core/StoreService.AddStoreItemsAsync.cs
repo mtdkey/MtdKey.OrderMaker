@@ -1,11 +1,11 @@
-﻿using MtdKey.OrderMaker.Entity;
+﻿using Microsoft.EntityFrameworkCore;
+using MtdKey.OrderMaker.Areas.Identity.Data;
+using MtdKey.OrderMaker.Entity;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
-using System;
-using Microsoft.EntityFrameworkCore;
-using MtdKey.OrderMaker.Areas.Identity.Data;
 
 namespace MtdKey.OrderMaker.Core
 {
@@ -34,10 +34,10 @@ namespace MtdKey.OrderMaker.Core
                 {
                     Key = field.Id,
                     Type = field.MtdSysType,
-                    Value = GetFieldValue(field, storeRequest) == null 
+                    Value = GetFieldValue(field, storeRequest) == null
                         && field.ReadOnly != 1
-                        && field.DefaultData != null 
-                        && field.DefaultData != string.Empty ? 
+                        && field.DefaultData != null
+                        && field.DefaultData != string.Empty ?
                      field.DefaultData : GetFieldValue(field, storeRequest)
                 })
                 .ToListAsync();
@@ -127,14 +127,15 @@ namespace MtdKey.OrderMaker.Core
                         }
                     case FieldType.List:
                         {
-                            if (!Guid.TryParse((string) partField.Value, out Guid guid)) break;
+                            if (!Guid.TryParse((string)partField.Value, out Guid guid)) break;
 
                             var item = await context.MtdFormPartFieldItems.FindAsync(guid);
                             if (item == null) break;
-                            
+
                             MarkDeletedStoreItems(store.MtdStoreItems, partField.Key);
 
-                            await context.MtdStoreItems.AddAsync(new() {
+                            await context.MtdStoreItems.AddAsync(new()
+                            {
                                 FieldId = partField.Key,
                                 StoreId = storeRequest.StoreId,
                                 ItemId = item.Id,

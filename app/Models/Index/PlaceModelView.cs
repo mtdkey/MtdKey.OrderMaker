@@ -8,6 +8,6 @@ namespace MtdKey.OrderMaker.Models.Index
 {
     public class PlaceModelView
     {
-        public string FormId { get; set; }      
+        public string FormId { get; set; }
     }
 }

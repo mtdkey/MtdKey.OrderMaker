@@ -7,13 +7,9 @@ namespace MtdKey.OrderMaker.Components.Controls
 {
 
     [ViewComponent(Name = "MTDSelectList")]
-    public class MTDSelectList : ViewComponent
+    public class MTDSelectList(IStringLocalizer<SharedResource> localizer) : ViewComponent
     {
-        private readonly IStringLocalizer<SharedResource> Localizer;
-        public MTDSelectList(IStringLocalizer<SharedResource> localizer)
-        {
-            Localizer = localizer;
-        }
+        private readonly IStringLocalizer<SharedResource> Localizer = localizer;
 
         public async Task<IViewComponentResult> InvokeAsync(MTDSelectListTags tags)
         {

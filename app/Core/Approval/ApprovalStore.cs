@@ -1,7 +1,7 @@
 ﻿
 
-namespace MtdKey.OrderMaker.Core 
-{ 
+namespace MtdKey.OrderMaker.Core
+{
     public enum ApprovalStatus
     {
         Start,

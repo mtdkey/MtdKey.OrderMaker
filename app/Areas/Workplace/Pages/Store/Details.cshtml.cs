@@ -3,10 +3,6 @@
     Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
 */
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +13,9 @@ using MtdKey.OrderMaker.Entity;
 using MtdKey.OrderMaker.Models.Controls.MTDSelectList;
 using MtdKey.OrderMaker.Models.LogDocument;
 using MtdKey.OrderMaker.Services;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace MtdKey.OrderMaker.Areas.Workplace.Pages.Store
 {
@@ -62,7 +61,7 @@ namespace MtdKey.OrderMaker.Areas.Workplace.Pages.Store
             MtdStore = await _context.MtdStore.FirstOrDefaultAsync(m => m.Id == id);
 
             if (MtdStore == null) { return NotFound(); }
-            
+
             await _context.Entry(MtdStore).Reference(x => x.MtdFormNavigation).LoadAsync();
             await _context.Entry(MtdStore.MtdFormNavigation).Reference(x => x.MtdFormHeader).LoadAsync();
 
@@ -112,7 +111,7 @@ namespace MtdKey.OrderMaker.Areas.Workplace.Pages.Store
 
             await SetUsersList(user);
 
-            await SetUsersRequest(user, approvalHandler);            
+            await SetUsersRequest(user, approvalHandler);
 
             await SetResolutions(approvalHandler);
 

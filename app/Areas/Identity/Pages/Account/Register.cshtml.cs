@@ -1,20 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text.Encodings.Web;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using MtdKey.OrderMaker.Areas.Identity.Data;
 using MtdKey.OrderMaker.Services;
+using System.ComponentModel.DataAnnotations;
+using System.Text.Encodings.Web;
+using System.Threading.Tasks;
 
 namespace MtdKey.OrderMaker.Areas.Identity.Pages.Account
 {
-   /// [AllowAnonymous]
+    /// [AllowAnonymous]
     [Authorize(Roles = "sdfsdF")]
     public class RegisterModel : PageModel
     {
@@ -41,7 +38,7 @@ namespace MtdKey.OrderMaker.Areas.Identity.Pages.Account
         public class InputModel
         {
 
-            [Required]            
+            [Required]
             [Display(Name = "Title")]
             public string Title { get; set; }
 
@@ -98,7 +95,7 @@ namespace MtdKey.OrderMaker.Areas.Identity.Pages.Account
                 }
             }
 
-            
+
             return Page();
         }
     }

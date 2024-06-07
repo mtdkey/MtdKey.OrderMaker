@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MtdKey.OrderMaker.AppConfig;
@@ -102,8 +101,8 @@ namespace MtdKey.OrderMaker
 
         }
 
-        private static async Task InitIdentity(IServiceProvider serviceProvider, 
-            RoleManager<WebAppRole> roleManager, 
+        private static async Task InitIdentity(IServiceProvider serviceProvider,
+            RoleManager<WebAppRole> roleManager,
             UserManager<WebAppUser> userManager)
         {
 

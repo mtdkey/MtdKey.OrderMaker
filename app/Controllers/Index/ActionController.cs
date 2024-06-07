@@ -3,12 +3,6 @@
     Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
 */
 
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
@@ -19,6 +13,12 @@ using MtdKey.OrderMaker.AppConfig;
 using MtdKey.OrderMaker.Core;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Mtd.OrderMaker.Web.Controllers.Index
 {
@@ -33,7 +33,7 @@ namespace Mtd.OrderMaker.Web.Controllers.Index
         private readonly LimitSettings limit;
         private readonly IStoreService storeService;
 
-        public ActionController(IStoreService storeService, 
+        public ActionController(IStoreService storeService,
             IStringLocalizer<SharedResource> localizer, IOptions<LimitSettings> limit)
         {
 
@@ -48,23 +48,24 @@ namespace Mtd.OrderMaker.Web.Controllers.Index
         {
             if (!limit.ExportExcel) { return NotFound(); }
 
-            var form = await Request.ReadFormAsync();            
+            var form = await Request.ReadFormAsync();
             string formId = form["form-id"];
 
-           var requestResult =  await storeService.GetDocsBySQLRequestAsync(new() { 
-                 FormId = formId,
-                 UserPrincipal = User,           
-                 LimitRequest = true,
-                 UseFilter = true
+            var requestResult = await storeService.GetDocsBySQLRequestAsync(new()
+            {
+                FormId = formId,
+                UserPrincipal = User,
+                LimitRequest = true,
+                UseFilter = true
             });
 
             IWorkbook workbook = CreateWorkbook(requestResult.Docs);
-       
+
             var ms = new NpoiMemoryStream
             {
                 AllowClose = false
             };
-            workbook.Write(ms,true);
+            workbook.Write(ms, true);
             ms.Flush();
             ms.Seek(0, SeekOrigin.Begin);
             ms.AllowClose = true;
@@ -97,7 +98,7 @@ namespace Mtd.OrderMaker.Web.Controllers.Index
                 colIndex++;
                 var cell = rowTitle.CreateCell(colIndex);
                 cell.SetCellValue(field.Name);
-                
+
             }
 
             colIndex = 0;
@@ -119,7 +120,7 @@ namespace Mtd.OrderMaker.Web.Controllers.Index
                 rowIndex++;
             }
 
-            
+
 
             return workbook;
         }
@@ -131,14 +132,14 @@ namespace Mtd.OrderMaker.Web.Controllers.Index
             {
                 case 2:
                     {
-                        int result = field.Value != null ? (int) field.Value : 0;
+                        int result = field.Value != null ? (int)field.Value : 0;
                         cell.SetCellType(CellType.Numeric);
                         cell.SetCellValue(result);
                         break;
                     }
                 case 3:
                     {
-                        decimal result = field.Value != null ? (decimal) field.Value : 0;
+                        decimal result = field.Value != null ? (decimal)field.Value : 0;
                         cell.SetCellType(CellType.Numeric);
                         cell.SetCellValue((double)result);
                         break;
@@ -146,7 +147,7 @@ namespace Mtd.OrderMaker.Web.Controllers.Index
                 case 5:
                     {
 
-                        if (field.Value != null && (DateTime) field.Value > DateTime.MinValue)                                          
+                        if (field.Value != null && (DateTime)field.Value > DateTime.MinValue)
                             cell.SetCellValue(((DateTime)field.Value).ToShortDateString());
                         else
                             cell.SetCellValue("");
@@ -155,7 +156,7 @@ namespace Mtd.OrderMaker.Web.Controllers.Index
                 case 6:
                     {
                         if (field.Value != null && (DateTime)field.Value > DateTime.MinValue)
-                            cell.SetCellValue(((DateTime) field.Value).ToString("g"));
+                            cell.SetCellValue(((DateTime)field.Value).ToString("g"));
                         else
                             cell.SetCellValue("");
                         break;
@@ -173,14 +174,14 @@ namespace Mtd.OrderMaker.Web.Controllers.Index
 
                 case 12:
                     {
-                        int result = field.Value != null && (int) field.Value == 1 ? 1 : 0;
+                        int result = field.Value != null && (int)field.Value == 1 ? 1 : 0;
                         cell.SetCellType(CellType.Boolean);
                         cell.SetCellValue(result);
                         break;
                     }
                 default:
                     {
-                        string result = field.Value is not null and string ? (string) field.Value : "";
+                        string result = field.Value is not null and string ? (string)field.Value : "";
                         cell.SetCellType(CellType.String);
                         cell.SetCellValue(result);
                         break;

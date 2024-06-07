@@ -3,14 +3,11 @@
     Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
 */
 
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using MtdKey.OrderMaker.Entity;
 using MtdKey.OrderMaker.Services;
+using System.Threading.Tasks;
 
 namespace MtdKey.OrderMaker.Areas.Workplace.Pages.Store
 {
@@ -45,8 +42,8 @@ namespace MtdKey.OrderMaker.Areas.Workplace.Pages.Store
                 return Forbid();
             }
 
-            MtdForm = await _context.MtdForm.FindAsync(formId);            
-            MtdStore = new MtdStore { MtdFormId = MtdForm.Id, MtdFormNavigation = MtdForm};
+            MtdForm = await _context.MtdForm.FindAsync(formId);
+            MtdStore = new MtdStore { MtdFormId = MtdForm.Id, MtdFormNavigation = MtdForm };
 
             return Page();
         }

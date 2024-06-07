@@ -3,10 +3,8 @@
     Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
 */
 
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyModel;
 using MtdKey.OrderMaker.Areas.Identity.Data;
 using MtdKey.OrderMaker.Core;
 using MtdKey.OrderMaker.Entity;
@@ -20,13 +18,13 @@ using System.Threading.Tasks;
 
 namespace MtdKey.OrderMaker.Components.Index.Filter
 {
-    public enum ServiceFilter { DateCreated, DocumentOwner, DocumentBased  }
+    public enum ServiceFilter { DateCreated, DocumentOwner, DocumentBased }
 
     [ViewComponent(Name = "IndexFilterSelector")]
     public class Selector : ViewComponent
     {
         private readonly DataConnector _context;
-        private readonly UserHandler _userHandler;     
+        private readonly UserHandler _userHandler;
 
         public Selector(DataConnector context, UserHandler userHandler)
         {
@@ -37,7 +35,7 @@ namespace MtdKey.OrderMaker.Components.Index.Filter
         public async Task<IViewComponentResult> InvokeAsync(string formId)
         {
             WebAppUser user = await _userHandler.GetUserAsync(HttpContext.User);
-            
+
             MtdFilter filter = await _context.MtdFilter.FirstOrDefaultAsync(x => x.IdUser == user.Id && x.MtdFormId == formId);
 
             List<MTDSelectListItem> customItems = await GetCustomFieldsAsync(user, formId, filter);
@@ -51,14 +49,14 @@ namespace MtdKey.OrderMaker.Components.Index.Filter
 
             List<MTDSelectListItem> userList = await GetUserItemsAsync(user, formId);
 
-            IList<MtdFilterScript> scripts = await _userHandler.GetFilterScriptsAsync(user,formId,0);            
+            IList<MtdFilterScript> scripts = await _userHandler.GetFilterScriptsAsync(user, formId, 0);
             List<MTDSelectListItem> scriptItems = new();
 
             foreach (var script in scripts)
             {
                 scriptItems.Add(new MTDSelectListItem { Id = script.Id.ToString(), Value = script.Name });
             }
-     
+
             List<MTDSelectListItem> serviceItems = GetServiceItems();
 
             SelectorModelView selector = new()
@@ -74,12 +72,12 @@ namespace MtdKey.OrderMaker.Components.Index.Filter
             return View("Default", selector);
         }
 
-        
+
         private async Task<List<MTDSelectListItem>> GetCustomFieldsAsync(WebAppUser user, string formId, MtdFilter mtdFilter)
         {
             List<MtdFormPart> parts = await _userHandler.GetAllowPartsForView(user, formId);
             List<string> partIds = parts.Select(x => x.Id).ToList();
-            
+
             var query = _context.MtdFormPartField
                 .Where(x => x.Active == 1 && partIds.Contains(x.MtdFormPartId))
                 .OrderBy(x => x.MtdFormPartNavigation.Sequence).ThenBy(x => x.Sequence);

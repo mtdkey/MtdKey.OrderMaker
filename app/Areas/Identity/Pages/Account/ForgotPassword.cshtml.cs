@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.IO;
-using System.Text.Encodings.Web;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Localization;
-using Microsoft.Extensions.Options;
 using MtdKey.OrderMaker.Areas.Identity.Data;
-using MtdKey.OrderMaker.AppConfig;
 using MtdKey.OrderMaker.Services;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Text.Encodings.Web;
+using System.Threading.Tasks;
 
 namespace MtdKey.OrderMaker.Areas.Identity.Pages.Account
 {
@@ -22,13 +16,13 @@ namespace MtdKey.OrderMaker.Areas.Identity.Pages.Account
     public class ForgotPasswordModel : PageModel
     {
         private readonly UserManager<WebAppUser> _userManager;
-        private readonly IEmailSenderBlank _emailSender;    
+        private readonly IEmailSenderBlank _emailSender;
         private readonly IStringLocalizer<SharedResource> _localizer;
 
         public ForgotPasswordModel(UserManager<WebAppUser> userManager, IEmailSenderBlank emailSender, IStringLocalizer<SharedResource> localizer)
         {
             _userManager = userManager;
-            _emailSender = emailSender;            
+            _emailSender = emailSender;
             _localizer = localizer;
         }
 
@@ -58,7 +52,7 @@ namespace MtdKey.OrderMaker.Areas.Identity.Pages.Account
                     "/Account/ResetPassword",
                     pageHandler: null,
                     values: new { code },
-                    protocol: Request.Scheme);       
+                    protocol: Request.Scheme);
 
                 BlankEmail blankEmail = new()
                 {

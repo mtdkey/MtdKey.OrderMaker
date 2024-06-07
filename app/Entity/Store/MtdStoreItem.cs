@@ -28,10 +28,10 @@ namespace MtdKey.OrderMaker.Entity
 
         [ForeignKey(nameof(StoreId))]
         public virtual MtdStore MtdStore { get; set; }
-        
+
         [ForeignKey(nameof(FieldId))]
         public virtual MtdFormPartField MtdFormPartField { get; set; }
-        
+
         [ForeignKey(nameof(ItemId))]
         public virtual MtdFormPartFieldItem MtdFormPartFieldItem { get; set; }
     }

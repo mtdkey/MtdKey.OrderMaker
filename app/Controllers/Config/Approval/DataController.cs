@@ -3,14 +3,14 @@
     Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
 */
 
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using MtdKey.OrderMaker.Entity;
 using MtdKey.OrderMaker.Core;
+using MtdKey.OrderMaker.Entity;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace MtdKey.OrderMaker.Controllers.Config.Approval
 {
@@ -61,7 +61,7 @@ namespace MtdKey.OrderMaker.Controllers.Config.Approval
                 return BadRequest(new JsonResult("Error. Approval not found."));
             }
 
-     
+
             int stageLevel = await _context.MtdApprovalStage.CountAsync(x => x.MtdApproval == approvalId);
             stageLevel++;
 

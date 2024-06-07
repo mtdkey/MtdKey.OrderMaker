@@ -497,7 +497,7 @@ namespace MtdKey.OrderMaker.Core
             }
             catch (Exception ex)
             {
-                await _context.Database.RollbackTransactionAsync();                
+                await _context.Database.RollbackTransactionAsync();
                 throw ex.InnerException;
             }
 

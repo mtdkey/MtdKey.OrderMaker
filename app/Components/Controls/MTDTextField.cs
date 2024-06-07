@@ -1,30 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using MtdKey.OrderMaker.Models.Controls.MTDTextField;
 using Microsoft.Extensions.Localization;
+using MtdKey.OrderMaker.Models.Controls.MTDTextField;
+using System.Threading.Tasks;
 
 namespace MtdKey.OrderMaker.Components.Controls
 {
     [ViewComponent(Name = "MTDTextField")]
-    public class MTDTextField : ViewComponent
+    public class MTDTextField(IStringLocalizer<SharedResource> localizer) : ViewComponent
     {
-        private readonly IStringLocalizer<SharedResource> Localizer;
-
-        public MTDTextField(IStringLocalizer<SharedResource> localizer)
-        {
-            Localizer = localizer;
-        }
+        private readonly IStringLocalizer<SharedResource> Localizer = localizer;
 
         public async Task<IViewComponentResult> InvokeAsync(MTDTextFieldTags tags)
         {
-            MTDTextFieldTagsModel model = new (tags);
-            
+            MTDTextFieldTagsModel model = new(tags);
+
             LocalizerModel(model);
 
-            string viewName = model.MTDTexFieldView.ToString();                      
+            string viewName = model.MTDTexFieldView.ToString();
             return await Task.Run(() => View(viewName, model));
         }
 

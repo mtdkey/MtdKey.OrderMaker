@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace MtdKey.OrderMaker.Areas.Identity.Pages.Users.Policy
+﻿namespace MtdKey.OrderMaker.Areas.Identity.Pages.Users.Policy
 {
     public class RightsModel
     {
@@ -25,7 +20,7 @@ namespace MtdKey.OrderMaker.Areas.Identity.Pages.Users.Policy
         public bool SetDate { get; set; }
         public bool ExportToExcel { get; set; }
         public bool RelatedCreate { get; set; }
-        public bool RelatedEdit { get; set; }        
+        public bool RelatedEdit { get; set; }
 
     }
 }

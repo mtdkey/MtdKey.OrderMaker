@@ -1,27 +1,19 @@
 ﻿using Microsoft.Extensions.Options;
-using MtdKey.OrderMaker.Entity;
 using MtdKey.OrderMaker.AppConfig;
+using MtdKey.OrderMaker.Entity;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace MtdKey.OrderMaker.Services
 {
-    public class ConfigHandler
+    public class ConfigHandler(DataConnector context, IOptions<ConfigSettings> options)
     {
         public int CodeImgMenu => 1;
-        public int CodeImgAppBar => 2;      
+        public int CodeImgAppBar => 2;
         public string AppName => options.Value.AppName;
 
-        private readonly DataConnector _context;
-        public readonly IOptions<ConfigSettings> options;
-
-        public ConfigHandler(DataConnector context, IOptions<ConfigSettings> options)
-        {
-            _context = context;
-            this.options = options;
-        }
+        private readonly DataConnector _context = context;
+        public readonly IOptions<ConfigSettings> options = options;
 
         public async Task<string> GetImageFromConfig(int code)
         {

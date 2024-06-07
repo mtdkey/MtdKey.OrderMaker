@@ -3,14 +3,13 @@
     Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
  */
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using MtdKey.OrderMaker.Entity;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace MtdKey.OrderMaker.Areas.Config.Pages.Approval
 {
@@ -18,7 +17,7 @@ namespace MtdKey.OrderMaker.Areas.Config.Pages.Approval
     public class IndexModel : PageModel
     {
         private readonly DataConnector _context;
-        
+
         public IndexModel(DataConnector context)
         {
             _context = context;
@@ -38,11 +37,11 @@ namespace MtdKey.OrderMaker.Areas.Config.Pages.Approval
                                         );
                 SearchText = searchText;
             }
-            
+
             MtdApprovals = await query.ToListAsync();
-            foreach(var MtdApproval in MtdApprovals)
+            foreach (var MtdApproval in MtdApprovals)
             {
-                await _context.Entry(MtdApproval).Reference(x=>x.MtdFormNavigation).LoadAsync();
+                await _context.Entry(MtdApproval).Reference(x => x.MtdFormNavigation).LoadAsync();
                 await _context.Entry(MtdApproval.MtdFormNavigation).Reference(x => x.MtdFormDesk).LoadAsync();
             }
             return Page();

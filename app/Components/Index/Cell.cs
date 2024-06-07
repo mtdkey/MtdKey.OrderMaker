@@ -16,7 +16,7 @@ namespace MtdKey.OrderMaker.Components.Index
         public Task<IViewComponentResult> InvokeAsync(DocFieldModel field)
         {
             string viewName = GetViewName(field.Type);
-            return Task.FromResult((IViewComponentResult) View(viewName, field));
+            return Task.FromResult((IViewComponentResult)View(viewName, field));
         }
 
         private static string GetViewName(int idType) =>

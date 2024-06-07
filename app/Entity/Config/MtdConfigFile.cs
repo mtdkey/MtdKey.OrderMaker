@@ -3,9 +3,6 @@
     Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
 */
 
-using System;
-using System.Collections.Generic;
-
 namespace MtdKey.OrderMaker.Entity
 {
     public partial class MtdConfigFile

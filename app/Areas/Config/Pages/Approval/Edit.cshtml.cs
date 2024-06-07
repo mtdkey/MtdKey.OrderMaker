@@ -3,15 +3,12 @@
     Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
  */
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using MtdKey.OrderMaker.Entity;
 using MtdKey.OrderMaker.Components;
+using MtdKey.OrderMaker.Entity;
+using System.Threading.Tasks;
 
 namespace MtdKey.OrderMaker.Areas.Config.Pages.Approval
 {
@@ -37,8 +34,8 @@ namespace MtdKey.OrderMaker.Areas.Config.Pages.Approval
             if (MtdApproval == null)
             {
                 return NotFound();
-            }            
-            await _context.Entry(MtdApproval).Reference(x=>x.MtdFormNavigation).LoadAsync();
+            }
+            await _context.Entry(MtdApproval).Reference(x => x.MtdFormNavigation).LoadAsync();
 
             return Page();
         }

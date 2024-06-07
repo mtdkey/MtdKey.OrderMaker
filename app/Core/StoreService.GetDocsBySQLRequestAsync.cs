@@ -1,12 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MtdKey.OrderMaker.Areas.Identity.Data;
 using MtdKey.OrderMaker.Core.Scripts;
 using MtdKey.OrderMaker.Entity;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System;
-using System.Linq;
-using MtdKey.OrderMaker.Areas.Identity.Data;
 using MtdKey.OrderMaker.src.formBuilder.models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace MtdKey.OrderMaker.Core
 {
@@ -91,7 +91,7 @@ namespace MtdKey.OrderMaker.Core
                     Sequence = storeItem.Sequence,
                     Created = storeItem.Timecr,
                     Parts = allowedData.DocParts,
-                    EditDate = IsReviewer,                    
+                    EditDate = IsReviewer,
                 };
 
                 docList.Add(doc);
@@ -115,7 +115,7 @@ namespace MtdKey.OrderMaker.Core
                         case FieldType.Memo:
                             {
                                 var value = string.Join("", storeItem.MtdStoreMemos
-                                   .Where(x=> x.FieldId == docField.Id)
+                                   .Where(x => x.FieldId == docField.Id)
                                    .OrderBy(x => x.Id)
                                    .Select(x => x.Result)
                                    .ToList());
@@ -188,7 +188,7 @@ namespace MtdKey.OrderMaker.Core
 
                                 break;
                             }
-                            case FieldType.List:
+                        case FieldType.List:
                             {
                                 var value = storeItem.MtdStoreItems
                                     .Where(x => x.FieldId == docField.Id)
@@ -271,32 +271,32 @@ namespace MtdKey.OrderMaker.Core
             MtdFilter userFilter = await GetUserFilter(formId, appUser);
 
             var docFields = await context.MtdFormPartField
-                .Include(x=>x.MtdFilterColumn)
-                .Include(x=>x.MtdFormPartFieldItems)
+                .Include(x => x.MtdFilterColumn)
+                .Include(x => x.MtdFormPartFieldItems)
                 .Where(x => partIds.Contains(x.MtdFormPartId))
                 .Select(x => new DocFieldModel
                 {
                     Id = x.Id,
                     PartId = x.MtdFormPartId,
                     Name = x.Name,
-                    Sequence = x.Sequence,                               
+                    Sequence = x.Sequence,
                     DefaultValue = x.DefaultData,
                     Readonly = x.ReadOnly == 1,
                     Type = x.MtdSysType,
                     Required = x.Required == 1,
-                    ListItems = x.MtdFormPartFieldItems.Where(x=>x.IsDeleted == false)
-                        .Select(x=> new ListItemModel { Id = x.Id.ToString(), Name=x.Name})
+                    ListItems = x.MtdFormPartFieldItems.Where(x => x.IsDeleted == false)
+                        .Select(x => new ListItemModel { Id = x.Id.ToString(), Name = x.Name })
                         .ToArray(),
                 }).AsSplitQuery()
                 .OrderBy(x => x.Sequence)
                 .ToListAsync();
 
-            foreach(var docField in docFields)
+            foreach (var docField in docFields)
             {
                 int? sequence = userFilter.MtdFilterColumns?
-                    .Where(x => x.MtdFormPartFieldId == docField.Id).Select(x=> (int?) x.Sequence)
+                    .Where(x => x.MtdFormPartFieldId == docField.Id).Select(x => (int?)x.Sequence)
                     .FirstOrDefault();
-                
+
                 docField.IndexSequence = sequence ?? int.MaxValue;
             }
 

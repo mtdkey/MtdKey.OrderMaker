@@ -3,25 +3,22 @@
     Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
 */
 
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using MtdKey.OrderMaker.AppConfig;
+using MtdKey.OrderMaker.Areas.Identity.Data;
+using MtdKey.OrderMaker.Core;
+using MtdKey.OrderMaker.Entity;
+using MtdKey.OrderMaker.Models.Controls.MTDSelectList;
+using MtdKey.OrderMaker.Services;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using MtdKey.OrderMaker.Areas.Identity.Data;
-using MtdKey.OrderMaker.Entity;
-using MtdKey.OrderMaker.AppConfig;
-using MtdKey.OrderMaker.Services;
-using MtdKey.OrderMaker.Models.Controls.MTDSelectList;
-using MtdKey.OrderMaker.Core;
 
 namespace MtdKey.OrderMaker.Areas.Identity.Pages.Users.Accounts
 {
@@ -53,7 +50,7 @@ namespace MtdKey.OrderMaker.Areas.Identity.Pages.Users.Accounts
             _context = context;
             this.options = options;
         }
-        
+
 
         public string UserName { get; set; }
         //public string Role { get; set; }
@@ -84,10 +81,10 @@ namespace MtdKey.OrderMaker.Areas.Identity.Pages.Users.Accounts
 
             [Display(Name = "Confirm")]
             public bool IsConfirm { get; set; }
-         
+
             public string Role { get; set; }
             public string Policy { get; set; }
-            public string TitleGroup { get; set; }              
+            public string TitleGroup { get; set; }
         }
 
         public List<MTDSelectListItem> Roles { get; set; }
@@ -106,7 +103,7 @@ namespace MtdKey.OrderMaker.Areas.Identity.Pages.Users.Accounts
             IList<WebAppRole> roles = await _roleManager.Roles.ToListAsync();
             var userRoles = await _userManager.GetRolesAsync(user);
             var userRoleName = userRoles.FirstOrDefault();
-            var userRole =  await _roleManager.FindByNameAsync(userRoleName);         
+            var userRole = await _roleManager.FindByNameAsync(userRoleName);
 
             Input = new InputModel
             {
@@ -123,11 +120,11 @@ namespace MtdKey.OrderMaker.Areas.Identity.Pages.Users.Accounts
             {
                 Roles.Add(new MTDSelectListItem { Id = item.Id, Value = item.Title });
             });
-                      
+
 
             Users = new List<MTDSelectListItem>();
             var users = await _userManager.Users
-                .Where(x=>x.DatabaseId == currentUser.DatabaseId)
+                .Where(x => x.DatabaseId == currentUser.DatabaseId)
                 .OrderBy(x => x.Title)
                 .ToListAsync();
 
@@ -147,7 +144,7 @@ namespace MtdKey.OrderMaker.Areas.Identity.Pages.Users.Accounts
                 Policies.Add(new MTDSelectListItem { Id = item.Id, Value = item.Name });
             });
 
-           //ViewData["Policies"] = new SelectList(mtdPolicy.OrderBy(x=>x.Name), "Id", "Name", policyID);
+            //ViewData["Policies"] = new SelectList(mtdPolicy.OrderBy(x=>x.Name), "Id", "Name", policyID);
 
             MtdGroups = await _context.MtdGroup.OrderBy(x => x.Name).ToListAsync();
 
@@ -162,7 +159,7 @@ namespace MtdKey.OrderMaker.Areas.Identity.Pages.Users.Accounts
             };
 
             foreach (var group in groups)
-            {                
+            {
                 GroupList.Add(new MTDSelectListItem { Id = group.Id, Value = group.Name });
             }
 

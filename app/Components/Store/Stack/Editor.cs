@@ -5,8 +5,6 @@
 
 using Microsoft.AspNetCore.Mvc;
 using MtdKey.OrderMaker.Core;
-using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace MtdKey.OrderMaker.Components.Store.Stack
@@ -19,7 +17,7 @@ namespace MtdKey.OrderMaker.Components.Store.Stack
         {
             string viewName = await GetViewNameAsync(docField.Type, docPart.Type);
             ViewData["typeStyle"] = docPart.Type == DocPartType.Columns ? "Columns" : "Rows";
-           
+
             return View(viewName, docField);
         }
 
@@ -50,7 +48,7 @@ namespace MtdKey.OrderMaker.Components.Store.Stack
 
         private static async Task<string> GetViewNameAsync(int type, int partType)
         {
-            return await Task.Run(() => GetViewName(type,partType));
+            return await Task.Run(() => GetViewName(type, partType));
         }
     }
 }

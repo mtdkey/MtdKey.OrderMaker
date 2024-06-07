@@ -14,7 +14,7 @@ namespace MtdKey.OrderMaker.Controllers
         public readonly DataConnector context;
 
         public ImagesController(DataConnector context)
-        {    
+        {
             this.context = context;
         }
 

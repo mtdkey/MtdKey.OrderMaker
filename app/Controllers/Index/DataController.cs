@@ -321,7 +321,7 @@ namespace MtdKey.OrderMaker.Controllers.Index
                 await _context.SaveChangesAsync();
             }
 
-            await _context.Entry(filter).Collection(x=>x.MtdFilterColumns).LoadAsync();
+            await _context.Entry(filter).Collection(x => x.MtdFilterColumns).LoadAsync();
 
             List<MtdFilterColumn> columns = new();
             int seq = 0;

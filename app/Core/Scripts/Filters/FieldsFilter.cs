@@ -1,6 +1,6 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 using System.Linq;
-using System;
 
 namespace MtdKey.OrderMaker.Core.Scripts.StoreIds
 {
@@ -8,7 +8,7 @@ namespace MtdKey.OrderMaker.Core.Scripts.StoreIds
     {
         public override string ReplaceFilter(string script, FilterSQLparams filter)
         {
-      
+
             if (filter.DocFieldModels.Count > 0)
             {
                 var fieldIds = string.Empty;
@@ -51,7 +51,7 @@ namespace MtdKey.OrderMaker.Core.Scripts.StoreIds
 
         private static void FilterTextHandler(ref string script, FilterFieldModel model)
         {
-            bool IsText = model.Type == FieldType.Text 
+            bool IsText = model.Type == FieldType.Text
                 || model.Type == FieldType.Link
                 || model.Type == FieldType.List;
 

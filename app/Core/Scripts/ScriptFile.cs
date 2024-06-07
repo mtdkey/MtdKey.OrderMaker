@@ -4,7 +4,7 @@ using System.Reflection;
 namespace MtdKey.OrderMaker.Core.Scripts
 {
 
-    public class ScriptFile 
+    public class ScriptFile
     {
         private string _script;
         private readonly IScriptFile scriptFile;

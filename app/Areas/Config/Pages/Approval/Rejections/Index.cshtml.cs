@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using MtdKey.OrderMaker.Entity;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace MtdKey.OrderMaker.Areas.Config.Pages.Approval.Rejections
 {
@@ -23,7 +22,7 @@ namespace MtdKey.OrderMaker.Areas.Config.Pages.Approval.Rejections
         public MtdApprovalStage MtdApprovalStage { get; set; }
         [BindProperty]
         public string SearchText { get; set; }
-        public async Task<IActionResult> OnGetAsync(string searchText, int stage=0)
+        public async Task<IActionResult> OnGetAsync(string searchText, int stage = 0)
         {
             SearchText = searchText;
             if (stage == 0) { return NotFound(); }
@@ -69,7 +68,7 @@ namespace MtdKey.OrderMaker.Areas.Config.Pages.Approval.Rejections
             _context.MtdApprovalRejection.UpdateRange(rejections);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index",new {stage=stageId,searchText=SearchText});
+            return RedirectToPage("./Index", new { stage = stageId, searchText = SearchText });
         }
     }
 }

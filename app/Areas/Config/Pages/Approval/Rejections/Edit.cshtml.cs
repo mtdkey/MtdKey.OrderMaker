@@ -1,10 +1,10 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using MtdKey.OrderMaker.Components;
 using MtdKey.OrderMaker.Entity;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace MtdKey.OrderMaker.Areas.Config.Pages.Approval.Rejections
 {
@@ -37,7 +37,7 @@ namespace MtdKey.OrderMaker.Areas.Config.Pages.Approval.Rejections
             }
 
             await _context.Entry(MtdApprovalRejection).Reference(x => x.MtdApprovalStage).LoadAsync();
-            MtdApprovalStage = MtdApprovalRejection.MtdApprovalStage;            
+            MtdApprovalStage = MtdApprovalRejection.MtdApprovalStage;
             return Page();
         }
 

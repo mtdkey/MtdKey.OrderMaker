@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using MtdKey.OrderMaker.Areas.Identity.Data;
+using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
 
 namespace MtdKey.OrderMaker.Areas.Identity.Pages.Account.Manage
 {
@@ -87,7 +84,8 @@ namespace MtdKey.OrderMaker.Areas.Identity.Pages.Account.Manage
 
 
             bool checkCurrent = await _userManager.CheckPasswordAsync(user, Input.OldPassword);
-            if (!checkCurrent) {
+            if (!checkCurrent)
+            {
                 return BadRequest(_localizer["Invalid current password."]);
             }
 
@@ -104,7 +102,7 @@ namespace MtdKey.OrderMaker.Areas.Identity.Pages.Account.Manage
             {
                 return BadRequest(_localizer["The new password is not strong enough."]);
             }
-            
+
             var changePasswordResult = await _userManager.ChangePasswordAsync(user, Input.OldPassword, Input.NewPassword.Trim());
             if (!changePasswordResult.Succeeded)
             {
@@ -117,7 +115,7 @@ namespace MtdKey.OrderMaker.Areas.Identity.Pages.Account.Manage
 
             await _signInManager.RefreshSignInAsync(user);
             //_logger.LogInformation("User changed their password successfully.");
-            
+
             //StatusMessage = "Your password has been changed.";
 
             return RedirectToPage("/Index");

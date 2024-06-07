@@ -15,6 +15,6 @@ namespace MtdKey.OrderMaker
         public bool Active { get; set; } = true;
         public string DefaultValue { get; set; } = string.Empty;
         public ListItemModel[] ListItems { get; set; } = [];
-   
+
     }
 }

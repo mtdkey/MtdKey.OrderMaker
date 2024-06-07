@@ -1,8 +1,8 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using MtdKey.OrderMaker.Services;
+using System.Threading.Tasks;
 
 namespace MtdKey.OrderMaker.Controllers.Index.Filter
 {
@@ -27,11 +27,11 @@ namespace MtdKey.OrderMaker.Controllers.Index.Filter
         public async Task<IActionResult> PostFilterScriptAsync()
         {
             var form = await Request.ReadFormAsync();
-     
+
             string scriptId = form["script-id"];
             bool isOk = int.TryParse(scriptId, out int id);
             if (!isOk) { return BadRequest(_localizer["Error: Bad request."]); }
-            
+
             bool available = await userHandler.IsFilterAccessingAsync(User, id);
             if (!available) { return BadRequest(_localizer["Error: Bad request."]); }
 

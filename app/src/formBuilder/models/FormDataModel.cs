@@ -1,6 +1,4 @@
-﻿using MtdKey.OrderMaker;
-
-namespace MtdKey.OrderMaker
+﻿namespace MtdKey.OrderMaker
 {
     public class FormDataModel
     {

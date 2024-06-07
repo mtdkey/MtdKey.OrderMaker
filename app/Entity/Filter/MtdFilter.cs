@@ -24,7 +24,7 @@ namespace MtdKey.OrderMaker.Entity
         public string SearchNumber { get; set; }
         public int Page { get; set; }
         public sbyte ShowNumber { get; set; }
-        public sbyte ShowDate { get; set; }         
+        public sbyte ShowDate { get; set; }
         public string Sort { get; set; }
         public string SortOrder { get; set; }
 

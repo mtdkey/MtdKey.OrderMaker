@@ -3,18 +3,15 @@
     Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
 */
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using MtdKey.OrderMaker.AppConfig;
-using MtdKey.OrderMaker.Areas.Identity.Data;
 using MtdKey.OrderMaker.Entity;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace MtdKey.OrderMaker.Areas.Identity.Pages.Users.Policy
 {
@@ -45,14 +42,14 @@ namespace MtdKey.OrderMaker.Areas.Identity.Pages.Users.Policy
             await _context.Entry(MtdPolicy).Collection(x => x.MtdPolicyForms).LoadAsync();
             await _context.Entry(MtdPolicy).Collection(x => x.MtdPolicyParts).LoadAsync();
 
-            MtdGroups = await _context.MtdGroup.OrderBy(x=>x.Name).ToListAsync();
-            
-            MtdForms = await _context.MtdForm
-                .OrderBy(x=>x.Sequence).ToListAsync();
+            MtdGroups = await _context.MtdGroup.OrderBy(x => x.Name).ToListAsync();
 
-            foreach(MtdForm form in MtdForms)
+            MtdForms = await _context.MtdForm
+                .OrderBy(x => x.Sequence).ToListAsync();
+
+            foreach (MtdForm form in MtdForms)
             {
-                await _context.Entry(form).Collection(x=>x.MtdFormParts).LoadAsync();
+                await _context.Entry(form).Collection(x => x.MtdFormParts).LoadAsync();
             }
 
             ExportToExcel = limit.ExportExcel;

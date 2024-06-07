@@ -3,9 +3,6 @@
     Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
 */
 
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -14,6 +11,7 @@ using MtdKey.OrderMaker.Areas.Identity.Data;
 using MtdKey.OrderMaker.Core;
 using MtdKey.OrderMaker.Entity;
 using MtdKey.OrderMaker.Services;
+using System.Threading.Tasks;
 
 namespace MtdKey.OrderMaker.Areas.Workplace.Pages.Store
 {
@@ -45,10 +43,11 @@ namespace MtdKey.OrderMaker.Areas.Workplace.Pages.Store
                 return NotFound();
             }
 
-            var user = await _userHandler.GetUserAsync(HttpContext.User);            
-            bool isEditor = await _userHandler.IsEditor(user,MtdStore.MtdFormId,MtdStore.Id);
-            
-            if (!isEditor) {
+            var user = await _userHandler.GetUserAsync(HttpContext.User);
+            bool isEditor = await _userHandler.IsEditor(user, MtdStore.MtdFormId, MtdStore.Id);
+
+            if (!isEditor)
+            {
                 return Forbid();
             }
 

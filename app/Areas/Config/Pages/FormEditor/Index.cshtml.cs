@@ -5,13 +5,13 @@
 */
 
 
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using MtdKey.OrderMaker.Entity;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace MtdKey.OrderMaker.Areas.Config.Pages.FormEditor
 {
@@ -24,22 +24,23 @@ namespace MtdKey.OrderMaker.Areas.Config.Pages.FormEditor
             _context = context;
         }
 
-        public IList<MtdForm> MtdForms { get;set; }
+        public IList<MtdForm> MtdForms { get; set; }
         public string SearchText { get; set; }
 
         public async Task<IActionResult> OnGetAsync(string searchText)
         {
             var query = _context.MtdForm.AsQueryable();
 
-            if (searchText != null) {
+            if (searchText != null)
+            {
                 string normText = searchText.ToUpper();
-                query = query.Where(x => x.Name.ToUpper().Contains(normText) || 
+                query = query.Where(x => x.Name.ToUpper().Contains(normText) ||
                                         x.Description.ToUpper().Contains(normText)
                                         );
                 SearchText = searchText;
             }
 
-            MtdForms = await query.OrderBy(x=>x.Sequence).ToListAsync();
+            MtdForms = await query.OrderBy(x => x.Sequence).ToListAsync();
 
             foreach (MtdForm form in MtdForms)
             {

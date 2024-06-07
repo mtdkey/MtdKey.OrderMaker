@@ -1,14 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Linq;
-using System.Text.Json.Serialization;
-using System.Text.Json;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using MtdKey.OrderMaker.Entity;
 using MtdKey.OrderMaker.Areas.Identity.Data;
+using MtdKey.OrderMaker.Entity;
 using MtdKey.OrderMaker.Services;
 using MtdKey.OrderMaker.src.formBuilder.models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Threading.Tasks;
 
 
 namespace MtdKey.OrderMaker
@@ -207,12 +207,12 @@ namespace MtdKey.OrderMaker
                     SysType = field.MtdSysType,
                     DefaultValue = field.DefaultData,
                     ListItems = field.MtdFormPartFieldItems
-                    .Where(x=>x.IsDeleted==false)
+                    .Where(x => x.IsDeleted == false)
                     .Select(x => new ListItemModel
                     {
                         Id = x.Id.ToString(),
                         Name = x.Name
-                    }).OrderBy(x=>x.Name)
+                    }).OrderBy(x => x.Name)
                     .ToArray(),
                 });
             });
@@ -409,16 +409,17 @@ namespace MtdKey.OrderMaker
                         var itemExists = field.MtdFormPartFieldItems
                             .FirstOrDefault(x => x.Id.ToString().ToLower() == item.Id.ToLower());
                         if (itemExists == null)
-                            await context.MtdFormPartFieldItems.AddAsync(new MtdFormPartFieldItem { 
-                                Id = Guid.Parse(item.Id), 
-                                Name= item.Name,
+                            await context.MtdFormPartFieldItems.AddAsync(new MtdFormPartFieldItem
+                            {
+                                Id = Guid.Parse(item.Id),
+                                Name = item.Name,
                                 FieldId = field.Id
                             });
                         else
                             itemExists.Name = item.Name;
                     }
 
-                    foreach (var item in field.MtdFormPartFieldItems.Where(x=>x.IsDeleted == false))
+                    foreach (var item in field.MtdFormPartFieldItems.Where(x => x.IsDeleted == false))
                     {
                         if (!fieldModel.ListItems.Any(x => x.Id.Equals(item.Id.ToString(), StringComparison.CurrentCultureIgnoreCase)))
                             item.IsDeleted = true;

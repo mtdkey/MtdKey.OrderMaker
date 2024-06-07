@@ -12,12 +12,13 @@ namespace MtdKey.OrderMaker.Core
         {
             var appUser = await userHandler.GetUserAsync(request.UserPrincipal);
             var parts = await GetAllowedPartsAsync(request);
-            var partIds = parts.Select(x=>x.Id).ToList();
+            var partIds = parts.Select(x => x.Id).ToList();
             List<DocFieldModel> docFields = await GetDocFields(request.FormId, appUser, partIds);
             var form = await context.MtdForm.Include(x => x.MtdFormHeader).AsSplitQuery()
                 .FirstOrDefaultAsync(x => x.Id == request.FormId);
 
-            DocModel docModel = new() {
+            DocModel docModel = new()
+            {
                 Id = request.StoreId,
                 FormName = form.Name,
                 Image = form.MtdFormHeader?.Image,
@@ -25,7 +26,7 @@ namespace MtdKey.OrderMaker.Core
                 Parts = parts,
                 Fields = docFields,
                 Created = DateTime.UtcNow,
-                EditDate = await userHandler.IsReviewerAsync(appUser, request.FormId),                
+                EditDate = await userHandler.IsReviewerAsync(appUser, request.FormId),
             };
 
             return docModel;

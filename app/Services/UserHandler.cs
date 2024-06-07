@@ -22,8 +22,8 @@ namespace MtdKey.OrderMaker.Services
 {
     public enum RightsType
     {
-        ViewAll, Create, Edit, Delete, ViewOwn, EditOwn, DeleteOwn, 
-        ViewGroup, EditGroup, DeleteGroup, SetOwn, 
+        ViewAll, Create, Edit, Delete, ViewOwn, EditOwn, DeleteOwn,
+        ViewGroup, EditGroup, DeleteGroup, SetOwn,
         Reviewer, SetDate, OwnDenyGroup,
         ExportToExcel
     };
@@ -56,13 +56,13 @@ namespace MtdKey.OrderMaker.Services
 
             IList<MtdPolicy> mtdPolicies = await _context.MtdPolicy.ToListAsync();
 
-            foreach(var policy in mtdPolicies)
+            foreach (var policy in mtdPolicies)
             {
                 await _context.Entry(policy).Collection(x => x.MtdPolicyForms).LoadAsync();
                 await _context.Entry(policy).Collection(x => x.MtdPolicyParts).LoadAsync();
                 await _context.Entry(policy).Collection(x => x.MtdPolicyScripts).LoadAsync();
             }
-            
+
             return mtdPolicies;
         }
 
@@ -91,8 +91,8 @@ namespace MtdKey.OrderMaker.Services
 
         public async Task SetPolicyForUserAsync(WebAppUser user, string policyId)
         {
-            IEnumerable<Claim> claims = await GetClaimsAsync(user);            
-            await RemoveClaimsAsync(user, claims.Where(x=>x.Type == "policy"));
+            IEnumerable<Claim> claims = await GetClaimsAsync(user);
+            await RemoveClaimsAsync(user, claims.Where(x => x.Type == "policy"));
 
             Claim claim = new("policy", policyId);
             await AddClaimAsync(user, claim);
@@ -304,7 +304,7 @@ namespace MtdKey.OrderMaker.Services
             if (userPolicy == null) return result;
 
             IList<MtdFormPart> parts = await _context.MtdFormPart
-                .Include(x=>x.MtdFormPartHeader)
+                .Include(x => x.MtdFormPartHeader)
                 .Where(x => x.MtdFormId == formId)
                 .AsSplitQuery()
                 .ToListAsync();

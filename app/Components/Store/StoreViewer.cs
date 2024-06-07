@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
+using MtdKey.OrderMaker.Areas.Identity.Data;
 using MtdKey.OrderMaker.Entity;
+using MtdKey.OrderMaker.Services;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using MtdKey.OrderMaker.Services;
-using MtdKey.OrderMaker.Areas.Identity.Data;
 
 namespace MtdKey.OrderMaker.Components.Store
 {
@@ -34,11 +34,11 @@ namespace MtdKey.OrderMaker.Components.Store
             this.userHandler = userHandler;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(string storeId, string viewerId)            
+        public async Task<IViewComponentResult> InvokeAsync(string storeId, string viewerId)
         {
             if (storeId == null)
             {
-                               
+
                 StoreViewerModel nullModel = new()
                 {
                     SoreId = string.Empty,
@@ -56,8 +56,8 @@ namespace MtdKey.OrderMaker.Components.Store
             await context.Entry(mtdForm).Reference(x => x.MtdFormHeader).LoadAsync();
 
             WebAppUser user = await userHandler.GetUserAsync(HttpContext.User);
-            bool isViewer = await userHandler.IsViewer(user,mtdForm.Id, storeId);
-           
+            bool isViewer = await userHandler.IsViewer(user, mtdForm.Id, storeId);
+
             string imgSrc = string.Empty;
             if (mtdForm.MtdFormHeader != null)
             {

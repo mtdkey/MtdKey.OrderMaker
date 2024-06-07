@@ -3,18 +3,18 @@
     Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
 */
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
-using MtdKey.OrderMaker.Entity;
 using Microsoft.Extensions.Options;
 using MtdKey.OrderMaker.AppConfig;
+using MtdKey.OrderMaker.Entity;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace MtdKey.OrderMaker.Areas.Config.Pages.FormEditor
 {
@@ -73,12 +73,12 @@ namespace MtdKey.OrderMaker.Areas.Config.Pages.FormEditor
                 Description = _localizer["Main content"],
                 MtdSysStyle = 4,
                 Sequence = 1,
-                Title = 1                
+                Title = 1
             };
 
             MtdForm.MtdFormParts.Add(formPart);
-            await _context.MtdForm.AddAsync(MtdForm);           
-            
+            await _context.MtdForm.AddAsync(MtdForm);
+
             await _context.SaveChangesAsync();
 
             return LocalRedirect($"/config/formeditor/index?formId={MtdForm.Id}");

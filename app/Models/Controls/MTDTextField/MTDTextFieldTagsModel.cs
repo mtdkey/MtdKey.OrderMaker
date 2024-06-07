@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Razor.Language.Intermediate;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System;
 
 namespace MtdKey.OrderMaker.Models.Controls.MTDTextField
 {
@@ -15,8 +11,9 @@ namespace MtdKey.OrderMaker.Models.Controls.MTDTextField
         public string IdHelperError { get; set; }
         public string IdInput { get; set; }
 
-        public MTDTextFieldTagsModel(MTDTextFieldTags tags) {
-            this.Id = tags.Id ?? Guid.NewGuid().ToString(); 
+        public MTDTextFieldTagsModel(MTDTextFieldTags tags)
+        {
+            this.Id = tags.Id ?? Guid.NewGuid().ToString();
             this.MaxLength = tags.MaxLength;
             this.Disabled = tags.Disabled;
             this.HelperText = tags.HelperText;
@@ -24,7 +21,7 @@ namespace MtdKey.OrderMaker.Models.Controls.MTDTextField
             this.HelperError = tags.HelperError;
             this.HelperErrorLocalizer = tags.HelperErrorLocalizer;
             this.IconLeading = tags.IconLeading;
-            this.IconLeadingScript = tags.IconLeadingScript;     
+            this.IconLeadingScript = tags.IconLeadingScript;
             this.IconTrailing = tags.IconTrailing;
             this.IconTrailingString = tags.IconTrailingString;
             this.IconTrailingColor = tags.IconTrailingColor;
@@ -42,7 +39,7 @@ namespace MtdKey.OrderMaker.Models.Controls.MTDTextField
             this.IdLabel = $"{Id}-label";
             this.IdHelper = $"{Id}-helper";
             this.IdHelperError = $"{Id}-helper-error";
-            this.IdInput = $"{Id}-input";            
+            this.IdInput = $"{Id}-input";
             this.RDAttribute = tags.Required ? "required" : string.Empty;
             if (tags.Disabled) { RDAttribute = "disabled"; }
 
@@ -57,9 +54,9 @@ namespace MtdKey.OrderMaker.Models.Controls.MTDTextField
             this.MtdInputClicker = tags.MtdInputClicker;
             this.Pattern = tags.Pattern;
             this.MtdDataMessage = tags.MtdDataMessage;
-                
-                       
+
+
         }
-                
+
     }
 }

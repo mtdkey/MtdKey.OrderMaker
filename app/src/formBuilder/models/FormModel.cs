@@ -12,7 +12,7 @@
         public string ImageBack { get; set; } = string.Empty;
         public string ImageBackType { get; set; } = string.Empty;
         public int ImageBackSize { get; set; }
-        public string ImageLogo{ get; set; } = string.Empty;
+        public string ImageLogo { get; set; } = string.Empty;
         public string ImageLogoType { get; set; } = string.Empty;
         public int ImageLogoSize { get; set; }
 

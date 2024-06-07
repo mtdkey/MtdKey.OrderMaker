@@ -3,16 +3,15 @@
     Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
 */
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using MtdKey.OrderMaker.Areas.Identity.Data;
 using MtdKey.OrderMaker.Entity;
 using MtdKey.OrderMaker.Services;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace MtdKey.OrderMaker.Pages
 {
@@ -21,8 +20,8 @@ namespace MtdKey.OrderMaker.Pages
         private readonly DataConnector _context;
         private readonly UserHandler _userHandler;
 
-        public IndexModel(UserHandler userHandler, DataConnector  context)
-        {         
+        public IndexModel(UserHandler userHandler, DataConnector context)
+        {
             _context = context;
             _userHandler = userHandler;
         }
@@ -39,7 +38,7 @@ namespace MtdKey.OrderMaker.Pages
 
             foreach (var form in forms)
             {
-                bool isExists = await _context.MtdFilter.Where(x => x.MtdFormId == form.Id && x.IdUser==user.Id).AnyAsync();
+                bool isExists = await _context.MtdFilter.Where(x => x.MtdFormId == form.Id && x.IdUser == user.Id).AnyAsync();
                 if (!isExists)
                 {
                     MtdFilter mtdFilter = new()
@@ -71,8 +70,9 @@ namespace MtdKey.OrderMaker.Pages
 
             Forms = await query.ToListAsync();
 
-            foreach(var form in Forms) { 
-                await _context.Entry(form).Reference(x=>x.MtdCategoryNavigation).LoadAsync();
+            foreach (var form in Forms)
+            {
+                await _context.Entry(form).Reference(x => x.MtdCategoryNavigation).LoadAsync();
                 await _context.Entry(form).Reference(x => x.MtdFormHeader).LoadAsync();
                 await _context.Entry(form).Reference(x => x.MtdFormDesk).LoadAsync();
             }

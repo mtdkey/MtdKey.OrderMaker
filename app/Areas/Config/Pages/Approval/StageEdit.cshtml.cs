@@ -3,10 +3,6 @@
     Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
  */
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -15,6 +11,9 @@ using MtdKey.OrderMaker.Areas.Identity.Data;
 using MtdKey.OrderMaker.Entity;
 using MtdKey.OrderMaker.Models.Controls.MTDSelectList;
 using MtdKey.OrderMaker.Services;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace MtdKey.OrderMaker.Areas.Config.Pages.Approval
 {
@@ -28,7 +27,7 @@ namespace MtdKey.OrderMaker.Areas.Config.Pages.Approval
             _context = context;
             _userHandler = userHandler;
         }
-        
+
         public MtdApproval MtdApproval { get; set; }
         public MtdApprovalStage MtdApprovalStage { get; set; }
         public IList<MtdFormPart> MtdFormParts { get; set; }
@@ -50,10 +49,10 @@ namespace MtdKey.OrderMaker.Areas.Config.Pages.Approval
                 .Where(x => x.Id == MtdApprovalStage.MtdApproval)
                 .FirstOrDefaultAsync();
 
-            await _context.Entry(MtdApproval).Reference(x=>x.MtdFormNavigation).LoadAsync();
+            await _context.Entry(MtdApproval).Reference(x => x.MtdFormNavigation).LoadAsync();
 
             MtdFormParts = await _context.MtdFormPart.Where(x => x.MtdFormId == MtdApproval.MtdForm).OrderBy(x => x.Sequence).ToListAsync();
-            IList<WebAppUser> webAppUsers = await _userHandler.Users.OrderBy(x=>x.Title).ToListAsync();
+            IList<WebAppUser> webAppUsers = await _userHandler.Users.OrderBy(x => x.Title).ToListAsync();
             UserItems = new List<MTDSelectListItem>
             {
                 new MTDSelectListItem { Id = "owner", Value = "Owner", Selectded = MtdApprovalStage.UserId == "owner", Localized=true }
@@ -66,7 +65,7 @@ namespace MtdKey.OrderMaker.Areas.Config.Pages.Approval
 
             ViewData["Users"] = new SelectList(webAppUsers, "Id", "Title");
 
-            Resolutions = await _context.MtdApprovalResolution.Where(x=>x.MtdApprovalStageId == id).OrderBy(x => x.Sequence).ToListAsync();
+            Resolutions = await _context.MtdApprovalResolution.Where(x => x.MtdApprovalStageId == id).OrderBy(x => x.Sequence).ToListAsync();
             Rejections = await _context.MtdApprovalRejection.Where(x => x.MtdApprovalStageId == id).OrderBy(x => x.Sequence).ToListAsync();
 
             return Page();

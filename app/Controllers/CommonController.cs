@@ -11,7 +11,7 @@ namespace MtdKey.OrderMaker.Controllers
     public class CommonController : ControllerBase
     {
         public readonly UserHandler userHandler;
-       
+
 
         public CommonController(UserHandler userHandler)
         {
@@ -24,7 +24,7 @@ namespace MtdKey.OrderMaker.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> OnPostPasswordGenerateAsync()
         {
-            string data = await Task.Run(()=> userHandler.GeneratePassword());
+            string data = await Task.Run(() => userHandler.GeneratePassword());
 
             return Ok(new JsonResult(data));
         }

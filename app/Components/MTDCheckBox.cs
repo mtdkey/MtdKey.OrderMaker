@@ -2,9 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Primitives;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace MtdKey.OrderMaker.Components
@@ -27,7 +24,7 @@ namespace MtdKey.OrderMaker.Components
         public static async Task<bool> GetResultAsync(string id, HttpRequest request)
         {
             bool result = false;
-            StringValues value = await Task.Run(()=> request.Form[$"{id}-mtd-checkbox-input"]);
+            StringValues value = await Task.Run(() => request.Form[$"{id}-mtd-checkbox-input"]);
 
             if (!StringValues.IsNullOrEmpty(value) && value != "false") { result = true; }
 

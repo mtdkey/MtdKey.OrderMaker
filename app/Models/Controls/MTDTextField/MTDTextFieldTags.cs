@@ -1,7 +1,7 @@
 ﻿namespace MtdKey.OrderMaker.Models.Controls.MTDTextField
 {
     public class MTDTextFieldTags
-    {        
+    {
         public string Id { get; set; }
         public string Name { get; set; }
         public string Label { get; set; }
@@ -22,8 +22,8 @@
         public bool HelperErrorLocalizer { get; set; }
         public string Type { get; set; }
         public string Step { get; set; }
-        public bool UnlimitedText { get; set; }  = false;
-        public bool ShowCounter { get; set; }  = false;
+        public bool UnlimitedText { get; set; } = false;
+        public bool ShowCounter { get; set; } = false;
         public int MaxLength { get; set; } = 250;
         public string Class { get; set; }
         public MTDTextFieldViews MTDTexFieldView { get; set; }

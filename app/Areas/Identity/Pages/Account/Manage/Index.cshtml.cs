@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.IO;
-using System.Text.Encodings.Web;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Localization;
-using Microsoft.Extensions.Options;
 using MtdKey.OrderMaker.Areas.Identity.Data;
-using MtdKey.OrderMaker.AppConfig;
 using MtdKey.OrderMaker.Services;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Text.Encodings.Web;
+using System.Threading.Tasks;
 
 namespace MtdKey.OrderMaker.Areas.Identity.Pages.Account.Manage
 {
@@ -28,14 +23,14 @@ namespace MtdKey.OrderMaker.Areas.Identity.Pages.Account.Manage
         public IndexModel(
             UserManager<WebAppUser> userManager,
             SignInManager<WebAppUser> signInManager,
-            IEmailSenderBlank emailSender, 
+            IEmailSenderBlank emailSender,
             IStringLocalizer<SharedResource> localizer)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _emailSender = emailSender;            
+            _emailSender = emailSender;
             _localizer = localizer;
-            
+
         }
 
         [BindProperty]
@@ -49,7 +44,7 @@ namespace MtdKey.OrderMaker.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
-            [Required]            
+            [Required]
             public string Password { get; set; }
 
             [Required]
@@ -101,12 +96,13 @@ namespace MtdKey.OrderMaker.Areas.Identity.Pages.Account.Manage
 
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
-            {                
+            {
                 return BadRequest(_localizer[$"Unable to load user with ID '{_userManager.GetUserId(User)}'."]);
             }
 
             bool check = await _userManager.CheckPasswordAsync(user, Input.Password);
-            if (!check) {
+            if (!check)
+            {
                 return BadRequest(_localizer["Wrong password!"]);
             }
 
@@ -127,7 +123,7 @@ namespace MtdKey.OrderMaker.Areas.Identity.Pages.Account.Manage
                     throw new InvalidOperationException($"Unexpected error occurred setting email for user with ID '{userId}'.");
                 }
             }
-           
+
 
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
             if (Input.PhoneNumber != phoneNumber)
@@ -167,9 +163,9 @@ namespace MtdKey.OrderMaker.Areas.Identity.Pages.Account.Manage
             var callbackUrl = Url.Page(
                 "/Account/ConfirmEmail",
                 pageHandler: null,
-                values: new { userId,  code },
+                values: new { userId, code },
                 protocol: Request.Scheme);
-           
+
             StatusMessage = _localizer["Verification email sent. Please check your email."];
 
             BlankEmail blankEmail = new()
@@ -183,16 +179,17 @@ namespace MtdKey.OrderMaker.Areas.Identity.Pages.Account.Manage
                            $"<a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>{_localizer["Email Verification"]}</a>"
                        }
             };
-            
+
             try
             {
                 await _emailSender.SendEmailBlankAsync(blankEmail, false);
 
-            } catch
+            }
+            catch
             {
                 StatusMessage = "Error sending message. Perhaps this address does not exist.";
             }
-                       
+
             return RedirectToPage("/Index");
         }
     }

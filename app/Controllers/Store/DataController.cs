@@ -55,8 +55,8 @@ namespace MtdKey.OrderMaker.Controllers.Store
 
             form.Where(x => x.Key.Contains("field-")).ToList().ForEach(item =>
             {
-                var itemKey = item.Key.Replace("field-", "");                
-                storeRequest.Fields.Add(itemKey, item.Value);                
+                var itemKey = item.Key.Replace("field-", "");
+                storeRequest.Fields.Add(itemKey, item.Value);
             });
 
             await storeService.CreateStoreAsync(storeRequest);

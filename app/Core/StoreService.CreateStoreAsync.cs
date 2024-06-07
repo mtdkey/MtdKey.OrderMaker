@@ -1,8 +1,8 @@
-﻿using MtdKey.OrderMaker.Entity;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
+using MtdKey.OrderMaker.Entity;
 using System;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace MtdKey.OrderMaker.Core
 {
@@ -11,7 +11,7 @@ namespace MtdKey.OrderMaker.Core
         public async Task CreateStoreAsync(StorePostRequest storeRequest)
         {
             var mtdStore = await AddMtdStoreAsync(storeRequest);
-            
+
             await AddStoreItemsAsync(storeRequest, mtdStore);
             await context.SaveChangesAsync();
 
@@ -28,7 +28,7 @@ namespace MtdKey.OrderMaker.Core
                     PartsApproved = string.Empty,
                     Result = 0,
                 };
-                
+
                 await context.MtdStoreApproval.AddAsync(storeApproval);
                 await context.SaveChangesAsync();
             }
@@ -56,7 +56,7 @@ namespace MtdKey.OrderMaker.Core
 
             int sequence = await context.MtdStore
                 .Where(x => x.MtdFormId == storeRequest.FormId)
-                .MaxAsync(x => (int?)x.Sequence) ?? 0;            
+                .MaxAsync(x => (int?)x.Sequence) ?? 0;
             mtdStore.Sequence = sequence + 1;
 
             await context.AddAsync(mtdStore);

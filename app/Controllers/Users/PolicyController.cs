@@ -10,7 +10,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using MtdKey.OrderMaker.AppConfig;
 using MtdKey.OrderMaker.Entity;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -66,15 +65,15 @@ namespace MtdKey.OrderMaker.Controllers.Users
             MtdPolicy mtdPolicy = await _context.MtdPolicy.FindAsync(policyId);
             if (mtdPolicy == null) { return NotFound(); }
 
-            IList<MtdForm> mtdForms = await _context.MtdForm.ToListAsync();            
-            IList<MtdGroup> groups = await _context.MtdGroup.ToListAsync();          
+            IList<MtdForm> mtdForms = await _context.MtdForm.ToListAsync();
+            IList<MtdGroup> groups = await _context.MtdGroup.ToListAsync();
 
             IList<MtdPolicyForms> mtdPolicyForms = await _context.MtdPolicyForms.Where(x => x.MtdPolicy == mtdPolicy.Id).ToListAsync();
             mtdPolicyForms ??= new List<MtdPolicyForms>();
 
             foreach (var mtdForm in mtdForms)
             {
-                await _context.Entry(mtdForm).Collection(x=>x.MtdFormParts).LoadAsync();
+                await _context.Entry(mtdForm).Collection(x => x.MtdFormParts).LoadAsync();
 
                 string formCreate = form[$"{mtdForm.Id}-create"];
 
@@ -127,7 +126,7 @@ namespace MtdKey.OrderMaker.Controllers.Users
 
                 pf.DeleteAll = GetSbyte(formDelete);
                 pf.DeleteGroup = GetSbyte(formDeleteGroup);
-                pf.DeleteOwn = GetSbyte(formDeleteOwn);              
+                pf.DeleteOwn = GetSbyte(formDeleteOwn);
 
                 if (newPf)
                 {
@@ -187,13 +186,13 @@ namespace MtdKey.OrderMaker.Controllers.Users
 
             IList<MtdForm> forms = await _context.MtdForm.ToListAsync();
             IList<MtdGroup> groups = await _context.MtdGroup.ToListAsync();
-           
+
             IList<MtdPolicyForms> mtdPolicyForms = await _context.MtdPolicyForms.Where(x => x.MtdPolicy == mtdPolicy.Id).ToListAsync();
             mtdPolicyForms ??= new List<MtdPolicyForms>();
 
             foreach (var form in forms)
             {
-                await _context.Entry(form).Collection(x=> x.MtdFormParts).LoadAsync();
+                await _context.Entry(form).Collection(x => x.MtdFormParts).LoadAsync();
                 MtdPolicyForms pf = mtdPolicyForms.Where(x => x.MtdForm == form.Id).FirstOrDefault();
                 bool newPf = false;
                 if (pf == null)
@@ -207,7 +206,7 @@ namespace MtdKey.OrderMaker.Controllers.Users
                 pf.Reviewer = 1;
                 pf.ChangeDate = 1;
                 pf.OwnDenyGroup = 1;
-                pf.ExportToExcel = limit.ExportExcel ? (sbyte)  1 : (sbyte) 0;
+                pf.ExportToExcel = limit.ExportExcel ? (sbyte)1 : (sbyte)0;
                 pf.RelatedCreate = 1;
                 pf.RelatedEdit = 1;
 
@@ -275,7 +274,7 @@ namespace MtdKey.OrderMaker.Controllers.Users
 
             IList<MtdForm> forms = await _context.MtdForm.ToListAsync();
             IList<MtdGroup> groups = await _context.MtdGroup.ToListAsync();
-            
+
             IList<MtdPolicyForms> mtdPolicyForms = await _context.MtdPolicyForms.Where(x => x.MtdPolicy == mtdPolicy.Id).ToListAsync();
             if (mtdPolicyForms == null) { mtdPolicyForms = new List<MtdPolicyForms>(); }
 
@@ -353,11 +352,12 @@ namespace MtdKey.OrderMaker.Controllers.Users
 
         [HttpPost("delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> OnPostPolicyDelete() {
+        public async Task<IActionResult> OnPostPolicyDelete()
+        {
 
             string policyId = Request.Form["policy-delete-id"];
             MtdPolicy mtdPolicy = new() { Id = policyId };
-            _context.MtdPolicy.Remove(mtdPolicy);            
+            _context.MtdPolicy.Remove(mtdPolicy);
             await _context.SaveChangesAsync();
 
             return Ok();

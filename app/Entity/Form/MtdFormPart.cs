@@ -23,7 +23,7 @@ namespace MtdKey.OrderMaker.Entity
         public sbyte Active { get; set; }
         public int MtdSysStyle { get; set; }
         public string MtdFormId { get; set; }
-        public sbyte Title { get; set; }   
+        public sbyte Title { get; set; }
 
         public virtual MtdForm MtdFormNavigation { get; set; }
         public virtual MtdSysStyle MtdSysStyleNavigation { get; set; }

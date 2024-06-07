@@ -1,24 +1,20 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using MtdKey.OrderMaker.Areas.Identity.Data;
 using MtdKey.OrderMaker.Core;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace MtdKey.OrderMaker.Areas.Identity.Pages.Account
 {
     public class ReLoginModel : PageModel
     {
 
-        private UserManager<WebAppUser> userManager;        
+        private UserManager<WebAppUser> userManager;
         private readonly ILogger<ReLoginModel> _logger;
- 
+
         public ReLoginModel(UserManager<WebAppUser> userManager, ILogger<ReLoginModel> logger)
         {
             this.userManager = userManager;
@@ -26,7 +22,7 @@ namespace MtdKey.OrderMaker.Areas.Identity.Pages.Account
         }
 
         public async Task<IActionResult> OnGetAsync(string returnUrl)
-        {           
+        {
             WebAppUser user = await userManager.GetUserAsync(HttpContext.User);
             if (user == null) { return RedirectToPage("/Identity/Account/Login"); }
 

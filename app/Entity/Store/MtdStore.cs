@@ -34,7 +34,7 @@ namespace MtdKey.OrderMaker.Entity
         public bool IsDeleted { get; set; } = false;
 
         public virtual MtdForm MtdFormNavigation { get; set; }
-        public virtual MtdStoreApproval MtdStoreApproval { get; set; }      
+        public virtual MtdStoreApproval MtdStoreApproval { get; set; }
         public virtual MtdStoreOwner MtdStoreOwner { get; set; }
         public virtual ICollection<MtdLogDocument> MtdLogDocument { get; set; }
         public virtual ICollection<MtdLogApproval> MtdLogApproval { get; set; }
@@ -42,8 +42,8 @@ namespace MtdKey.OrderMaker.Entity
         public virtual ICollection<MtdStoreText> MtdStoreTexts { get; set; }
         public virtual ICollection<MtdStoreInt> MtdStoreInts { get; set; }
         public virtual ICollection<MtdStoreDecimal> MtdStoreDecimals { get; set; }
-        public virtual ICollection<MtdStoreMemo> MtdStoreMemos { get; set;}
-        public virtual ICollection<MtdStoreFile> MtdStoreFiles { get; set;}
-        public virtual ICollection<MtdStoreItem> MtdStoreItems { get; set;}
+        public virtual ICollection<MtdStoreMemo> MtdStoreMemos { get; set; }
+        public virtual ICollection<MtdStoreFile> MtdStoreFiles { get; set; }
+        public virtual ICollection<MtdStoreItem> MtdStoreItems { get; set; }
     }
 }
