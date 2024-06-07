@@ -6,6 +6,6 @@ namespace MtdKey.OrderMaker.Core
     {
         public  List<DocPartModel> DocParts { get; set; }
         public List<DocFieldModel> DocFields { get; set; }
-        public List<string> UsersInGroupIds { get; set; } = new();
+        public List<string> UsersInGroupIds { get; set; } = [];
     }
 }

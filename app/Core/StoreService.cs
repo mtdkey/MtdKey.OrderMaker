@@ -7,19 +7,11 @@ using System.Threading.Tasks;
 
 namespace MtdKey.OrderMaker.Core
 {
-    public partial class StoreService : IStoreService
+    public partial class StoreService(DataConnector context, UserHandler userHandler, IOptions<LimitSettings> limitSettings) : IStoreService
     {
-        private readonly DataConnector context;
-        private readonly UserHandler userHandler;
-        private readonly LimitSettings limitSettings;
-
-        public StoreService(DataConnector context, UserHandler userHandler, IOptions<LimitSettings> limitSettings)
-        {
-            this.context = context;
-            this.userHandler = userHandler;
-            this.limitSettings = limitSettings.Value;
-        }
-
+        private readonly DataConnector context = context;
+        private readonly UserHandler userHandler = userHandler;
+        private readonly LimitSettings limitSettings = limitSettings.Value;
 
         public async Task<AllowedData> SecurityHandlerAsync(StoreDocRequest docRequest)
         {
@@ -69,7 +61,7 @@ namespace MtdKey.OrderMaker.Core
 
             if (viewOwn)
             {
-                allowedData.UsersInGroupIds = new() { appUser.Id };
+                allowedData.UsersInGroupIds = [appUser.Id];
             }
 
             return allowedData;

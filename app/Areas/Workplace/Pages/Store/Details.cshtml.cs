@@ -20,16 +20,10 @@ using MtdKey.OrderMaker.Services;
 
 namespace MtdKey.OrderMaker.Areas.Workplace.Pages.Store
 {
-    public class DetailsModel : PageModel
+    public class DetailsModel(DataConnector context, UserHandler userHandler) : PageModel
     {
-        private readonly DataConnector _context;
-        private readonly UserHandler _userHandler;
-
-        public DetailsModel(DataConnector context, UserHandler userHandler)
-        {
-            _context = context;
-            _userHandler = userHandler;
-        }
+        private readonly DataConnector _context = context;
+        private readonly UserHandler _userHandler = userHandler;
 
         public MtdStore MtdStore { get; set; }
         public MtdForm MtdForm { get; set; }
@@ -59,6 +53,7 @@ namespace MtdKey.OrderMaker.Areas.Workplace.Pages.Store
         public List<MTDSelectListItem> UsersRequest { get; set; }
 
         public WebAppUser CurrentUser { get; set; }
+
 
         public async Task<IActionResult> OnGetAsync(string id)
         {
