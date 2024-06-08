@@ -56,6 +56,10 @@
   background-color: white !important;
   font-size: small;
 }
+#search-number:focus {
+  border-color: cornflowerblue;
+  box-shadow: 1px 1px 8px 2px cornflowerblue;
+}
 .mtd-index-rows-selected {
   background-color: whitesmoke !important;
   box-shadow: 1px 1px 3px #ccc;
