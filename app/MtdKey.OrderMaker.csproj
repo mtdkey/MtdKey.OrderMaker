@@ -31,19 +31,12 @@ OrderMaker provides the ability quickly create a solution to consolidate informa
 
 
   <ItemGroup>
-    <PackageReference Include="Azure.Identity" Version="1.11.3" />
     <PackageReference Include="BouncyCastle.Cryptography" Version="2.4.0" />
     <PackageReference Include="Microsoft.AspNetCore.DataProtection.EntityFrameworkCore" Version="8.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.6" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.6" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.6">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="7.6.0" />
     <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="5.4.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -52,12 +45,8 @@ OrderMaker provides the ability quickly create a solution to consolidate informa
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.2" />
     <PackageReference Include="MtdKey.Cipher" Version="1.0.2" />
     <PackageReference Include="NPOI" Version="2.7.0" />
-    <PackageReference Include="NuGet.Common" Version="6.10.0" />
-    <PackageReference Include="NuGet.Packaging" Version="6.10.0" />
-    <PackageReference Include="NuGet.Protocol" Version="6.10.0" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.2" />
     <PackageReference Include="SixLabors.ImageSharp" Version="3.1.4" />
-    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.6.0" />
   </ItemGroup>
 
 

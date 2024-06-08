@@ -1,17 +1,24 @@
-﻿
-@model Models.Index.RowsModelView
+﻿@model Models.Index.RowsModelView
 @using Microsoft.AspNetCore.Mvc.Localization
 @inject IHtmlLocalizer<ISharedResource> Localizer
 
+@{
+    var placeHolder = Localizer["Number"];
+}
+
+<div class="p-1" style="font-size: smaller">
+    <input id="search-number"
+           mtd-input-clicker
+           type="search"
+           class="form-control"
+           name="searchNumber"
+           placeholder=@placeHolder value="@Model.SearchNumber"
+           onkeydown="return ( event.ctrlKey || event.altKey
+           || (47<event.keyCode && event.keyCode<58 && event.shiftKey==false)
+                    || (95<event.keyCode && event.keyCode<106)
+                    || (event.keyCode==8) || (event.keyCode==9)
+                    || (event.keyCode>34 && event.keyCode<40)
+                    || (event.keyCode==46) )"/>
+</div>
 
 
-@await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags {
-    Id = "search-number",
-    Name = "searchNumber",
-    Label = "ID Number",
-    LabelLocalized = true,
-    Value = @Model.SearchNumber,
-    MTDTexFieldView = MTDTextFieldViews.Outlined,
-    MtdInputClicker = true,    
-})
-   

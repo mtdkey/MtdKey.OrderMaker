@@ -8,7 +8,7 @@
             {
                 var searchNumber = filter.SearchNumber.Replace("'", string.Empty);
                 if (searchNumber.Length > 10) searchNumber = searchNumber[..10];
-                script = script.Replace("store.sequence like '%%'", $"store.sequence like '%{searchNumber}%'");
+                script = script.Replace("/*and store.sequence*/", $"and store.sequence = '{searchNumber}'");
             }
 
             return script;

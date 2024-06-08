@@ -132,4 +132,12 @@ if (storeIds) {
 }
 
 new MTDTextField("search-text");
-new MTDTextField("search-number");
+
+const searchNumber = document.getElementById("search-number");
+if (searchNumber) {
+    searchNumber.addEventListener("search", () => {
+        var evt = new KeyboardEvent('keydown', { keyCode: 13 });
+        searchNumber.dispatchEvent(evt);
+    });
+    
+}

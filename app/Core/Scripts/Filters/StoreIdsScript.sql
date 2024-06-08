@@ -33,7 +33,7 @@ select StoreId from (
 ) as d 
 inner join mtd_store as store on store.id = d.StoreId and store.IsDeleted = 0
 /*left join mtd_store_approval*/
-where store.mtd_form = '[FormId]' /*and store.timecr between*/
+where store.mtd_form = '[FormId]' /*and store.sequence*/  /*and store.timecr between*/
 /*order by store.timecr desc*/
 /*order by sequence desc*/
 /*order by approval.md_approve_stage desc*/

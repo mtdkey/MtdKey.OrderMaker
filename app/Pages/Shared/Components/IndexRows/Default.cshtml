@@ -132,14 +132,16 @@
                     {
                         <th>
                             <div class="d-flex align-items-center">
-                                <div>@item.Name</div>
+                                <div class="flex-grow-1">@item.Name</div>
+                                <div>
+                                    <button data-sort="field-@item.Id" data-order="asc">
+                                        <i class="bi bi-sort-down-alt h6"></i>
+                                    </button>
+                                    <button data-sort="field-@item.Id" data-order="desc">
+                                        <i class="bi bi-sort-up h6"></i>
+                                    </button>
+                                </div>
 
-                                <button data-sort="field-@item.Id" data-order="asc">
-                                    <i class="bi bi-sort-down-alt"></i>
-                                </button>
-                                <button data-sort="field-@item.Id" data-order="desc">
-                                    <i class="bi bi-sort-up"></i>
-                                </button>
                             </div>
                         </th>
                     }
