@@ -29,9 +29,10 @@
                })
 
             <div class="mtd-dialog-buttons">
-                <button mtd-dialog-apply type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="yes" onclick="OnAddGroup()">
+                <button mtd-dialog-apply mtd-dialog-cancel type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="yes" 
+                    onclick="OnAddGroup()">
                     <div class="mdc-button__ripple"></div>
-                    <span class="mdc-button__label" style="color: red">@Localizer["Add"]</span>
+                    <span class="mdc-button__label">@Localizer["Add"]</span>
                 </button>
                 <button mtd-dialog-cancel type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="no">
                     <div class="mdc-button__ripple"></div>
@@ -43,8 +44,8 @@
 </div>
 
 
-<div class="noselect" style="padding: 4px 36px 4px 36px;">
-    <div style="flex-grow: 1; padding: 24px 8px 8px 8px;">
+<div class="noselect container mtd-desk-fields">
+    <div style="padding-top: 24px; width: 95%">
         <div style="position:relative">
             <div style="position: absolute; padding: 4px; top: -16px; left: 12px; background-color:white;font-weight: 500; z-index:1;">
                 @Localizer["Groups user"]
