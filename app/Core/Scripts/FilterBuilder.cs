@@ -4,7 +4,7 @@ namespace MtdKey.OrderMaker.Core.Scripts
 {
     public class FilterBuilder
     {
-        private readonly List<FilterHandler> filterHandlers = new();
+        private readonly List<FilterHandler> filterHandlers = [];
 
         public FilterBuilder() { }
         public FilterBuilder(FilterBuilder filterBuilder)

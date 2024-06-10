@@ -15,6 +15,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MtdKey.Cipher;
+using MtdKey.EmailBuilder;
 using MtdKey.OrderMaker.AppConfig;
 using MtdKey.OrderMaker.Areas.Identity.Data;
 using MtdKey.OrderMaker.Core;
@@ -102,6 +103,7 @@ namespace MtdKey.OrderMaker
             services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
             services.Configure<ConfigSettings>(Configuration.GetSection("ConfigSettings"));
             services.Configure<LimitSettings>(Configuration.GetSection("LimitSettings"));
+            services.AddSingleton<ITemplateStorage, FileTemplates>();
 
             services.AddAesMangerService(options =>
             {

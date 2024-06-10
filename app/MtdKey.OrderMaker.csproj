@@ -89,6 +89,10 @@ OrderMaker provides the ability quickly create a solution to consolidate informa
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\..\MtdKey.EmailBuilder\MtdKey.EmailBuilder\MtdKey.EmailBuilder.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <None Update="src\formBuilder\configFormBuilder.css">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>

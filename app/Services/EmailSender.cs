@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Options;
+using MtdKey.EmailBuilder;
+using MtdKey.EmailBuilder.EmailBlocks;
 using MtdKey.OrderMaker.AppConfig;
 using MtdKey.OrderMaker.Areas.Identity.Data;
 using System;
@@ -8,6 +11,7 @@ using System.IO;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace MtdKey.OrderMaker.Services
 {
@@ -27,19 +31,22 @@ namespace MtdKey.OrderMaker.Services
 
     public class EmailSender : IEmailSenderBlank
     {
+
         private readonly EmailSettings _emailSettings;
         private readonly IWebHostEnvironment _hostingEnvironment;
         private readonly ConfigHandler configHandler;
         private readonly UserHandler userHandler;
+        private readonly ITemplateStorage templateStorage;
 
         public EmailSender(IOptions<EmailSettings> emailSettings,
             IWebHostEnvironment hostingEnvironment,
-            ConfigHandler configHandler, UserHandler userHandler)
+            ConfigHandler configHandler, UserHandler userHandler, ITemplateStorage templateStorage)
         {
             _emailSettings = emailSettings.Value;
             _hostingEnvironment = hostingEnvironment;
             this.configHandler = configHandler;
             this.userHandler = userHandler;
+            this.templateStorage = templateStorage;
         }
 
         public async Task SendEmailAsync(string email, string subject, string message, bool mustconfirm = true)
@@ -49,37 +56,100 @@ namespace MtdKey.OrderMaker.Services
 
         public async Task<bool> SendEmailBlankAsync(BlankEmail blankEmail, bool mustconfirm = true)
         {
+
             string pathImgMenu = $"{_emailSettings.Host}/lib/mtd-ordermaker/images/logo-mtd.png";
             var imgMenu = await configHandler.GetImageFromConfig(configHandler.CodeImgMenu);
-            if (imgMenu != string.Empty) { pathImgMenu = $"{_emailSettings.Host}/images/logo.png"; }
+            if (imgMenu != string.Empty) { pathImgMenu = $"{_emailSettings.Host}/images/logo.png";}
 
-            try
+            EmailDesigner emailDesigner = new();
+            LayoutBlock layoutBlock = new LayoutBlock(templateStorage);
+            await layoutBlock.CreateAsync();
+
+            LogoBlock logoBlock = new(templateStorage);
+            await logoBlock.CreateAsync(pathImgMenu);
+
+            TextBlock titleBlock = new(templateStorage);
+            await titleBlock.CreateAsync(_emailSettings.Title);
+
+            DividerBlock dividerBlock = new(templateStorage);
+            await dividerBlock.CreateAsync();
+
+            ContainerBlock titleContainer = new(templateStorage);
+            await titleContainer.CreateAsync([titleBlock, dividerBlock]);
+
+            HeadingBlock headingBlock = new(templateStorage);
+            await headingBlock.CreateAsync(blankEmail.Header);
+
+
+            ContainerBlock headerContainer = new(templateStorage);
+            await headerContainer.CreateAsync([headingBlock]);
+
+            emailDesigner.AddLayout(layoutBlock)
+                .AddBlock(logoBlock)
+                .AddBlock(titleContainer)
+                .AddBlock(headerContainer);
+
+
+            List<EmailBlock> textBlocks = [];
+            foreach (string text in blankEmail.Content)
             {
-
-                string message = string.Empty;
-                foreach (string p in blankEmail.Content)
-                {
-                    message += $"<p>{p}</p>";
-                }
-
-                string webRootPath = _hostingEnvironment.WebRootPath;
-                string contentRootPath = _hostingEnvironment.ContentRootPath;
-                var file = Path.Combine(contentRootPath, "wwwroot", "lib", "mtd-ordermaker", "emailform", "blank.html");
-                var htmlArray = File.ReadAllText(file);
-                string htmlText = htmlArray.ToString();
-
-                //htmlText = htmlText.Replace("{logo}", pathImgMenu);
-                htmlText = htmlText.Replace("{title}", _emailSettings.Title);
-                htmlText = htmlText.Replace("{header}", blankEmail.Header);
-                htmlText = htmlText.Replace("{content}", message);
-                htmlText = htmlText.Replace("{footer}", _emailSettings.Footer);
-
-                await ExecuteAsync(blankEmail.Email, blankEmail.Subject, htmlText, mustconfirm);
+                var textBlock = new TextBlock(templateStorage);
+                await textBlock.CreateAsync(text);
+                textBlocks.Add(textBlock);
             }
-            catch
-            {
-                return false;
-            }
+
+
+            ContainerBlock containerBlock = new(templateStorage);
+            await containerBlock.CreateAsync(textBlocks);
+
+            InfoLineBlock infoLineBlock = new(templateStorage);
+            await infoLineBlock.CreateAsync("Не отвечайте на это письмо оно создано автоматически и не дойдет до адресата.");
+
+            var footerText = new TextBlock(templateStorage);
+            await footerText.CreateAsync(_emailSettings.Footer);
+
+            var footerUnsubscube = new TextBlock(templateStorage);
+            await footerUnsubscube.CreateAsync("<div style='text-align:center; font-size: small'><a href=\"%unsubscribe_url%\">Отказаться от рассылки</a></div>");
+
+
+            var containerFooter = new ContainerBlock(templateStorage);
+            await containerFooter.CreateAsync([footerText, footerUnsubscube]);
+
+            var htmlText = emailDesigner
+                .AddBlock(containerBlock)
+                .AddBlock(infoLineBlock)
+                .AddBlock(containerFooter)
+                .Build();
+
+            await ExecuteAsync(blankEmail.Email, blankEmail.Subject, htmlText, mustconfirm);
+
+            //try
+            //{
+
+            //    string message = string.Empty;
+            //    foreach (string p in blankEmail.Content)
+            //    {
+            //        message += $"<p>{p}</p>";
+            //    }
+
+            //    string webRootPath = _hostingEnvironment.WebRootPath;
+            //    string contentRootPath = _hostingEnvironment.ContentRootPath;
+            //    var file = Path.Combine(contentRootPath, "wwwroot", "lib", "mtd-ordermaker", "emailform", "blank.html");
+            //    var htmlArray = File.ReadAllText(file);
+            //    string htmlText = htmlArray.ToString();
+
+            //    //htmlText = htmlText.Replace("{logo}", pathImgMenu);
+            //    htmlText = htmlText.Replace("{title}", _emailSettings.Title);
+            //    htmlText = htmlText.Replace("{header}", blankEmail.Header);
+            //    htmlText = htmlText.Replace("{content}", message);
+            //    htmlText = htmlText.Replace("{footer}", _emailSettings.Footer);
+
+            //    await ExecuteAsync(blankEmail.Email, blankEmail.Subject, htmlText, mustconfirm);
+            //}
+            //catch
+            //{
+            //    return false;
+            //}
 
 
             return true;
