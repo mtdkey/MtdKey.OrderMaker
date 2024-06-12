@@ -72,7 +72,9 @@ OrderMaker provides the ability quickly create a solution to consolidate informa
 	  <Content Remove="wwwroot\lib\google\css\MaterialIcons.css" />
 	  <Content Remove="wwwroot\lib\google\css\roboto.css" />
 	  <Content Remove="wwwroot\lib\mtd-ordermaker\config\css\mtd-config-form-editor.css" />
+	  <Content Remove="wwwroot\lib\mtd-ordermaker\identity\css\registration.css" />
 	  <Content Remove="wwwroot\lib\mtd-ordermaker\identity\js\mtd-identity - Copy.js" />
+	  <Content Remove="wwwroot\lib\mtd-ordermaker\identity\js\registration.js" />
 	  <Content Remove="wwwroot\lib\mtd-ordermaker\images\loading.gif" />
 	  <Content Remove="wwwroot\lib\mtd-ordermaker\index\js\mtd-index-sorting.js" />
 	  <Content Remove="wwwroot\lib\mtd-ordermaker\main\css\ripple.css" />

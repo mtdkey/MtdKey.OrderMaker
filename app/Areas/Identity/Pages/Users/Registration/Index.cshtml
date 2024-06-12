@@ -1,4 +1,6 @@
-﻿@page
+﻿@* Translate *@
+
+@page
 @model IndexModel
 @using Microsoft.AspNetCore.Mvc.Localization
 @inject IHtmlLocalizer<SharedResource> Localizer
@@ -6,6 +8,12 @@
     ViewData["Title"] = Localizer["User registration"];
     ViewData["SecondTitle"] = Localizer["Rules for public users"];
 }
+
+@section Head {
+    <link rel="stylesheet" href="~/lib/mtd-ordermaker/identity/css/registration.css" asp-append-version="true" />
+
+}
+
 @section Breadcrumb {
     <li><a href="~/identity/users">@Localizer["Users"]</a></li>
     <li>@ViewBag.Title</li>
@@ -13,27 +21,113 @@
 <div class="mtd-desk">
     <div class="mtd-desk-panel"></div>
 
-    <div class="container">
-        <p>Возможность регистрации пользователя на странице запросов</p>
-        <p>Возможность регистрации пользователя через API</p>
-        <p>Ключ для регистрации пользователей через API</p>
-        <p>Политика уровня доступа для пользователя по умолчанию </p>
-        <p>Группа пользователя по умолчанию </p>
-    </div>
 
-    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Toggle right offcanvas</button>
+    @*     <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Toggle right offcanvas</button>
 
     <div class="offcanvas offcanvas-end" style="min-width: 75%" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasRightLabel">Offcanvas right</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            ...
+    <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasRightLabel">Offcanvas right</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+    ...
+    </div>
+    </div> *@
+
+
+    <div class="container">
+        <div class="mtd-settings-block">
+            <button class="mtd-settings-item">
+                <div class="mtd-settings-item-header">
+                    <div class="mtd-settings-item-icon">
+                        <i class="bi bi-card-heading h4"></i>
+                    </div>
+                    <div class="mtd-settings-item-content">
+                        <div class="mtd-settings-item-name">Возможность регистрации пользователя на странице запросов</div>
+                        <div class="mtd-settings-item-status">Выключено</div>
+                    </div>
+                    <div class="mtd-settings-chevron">
+                        <i class="bi bi-chevron-down"></i>
+                    </div>
+                </div>
+            </button>
+            <div class="mtd-settings-panel">
+                <p>Lorem ipsum...</p>
+                <form mtd-data-form method="post" asp-action="~/identity/users/registration">
+                    <button mtd-data-clicker type="button">SEND</button>
+                </form>
+            </div>
         </div>
     </div>
 
+    <div class="container">
+        <div class="mtd-settings-block">
+            <button class="mtd-settings-item">
+                <div class="mtd-settings-item-header">
+                    <div class="mtd-settings-item-icon">
+                        <i class="bi bi-key h4"></i>
+                    </div>
+                    <div class="mtd-settings-item-content">
+                        <div class="mtd-settings-item-name">Возможность регистрации пользователя через API</div>
+                        <div class="mtd-settings-item-status">Выключено</div>
+                    </div>
+                    <div class="mtd-settings-chevron">
+                        <i class="bi bi-chevron-down"></i>
+                    </div>
+                </div>
+            </button>
+            <div class="mtd-settings-panel">
+                <p>Lorem ipsum...</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="mtd-settings-block">
+            <button class="mtd-settings-item">
+                <div class="mtd-settings-item-header">
+                    <div class="mtd-settings-item-icon">
+                        <i class="bi bi-shield-exclamation h4"></i>
+                    </div>
+                    <div class="mtd-settings-item-content">
+                        <div class="mtd-settings-item-name">Политика уровня доступа для пользователя по умолчанию</div>
+                        <div class="mtd-settings-item-status">Не указано</div>
+                    </div>
+                    <div class="mtd-settings-chevron">
+                        <i class="bi bi-chevron-down"></i>
+                    </div>
+                </div>
+            </button>
+            <div class="mtd-settings-panel">
+                <p>Lorem ipsum...</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="mtd-settings-block">
+            <button class="mtd-settings-item">
+                <div class="mtd-settings-item-header">
+                    <div class="mtd-settings-item-icon">
+                        <i class="bi bi-people h4"></i>
+                    </div>
+                    <div class="mtd-settings-item-content">
+                        <div class="mtd-settings-item-name">Группа пользователя по умолчанию</div>
+                        <div class="mtd-settings-item-status">Группа не указана</div>
+                    </div>
+                    <div class="mtd-settings-chevron">
+                        <i class="bi bi-chevron-down"></i>
+                    </div>
+                </div>
+            </button>
+            <div class="mtd-settings-panel">
+                <p>Lorem ipsum...</p>
+            </div>
+        </div>
+    </div>
 
 </div>
-
+@section Scripts {
+    <script src="~/lib/mtd-ordermaker/identity/js/registration.js" asp-append-version="true"></script>
+}
 

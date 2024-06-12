@@ -104,6 +104,7 @@ namespace MtdKey.OrderMaker
             services.Configure<ConfigSettings>(Configuration.GetSection("ConfigSettings"));
             services.Configure<LimitSettings>(Configuration.GetSection("LimitSettings"));
             services.AddSingleton<ITemplateStorage, FileTemplates>();
+            services.AddSingleton<IAppParams, AppParams>();
 
             services.AddAesMangerService(options =>
             {

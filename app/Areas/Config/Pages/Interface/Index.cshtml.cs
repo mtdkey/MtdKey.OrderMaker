@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using MtdKey.OrderMaker.AppConfig;
 using MtdKey.OrderMaker.Entity;
 using System;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Threading.Tasks;
 
 namespace MtdKey.OrderMaker.Areas.Config.Pages.Interface
@@ -30,8 +32,8 @@ namespace MtdKey.OrderMaker.Areas.Config.Pages.Interface
         {
             ViewData["ImgMenu"] = await GetImageFromConfig(1);
             ViewData["ImgAppBar"] = await GetImageFromConfig(2);
-            var barColor = await _context.MtdConfigParam.Where(x => x.Id == 1).Select(x => x.Value).FirstOrDefaultAsync();
-            var iconColor = await _context.MtdConfigParam.Where(x => x.Id == 2).Select(x => x.Value).FirstOrDefaultAsync();
+            var barColor = await _context.MtdConfigParam.Where(x => x.Id == ParamId.BarColor).Select(x => x.Value).FirstOrDefaultAsync();
+            var iconColor = await _context.MtdConfigParam.Where(x => x.Id == ParamId.IconColor).Select(x => x.Value).FirstOrDefaultAsync();
             ViewData["BarColor"] = barColor ?? "#00008a";
             ViewData["IconColor"] = iconColor ?? "#ffffff";
             return Page();
