@@ -12,22 +12,14 @@ using System.Threading.Tasks;
 
 namespace MtdKey.OrderMaker.Areas.Identity.Pages.Account
 {
-    public class TokenLoginModel : PageModel
+    public class TokenLoginModel(IAesManager aesManager,
+        OrderMakerContext context, UserHandler userHandler,
+        SignInManager<WebAppUser> signInManager) : PageModel
     {
-        private readonly IAesManager aesManager;
-        private readonly OrderMakerContext context;
-        private readonly UserHandler userHandler;
-        private readonly SignInManager<WebAppUser> signInManager;
-
-        public TokenLoginModel(IAesManager aesManager,
-            OrderMakerContext context, UserHandler userHandler,
-            SignInManager<WebAppUser> signInManager)
-        {
-            this.userHandler = userHandler;
-            this.aesManager = aesManager;
-            this.context = context;
-            this.signInManager = signInManager;
-        }
+        private readonly IAesManager aesManager = aesManager;
+        private readonly OrderMakerContext context = context;
+        private readonly UserHandler userHandler = userHandler;
+        private readonly SignInManager<WebAppUser> signInManager = signInManager;
 
         [BindProperty]
         public string Token { get; set; }

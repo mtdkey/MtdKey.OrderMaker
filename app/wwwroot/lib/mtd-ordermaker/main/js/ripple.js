@@ -19,7 +19,7 @@ function getElemPos(elem) {
     return { x: xPos, y: yPos };
 }
 function addRippleEffect(root) {
-    root.querySelectorAll(".btn").forEach(btn => {
+    root.querySelectorAll(".btn, .card-img-ripple").forEach(btn => {
         btn.addEventListener("click", createRipple);
     });
 }

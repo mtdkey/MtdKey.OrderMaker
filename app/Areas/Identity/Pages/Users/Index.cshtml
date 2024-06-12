@@ -11,7 +11,7 @@
     ViewData["SecondTitle"] = Localizer["User Management"];
 }
 
-@section Head  {
+@section Head {
     <link rel="stylesheet" href="~/lib/mtd-ordermaker/config/css/mtd-config.css" asp-append-version="true" />
 }
 
@@ -21,53 +21,118 @@
 
 <div class="mtd-desk">
     <div class="mtd-desk-panel"></div>
-    <div class="mtd-config-place">         
+    <div class="mtd-config-place">
+        @*         <div class="mdc-card mdc-card--outlined">
+        <div class="mdc-card__primary-action" tabindex="0">
+        <div mtd-data-url="/identity/users/group" class="mtd-config-param noselect">
+        <div class="mtd-config-param-icon">
+        <img src="~/lib/mtd-ordermaker/images/userGroup.png" />
+        </div>
+        <div class="mtd-config-param-title">
+        <span>@Localizer["Groups"]</span>
+        </div>
+        <div>
+        <span>@Localizer["List user groups"]</span>
+        </div>
+        </div>
+        </div>
+        </div>
         <div class="mdc-card mdc-card--outlined">
-            <div class="mdc-card__primary-action" tabindex="0">
-                <div mtd-data-url="/identity/users/group" class="mtd-config-param noselect">
-                    <div class="mtd-config-param-icon">
-                        <img src="~/lib/mtd-ordermaker/images/userGroup.png" />
+        <div class="mdc-card__primary-action" tabindex="0">
+        <div mtd-data-url="/identity/users/policy" class="mtd-config-param">
+        <div class="mtd-config-param-icon">
+        <img src="~/lib/mtd-ordermaker/images/userPolicy.png" />
+        </div>
+        <div class="mtd-config-param-title">
+        <span>@Localizer["Policy"]</span>
+        </div>
+        <div>
+        <span>@Localizer["Access template"]</span>
+        </div>
+        </div>
+        </div>
+        </div>
+        <div class="mdc-card mdc-card--outlined">
+        <div class="mdc-card__primary-action" tabindex="0">
+        <div mtd-data-url="/identity/users/accounts" class="mtd-config-param">
+        <div class="mtd-config-param-icon">
+        <img src="~/lib/mtd-ordermaker/images/userAccounts.png" />
+        </div>
+        <div class="mtd-config-param-title">
+        <span>@Localizer["Accounts"]</span>
+        </div>
+        <div>
+        <span>@Localizer["User list"]</span>
+        </div>
+        </div>
+        </div>
+        </div> *@
+
+
+        <div class="d-flex flex-wrap justify-content-center">
+            <div mtd-data-url="/identity/users/group" class="card m-2" style="width: 16rem; cursor: pointer;">
+                <div class="card-img-top card-img-ripple" style="background-color: cornflowerblue">
+                    <div class="position-relative" style="height: 8em; overflow: hidden">
+                        <div class="position-absolute" style="font-size: 8em; margin-top:-35px; left: 25px; opacity: 0.5; color: white">
+                            <i class="bi bi-people-fill"></i>
+                        </div>
                     </div>
-                    <div class="mtd-config-param-title">
-                        <span>@Localizer["Groups"]</span>
-                    </div>
-                    <div>
-                        <span>@Localizer["List user groups"]</span>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">@Localizer["Groups"]</h5>    
+                    <div class="card-text small">
+                        <span>@Localizer["List of user groups"]</span>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="mdc-card mdc-card--outlined">
-            <div class="mdc-card__primary-action" tabindex="0">
-                <div mtd-data-url="/identity/users/policy" class="mtd-config-param">
-                    <div class="mtd-config-param-icon">
-                        <img src="~/lib/mtd-ordermaker/images/userPolicy.png" />
+            <div mtd-data-url="/identity/users/policy" class="card m-2" style="width: 16rem; cursor: pointer">
+                <div class="card-img-top card-img-ripple" style="background-color: cornflowerblue">
+                    <div class="position-relative" style="height: 8em; overflow: hidden">
+                        <div class="position-absolute" style="font-size: 8em; margin-top:-35px; left: 25px; opacity: 0.5; color: white">
+                            <i class="bi bi-shield-fill-check"></i>
+                        </div>
                     </div>
-                    <div class="mtd-config-param-title">
-                        <span>@Localizer["Policy"]</span>
-                    </div>
-                    <div>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">@Localizer["Policy Access"]</h5>
+                    <div class="card-text small">
                         <span>@Localizer["Access template"]</span>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="mdc-card mdc-card--outlined">
-            <div class="mdc-card__primary-action" tabindex="0">
-                <div mtd-data-url="/identity/users/accounts" class="mtd-config-param">
-                    <div class="mtd-config-param-icon">
-                        <img src="~/lib/mtd-ordermaker/images/userAccounts.png" />
+            <div mtd-data-url="/identity/users/accounts" class="card m-2" style="width: 16rem; cursor: pointer">
+                <div class="card-img-top card-img-ripple" style="background-color: cornflowerblue">
+                    <div class="position-relative" style="height: 8em; overflow: hidden">
+                        <div class="position-absolute" style="font-size: 8em; margin-top:-35px; left: 25px; opacity: 0.5; color: white">
+                            <i class="bi bi-person-vcard"></i>
+                        </div>
                     </div>
-                    <div class="mtd-config-param-title">
-                        <span>@Localizer["Accounts"]</span>
-                    </div>
-                    <div>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">@Localizer["Accounts"]</h5>
+                    <div class="card-text small">
                         <span>@Localizer["User list"]</span>
                     </div>
                 </div>
             </div>
+
+            <div mtd-data-url="/identity/users/registration" class="card m-2" style="width: 16rem; cursor: pointer">
+                <div class="card-img-top card-img-ripple" style="background-color: cornflowerblue">
+                    <div class="position-relative" style="height: 8em; overflow: hidden">
+                        <div class="position-absolute" style="font-size: 8em; margin-top:-35px; left: 25px; opacity: 0.5; color: white">
+                            <i class="bi bi-person-fill-add"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">@Localizer["User registration"]</h5>
+                    <div class="card-text small">
+                        @Localizer["Rules for public users"]
+                    </div>
+                </div>
+            </div>
+
         </div>
+
     </div>
 </div>
-
-

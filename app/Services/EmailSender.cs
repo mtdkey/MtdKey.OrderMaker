@@ -54,6 +54,7 @@ namespace MtdKey.OrderMaker.Services
             await ExecuteAsync(email, subject, message, mustconfirm);
         }
 
+
         public async Task<bool> SendEmailBlankAsync(BlankEmail blankEmail, bool mustconfirm = true)
         {
 

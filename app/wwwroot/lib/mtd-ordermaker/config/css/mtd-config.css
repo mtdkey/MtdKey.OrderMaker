@@ -6,8 +6,8 @@
   align-items: center;
   justify-content: center;
 }
-.mtd-config-place .mdc-card {
-  margin: 4px;
+.mtd-config-place .card:hover {
+    box-shadow: 2px 2px 8px 6px #ccc;
 }
 .mtd-config-param {
   text-align: center;
