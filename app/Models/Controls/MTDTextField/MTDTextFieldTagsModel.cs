@@ -23,7 +23,7 @@ namespace MtdKey.OrderMaker.Models.Controls.MTDTextField
             this.IconLeading = tags.IconLeading;
             this.IconLeadingScript = tags.IconLeadingScript;
             this.IconTrailing = tags.IconTrailing;
-            this.IconTrailingString = tags.IconTrailingString;
+            this.IconTrailingScript = tags.IconTrailingScript;
             this.IconTrailingColor = tags.IconTrailingColor;
             this.Label = tags.Label;
             this.LabelLocalized = tags.LabelLocalized;

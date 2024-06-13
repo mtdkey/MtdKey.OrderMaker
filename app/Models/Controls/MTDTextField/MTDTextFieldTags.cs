@@ -12,7 +12,7 @@
         public string IconLeading { get; set; }
         public string IconLeadingScript { get; set; }
         public string IconTrailing { get; set; }
-        public string IconTrailingString { get; set; }
+        public string IconTrailingScript { get; set; }
         public string IconTrailingColor { get; set; }
         public bool Required { get; set; }
         public bool Disabled { get; set; }

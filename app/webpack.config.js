@@ -9,6 +9,7 @@ var CopyPlugin = require('copy-webpack-plugin');
 module.exports = {
     entry: {
         configFormBuilder: ['./src/formBuilder/index.ts'],
+        fetchData: ['./src/fetchData/index.ts'],
     },
     devtool: 'inline-source-map',
     module: {

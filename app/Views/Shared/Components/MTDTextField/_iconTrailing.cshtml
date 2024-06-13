@@ -3,12 +3,12 @@
 
 @if (Model.IconTrailing != null)
 {
-    if (Model.IconTrailing.Contains("fas ") || Model.IconTrailing.Contains("far "))
+    if (Model.IconTrailing.Contains("bi ") || Model.IconTrailing.Contains("bi "))
     {
-        if (Model.IconTrailingString != null)
+        if (Model.IconTrailingScript != null)
         {
             <i class="mdc-text-field__icon mdc-text-field__icon--trailing @Model.IconTrailing"
-               tabindex="0" role="button" onclick="@Model.IconTrailingString" style="color:cornflowerblue"></i>
+               tabindex="0" role="button" onclick="@Model.IconTrailingScript" style="color:cornflowerblue"></i>
         }
         else
         {
@@ -18,10 +18,10 @@
     }
     else
     {
-        if (Model.IconTrailingString != null)
+        if (Model.IconTrailingScript != null)
         {
             <i class="material-icons mdc-text-field__icon mdc-text-field__icon--trailing"
-               tabindex="0" role="button" onclick="@Model.IconTrailingString" style="color:cornflowerblue">
+               tabindex="0" role="button" onclick="@Model.IconTrailingScript" style="color:cornflowerblue">
                 @Model.IconTrailing
             </i>
         }

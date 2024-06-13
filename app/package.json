@@ -18,6 +18,7 @@
     "@material/list": "7.0.0",
     "@material/select": "7.0.0",
     "@material/textfield": "14.0.0",
+    "@material/snackbar": "7.0.0",
     "@types/bootstrap": "^5.2.6",
     "clean-webpack-plugin": "4.0.0",
     "copy-webpack-plugin": "11.0.0",

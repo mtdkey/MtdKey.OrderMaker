@@ -124,6 +124,11 @@ namespace MtdKey.OrderMaker.Services
             return await _context.MtdStoreOwner.Where(x => x.Id == storeId && x.UserId == user.Id).AnyAsync();
         }
 
+        public async Task<List<MtdGroup>> GetAllGroups()
+        {
+            return await _context.MtdGroup.ToListAsync();
+        }
+
         public async Task<bool> InGroup(WebAppUser user, string formId, string storeId)
         {
             string ownerId = await _context.MtdStoreOwner.Where(x => x.Id == storeId).Select(x => x.UserId).FirstOrDefaultAsync();
