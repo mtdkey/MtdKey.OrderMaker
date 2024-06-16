@@ -7,9 +7,9 @@
 @{
     ViewData["Title"] = Localizer["User registration"];
     ViewData["SecondTitle"] = Localizer["Rules for public users"];
-    var pageUrl = $"{Request.Scheme}://{Request.Host}/public/request";
+    var pageUrl = $"{Request.Scheme}://{Request.Host}/identity/requests/createformrequest";
     var pageRaw = Html.Raw($"<a href='{pageUrl}' target='_blank'>{pageUrl}</a>");
-    var apiUrl = $"{Request.Scheme}://{Request.Host}/api/request?formId=[guid]&email=[email@address]&token=[stringBase64]";
+    var apiUrl = $"{Request.Scheme}://{Request.Host}/api/requests/create/form?userName=[text]&formId=[guid]&email=[email@address]&token=[stringBase64]";
 }
 
 @section Head {
@@ -40,58 +40,46 @@
         </div>
     </div>
 
-    <form data-mtd-form method="post" asp-action="~/identity/users/registration">
+    <div class="pb-5">
+        <form data-mtd-form method="post" asp-action="~/identity/users/registration">
 
-        <div class="container">
-            <div class="mtd-settings-block">
-                <button class="mtd-settings-item" type="button">
-                    <div class="mtd-settings-item-header">
-                        <div class="mtd-settings-item-icon">
-                            <i class="bi bi-card-heading h4"></i>
-                        </div>
-                        <div class="mtd-settings-item-content">
-                            <div class="mtd-settings-item-name">Возможность регистрации пользователя на странице запросов</div>
-                            <div id="pageTitle" class="mtd-settings-item-status">@Model.ParamsModel.RegisterByPageTitle</div>
-                        </div>
-                        <div class="mtd-settings-chevron">
-                            <i class="bi bi-chevron-down"></i>
+            <div class="container">
+                <div class="mtd-settings-block">
+                    <div class="mtd-settings-item">
+                        <div class="mtd-settings-item-header">
+                            <div class="mtd-settings-item-icon">
+                                <i class="bi bi-card-heading h4"></i>
+                            </div>
+                            <div class="mtd-settings-item-content">
+                                <div class="mtd-settings-item-name">Регистрация пользователя на странице запросов</div>
+                            </div>
                         </div>
                     </div>
-                </button>
-                <div class="mtd-settings-panel">
-                    <div class="p-2">
-                        <p>Этот параметр разрешает автоматическую решистрацию пользовтаелей на странице @pageRaw</p>
-                        <hr />
+                    <div class="mtd-settings-panel">
                         <div class="form-check form-switch noselect">
                             <input class="form-check-input" type="checkbox" role="switch" id="registerByPage" name="registerByPage" @Model.ParamsModel.RegisterByPage>
                             <label class="form-check-label" for="registerByPage">Включить доступ через страницу запроса</label>
                         </div>
+                        <div class="mtd-settings-helper">
+                            Этот параметр разрешает автоматическую решистрацию пользовтаелей на странице @pageRaw
+                        </div>
                     </div>
-
                 </div>
             </div>
-        </div>
 
-        <div class="container">
-            <div class="mtd-settings-block">
-                <button class="mtd-settings-item" type="button">
-                    <div class="mtd-settings-item-header">
-                        <div class="mtd-settings-item-icon">
-                            <i class="bi bi-key h4"></i>
-                        </div>
-                        <div class="mtd-settings-item-content">
-                            <div class="mtd-settings-item-name">Возможность регистрации пользователя через API</div>
-                            <div id="apiTitle" class="mtd-settings-item-status">@Model.ParamsModel.RegisterByAPITitle</div>
-                        </div>
-                        <div class="mtd-settings-chevron">
-                            <i class="bi bi-chevron-down"></i>
+            <div class="container">
+                <div class="mtd-settings-block">
+                    <div class="mtd-settings-item">
+                        <div class="mtd-settings-item-header">
+                            <div class="mtd-settings-item-icon">
+                                <i class="bi bi-key h4"></i>
+                            </div>
+                            <div class="mtd-settings-item-content">
+                                <div class="mtd-settings-item-name">Регистрация пользователя через API</div>
+                            </div>
                         </div>
                     </div>
-                </button>
-                <div class="mtd-settings-panel">
-                    <div class="p-2">
-                        <div>Если нужно предоставить возможность автоматической регистрации пользователей прямо с сайта компании, то можно использовать эти настройки.</div>
-                        <sman class="small">Шаблон GET запроса к API портала: <strong>@apiUrl</strong></sman>
+                    <div class="mtd-settings-panel">
 
                         <div class="w-100">
                             @await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags
@@ -101,7 +89,7 @@
                            Label = "API Key",
                            LabelLocalized = true,
                            Required = true,
-                           MTDTexFieldView = MTDTextFieldViews.Default,
+                           MTDTexFieldView = MTDTextFieldViews.Outlined,
                            IconTrailing = "bi bi-magic",
                            IconTrailingScript = "GenerateStringBase64Token()",
                            Value = Model.ParamsModel.RegisterAPIKey
@@ -109,72 +97,84 @@
                         </div>
                         <div class="form-check form-switch noselect pt-3 pb-2" style="min-width: 290px;">
                             <input class="form-check-input" type="checkbox" role="switch" id="registerByAPI" name="registerByAPI" @Model.ParamsModel.RegisterByAPI>
-                            <label class="form-check-label" for="registerByAPI">Разрешить доступ через API</label>
+                            <label class="form-check-label" for="registerByAPI">Разрешить запросы через API</label>
+                        </div>
+
+                        <div class="mtd-settings-helper">
+                            Если нужно предоставить возможность автоматической регистрации пользователей прямо с сайта компании, то можно использовать эти настройки.
+                            <div class="small">Шаблон GET запроса к API портала: @apiUrl </div>
                         </div>
 
                     </div>
-
                 </div>
             </div>
-        </div>
 
-
-
-        <div class="container">
-            <div class="mtd-settings-block">
-                <button class="mtd-settings-item" type="button">
-                    <div class="mtd-settings-item-header">
-                        <div class="mtd-settings-item-icon">
-                            <i class="bi bi-shield-exclamation h4"></i>
-                        </div>
-                        <div class="mtd-settings-item-content">
-                            <div class="mtd-settings-item-name">Политика уровня доступа для пользователя по умолчанию</div>
-                            <div id="policyTitle" class="mtd-settings-item-status">@Model.ParamsModel.RegisterUserPolicyName</div>
-                        </div>
-                        <div class="mtd-settings-chevron">
-                            <i class="bi bi-chevron-down"></i>
+            <div class="container">
+                <div class="mtd-settings-block">
+                    <div class="mtd-settings-item">
+                        <div class="mtd-settings-item-header">
+                            <div class="mtd-settings-item-icon">
+                                <i class="bi bi-shield-exclamation h4"></i>
+                            </div>
+                            <div class="mtd-settings-item-content">
+                                <div class="mtd-settings-item-name">Политика уровня доступа для пользователя по умолчанию</div>
+                            </div>
                         </div>
                     </div>
-                </button>
-                <div class="mtd-settings-panel">
-                    <div class="p-2">
-                        <p>Указанная политика уровня доступа будет автоматически присваеватся для пользователей, которые будут регестрироваться через страницу запросов или API.</p>
+                    <div class="mtd-settings-panel">
+                        @await Component.InvokeAsync(typeof(MTDSelectList), new MTDSelectListTags
+                   {
+                       Id = "policyId",
+                       Name = "RegisterUserPolicyId",
+                       Items = Model.UserPolicies,
+                       Label = "Policy",
+                       LabelLocalized = true,                       
+                       MTDSelectListView = MTDSelectListViews.Outlined
+                   })
 
-                        <button id="editPolicy" mtd-dialog-button="dialog-policy" type="button" class="btn btn-light text-primary btn-sm">
-                            <i class="bi bi-pencil-square h6"></i>
-                        </button>
-                         &nbsp;
-                        <span id="policyName" onclick="editPolicy.click()" style="cursor: pointer">@Model.ParamsModel.RegisterUserPolicyName</span>
-
+                        <div class="mtd-settings-helper">
+                            Указанная политика уровня доступа будет автоматически присваеватся для пользователей, которые будут регестрироваться через страницу запросов или API.
+                        </div>
                     </div>
-
                 </div>
             </div>
-        </div>
-        @await Html.PartialAsync("./_dialogPolicy")
-        <div class="container">
-            <div class="mtd-settings-block">
-                <button class="mtd-settings-item" type="button">
-                    <div class="mtd-settings-item-header">
-                        <div class="mtd-settings-item-icon">
-                            <i class="bi bi-people h4"></i>
-                        </div>
-                        <div class="mtd-settings-item-content">
-                            <div class="mtd-settings-item-name">Группа пользователя по умолчанию</div>
-                            <div class="mtd-settings-item-status">Группа не указана</div>
-                        </div>
-                        <div class="mtd-settings-chevron">
-                            <i class="bi bi-chevron-down"></i>
+
+
+
+            <div class="container">
+                <div class="mtd-settings-block">
+                    <div class="mtd-settings-item">
+                        <div class="mtd-settings-item-header">
+                            <div class="mtd-settings-item-icon">
+                                <i class="bi bi-people h4"></i>
+                            </div>
+                            <div class="mtd-settings-item-content">
+                                <div class="mtd-settings-item-name">Группа пользователя по умолчанию</div>
+                            </div>
                         </div>
                     </div>
-                </button>
-                <div class="mtd-settings-panel">
-                    <p>Lorem ipsum...</p>
+                    <div class="mtd-settings-panel">
+                        @await Component.InvokeAsync(typeof(MTDSelectList), new MTDSelectListTags
+                   {
+                       Id = "groupId",
+                       Name = "RegisterUserGroupId",
+                       Items = Model.UserGroups,
+                       Label = "Group",
+                       LabelLocalized = true,
+                       MTDSelectListView = MTDSelectListViews.Outlined
+                   })
+
+                        <div class="mtd-settings-helper">
+                            Указанная группа будет автоматически присваеватся для пользователей, которые будут регестрироваться через страницу запросов или API.
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <button class="d-none" id="clickerId" data-mtd-clicker type="button">SEND</button>
-    </form>
+            <button class="d-none" id="clickerId" data-mtd-clicker type="button">SEND</button>
+        </form>
+    </div>
+
+
 </div>
 
 

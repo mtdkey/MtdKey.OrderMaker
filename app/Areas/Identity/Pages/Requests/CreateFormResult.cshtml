@@ -1,0 +1,57 @@
+﻿@* Translate *@
+@page
+@using MtdKey.OrderMaker.Services
+@inject Services.ConfigHandler configHandler
+@model CreateFormRequestModel
+
+
+<div class="mtd-desk" style="margin-bottom: 24px">
+    <div class="mtd-desk-panel">
+    </div>
+
+    <div class="mdc-elevation--z8 identity-box" style="max-width: 650px;   margin-left: auto;  margin-right: auto;  margin-top: 12px;  padding: 16px 16px 18px 16px;  background-color: white;">
+        <div style="text-align: center">
+            <span class="mdc-top-app-bar__title" style="padding-left: 8px">
+                @{
+                    var imgAppBar = await configHandler.GetImageFromConfig(configHandler.CodeImgMenu);
+                }
+
+                @if (imgAppBar != string.Empty)
+                {
+                    <img src="@imgAppBar" style="max-height: 42px" />
+
+                }
+                else
+                {
+                    <img src="~/lib/mtd-ordermaker/images/logo-mtd.png" style="max-height: 64px" />
+                }
+
+            </span>
+        </div>
+        <div>
+            <hr />
+            <h4>Модуль регистрации и создания документов.</h4>
+
+            <div class="d-flex align-items-center">
+                <div>
+                    <i class="bi bi-check2-circle" style="color: green; font-size: 5em; font-weight: bold"></i>
+                </div>               
+                <div class="p-4" style="font-size: 1.3em">
+                    <div>Запрос отправлен успешно!</div> 
+                    Проверьте ваш почтовый ящик.
+                </div>
+            </div>
+          
+
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    <script>
+        var selectForm = new MTDSelectList("selectForm");
+        var name = new MTDTextField("userName");
+        var email = new MTDTextField("email");
+    </script>
+}

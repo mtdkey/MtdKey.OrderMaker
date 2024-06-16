@@ -124,34 +124,6 @@ namespace MtdKey.OrderMaker.Services
 
             await ExecuteAsync(blankEmail.Email, blankEmail.Subject, htmlText, mustconfirm);
 
-            //try
-            //{
-
-            //    string message = string.Empty;
-            //    foreach (string p in blankEmail.Content)
-            //    {
-            //        message += $"<p>{p}</p>";
-            //    }
-
-            //    string webRootPath = _hostingEnvironment.WebRootPath;
-            //    string contentRootPath = _hostingEnvironment.ContentRootPath;
-            //    var file = Path.Combine(contentRootPath, "wwwroot", "lib", "mtd-ordermaker", "emailform", "blank.html");
-            //    var htmlArray = File.ReadAllText(file);
-            //    string htmlText = htmlArray.ToString();
-
-            //    //htmlText = htmlText.Replace("{logo}", pathImgMenu);
-            //    htmlText = htmlText.Replace("{title}", _emailSettings.Title);
-            //    htmlText = htmlText.Replace("{header}", blankEmail.Header);
-            //    htmlText = htmlText.Replace("{content}", message);
-            //    htmlText = htmlText.Replace("{footer}", _emailSettings.Footer);
-
-            //    await ExecuteAsync(blankEmail.Email, blankEmail.Subject, htmlText, mustconfirm);
-            //}
-            //catch
-            //{
-            //    return false;
-            //}
-
 
             return true;
         }

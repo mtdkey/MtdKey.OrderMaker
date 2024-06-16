@@ -1,0 +1,98 @@
+﻿@* Translate *@
+@page
+@using MtdKey.OrderMaker.Services
+@inject Services.ConfigHandler configHandler
+@model CreateFormRequestModel
+
+
+<div class="mtd-desk" style="margin-bottom: 24px">
+    <div class="mtd-desk-panel">
+    </div>
+
+    <div class="mdc-elevation--z8 identity-box" style="max-width: 650px;   margin-left: auto;  margin-right: auto;  margin-top: 12px;  padding: 16px 16px 18px 16px;  background-color: white;">
+        <div style="text-align: center">
+            <span class="mdc-top-app-bar__title" style="padding-left: 8px">
+                @{
+                    var imgAppBar = await configHandler.GetImageFromConfig(configHandler.CodeImgMenu);
+                }
+
+                @if (imgAppBar != string.Empty)
+                {
+                    <img src="@imgAppBar" style="max-height: 42px" />
+
+                }
+                else
+                {
+                    <img src="~/lib/mtd-ordermaker/images/logo-mtd.png" style="max-height: 64px" />
+                }
+
+            </span>
+        </div>
+        <div>
+            <hr />
+            <h4>Модуль регистрации и создания документов.</h4>
+            <ul>
+                <li>Выберите название документа, который вы хотите создать</li>
+                <li>Укажите адрес ваше имя и адрес электронной почты</li>
+                <li>После нажатия кнопки Отправить на указанную электронную почту будет отправлена ссылка для создания документа</li>
+            </ul>
+
+            <form mtd-data-form method="post">
+
+                <div class="p-1 pb-2">
+                    @await Component.InvokeAsync(typeof(MTDSelectList), new MTDSelectListTags
+                   {
+                       Id = "selectForm",
+                       Name = "form",
+                       Label = "Название документа",
+                       LabelLocalized = true,
+                       Items = Model.Forms,
+                       MTDSelectListView = MTDSelectListViews.Outlined,
+                   })
+                </div>
+
+                <div class="p-1">
+                    @await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags
+                   {
+                       Id = "userName",
+                       Name = "userName",
+                       Label = "ФИО",
+                       LabelLocalized = true,
+                       Required = true,
+                       MaxLength = 50,
+                       ShowCounter = true,
+                       MTDTexFieldView = MTDTextFieldViews.Outlined,
+                   })
+                </div>
+                <div class="p-1">
+                    @await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags
+                       {
+                           Id = "email",
+                           Name = "email",
+                           Label = "Email",
+                           LabelLocalized = true,
+                           Required = true,
+                           MaxLength = 50,
+                           ShowCounter = true,
+                           MTDTexFieldView = MTDTextFieldViews.Outlined,
+                       })
+                </div>
+                <div class="p-1">
+                    <button mtd-data-clicker type="button"
+                            mtd-data-location="/identity/requests/createformresult"
+                        class="btn btn-primary"><i class="bi bi-send-fill"></i> Отправить</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    <script>
+        var selectForm = new MTDSelectList("selectForm");
+        var name = new MTDTextField("userName");
+        var email = new MTDTextField("email");
+    </script>
+}

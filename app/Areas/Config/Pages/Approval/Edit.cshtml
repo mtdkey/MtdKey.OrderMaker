@@ -234,8 +234,6 @@
 
 
 
-
-
 <form mtd-data-form method="post" autocomplete='off' enctype='multipart/form-data' action='/api/config/approval/stage/update'>
     @Html.AntiForgeryToken()
     <input name="approval-id" type="hidden" value="@Model.MtdApproval.Id" />
@@ -247,6 +245,7 @@
     <input id="config-delete-id" name="idApproval" type="hidden" value="@Model.MtdApproval.Id" />
     <input id="deleteClicker" mtd-data-clicker mtd-data-location="/config/approval" mtd-data-message="@Localizer["The approval "] '@Model.MtdApproval.Name' @Localizer["was deleted"]" type="hidden" />
 </form>
+
 <div id="dialog-delete" class="mdc-dialog"
      role="alertdialog"
      aria-modal="true"

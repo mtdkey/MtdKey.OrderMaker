@@ -166,17 +166,6 @@ namespace MtdKey.OrderMaker.Controllers.Users
             Claim claim = new("policy", policyId);
             await _userManager.AddClaimAsync(user, claim);
 
-            //IList<MtdGroup> groups = await _context.MtdGroup.ToListAsync();
-            //foreach (var group in groups)
-            //{
-            //    string value = form[$"{group.Id}-group"];
-            //    if (value == "true")
-            //    {
-            //        Claim claimGroup = new Claim("group", group.Id);
-            //        await _userManager.AddClaimAsync(user, claimGroup);
-            //    }
-            //}
-
             List<string> groupIds = groupContainer.Split("&").Where(x => x != "").ToList();
             foreach (var groupId in groupIds)
             {

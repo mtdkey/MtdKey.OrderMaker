@@ -4,10 +4,22 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
+
+
+    <link rel="stylesheet" href="~/lib/bootstrap-5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/lib/mtd-ordermaker/main/css/ripple.css" asp-append-version="true" />
+
+    <link rel="stylesheet" href="~/lib/mtd-ordermaker/identity/css/mtd-public.css" asp-append-version="true" />
+
+    @RenderSection("Head", required: false)
 </head>
 <body>
     <div>
         @RenderBody()
     </div>
+
+    <script src="~/lib/bootstrap-5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/mtd-ordermaker/main/js/ripple.js" asp-append-version="true"></script>
+
 </body>
 </html>

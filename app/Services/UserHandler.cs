@@ -124,7 +124,7 @@ namespace MtdKey.OrderMaker.Services
             return await _context.MtdStoreOwner.Where(x => x.Id == storeId && x.UserId == user.Id).AnyAsync();
         }
 
-        public async Task<List<MtdGroup>> GetAllGroups()
+        public async Task<List<MtdGroup>> GetAllGroupsAsync()
         {
             return await _context.MtdGroup.ToListAsync();
         }
@@ -629,5 +629,8 @@ namespace MtdKey.OrderMaker.Services
 
             return password.ToString();
         }
+
+
+
     }
 }

@@ -77,7 +77,7 @@ namespace MtdKey.OrderMaker.Core
                 .Include(x => x.MtdFormHeader)
                 .AsSplitQuery()
                 .ToListAsync();
-
+            
             var docList = new List<DocModel>();
             foreach (var storeItem in storeItems)
             {
@@ -268,7 +268,7 @@ namespace MtdKey.OrderMaker.Core
 
         private async Task<List<DocFieldModel>> GetDocFields(string formId, WebAppUser appUser, List<string> partIds)
         {
-            MtdFilter userFilter = await GetUserFilter(formId, appUser);
+            MtdFilter userFilter = await GetUserFilter(formId, appUser) ?? new();
 
             var docFields = await context.MtdFormPartField
                 .Include(x => x.MtdFilterColumn)
@@ -305,7 +305,7 @@ namespace MtdKey.OrderMaker.Core
 
         private async Task<MtdFilter> GetUserFilter(string formId, WebAppUser appUser)
         {
-            return await context.MtdFilter
+          var userFilter = await context.MtdFilter
                 .Include(x => x.MtdFilterColumns)
                 .Include(x => x.MtdFilterDate)
                 .Include(x => x.MtdFilterOwner)
@@ -314,6 +314,8 @@ namespace MtdKey.OrderMaker.Core
                 .AsSplitQuery()
                 .Where(x => x.IdUser == appUser.Id && x.MtdFormId == formId)
                 .FirstOrDefaultAsync();
+
+            return userFilter;
         }
 
         private static void AddDocField(DocModel doc, DocFieldModel docField, object value)

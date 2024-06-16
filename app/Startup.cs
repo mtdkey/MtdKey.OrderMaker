@@ -21,6 +21,7 @@ using MtdKey.OrderMaker.Areas.Identity.Data;
 using MtdKey.OrderMaker.Core;
 using MtdKey.OrderMaker.Entity;
 using MtdKey.OrderMaker.Services;
+using MtdKey.OrderMaker.Services.Tokens;
 
 namespace MtdKey.OrderMaker
 {
@@ -105,6 +106,8 @@ namespace MtdKey.OrderMaker
             services.Configure<LimitSettings>(Configuration.GetSection("LimitSettings"));
             services.AddSingleton<ITemplateStorage, FileTemplates>();
             services.AddSingleton<IAppParams, AppParams>();
+            services.AddScoped<ITokenService, TokenService<IdentityDbContext>>();
+            services.AddScoped<RegistrationService>();
 
             services.AddAesMangerService(options =>
             {

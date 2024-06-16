@@ -6,6 +6,7 @@ namespace MtdKey.OrderMaker.Models.Controls.MTDSelectList
     {
         public string Id { get; set; }
         public string Label { get; set; }
+        public bool Required { get; set; } 
         public bool LabelLocalized { get; set; }
         public string Name { get; set; }
         public string ValueId { get; set; }

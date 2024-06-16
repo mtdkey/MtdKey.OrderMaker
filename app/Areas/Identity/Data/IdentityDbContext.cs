@@ -2,10 +2,11 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using MtdKey.OrderMaker.Areas.Identity.Data;
+using MtdKey.OrderMaker.Services.Tokens;
 
 namespace MtdKey.OrderMaker.Entity
 {
-    public class IdentityDbContext : IdentityDbContext<WebAppUser, WebAppRole, string>, IDataProtectionKeyContext
+    public class IdentityDbContext : IdentityDbContext<WebAppUser, WebAppRole, string>, IDataProtectionKeyContext, IDataTokensContext
     {
 
         //private readonly Guid DatabaseId;
@@ -20,6 +21,7 @@ namespace MtdKey.OrderMaker.Entity
         }
         public DbSet<DataProtectionKey> DataProtectionKeys { get; set; }
 
+        public DbSet<TokenProof> TokenProofs {  get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

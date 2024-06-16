@@ -1,5 +1,48 @@
 ﻿@page
 @model MtdKey.OrderMaker.Areas.Public.Pages.RequestModel
+@inject Services.ConfigHandler configHandler;
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> Localizer
+
 @{
+    var imgMenu = await configHandler.GetImageFromConfig(configHandler.CodeImgMenu);
 }
-<h1>Request</h1>
+
+<div class="conteiner">
+    <div class="request-block">
+        <center>
+            @if (imgMenu != string.Empty)
+            {
+                <img src="@imgMenu" width="100%" />
+            }
+            else
+            {
+                <img src="~/lib/mtd-ordermaker/images/logo-mtd.png" width="100%" />
+            }
+        </center>
+        <hr />
+
+        <form method="post">
+            <div class="p-2">
+                <select required class="form-select" name="form">
+                    @foreach (var form in Model.Forms)
+                    {
+                        <option value="@form.Key">@form.Value</option>
+                    }
+                </select>
+            </div>
+
+            <div class="p-2">
+                <input type="text" class="form-control" name="name" required />
+            </div>
+            <div class="p-2">
+                <input type="email" class="form-control" name="email" required />
+            </div>
+            <div class="p-2">
+                <button class="btn btn-primary">Send</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
