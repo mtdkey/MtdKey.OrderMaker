@@ -24,7 +24,7 @@ namespace MtdKey.OrderMaker.Areas.Identity.Requests
             try
             {
                 var validToken = await registrationService.TokenValidateAsync(token);
-                if (validToken is not true) { return BadRequest(); }
+                if (validToken is not true) { return RedirectToPage("/Index"); }
 
                 var formId = await registrationService.GetFormIdByTokenAsync(token);
                 await registrationService.AcceptUserByToken(token);

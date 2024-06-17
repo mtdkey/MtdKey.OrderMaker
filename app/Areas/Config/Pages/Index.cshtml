@@ -15,7 +15,7 @@
 
 }
 
-@section Head  {
+@section Head {
     <link rel="stylesheet" href="~/lib/mtd-ordermaker/config/css/mtd-config.css" asp-append-version="true" />
 }
 
@@ -26,58 +26,59 @@
 <div class="mtd-desk">
     <div class="mtd-desk-panel"></div>
     <div class="mtd-config-place">
-        <div mtd-data-url="/config/formeditor" class="mdc-ripple-surface mtd-config-param">
-            <div class="mtd-config-param-icon">
-                <img src="~/lib/mtd-ordermaker/images/form.png" />
+  
+    <div class="d-flex flex-wrap justify-content-center">
+        <div mtd-data-url="/config/formeditor" class="card m-2" style="width: 16rem; cursor: pointer;">
+            <div class="card-img-top card-img-ripple" style="background-color: darkslateblue">
+                <div class="position-relative" style="height: 8em; overflow: hidden">
+                    <div class="position-absolute" style="font-size: 7.5em; margin-top:-25px; left: 25px; opacity: 0.5; color: white">
+                        <i class="bi bi-file-earmark-richtext"></i>
+                    </div>
+                </div>
             </div>
-            <div class="mtd-config-param-title" style="align-self:stretch">
-                <span>@Localizer["Forms"]</span>
-            </div>
-            <div>
-                <span>@Localizer["Templates setting"]</span>
+            <div class="card-body">
+                <h5 class="card-title">@Localizer["Forms"]</h5>
+                <div class="card-text small">
+                    <span>@Localizer["Templates setting"]</span>
+                </div>
             </div>
         </div>
 
-        @if (User.IsInRole("Admin"))
-        {
-            <div mtd-data-url="/config/interface" class="mdc-ripple-surface mtd-config-param">
-                <div class="mtd-config-param-icon">
-                    <img src="~/lib/mtd-ordermaker/images/formGear.png" />
+        <div class="d-flex flex-wrap justify-content-center">
+            <div mtd-data-url="/config/interface" class="card m-2" style="width: 16rem; cursor: pointer;">
+                <div class="card-img-top card-img-ripple" style="background-color: darkslateblue">
+                    <div class="position-relative" style="height: 8em; overflow: hidden">
+                        <div class="position-absolute" style="font-size: 7em; margin-top:-20px; left: 25px; opacity: 0.5; color: white">
+                                <i class="bi bi-layout-wtf"></i>
+                        </div>
+                    </div>
                 </div>
-                <div class="mtd-config-param-title">
-                    <span>@Localizer["Interface"]</span>
+                <div class="card-body">
+                    <h5 class="card-title">@Localizer["Interface"]</h5>
+                    <div class="card-text small">
+                        <span>@Localizer["Display elements"]</span>
+                    </div>
                 </div>
-                <div>
-                    <span>@Localizer["Display elements"]</span>
-                </div>
-            </div>
-        }
-
-
-        <div mtd-data-url="/config/approval" class="mdc-ripple-surface mtd-config-param">
-            <div class="mtd-config-param-icon">
-                <img src="~/lib/mtd-ordermaker/images/formApproval.png" />
-            </div>
-            <div class="mtd-config-param-title">
-                <span>@Localizer["Approvals"]</span>
-            </div>
-            <div>
-                <span>@Localizer["Approval flows"]</span>
             </div>
         </div>
 
-@*        <div mtd-data-url="/config/register" class="mdc-ripple-surface mtd-config-param">
-            <div class="mtd-config-param-icon">
-                <img src="~/lib/mtd-ordermaker/images/formRegister.png" />
+        <div class="d-flex flex-wrap justify-content-center">
+            <div mtd-data-url="/config/approval" class="card m-2" style="width: 16rem; cursor: pointer;">
+                <div class="card-img-top card-img-ripple" style="background-color: darkslateblue">
+                    <div class="position-relative" style="height: 8em; overflow: hidden">
+                        <div class="position-absolute" style="font-size: 8.5em; margin-top:-35px; left: 25px; opacity: 0.5; color: white">
+                                <i class="bi bi-person-check-fill"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">@Localizer["Approvals"]</h5>
+                    <div class="card-text small">
+                        <span>@Localizer["Approval flows"]</span>
+                    </div>
+                </div>
             </div>
-            <div class="mtd-config-param-title">
-                <span>@Localizer["Registers"]</span>
-            </div>
-            <div>
-                <span>@Localizer["Register set"]</span>
-            </div>
-        </div>*@
-
+        </div>
     </div>
 </div>
 
