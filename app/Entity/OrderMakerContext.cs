@@ -4,11 +4,12 @@
 */
 
 using Microsoft.EntityFrameworkCore;
+using MtdKey.OrderMaker.Services.FileStorage;
 using System;
 
 namespace MtdKey.OrderMaker.Entity
 {
-    public partial class OrderMakerContext : DbContext
+    public partial class OrderMakerContext : DbContext, IFileStorageContext
     {
         public OrderMakerContext(DbContextOptions<OrderMakerContext> options) : base(options) { }
 
@@ -22,6 +23,7 @@ namespace MtdKey.OrderMaker.Entity
         public virtual DbSet<MtdEventSubscribe> MtdEventSubscribes { get; set; }
         public virtual DbSet<MtdGroup> MtdGroup { get; set; }
 
+        public DbSet<FileStorageItem> FileStorageItems { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

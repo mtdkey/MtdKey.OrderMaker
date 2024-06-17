@@ -1,0 +1,19 @@
+﻿@using Microsoft.Extensions.Localization
+@using MtdKey.OrderMaker.Localizer
+@using MtdKey.OrderMaker.Components.AttachedFiles
+@model AttachedFilesModel
+@inject IStringLocalizer<AttachedFilesLocalizer> localizer
+@{
+    var thisModel = Model ?? new AttachedFilesModel();
+}
+
+<label>@thisModel.Label</label>
+
+<div>
+    @foreach (var file in thisModel.Files)
+    {
+        <div>
+            <a href="/files/getFile/@file.Id">@file.Name</a>
+        </div>        
+    }
+</div>

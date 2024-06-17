@@ -4,6 +4,7 @@
 *@
 @model Core.DocModel
 @using Microsoft.AspNetCore.Mvc.Localization
+@using MtdKey.OrderMaker.Components.AttachedFiles
 @inject IHtmlLocalizer<SharedResource> Localizer
 
 
@@ -13,7 +14,7 @@
     <input type="hidden" name="storeId" asp-for="@Model.Id" />
     <input type="hidden" id="store-edit-clicker" mtd-data-clicker mtd-data-location="/workplace/store/details?id=@Model.Id" />
 
-    <div class="mtd-store-style-blank" style="margin-bottom: 24px;">    
+    <div class="mtd-store-style-blank" style="margin-bottom: 24px;">
 
         <div id="@Model.Id-modal" class="mtd-store-style-modal"></div>
 
@@ -33,22 +34,23 @@
 
             <div class="mtd-store-style-attribute">
 
-                    <span class="mtd-store-style-number">№ @Model.Sequence.ToString("D9")</span>
-                    <hr />
+                <span class="mtd-store-style-number">№ @Model.Sequence.ToString("D9")</span>
+                <hr />
 
                 @if (Model.EditDate)
                 {
                     @await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags
-                    {
-                        Id = "date-create",
-                        Name = "date-create",
-                        Value = @Model.Created.ToShortDateString(),
-                        Class = "mtd-data-datepicker",
-                        MTDTexFieldView = MTDTextFieldViews.Outlined,
-                        Label = "Date",
-                        LabelLocalized = true,
-                    })
-                } else
+           {
+               Id = "date-create",
+               Name = "date-create",
+               Value = @Model.Created.ToShortDateString(),
+               Class = "mtd-data-datepicker",
+               MTDTexFieldView = MTDTextFieldViews.Outlined,
+               Label = "Date",
+               LabelLocalized = true,
+           })
+                }
+                else
                 {
                     <span class="mtd-store-style-date">@Localizer["Date"] @Model.Created.ToShortDateString()</span>
                 }
@@ -56,9 +58,11 @@
         </div>
 
         <div>
-            @{ string partId = Guid.NewGuid().ToString(); }
+            @{
+                string partId = Guid.NewGuid().ToString();
+            }
 
-            @foreach (var part in Model.Parts.OrderBy(x=>x.Sequence))
+            @foreach (var part in Model.Parts.OrderBy(x => x.Sequence))
             {
                 if (part.ShowTitle)
                 {
@@ -84,4 +88,19 @@
             }
         </div>
     </div>
+    @await Component.InvokeAsync(typeof(AttachedFiles), new AttachedFilesModel
+        {
+            AttachedFilesView = AttachedFilesView.Editor,
+            Name = "Files",
+            Label = string.Empty,
+        })
 </form>
+
+@* <form autocomplete='off' method="post" enctype='multipart/form-data' action='/api/store/save'>
+    @Html.AntiForgeryToken()
+    <div class="pt-2 pb">
+
+    </div>
+    <button class="btn btn-primart">Save</button>
+</form>
+ *@

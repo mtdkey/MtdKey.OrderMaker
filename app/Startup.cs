@@ -128,29 +128,11 @@ namespace MtdKey.OrderMaker
 #if DEBUG
             services.AddRazorPages().AddRazorRuntimeCompilation();
 #endif
-
-            //services.Configure<RequestLocalizationOptions>(options =>
-            //{
-            //    var supportedCultures = new[]
-            //    {
-            //        new CultureInfo("en-US"),
-            //        new CultureInfo("ru-RU"),
-            //    };
-
-            //    options.DefaultRequestCulture = new RequestCulture(culture: "en-US", uiCulture: "en-US");
-            //    options.SupportedCultures = supportedCultures;
-            //    options.SupportedUICultures = supportedCultures;
-            //    options.RequestCultureProviders = new[] { new CookieRequestCultureProvider() };
-            //});            
+          
         }
 
         public void Configure(IApplicationBuilder app)
         {
-            //var config = serviceProvider.GetRequiredService<IOptions<ConfigSettings>>();
-            //var locOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
-            //var cultureInfo = new CultureInfo(config.Value.CultureInfo);
-            //locOptions.Value.DefaultRequestCulture = new RequestCulture(cultureInfo);
-            //app.UseRequestLocalization(locOptions.Value);
 
             if (CurrentEnvironment.IsDevelopment())
             {

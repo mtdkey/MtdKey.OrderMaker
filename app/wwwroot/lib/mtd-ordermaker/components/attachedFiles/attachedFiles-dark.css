@@ -1,0 +1,70 @@
+﻿.attachedFiles {
+    background-color: #262424;
+    border-radius: 25px;
+    width: 100%;
+    min-height: 110px;
+    padding: 8px;
+    margin-bottom: 8px;
+}
+
+.attachedFiles__item {
+    position: relative;
+    margin: 2px;
+    padding: 2px 24px 2px 12px;
+    background-color: #ff6a00;
+    color: whitesmoke;
+    text-shadow: 1px 1px 2px black;
+    border-radius: 25px;
+    overflow: hidden;
+    white-space: nowrap;
+    word-break: normal;
+    text-overflow: ellipsis;
+}
+
+.attachedFiles__removing {
+    position: absolute;
+    top: 0.14em;
+    right: 0.8rem;
+    background-color: transparent;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    border-radius: 2rem;
+    float: right;
+    color: white;
+    cursor: pointer;
+    margin-right: -0.7rem;
+    font-weight: bold;
+}
+
+    .attachedFiles__removing::after {
+        content: "X";
+    }
+
+.attachedFiles__title {
+    width: 100%;
+    text-align: center;
+    line-height: 0;
+    margin-bottom: 1em;
+    color: lightgray;
+}
+
+.attachedFiles__menu {
+    display: flex;
+    text-align: center;
+    margin: 0;
+}
+
+.attachedFiles__content {
+    margin-top: 1em;
+}
+
+.attachedFiles--hover {
+    -webkit-box-shadow: 1px 1px 8px 1px var(--primary-color);
+    -moz-box-shadow: 1px 1px 8px 1px var(--primary-color);
+    box-shadow: 1px 1px 8px 1px var(--primary-color);
+}
+
+.file-link {
+    padding: 4px;
+    color: navy;
+}

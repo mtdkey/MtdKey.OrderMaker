@@ -113,7 +113,9 @@ const CreateFormData = (form) => {
         }
 
         if (form[i].files && form[i].files.length > 0) {
-            formData.append(form[i].name, form[i].files[0], form[i].files[0].name);
+            for (var f = 0; f < form[i].files.length; f++) {
+                formData.append(form[i].name, form[i].files[f], form[i].files[f].name);
+            }
         }
     }
 
@@ -312,13 +314,13 @@ var notSelected = true;
 var cssActivated = "mdc-list-item--activated";
 
 mainMenuItems.forEach((item, index) => {
-    
+
     if (url.includes(item.href.toLowerCase()) && index !== 0) {
 
         item.classList.add(cssActivated);
         notSelected = false;
     }
-    
+
 });
 
 if (notSelected) { mainMenuItems[0].classList.add(cssActivated); }

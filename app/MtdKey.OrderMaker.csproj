@@ -96,6 +96,12 @@ OrderMaker provides the ability quickly create a solution to consolidate informa
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Include="Views\Shared\Components\AttachedFiles\Default.cshtml" />
+	  <None Include="Views\Shared\Components\AttachedFiles\Editor.cshtml" />
+	  <None Include="Views\Shared\Components\ToastContainer\Default.cshtml" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <ProjectReference Include="..\..\MtdKey.EmailBuilder\MtdKey.EmailBuilder\MtdKey.EmailBuilder.csproj" />
 	</ItemGroup>
 

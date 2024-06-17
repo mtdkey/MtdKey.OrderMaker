@@ -1,0 +1,36 @@
+﻿@using MtdKey.OrderMaker.Components.ToastContainer
+@model ToastContainerModel
+
+@{
+    var thisModel = Model ?? new ToastContainerModel();
+}
+
+<div id='toastContainer'
+     class='toast-container position-fixed bottom-0 end-0 p-3' style="z-index:5000">
+</div>
+
+<template id="toastError">
+    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header toast-header-error">
+            <i class="rounded me-2 fas fa-exclamation-triangle"></i>
+            <strong data-header class="me-auto">@thisModel.ErrorHeader</strong>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div data-body class="toast-body toast-body-error">
+            Body
+        </div>
+    </div>
+</template>
+
+<template id="toastOk">
+    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header  toast-header-ok">
+           <i class="rounded me-2 fas fa-check"></i>  
+            <strong data-header class="me-auto">@thisModel.SuccessHeader</strong>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div data-body class="toast-body bg-white">
+            Body
+        </div>
+    </div>
+</template>

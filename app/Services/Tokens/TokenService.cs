@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using MtdKey.Cipher;
-using NPOI.HSSF.Record;
 using System;
 using System.Collections.Generic;
 using System.Linq;

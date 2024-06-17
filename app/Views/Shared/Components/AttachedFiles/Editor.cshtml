@@ -1,0 +1,46 @@
+﻿@using Microsoft.Extensions.Localization
+@using MtdKey.OrderMaker.Localizer
+@using MtdKey.OrderMaker.Components.AttachedFiles
+@model AttachedFilesModel
+@inject IStringLocalizer<AttachedFilesLocalizer> localizer
+
+@{
+    var thisModel = Model ?? new AttachedFilesModel();
+}
+
+<input id="@thisModel.Id" type="file" class="d-none" name="@thisModel.Name" multiple data-size="@thisModel.MaxSize" />
+@*<input id="@thisModel.Id-deleted" name="deleted" type="hidden" value="DELETEDFILES" />*@
+
+@if (!string.IsNullOrEmpty(thisModel.Label))
+{
+    <label>@thisModel.Label</label>
+}
+
+<div id="@thisModel.Id-zone" class="attachedFiles"
+     ondrop="dropHandler(event);"
+     ondragover="dragOverHandler(event);"
+     ondragleave="dragLeaveHandler(event)"
+     onpaste="dragPaste(event)">
+    <div class="attachedFiles__title">
+        <div class="attachedFiles__menu">
+            <div class="col-6 p-2"><button id="@thisModel.Id-addExplorer" type="button" class="btn btn-outline-secondary w-100 btn-sm">
+                <i class="bi bi-folder-fill"></i>  
+                @localizer["Choose File"]
+            </button></div>
+            <div class="col-6 p-2"><button id="@thisModel.Id-addBuffer" type="button" class="btn btn-outline-secondary w-100 btn-sm">
+                <i class="bi bi-card-image"></i>  
+                @localizer["From clipboard"]
+                </button></div>
+        </div>
+        <div class="attachedFiles__content">@localizer["Drag and drop files into this Drop Zone."]</div>
+    </div>
+    @foreach (var file in thisModel.Files)
+    {
+        <div class="attachedFiles_item">
+            <input id="@file.Id-attached" name="attached" type="hidden" data-value="@file.Id" />
+            @file.Name
+            <div class="attachedFiles_removing"></div>
+        </div>
+    }
+</div>
+

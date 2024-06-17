@@ -1,0 +1,18 @@
+﻿.toast-header-error {
+    color: white;
+    background-color: var(--danger-color);
+}
+
+.toast-header-ok {
+    color: white;
+    background-color: var(--success-color);
+}
+
+.toast-body-error {
+    color: var(--danger-color);
+    font-weight: 600;
+}
+
+.toast-body {
+    background-color: var(--light-color);
+}
