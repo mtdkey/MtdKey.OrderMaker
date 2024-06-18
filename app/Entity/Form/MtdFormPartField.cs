@@ -21,6 +21,7 @@ namespace MtdKey.OrderMaker.Entity
             MtdStoreFiles = new HashSet<MtdStoreFile>();
             MtdFormPartFieldItems = new HashSet<MtdFormPartFieldItem>();
             MtdStoreItems = new HashSet<MtdStoreItem>();
+            MtdStoreFileLinks = new HashSet<MtdStoreFileLink>();
         }
 
         public string Id { get; set; }
@@ -47,5 +48,6 @@ namespace MtdKey.OrderMaker.Entity
         public virtual ICollection<MtdStoreFile> MtdStoreFiles { get; set; }
         public virtual ICollection<MtdFormPartFieldItem> MtdFormPartFieldItems { get; set; }
         public virtual ICollection<MtdStoreItem> MtdStoreItems { get; set; }
+        public virtual ICollection<MtdStoreFileLink> MtdStoreFileLinks { get; set; }
     }
 }

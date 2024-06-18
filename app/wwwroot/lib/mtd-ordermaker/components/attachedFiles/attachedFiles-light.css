@@ -25,7 +25,7 @@
     position: absolute;
     top: 0.14em;
     right: 0.8rem;
-    background-color: red;
+    background-color: brown;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
     border-radius: 2rem;
@@ -57,9 +57,9 @@
 }
 
 .attachedFiles--hover {
-    -webkit-box-shadow: 1px 1px 8px 1px var(--primary-color);
-    -moz-box-shadow: 1px 1px 8px 1px var(--primary-color);
-    box-shadow: 1px 1px 8px 1px var(--primary-color);
+    -webkit-box-shadow: 2px 2px 18px 4px #ccc;
+    -moz-box-shadow: 2px 2px 18px 4px #ccc;
+    box-shadow: 2px 2px 18px 4px #ccc;
 }
 
 .file-link{

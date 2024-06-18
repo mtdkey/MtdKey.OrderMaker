@@ -1602,4 +1602,22 @@
   <data name="Close" xml:space="preserve">
     <value>Закрыть</value>
   </data>
+  <data name="Add Screenshot" xml:space="preserve">
+    <value>Добавить снимок экрана</value>
+  </data>
+  <data name="Choose File" xml:space="preserve">
+    <value>Выбрать файл</value>
+  </data>
+  <data name="Drag and drop files into this Drop Zone." xml:space="preserve">
+    <value>Перетащите файлы в эту зону.</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Ошибка</value>
+  </data>
+  <data name="From clipboard" xml:space="preserve">
+    <value>Из буфера</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Выполнено</value>
+  </data>
 </root>

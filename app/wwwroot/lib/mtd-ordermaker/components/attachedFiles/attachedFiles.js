@@ -1,4 +1,5 @@
-﻿class FileStorage {
+﻿/* Translate */
+class FileStorage {
     constructor(id) {
         this.id = id;
         this.files = []
@@ -19,7 +20,6 @@ function GetFileStorage(id) {
     if (!store[0]) return new FileStorage(id);
     return FileStorages.filter(store => store.id === id)[0];
 }
-
 
 document.querySelectorAll(".attachedFiles").forEach(dropZone => {
 
@@ -190,7 +190,11 @@ fileItems.forEach(div => {
     div.addEventListener("click", (e) => {
         e.stopPropagation();
         e.preventDefault();
-        div.parentNode.remove();
+        var root = div.closest(".attachedFiles__item");
+        var input = root.querySelector("input");
+        input.name = input.name.replace("-attached", "-delete");
+        root.style.display="none";
+        //div.parentNode.remove();
     });
 });
 

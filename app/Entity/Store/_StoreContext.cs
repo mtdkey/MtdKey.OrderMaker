@@ -16,6 +16,7 @@ namespace MtdKey.OrderMaker.Entity
         public virtual DbSet<MtdStoreFile> MtdStoreFiles { get; set; }
 
         public virtual DbSet<MtdStoreItem> MtdStoreItems { get; set; }
+        public virtual DbSet<MtdStoreFileLink> MtdStoreFileLinks { get; set; }
 
         public void StoreModelCreating(ModelBuilder modelBuilder)
         {
@@ -163,6 +164,7 @@ namespace MtdKey.OrderMaker.Entity
             modelBuilder.Entity<MtdStoreDecimal>().HasQueryFilter(b => b.MtdStore.IsDeleted == false && b.IsDeleted == false);
             modelBuilder.Entity<MtdStoreDate>().HasQueryFilter(b => b.MtdStore.IsDeleted == false && b.IsDeleted == false);
             modelBuilder.Entity<MtdStoreItem>().HasQueryFilter(b => b.MtdStore.IsDeleted == false && b.IsDeleted == false);
+            modelBuilder.Entity<MtdStoreFileLink>().HasQueryFilter(b => b.MtdStore.IsDeleted == false && b.IsDeleted == false);
 
             modelBuilder.Entity<MtdLogApproval>().HasQueryFilter(b => b.MtdStoreNavigation.IsDeleted == false);
             modelBuilder.Entity<MtdLogDocument>().HasQueryFilter(b => b.MtdStoreNavigation.IsDeleted == false);

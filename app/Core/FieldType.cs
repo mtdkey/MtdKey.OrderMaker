@@ -13,5 +13,6 @@
         public const int List = 11;
         public const int Checkbox = 12;
         public const int Link = 13;
+        public const int FileStorage = 14;
     }
 }

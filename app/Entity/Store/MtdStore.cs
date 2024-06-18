@@ -23,6 +23,7 @@ namespace MtdKey.OrderMaker.Entity
             MtdStoreMemos = new HashSet<MtdStoreMemo>();
             MtdStoreFiles = new HashSet<MtdStoreFile>();
             MtdStoreItems = new HashSet<MtdStoreItem>();
+            MtdStoreFileLinks = new HashSet<MtdStoreFileLink>();
         }
 
         public string Id { get; set; }
@@ -45,5 +46,6 @@ namespace MtdKey.OrderMaker.Entity
         public virtual ICollection<MtdStoreMemo> MtdStoreMemos { get; set; }
         public virtual ICollection<MtdStoreFile> MtdStoreFiles { get; set; }
         public virtual ICollection<MtdStoreItem> MtdStoreItems { get; set; }
+        public virtual ICollection<MtdStoreFileLink> MtdStoreFileLinks { get; set; }
     }
 }

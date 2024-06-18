@@ -24,7 +24,7 @@ namespace MtdKey.OrderMaker.Services.FileStorage
 
         private string GetPath(DateTime date)
         {
-            return Path.Combine(_option.RootPath, date.Year.ToString("yyyy"), date.Month.ToString("MM"), date.Day.ToString("dd"));
+            return Path.Combine(_option.RootPath, date.ToString("yyyyMMdd"));
         } 
 
         public async Task<byte[]> GetFileAsync(Guid fileId)

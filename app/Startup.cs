@@ -21,6 +21,7 @@ using MtdKey.OrderMaker.Areas.Identity.Data;
 using MtdKey.OrderMaker.Core;
 using MtdKey.OrderMaker.Entity;
 using MtdKey.OrderMaker.Services;
+using MtdKey.OrderMaker.Services.FileStorage;
 using MtdKey.OrderMaker.Services.Tokens;
 
 namespace MtdKey.OrderMaker
@@ -108,6 +109,8 @@ namespace MtdKey.OrderMaker
             services.AddSingleton<IAppParams, AppParams>();
             services.AddScoped<ITokenService, TokenService<IdentityDbContext>>();
             services.AddScoped<RegistrationService>();
+            services.Configure<FileStorageOption>(Configuration.GetSection(nameof(FileStorageOption)));
+            services.AddScoped<IFileStorageService, FileStorageService<OrderMakerContext>>();
 
             services.AddAesMangerService(options =>
             {

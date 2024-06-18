@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MtdKey.OrderMaker.Entity;
 
@@ -11,9 +12,11 @@ using MtdKey.OrderMaker.Entity;
 namespace MtdKey.OrderMaker.Migrations
 {
     [DbContext(typeof(OrderMakerContext))]
-    partial class OrderMakerContextModelSnapshot : ModelSnapshot
+    [Migration("20240617132339_AddFileStorage")]
+    partial class AddFileStorage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1636,54 +1639,6 @@ namespace MtdKey.OrderMaker.Migrations
                     b.ToTable("mtd_store_file");
                 });
 
-            modelBuilder.Entity("MtdKey.OrderMaker.Entity.MtdStoreFileLink", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<string>("FieldId")
-                        .IsRequired()
-                        .HasMaxLength(36)
-                        .HasColumnType("varchar(36)");
-
-                    b.Property<string>("FileName")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("varchar(256)");
-
-                    b.Property<long>("FileSize")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("FileType")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("varchar(256)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<Guid>("Result")
-                        .HasColumnType("char(36)");
-
-                    b.Property<string>("StoreId")
-                        .IsRequired()
-                        .HasMaxLength(36)
-                        .HasColumnType("varchar(36)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FieldId");
-
-                    b.HasIndex("StoreId");
-
-                    b.HasIndex(new[] { "Result" }, "IX_FILE_LINK_RESULT");
-
-                    b.ToTable("mtd_store_file_links");
-                });
-
             modelBuilder.Entity("MtdKey.OrderMaker.Entity.MtdStoreInt", b =>
                 {
                     b.Property<long>("Id")
@@ -2456,25 +2411,6 @@ namespace MtdKey.OrderMaker.Migrations
                     b.Navigation("MtdStore");
                 });
 
-            modelBuilder.Entity("MtdKey.OrderMaker.Entity.MtdStoreFileLink", b =>
-                {
-                    b.HasOne("MtdKey.OrderMaker.Entity.MtdFormPartField", "MtdFormPartField")
-                        .WithMany("MtdStoreFileLinks")
-                        .HasForeignKey("FieldId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MtdKey.OrderMaker.Entity.MtdStore", "MtdStore")
-                        .WithMany("MtdStoreFileLinks")
-                        .HasForeignKey("StoreId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("MtdFormPartField");
-
-                    b.Navigation("MtdStore");
-                });
-
             modelBuilder.Entity("MtdKey.OrderMaker.Entity.MtdStoreInt", b =>
                 {
                     b.HasOne("MtdKey.OrderMaker.Entity.MtdFormPartField", "MtdFormPartField")
@@ -2654,8 +2590,6 @@ namespace MtdKey.OrderMaker.Migrations
 
                     b.Navigation("MtdStoreDecimals");
 
-                    b.Navigation("MtdStoreFileLinks");
-
                     b.Navigation("MtdStoreFiles");
 
                     b.Navigation("MtdStoreInts");
@@ -2692,8 +2626,6 @@ namespace MtdKey.OrderMaker.Migrations
                     b.Navigation("MtdStoreDates");
 
                     b.Navigation("MtdStoreDecimals");
-
-                    b.Navigation("MtdStoreFileLinks");
 
                     b.Navigation("MtdStoreFiles");
 

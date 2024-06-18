@@ -49,6 +49,7 @@ namespace MtdKey.OrderMaker.Core
             await context.Entry(store).Collection(x => x.MtdStoreMemos).LoadAsync();
             await context.Entry(store).Collection(x => x.MtdStoreFiles).LoadAsync();
             await context.Entry(store).Collection(x => x.MtdStoreItems).LoadAsync();
+            await context.Entry(store).Collection(x => x.MtdStoreFileLinks).LoadAsync();
 
             foreach (var partField in partFields)
             {
@@ -221,6 +222,42 @@ namespace MtdKey.OrderMaker.Core
                                 FileType = file.ContentType
                             };
                             await context.MtdStoreFiles.AddAsync(storeFile);
+                            break;
+                        }
+                    case FieldType.FileStorage:
+                        {
+
+                            var fileLinks = await context.MtdStoreFileLinks
+                                .Where(x => x.StoreId == storeRequest.StoreId && x.FieldId == partField.Key).ToListAsync();
+
+                            fileLinks.ForEach(
+                                fileLink => fileLink.IsDeleted = storeRequest.DeleteFields.Any(deletedFiled => deletedFiled.Key == fileLink.Result.ToString())
+                            );
+
+
+                            if (partField.Value == null)
+                                break;
+
+                            var files = storeRequest.Files.Where(f => f.Name == $"field-{partField.Key}").ToList() ?? [];
+
+                            foreach (var file in files)
+                            {
+                                byte[] streamArray = new byte[file.Length];
+                                await file.OpenReadStream().ReadAsync(streamArray);
+                                var guid = await _fileStore.PutFileAsync(file.FileName, file.Length, file.ContentType, streamArray);
+
+                                if (guid != null || guid != Guid.Empty)
+                                    await context.MtdStoreFileLinks.AddAsync(new MtdStoreFileLink()
+                                    {
+                                        FieldId = partField.Key,
+                                        StoreId = storeRequest.StoreId,
+                                        FileName = file.FileName,
+                                        FileSize = file.Length,
+                                        FileType = file.ContentType,
+                                        Result = (Guid)guid,
+                                    });
+                            }
+
                             break;
                         }
                 }

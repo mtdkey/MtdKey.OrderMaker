@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MtdKey.OrderMaker.Areas.Identity.Data;
+using MtdKey.OrderMaker.Components.AttachedFiles;
 using MtdKey.OrderMaker.Core.Scripts;
 using MtdKey.OrderMaker.Entity;
 using MtdKey.OrderMaker.src.formBuilder.models;
@@ -62,6 +63,7 @@ namespace MtdKey.OrderMaker.Core
                 .Include(x => x.MtdStoreMemos)
                 .Include(x => x.MtdStoreFiles)
                 .Include(x => x.MtdStoreItems)
+                .Include(x => x.MtdStoreFileLinks)
                 .AsSplitQuery()
                 .Where(x => storeIds.Contains(x.Id))
                 .ToListAsync();
@@ -199,7 +201,29 @@ namespace MtdKey.OrderMaker.Core
                                 AddDocField(doc, docField, value);
                                 break;
                             }
+                        case FieldType.FileStorage:
+                            {
+                                List<AttachedFile> attachedFiles = new List<AttachedFile>();
+                                var fieldLinks = storeItem.MtdStoreFileLinks
+                                   .Where(x => x.FieldId == docField.Id)
+                                   .OrderBy(x => x.Id)
+                                   .ToList();
 
+                                foreach (var fieldLink in fieldLinks)
+                                {        
+                                    attachedFiles.Add(new AttachedFile() {
+                                        Id = fieldLink.Result.ToString(),
+                                        Name = fieldLink.FileName,
+                                        Size = fieldLink.FileSize,
+                                        Mime = fieldLink.FileType,
+                                        ByteArray = [] 
+                                    });
+                                }
+
+                                docField.IsEmptyData = attachedFiles.Count == 0;
+                                AddDocField(doc, docField, attachedFiles);
+                                break;
+                            }
                     }
                 }
             }

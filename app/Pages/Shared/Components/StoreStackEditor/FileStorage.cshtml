@@ -1,0 +1,16 @@
+﻿@*
+    MTD OrderMaker - http://mtdkey.com
+    Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
+*@
+
+@model Core.DocFieldModel
+@using MtdKey.OrderMaker.Components.AttachedFiles
+
+@await Component.InvokeAsync(typeof(AttachedFiles), new AttachedFilesModel
+{
+    Id = Model.Id,
+    Name = $"field-{Model.Id}",
+    AttachedFilesView = AttachedFilesView.Editor,
+    Label =Model.Name,
+    Files = (List<AttachedFile>)Model.Value
+})

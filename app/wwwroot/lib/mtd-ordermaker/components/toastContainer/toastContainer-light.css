@@ -1,18 +1,20 @@
 ﻿.toast-header-error {
     color: white;
-    background-color: var(--danger-color);
+    background-color: darkred;
+    border: 1px solid darkred;
 }
 
 .toast-header-ok {
     color: white;
-    background-color: var(--success-color);
+    background-color: darkgreen;
+    border: 1px solid darkgreen;
 }
 
 .toast-body-error {
-    color: var(--danger-color);
-    font-weight: 600;
+    color: black;
+    font-weight: 100;
 }
 
 .toast-body {
-    background-color: var(--light-color);
+
 }

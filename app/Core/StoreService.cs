@@ -1,17 +1,20 @@
 ﻿using Microsoft.Extensions.Options;
 using MtdKey.OrderMaker.AppConfig;
 using MtdKey.OrderMaker.Services;
+using MtdKey.OrderMaker.Services.FileStorage;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace MtdKey.OrderMaker.Core
 {
-    public partial class StoreService(DataConnector context, UserHandler userHandler, IOptions<LimitSettings> limitSettings) : IStoreService
+    public partial class StoreService(DataConnector context, UserHandler userHandler, 
+        IOptions<LimitSettings> limitSettings, IFileStorageService fileStorage) : IStoreService
     {
         private readonly DataConnector context = context;
         private readonly UserHandler userHandler = userHandler;
         private readonly LimitSettings limitSettings = limitSettings.Value;
+        private readonly IFileStorageService _fileStore = fileStorage;
 
         public async Task<AllowedData> SecurityHandlerAsync(StoreDocRequest docRequest)
         {

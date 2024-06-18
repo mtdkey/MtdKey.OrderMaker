@@ -33,6 +33,7 @@ namespace MtdKey.OrderMaker.Components.Index
                11 => "List",
                12 => "CheckBox",
                13 => "Link",
+               14 => "FileStorage",
                _ => "Text"
            };
     }

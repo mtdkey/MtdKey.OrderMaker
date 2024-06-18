@@ -11,6 +11,7 @@ using MtdKey.OrderMaker.Areas.Identity.Data;
 using MtdKey.OrderMaker.Core;
 using MtdKey.OrderMaker.Entity;
 using MtdKey.OrderMaker.Services;
+using MtdKey.OrderMaker.Services.FileStorage;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -25,7 +26,6 @@ namespace MtdKey.OrderMaker.Controllers.Store
         private readonly DataConnector _context;
         private readonly UserHandler _userHandler;
         private readonly IStoreService storeService;
-
         private enum TypeAction { Create, Edit };
 
         public DataController(DataConnector context, UserHandler userHandler, IStoreService storeService)
@@ -73,6 +73,7 @@ namespace MtdKey.OrderMaker.Controllers.Store
         public async Task<IActionResult> OnPostSaveAsync()
         {
             var form = await Request.ReadFormAsync();
+
             StorePostRequest storeRequest = new()
             {
                 FormId = form["formId"],

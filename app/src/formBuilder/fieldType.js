@@ -14,6 +14,7 @@ var FieldType;
     FieldType[FieldType["List"] = 11] = "List";
     FieldType[FieldType["Checkbox"] = 12] = "Checkbox";
     FieldType[FieldType["Link"] = 13] = "Link";
+    FieldType[FieldType["FileStorage"] = 14] = "FileStorage";
 })(FieldType || (exports.FieldType = FieldType = {}));
 function GetFileTypeInfo(fieldType) {
     var result;

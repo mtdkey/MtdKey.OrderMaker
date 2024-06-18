@@ -40,15 +40,15 @@
                 @if (Model.EditDate)
                 {
                     @await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags
-           {
-               Id = "date-create",
-               Name = "date-create",
-               Value = @Model.Created.ToShortDateString(),
-               Class = "mtd-data-datepicker",
-               MTDTexFieldView = MTDTextFieldViews.Outlined,
-               Label = "Date",
-               LabelLocalized = true,
-           })
+                       {
+                           Id = "date-create",
+                           Name = "date-create",
+                           Value = @Model.Created.ToShortDateString(),
+                           Class = "mtd-data-datepicker",
+                           MTDTexFieldView = MTDTextFieldViews.Outlined,
+                           Label = "Date",
+                           LabelLocalized = true,
+                       })
                 }
                 else
                 {
@@ -79,6 +79,7 @@
                                 <i class="material-icons mdc-icon-button__icon">expand_less</i>
                             </button>
                         </div>
+
                     </div>
                 }
 
@@ -88,12 +89,6 @@
             }
         </div>
     </div>
-    @await Component.InvokeAsync(typeof(AttachedFiles), new AttachedFilesModel
-        {
-            AttachedFilesView = AttachedFilesView.Editor,
-            Name = "Files",
-            Label = string.Empty,
-        })
 </form>
 
 @* <form autocomplete='off' method="post" enctype='multipart/form-data' action='/api/store/save'>

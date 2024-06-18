@@ -1,8 +1,7 @@
 ﻿@using Microsoft.Extensions.Localization
-@using MtdKey.OrderMaker.Localizer
 @using MtdKey.OrderMaker.Components.AttachedFiles
 @model AttachedFilesModel
-@inject IStringLocalizer<AttachedFilesLocalizer> localizer
+@inject IStringLocalizer<SharedResource> localizer
 @{
     var thisModel = Model ?? new AttachedFilesModel();
 }
