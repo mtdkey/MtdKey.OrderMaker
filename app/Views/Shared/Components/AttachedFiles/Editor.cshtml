@@ -37,7 +37,7 @@
         </div>
         <div class="attachedFiles__content">@localizer["Drag and drop files into this Drop Zone."]</div>
     </div>
-    @foreach (var file in thisModel.Files)
+    @foreach (var file in thisModel.Files ?? [])
     {
         <div class="attachedFiles__item">
             <input id="@file.Id-attached" name="@file.Id-attached" type="hidden" data-value="@file.Id" />

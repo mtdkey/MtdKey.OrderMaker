@@ -5,4 +5,16 @@
 
 @model Core.DocFieldModel
 
-<div>File Storage Column</div>
+@using MtdKey.OrderMaker.Components.AttachedFiles
+
+<div class="attachedFiles__column">
+    @await Component.InvokeAsync(typeof(AttachedFiles), new AttachedFilesModel
+    {
+        Id = Model.Id,
+        Name = $"field-{Model.Id}",
+        AttachedFilesView = AttachedFilesView.Default,
+        Label =Model.Name,
+        Files = (List<AttachedFile>)Model.Value
+    })
+</div>
+

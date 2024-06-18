@@ -211,3 +211,17 @@ function dragPaste(ev) {
     input.files = new FileListItems(fileStore.files);
     addFile(ev.currentTarget, blob);
 }
+
+
+document.querySelectorAll(".attachedFiles__column").forEach(item => {
+
+    item.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        if (e.target.href) {
+            window.open(e.target.href, '_blank').focus();
+        }
+       
+    });    
+});

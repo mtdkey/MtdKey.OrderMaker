@@ -295,7 +295,7 @@ namespace MtdKey.OrderMaker.Services
             IList<MtdPolicy> mtdPolicy = await GetPoliciesAsync();
             string policyId = await GetPolicyIdAsync(user);
             if (policyId == null) return false;
-            MtdPolicyParts policyParts = mtdPolicy.SelectMany(x => x.MtdPolicyParts).Where(x => x.MtdFormPart == idPart && x.MtdPolicy == policyId).FirstOrDefault();
+            MtdPolicyParts policyParts = mtdPolicy.SelectMany(x => x.MtdPolicyParts).FirstOrDefault(x => x.MtdFormPart == idPart && x.MtdPolicy == policyId);
             if (policyParts == null) return false;
 
             return policyParts.View == 1;

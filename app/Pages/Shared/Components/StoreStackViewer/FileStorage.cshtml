@@ -4,5 +4,13 @@
 *@
 
 @model Core.DocFieldModel
+@using MtdKey.OrderMaker.Components.AttachedFiles
 
-<h1>File Storage Viewer</h1>
+@await Component.InvokeAsync(typeof(AttachedFiles), new AttachedFilesModel
+{
+    Id = Model.Id,
+    Name = $"field-{Model.Id}",
+    AttachedFilesView = AttachedFilesView.Default,
+    Label =Model.Name,
+    Files = (List<AttachedFile>)Model.Value
+})

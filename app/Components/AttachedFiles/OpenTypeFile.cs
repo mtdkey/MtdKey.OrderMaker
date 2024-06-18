@@ -9,6 +9,7 @@ namespace MtdKey.OrderMaker.Components.AttachedFiles
             "application/pdf",
             "image/jpeg",
             "image/png",
+            "image/webp"
         ];
 
         public static bool CheckType(string type) => List.Contains(type);

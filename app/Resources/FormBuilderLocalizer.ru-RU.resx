@@ -171,6 +171,9 @@
   <data name="File" xml:space="preserve">
     <value>Файл</value>
   </data>
+  <data name="File Storage" xml:space="preserve">
+    <value>Список файлов</value>
+  </data>
   <data name="First of all, drag the Form Part element here." xml:space="preserve">
     <value>Прежде всего, перетащите сюда элемент Раздел формы.</value>
   </data>
@@ -206,6 +209,9 @@
   </data>
   <data name="Link" xml:space="preserve">
     <value>Гиперссылка</value>
+  </data>
+  <data name="List" xml:space="preserve">
+    <value>Простой список</value>
   </data>
   <data name="List of form" xml:space="preserve">
     <value>Список формы</value>

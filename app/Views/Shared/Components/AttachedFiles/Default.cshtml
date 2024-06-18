@@ -2,17 +2,22 @@
 @using MtdKey.OrderMaker.Components.AttachedFiles
 @model AttachedFilesModel
 @inject IStringLocalizer<SharedResource> localizer
+
 @{
     var thisModel = Model ?? new AttachedFilesModel();
 }
 
-<label>@thisModel.Label</label>
 
-<div>
+<div class="p-2">
     @foreach (var file in thisModel.Files)
     {
-        <div>
-            <a href="/files/getFile/@file.Id">@file.Name</a>
-        </div>        
+        var name = file.Name ?? string.Empty;
+        if (name.Length > 25)
+        {
+            name = $"{name[..23]}..{System.IO.Path.GetExtension(name)}";
+        }
+        <div class='file-link d-inline-block text-truncate' style='max-width: 250px;'>
+            <a class='text-nowrap' target='_blank' href="~/api/file/@file.Id"><i class='bi bi-paperclip'></i>@name</a>
+        </div>    
     }
 </div>

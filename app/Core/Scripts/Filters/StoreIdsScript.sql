@@ -26,6 +26,9 @@ select StoreId from (
 	union all
     select StoreId, FieldId, ItemId as Result from mtd_store_item 
 	where IsDeleted = 0
+	union all
+	select StoreId, FieldId, FileName as Result from mtd_store_file_links
+    where isDeleted = 0
 	) as f
     /*inner join mtd_store_owner*/
 	where Result like '%%' /*and FieldId in*/ /*and Result*/ /*and StoreId*/
