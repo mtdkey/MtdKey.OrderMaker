@@ -1,4 +1,5 @@
-﻿@using MtdKey.OrderMaker;
+﻿@* Translate *@
+@using MtdKey.OrderMaker;
 @using Microsoft.AspNetCore.Mvc.Localization
 @using MtdKey.OrderMaker.Components.Controls;
 @using MtdKey.OrderMaker.Models.Controls.MTDSelectList;
@@ -37,12 +38,14 @@
                                {
                                    Id = "searchItem",
                                    Name = "searchItem",
-                                   MTDTexFieldView = MTDTextFieldViews.Default,
+                                   MTDTexFieldView = MTDTextFieldViews.Outlined,
+                                   Placeholder = "Наименование элемента списка",
+                                  PlaceholderLocalized = true,
                                    LabelLocalized = true,
                                })
                         </div>
 
-                        <div style="position: absolute; right: 0;">
+                        <div style="position: absolute; right: 12px;">
                             <button type="button" id="buttonAddItem" class="mdc-button mdc-button--outlined">
                                 <div class="mdc-button__ripple"></div>
                                 <span class="mdc-button__label">
