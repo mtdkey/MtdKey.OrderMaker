@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Options;
 using MtdKey.EmailBuilder;
 using MtdKey.EmailBuilder.EmailBlocks;
@@ -7,11 +6,9 @@ using MtdKey.OrderMaker.AppConfig;
 using MtdKey.OrderMaker.Areas.Identity.Data;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
-using System.Xml;
 
 namespace MtdKey.OrderMaker.Services
 {

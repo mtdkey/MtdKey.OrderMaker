@@ -4,11 +4,14 @@
 *@
 @model Core.DocModel
 @using Microsoft.AspNetCore.Mvc.Localization
+@using MtdKey.OrderMaker.Services
 @inject IHtmlLocalizer<SharedResource> Localizer
+@inject UserHandler userHandler
 
 @{
     string action = $"/api/store/create";
     string idStore = Guid.NewGuid().ToString();
+    bool userIsReviewer = await userHandler.IsReviewerAsync(User, Model.FormId);
 }
 
 <form mtd-data-form method='post' autocomplete='off' enctype='multipart/form-data' action='@action'>
@@ -38,7 +41,7 @@
                 <span class="mtd-store-style-number" style="opacity:0.3">№ @Model.Sequence.ToString("D9")</span>
                 <hr />
 
-                @if (Model.EditDate)
+                @if (userIsReviewer)
                 {
                     @await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags
                     {

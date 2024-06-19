@@ -48,7 +48,6 @@ namespace MtdKey.OrderMaker.Core
             var storeIds = await context.Database.SqlQueryRaw<string>(scriptForIds)
                 .ToListAsync();
 
-            var IsReviewer = await userHandler.IsReviewerAsync(appUser, docRequest.FormId);
             Dictionary<string, int> indexStore = new();
             foreach (var (item, index) in storeIds.WithIndex())
             {
@@ -92,8 +91,7 @@ namespace MtdKey.OrderMaker.Core
                     Image = form.MtdFormHeader?.Image,
                     Sequence = storeItem.Sequence,
                     Created = storeItem.Timecr,
-                    Parts = allowedData.DocParts,
-                    EditDate = IsReviewer,
+                    Parts = allowedData.DocParts
                 };
 
                 docList.Add(doc);

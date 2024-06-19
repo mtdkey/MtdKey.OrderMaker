@@ -256,6 +256,12 @@ namespace MtdKey.OrderMaker.Services
             return policyForms.ChangeOwner == 1;
         }
 
+        public async Task<bool> IsReviewerAsync(ClaimsPrincipal principal, string formId)
+        {
+            var user = await GetUserAsync(principal);
+            return await IsReviewerAsync(user, formId);
+        }
+
         public async Task<bool> IsReviewerAsync(WebAppUser user, string formId)
         {
             IList<MtdPolicy> mtdPolicy = await GetPoliciesAsync();

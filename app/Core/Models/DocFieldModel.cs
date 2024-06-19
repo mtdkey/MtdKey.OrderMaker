@@ -19,6 +19,9 @@ namespace MtdKey.OrderMaker.Core
         public string FileName { get; set; } = string.Empty;
         public string FileType { get; set; } = string.Empty;
         public long Size { get; set; } = 0;
+        /// <summary>
+        /// Don't show for empty value
+        /// </summary>
         public bool IsEmptyData { get; set; } = true;
         public ListItemModel[] ListItems { get; set; } = [];
     }
