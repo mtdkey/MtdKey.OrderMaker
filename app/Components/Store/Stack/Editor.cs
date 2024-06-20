@@ -41,6 +41,7 @@ namespace MtdKey.OrderMaker.Components.Store.Stack
                 case 12: { viewName = "CheckBox"; break; }
                 case 13: { viewName = "Link"; break; }
                 case 14: { viewName = "FileStorage"; break; }
+                case 15: { viewName = "HTMLEditor"; break; }
                 default: { viewName = "Text"; break; }
             };
 

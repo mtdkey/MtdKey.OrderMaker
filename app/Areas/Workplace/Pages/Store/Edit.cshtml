@@ -15,15 +15,16 @@
     string listGuid = Guid.NewGuid().ToString();
 }
 
-@section Head{
+@section Head {
     <link rel="stylesheet" href="~/lib/mtd-ordermaker/store/css/mtd-store-edit.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/lib/mtd-ordermaker/store/css/mtd-store-view.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/lib/mtd-ordermaker/ui/css/mtd-ui-material.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/lib/xdan/dist/jquery.datetimepicker.min.css" asp-append-version="true" />
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet" />
 }
 
 @section Breadcrumb {
-    <li mtd-data-url="/" ><a href="~/">@Localizer["Desktop"]</a></li>
+    <li mtd-data-url="/"><a href="~/">@Localizer["Desktop"]</a></li>
     <li mtd-data-url="/workplace/store/index?indexForm=@Model.MtdForm.Id"><a href="~/workplace/store/index?indexForm=@Model.MtdForm.Id">@Localizer["Data List"]</a></li>
     <li mtd-data-url="/workplace/store/details?id=@Model.MtdStore.Id"><a href="~/workplace/store/details?id=@Model.MtdStore.Id">@Localizer["Document view"]</a></li>
     <li>@ViewBag.Title</li>
@@ -59,36 +60,39 @@
 </div>
 @section Scripts {
 
+
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
     <script src="~/lib/mtd-ordermaker/store/js/mtd-store-edit.js" asp-append-version="true"></script>
     <script src="~/lib/mtd-ordermaker/ui/js/mtd-ui-material.js" asp-append-version="true"></script>
     <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
     <script src="~/lib/moment/dist/js/moment-with-locales.min.js" asp-append-version="true"></script>
     <script src="~/lib/xdan/dist/jquery.datetimepicker.full.min.js" asp-append-version="true"></script>
+   
 
     <script>
         $("input.mtd-data-datepicker").each(function () {
             $(this).datetimepicker({
                 timepicker: false,
-                @*mask: @Localizer["'19/39/9999'"],*@
+        @*mask: @Localizer["'19/39/9999'"],*@
                 format: @Localizer["'m/d/Y'"],
                 defaultDate: new Date(),
-            });
-        });
+                    });
+                });
 
         $("input.mtd-data-datetimepicker").each(function () {
             $(this).datetimepicker({
                 timepicker: true,
                 formatTime: @Localizer["'h:i A'"],
                 validateOnBlur: false,
-                @*mask: @Localizer["'19/39/9999 29:59'"],*@
+        @*mask: @Localizer["'19/39/9999 29:59'"],*@
                 format: @Localizer["'m/d/Y h:i A'"],
                 defaultDate: new Date(),
-            });
-        });
+                    });
+                });
 
-       $.datetimepicker.setLocale(@Localizer["'en'"]);
+        $.datetimepicker.setLocale(@Localizer["'en'"]);
 
-       new MTDTextField("date-create");
+        new MTDTextField("date-create");
 
     </script>
 }
@@ -104,7 +108,6 @@
                 <span id="dialog-info-title"></span>
             </h2>
             <div class="mdc-dialog__content" id="dialog-info-content">
-
             </div>
             <footer class="mdc-dialog__actions">
                 <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="no">

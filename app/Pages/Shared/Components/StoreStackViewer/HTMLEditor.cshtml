@@ -1,0 +1,54 @@
+﻿@*
+    MTD OrderMaker - http://mtdkey.com
+    Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
+*@
+
+@model Core.DocFieldModel
+@using Microsoft.AspNetCore.Mvc
+@using Ganss.Xss;
+@{
+    string name = string.Empty;
+    string value = string.Empty;
+
+    if (Model != null && Model.Value != null)
+    {
+        value = (string)Model.Value;
+        name = Model.Name;
+
+        var sanitizer = new HtmlSanitizer();
+        value = sanitizer.Sanitize(value);
+    }
+}
+
+@if (value != string.Empty)
+{
+    @switch (ViewBag.typeStyle)
+    {
+        case "Columns":
+            <div class="mtd-store-view-col-root">
+                <div class="mtd-store-view-col-name">
+                    @name
+                </div>
+                <div class="mtd-store-view-col-value">
+                    <div class="p-3">
+                        @Html.Raw(value)
+                    </div>
+@*                     <span style="white-space:pre-line">@value</span> *@
+                </div>
+            </div>
+            break;
+        default:
+            <div class="mtd-store-view-row-line">
+                <div class="mtd-store-view-row-name">
+                    @name
+                </div>
+                <div class="mtd-store-view-row-value">
+                    <div class="p-3">
+                       @Html.Raw(value)
+                    </div>
+                </div>
+            </div>
+            break;
+    }
+}
+

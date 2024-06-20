@@ -1,0 +1,21 @@
+﻿@*
+    MTD OrderMaker - http://mtdkey.com
+    Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
+*@
+
+@model Core.DocFieldModel
+@using Ganss.Xss;
+
+@{
+    string value = string.Empty;
+
+    if (Model != null && Model.Value != null)
+    {
+        value = (string)Model.Value;
+        var sanitizer = new HtmlSanitizer();
+        value = sanitizer.Sanitize(value);
+    }
+}
+<div>
+    @Html.Raw(value)
+</div>

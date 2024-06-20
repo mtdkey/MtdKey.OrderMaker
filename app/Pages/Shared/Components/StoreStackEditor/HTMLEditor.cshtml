@@ -1,0 +1,41 @@
+﻿@*
+    MTD OrderMaker - http://mtdkey.com
+    Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
+*@
+
+@model Core.DocFieldModel
+
+@{
+    string value = string.Empty;
+    if (Model.Value != null && (string)Model.Value != string.Empty)
+    {
+        value = (string)Model.Value;
+    }
+
+    if ((Model.Value == null || (string)Model.Value == string.Empty) && Model.DefaultValue != null && Model.DefaultValue != string.Empty)
+        value = Model.DefaultValue;
+}
+
+
+@if (!Model.Readonly)
+{
+    string fieldId = $"field-{Model.Id}";
+    <div data-mtd-quill="@fieldId" style="position: relative">
+        <div style="position: absolute;
+            font-size: small;
+            margin-top: -10px;
+            margin-left: 14px;
+            background-color: white;
+            padding-left: 8px;
+            padding-right: 8px;
+            color: darkgray">
+            @Model.Name
+        </div>
+        <input type="hidden" name="@fieldId" value="@Model.Value" />
+        <div id="@fieldId"></div>
+    </div>
+
+}
+
+
+

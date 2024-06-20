@@ -39,6 +39,7 @@
             </div>
             <div class="mtd-store-style-attribute">
                 <span class="mtd-store-style-number" style="opacity:0.3">№ @Model.Sequence.ToString("D9")</span>
+               
                 <hr />
 
                 @if (userIsReviewer)
@@ -92,7 +93,6 @@
                     @await Component.InvokeAsync("StorePartEditor", new { docModel = Model, partModel = part })
                 </div>
             }
-
         </div>
     </div>
 

@@ -54,7 +54,8 @@ namespace MtdKey.OrderMaker.Core.Scripts.StoreIds
             bool IsText = model.Type == FieldType.Text
                 || model.Type == FieldType.Link
                 || model.Type == FieldType.List
-                || model.Type == FieldType.FileStorage;
+                || model.Type == FieldType.FileStorage
+                || model.Type == FieldType.HTMLEditor;
 
             if (IsText is not true) return;
             TermHandler(ref script, model);

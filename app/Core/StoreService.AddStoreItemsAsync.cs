@@ -166,6 +166,7 @@ namespace MtdKey.OrderMaker.Core
                             break;
                         }
                     case FieldType.Memo:
+                    case FieldType.HTMLEditor:
                         {
                             if (partField.Value is not string val)
                                 break;

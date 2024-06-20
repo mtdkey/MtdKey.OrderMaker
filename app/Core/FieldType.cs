@@ -14,5 +14,6 @@
         public const int Checkbox = 12;
         public const int Link = 13;
         public const int FileStorage = 14;
+        public const int HTMLEditor = 15;
     }
 }

@@ -269,3 +269,12 @@
   /*width: 100%;
     text-align: center;*/
 }
+.ql-editor {
+  min-height: 150px !important;
+}
+.ql-container {
+  min-height: 150px !important;
+}
+.ql-editor:focus {
+  border: 2px solid navy;
+}

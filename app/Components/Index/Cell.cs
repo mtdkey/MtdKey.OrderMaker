@@ -34,6 +34,7 @@ namespace MtdKey.OrderMaker.Components.Index
                12 => "CheckBox",
                13 => "Link",
                14 => "FileStorage",
+               15 => "HTMLEditor",
                _ => "Text"
            };
     }

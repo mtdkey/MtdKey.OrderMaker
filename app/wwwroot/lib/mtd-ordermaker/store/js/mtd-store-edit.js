@@ -137,3 +137,19 @@ const PartsOpenAll = () => {
         });
     });
 }
+
+
+const quills = document.querySelectorAll("[data-mtd-quill]");
+quills.forEach(div => {
+
+    var input = div.querySelector("input");
+    var quill = new Quill(`#${div.dataset.mtdQuill}`, {
+        theme: 'snow'
+    });
+
+    quill.root.innerHTML = input.value;
+    quill.on("text-change", (delta, oldDelta, source) => {
+        input.value = quill.root.innerHTML;
+    });
+
+});

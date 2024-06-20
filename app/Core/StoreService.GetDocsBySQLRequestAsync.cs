@@ -113,6 +113,7 @@ namespace MtdKey.OrderMaker.Core
                                 break;
                             }
                         case FieldType.Memo:
+                        case FieldType.HTMLEditor:
                             {
                                 var value = string.Join("", storeItem.MtdStoreMemos
                                    .Where(x => x.FieldId == docField.Id)

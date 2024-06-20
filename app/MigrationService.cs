@@ -176,6 +176,7 @@ namespace MtdKey.OrderMaker
                     new MtdSysType{ Id = 12, Name="Checkbox",Description="Checkbox",Active=active},
                     new MtdSysType{ Id = 13, Name="Link",Description="Link",Active=active},
                     new MtdSysType{ Id = 14, Name="FileStorage",Description="FileStorage",Active=active},
+                    new MtdSysType{ Id = 15, Name="HTMLEditor",Description="HTMLEditor",Active=active},
                 };
 
             await context.MtdSysType.AddRangeAsync(mtdSysTypes);
