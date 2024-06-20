@@ -8,7 +8,7 @@
 @{
     var result = Model.Value != null && ((int)Model.Value) == 1 ? "checked" : string.Empty;
 }
-@if(!Model.Readonly)
+@if(!Model.Options.IsReadOnly())
 {
     <div class="text-center">
         <div class="mtd-store-edit-row-name">

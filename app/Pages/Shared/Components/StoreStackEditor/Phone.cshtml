@@ -5,7 +5,7 @@
 
 @model Core.DocFieldModel
 
-@if (!Model.Readonly)
+@if (!Model.Options.IsReadOnly())
 {
     <div style="display: flex; padding: 8px;">
         <div style="width: 120px">

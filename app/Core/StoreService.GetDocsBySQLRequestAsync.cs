@@ -182,7 +182,7 @@ namespace MtdKey.OrderMaker.Core
                                     Type = docField.Type,
                                     Size = file?.FileSize ?? 0,
                                     FileType = file?.FileType,
-                                    Required = docField.Required,
+                                    Options = docField.Options,                 
                                     Value = file?.Result,
                                     IsEmptyData = file == null || file.Result == null || file.Result.Length == 0
                                 });
@@ -297,19 +297,24 @@ namespace MtdKey.OrderMaker.Core
                 .Include(x => x.MtdFilterColumn)
                 .Include(x => x.MtdFormPartFieldItems)
                 .Where(x => partIds.Contains(x.MtdFormPartId))
-                .Select(x => new DocFieldModel
+                .Select(partField => new DocFieldModel
                 {
-                    Id = x.Id,
-                    PartId = x.MtdFormPartId,
-                    Name = x.Name,
-                    Sequence = x.Sequence,
-                    DefaultValue = x.DefaultData,
-                    Readonly = x.ReadOnly == 1,
-                    Type = x.MtdSysType,
-                    Required = x.Required == 1,
-                    ListItems = x.MtdFormPartFieldItems.Where(x => x.IsDeleted == false)
-                        .Select(x => new ListItemModel { Id = x.Id.ToString(), Name = x.Name })
+                    Id = partField.Id,
+                    PartId = partField.MtdFormPartId,
+                    Name = partField.Name,
+                    Sequence = partField.Sequence,
+                    DefaultValue = partField.DefaultData,
+                    Type = partField.MtdSysType,
+
+                    Options = new Dictionary<DocFieldOption, bool> { 
+                        { DocFieldOption.Required, partField.Required == 1 },
+                        { DocFieldOption.Readyonly, partField.ReadOnly == 1 }
+                    },
+
+                    ListItems = partField.MtdFormPartFieldItems.Where(item => item.IsDeleted == false)
+                        .Select(model => new ListItemModel { Id = model.Id.ToString(), Name = model.Name })
                         .ToArray(),
+
                 }).AsSplitQuery()
                 .OrderBy(x => x.Sequence)
                 .ToListAsync();
@@ -350,9 +355,8 @@ namespace MtdKey.OrderMaker.Core
                 FormId = doc.FormId,
                 PartId = docField.PartId,
                 Name = docField.Name,
-                DefaultValue = docField.DefaultValue,
-                Readonly = docField.Readonly,
-                Required = docField.Required,
+                DefaultValue = docField.DefaultValue,    
+                Options = docField.Options,
                 Sequence = docField.Sequence,
                 IndexSequence = docField.IndexSequence,
                 Type = docField.Type,

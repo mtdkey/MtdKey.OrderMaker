@@ -17,7 +17,7 @@
 }
 
 
-@if (!Model.Readonly)
+@if (!Model.Options.IsReadOnly())
 {
     string fieldId = $"field-{Model.Id}";
     <div data-mtd-quill="@fieldId" style="position: relative">

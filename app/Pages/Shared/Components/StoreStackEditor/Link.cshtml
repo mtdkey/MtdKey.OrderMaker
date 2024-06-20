@@ -3,13 +3,13 @@
     Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
 *@
 
-@model Core.DocFieldModel
+@model DocFieldModel
 
 @{
     string value = Model.Value != null ? (string)Model.Value : string.Empty;
 }
 
-@if (!Model.Readonly)
+@if (!Model.Options.IsReadOnly())
 {
     @await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags
 {
@@ -17,7 +17,7 @@
     Name = $"field-{Model.Id}",
     Value = value,
     Label = Model.Name,
-    Required = Model.Required,
+    Required = Model.Options.IsRequired(),
     MTDTexFieldView = MTDTextFieldViews.Outlined,
     MaxLength = 250,
     ShowCounter = true

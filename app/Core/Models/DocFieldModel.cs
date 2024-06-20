@@ -1,6 +1,7 @@
 ﻿
 
 using MtdKey.OrderMaker.src.formBuilder.models;
+using System.Collections.Generic;
 
 namespace MtdKey.OrderMaker.Core
 {
@@ -12,8 +13,7 @@ namespace MtdKey.OrderMaker.Core
         public int Sequence { get; set; }
         public int IndexSequence { get; set; } = int.MaxValue;
         public int Type { get; set; }
-        public bool Readonly { get; set; }
-        public bool Required { get; set; }
+        public Dictionary<DocFieldOption, bool> Options { get; set; } = [];
         public string DefaultValue { get; set; }
         public object Value { get; set; }
         public string FileName { get; set; } = string.Empty;

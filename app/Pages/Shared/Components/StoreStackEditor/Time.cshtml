@@ -3,13 +3,13 @@
     Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
 *@
 
-@model Core.DocFieldModel
+@model DocFieldModel
 
 @{
-    string required = Model.Required ? "required" : string.Empty;
+    string required = Model.Options.IsRequired() ? "required" : string.Empty;
 }
 
-@if (!Model.Readonly)
+@if (!Model.Options.IsReadOnly())
 {
     <div style="display: flex; padding: 8px;">
         <div style="width: 120px">

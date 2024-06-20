@@ -3,7 +3,7 @@
     Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
 *@
 
-@model Core.DocFieldModel
+@model DocFieldModel
 
 @{
     ViewBag.FieldID = Model.Id;
@@ -12,11 +12,11 @@
     {
         ViewBag.FileName = Model.FileName;
     }
-    string required = Model.Required ? "required" : string.Empty;
+    string required = Model.Options.IsRequired() ? "required" : string.Empty;
 }
 
 
-@if(!Model.Readonly)
+@if (!Model.Options.IsReadOnly())
 {
     <div class="mtd-store-edit-row-root" style="flex-wrap:wrap;">
     <div class="mtd-store-edit-row-name">
