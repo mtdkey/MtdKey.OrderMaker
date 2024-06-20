@@ -352,6 +352,7 @@ namespace MtdKey.OrderMaker.Core
                 Name = docField.Name,
                 DefaultValue = docField.DefaultValue,
                 Readonly = docField.Readonly,
+                Required = docField.Required,
                 Sequence = docField.Sequence,
                 IndexSequence = docField.IndexSequence,
                 Type = docField.Type,
