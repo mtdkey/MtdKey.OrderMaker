@@ -88,6 +88,9 @@ OrderMaker provides the ability quickly create a solution to consolidate informa
 	  <Content Remove="wwwroot\lib\mtd-ordermaker\main\css\ripple.css" />
 	  <Content Remove="wwwroot\lib\mtd-ordermaker\main\js\ripple.js" />
 	  <Content Remove="wwwroot\lib\mtd-ordermaker\main\js\ripple.js.map" />
+	  <Content Remove="wwwroot\lib\quill\dist\css\quill.snow.css" />
+	  <Content Remove="wwwroot\lib\quill\dist\js\quill.js" />
+	  <Content Remove="wwwroot\lib\quill\dist\js\quill.js.LICENSE.txt" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -118,10 +121,6 @@ OrderMaker provides the ability quickly create a solution to consolidate informa
 	  <TypeScriptCompile Update="src\formBuilder\index.ts">
 	    <SubType>Code</SubType>
 	  </TypeScriptCompile>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="wwwroot\lib\quill\" />
 	</ItemGroup>
 
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
