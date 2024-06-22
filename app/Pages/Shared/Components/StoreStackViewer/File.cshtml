@@ -7,6 +7,7 @@
 
 @if (Model != null && Model.Value != null)
 {
+    var file = (FileModel)Model.Value;
     switch (ViewBag.typeStyle)
     {
         case "Columns":
@@ -16,7 +17,7 @@
                 </div>
                 <div class="mtd-store-view-col-value">
                     <a href="~/api/store/stack/form/@Model.FormId/file/@Model.Id/store/@Model.StoreId" download>
-                        @Model.FileName
+                        @file.FileName
                     </a>
                 </div>
             </div>
@@ -28,7 +29,7 @@
                 </div>
                 <div class="mtd-store-view-row-value">
                     <a href="~/api/store/stack/form/@Model.FormId/file/@Model.Id/store/@Model.StoreId" download>
-                        @Model.FileName
+                        @file.FileName
                     </a>
                 </div>
             </div>

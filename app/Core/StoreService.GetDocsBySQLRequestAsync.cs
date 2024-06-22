@@ -78,7 +78,7 @@ namespace MtdKey.OrderMaker.Core
                 .Include(x => x.MtdFormHeader)
                 .AsSplitQuery()
                 .ToListAsync();
-            
+
             var docList = new List<DocModel>();
             foreach (var storeItem in storeItems)
             {
@@ -166,8 +166,18 @@ namespace MtdKey.OrderMaker.Core
                         case FieldType.File:
                         case FieldType.Image:
                             {
+                                FileModel fileModel = null;
                                 var file = storeItem.MtdStoreFiles
                                     .FirstOrDefault(x => x.FieldId == docField.Id);
+
+                                if (file != null)
+                                    fileModel = new FileModel
+                                    {
+                                        Data = file?.Result ?? [],
+                                        Size = file.FileSize,
+                                        FileName = file.FileName,
+                                        FileType = file.FileType
+                                    };
 
                                 doc.Fields.Add(new DocFieldModel()
                                 {
@@ -176,14 +186,11 @@ namespace MtdKey.OrderMaker.Core
                                     FormId = doc.FormId,
                                     PartId = docField.PartId,
                                     Name = docField.Name,
-                                    FileName = file?.FileName,
                                     Sequence = docField.Sequence,
                                     IndexSequence = docField.IndexSequence,
                                     Type = docField.Type,
-                                    Size = file?.FileSize ?? 0,
-                                    FileType = file?.FileType,
-                                    Options = docField.Options,                 
-                                    Value = file?.Result,
+                                    Options = docField.Options,
+                                    Value = fileModel,
                                     IsEmptyData = file == null || file.Result == null || file.Result.Length == 0
                                 });
 
@@ -209,13 +216,14 @@ namespace MtdKey.OrderMaker.Core
                                    .ToList();
 
                                 foreach (var fieldLink in fieldLinks)
-                                {        
-                                    attachedFiles.Add(new AttachedFile() {
+                                {
+                                    attachedFiles.Add(new AttachedFile()
+                                    {
                                         Id = fieldLink.Result.ToString(),
                                         Name = fieldLink.FileName,
                                         Size = fieldLink.FileSize,
                                         Mime = fieldLink.FileType,
-                                        ByteArray = [] 
+                                        ByteArray = []
                                     });
                                 }
 
@@ -306,7 +314,7 @@ namespace MtdKey.OrderMaker.Core
                     DefaultValue = partField.DefaultData,
                     Type = partField.MtdSysType,
 
-                    Options = new Dictionary<DocFieldOption, bool> { 
+                    Options = new Dictionary<DocFieldOption, bool> {
                         { DocFieldOption.Required, partField.Required == 1 },
                         { DocFieldOption.Readyonly, partField.ReadOnly == 1 }
                     },
@@ -333,15 +341,15 @@ namespace MtdKey.OrderMaker.Core
 
         private async Task<MtdFilter> GetUserFilter(string formId, WebAppUser appUser)
         {
-          var userFilter = await context.MtdFilter
-                .Include(x => x.MtdFilterColumns)
-                .Include(x => x.MtdFilterDate)
-                .Include(x => x.MtdFilterOwner)
-                .Include(x => x.MtdFilterFields)
-                .ThenInclude(x => x.MtdFormPartFieldNavigation)
-                .AsSplitQuery()
-                .Where(x => x.IdUser == appUser.Id && x.MtdFormId == formId)
-                .FirstOrDefaultAsync();
+            var userFilter = await context.MtdFilter
+                  .Include(x => x.MtdFilterColumns)
+                  .Include(x => x.MtdFilterDate)
+                  .Include(x => x.MtdFilterOwner)
+                  .Include(x => x.MtdFilterFields)
+                  .ThenInclude(x => x.MtdFormPartFieldNavigation)
+                  .AsSplitQuery()
+                  .Where(x => x.IdUser == appUser.Id && x.MtdFormId == formId)
+                  .FirstOrDefaultAsync();
 
             return userFilter;
         }
@@ -355,7 +363,7 @@ namespace MtdKey.OrderMaker.Core
                 FormId = doc.FormId,
                 PartId = docField.PartId,
                 Name = docField.Name,
-                DefaultValue = docField.DefaultValue,    
+                DefaultValue = docField.DefaultValue,
                 Options = docField.Options,
                 Sequence = docField.Sequence,
                 IndexSequence = docField.IndexSequence,

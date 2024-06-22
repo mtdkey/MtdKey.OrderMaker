@@ -8,13 +8,13 @@
 @{
     ViewBag.FieldID = Model.Id;
     ViewBag.FieldName = "";
-    if (Model != null)
+    if (Model != null && Model.Value != null)
     {
-        ViewBag.FileName = Model.FileName;
+        ViewBag.FileName = ((FileModel)Model.Value).FileName;
     }
+
     string required = Model.Options.IsRequired() ? "required" : string.Empty;
 }
-
 
 @if (!Model.Options.IsReadOnly())
 {

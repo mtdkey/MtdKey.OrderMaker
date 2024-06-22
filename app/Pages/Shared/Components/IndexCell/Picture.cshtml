@@ -3,13 +3,14 @@
     Copyright (c) 2019 Oleg Bruev <job4bruev@gmail.com>. All rights reserved.
 *@
 
-@model Core.DocFieldModel
+@model DocFieldModel
 
 <div class="text-center">
     @if (Model.Value != null)
     {
-        var base64 = Convert.ToBase64String((byte[])Model.Value);
-        var imgSrc = String.Format("data:{0};base64,{1}", Model.FileType, base64);
+        var file = (FileModel)Model.Value;
+        var base64 = Convert.ToBase64String((byte[])file.Data);
+        var imgSrc = String.Format("data:{0};base64,{1}", file.FileType, base64);
         <img src="@imgSrc" style="max-height:48px;" />
     }
     else

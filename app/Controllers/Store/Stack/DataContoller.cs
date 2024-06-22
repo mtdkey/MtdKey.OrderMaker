@@ -15,16 +15,10 @@ namespace MtdKey.OrderMaker.Controllers.Store.Stack
     [Route("api/store/stack")]
     [ApiController]
     [Authorize(Roles = "Admin,User")]
-    public class DataContoller : ControllerBase
+    public class DataContoller(IStoreService storeService) : ControllerBase
     {
 
-        private readonly IStoreService storeService;
-
-        public DataContoller(IStoreService storeService)
-        {
-            this.storeService = storeService;
-        }
-
+        private readonly IStoreService storeService = storeService;
 
         [HttpGet("form/{formId}/file/{fieldId}/store/{storeId}")]
         public async Task<ActionResult> GetStackFile(string formId, string fieldId, string storeId)
@@ -43,9 +37,11 @@ namespace MtdKey.OrderMaker.Controllers.Store.Stack
             var field = doc.Fields.FirstOrDefault(x => x.Id == fieldId);
             if (field == null || field.Value == null) { return NotFound(); }
 
-            return new FileStreamResult(new MemoryStream((byte[])field.Value), field.FileType)
+            FileModel file = (FileModel)field.Value; 
+
+            return new FileStreamResult(new MemoryStream((byte[])file.Data), file.FileType)
             {
-                FileDownloadName = field.FileName
+                FileDownloadName = file.FileName,
             };
 
         }
