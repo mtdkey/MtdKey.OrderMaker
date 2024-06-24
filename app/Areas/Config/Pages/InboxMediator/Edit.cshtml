@@ -1,0 +1,106 @@
+﻿@page
+@model EditModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> Localizer
+
+@{
+    ViewData["Title"] = Localizer["Editor of Inbox Mediator"];
+    ViewData["SecondTitle"] = Localizer["Email Receivers of order messages"];
+    string checkedTag = Model.EmailMediator?.UseSSL ?? false ? "checked" : string.Empty;
+    string activeTag = Model.EmailMediator?.Active ?? false ? "checked" : string.Empty;
+}
+
+@section Breadcrumb {
+    <li><a href="~/config">@Localizer["Configurator"]</a></li>
+    <li><a href="~/config/inboxmediator">@Localizer["Inbox Mediator"]</a></li>
+    <li>@ViewBag.Title</li>
+}
+
+<div class="mtd-desk">
+
+    <div class="mtd-desk-panel">
+        <div style="padding-left: 16px">
+            <button mtd-data-clicker-by="formClicker" class="mdc-fab mdc-fab--extended" aria-label="Create">
+                <div class="mdc-fab__ripple"></div>
+                <span class="material-icons mdc-fab__icon">add</span>
+                <span class="mdc-fab__label">@Localizer["Save"]</span>
+            </button>
+        </div>
+    </div>
+    <div class="container">
+        <form mtd-data-form method="post">
+            <input asp-asp-for="Model.InboxMediator.Email" type="hidden" value="@Model.EmailMediator.Email"/>
+            <h4>@Model.EmailMediator.Email</h4>
+            <div class="p-2">
+                <div class="p-2">
+                    @await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags
+               {
+                   Id = "server",
+                   Name = nameof(Model.EmailMediator.Server),
+                   Required = true,
+                   Label = "Server Name",
+                   LabelLocalized = true,
+                   MTDTexFieldView = MTDTextFieldViews.Outlined,
+                   Value = Model.EmailMediator.Server
+               })
+                </div>
+                <div class="p-2">
+                    @await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags
+               {
+                   Id = "port",
+                   Name = nameof(Model.EmailMediator.Port),
+                   Required = true,
+                   Label = "Server Port",
+                   Type = "number",
+                   LabelLocalized = true,
+                   ShowCounter = true,
+                   MaxLength = 5,
+                   MTDTexFieldView = MTDTextFieldViews.Outlined,
+                   Value = Model.EmailMediator.Port.ToString()
+               })
+                </div>
+                <div class="p-2">
+                    @await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags
+               {
+                   Id = "password",
+                   Name = nameof(Model.EmailMediator.Password),
+                   Required = true,
+                   Label = "Password",
+                   LabelLocalized = true,
+                   Type = "password",
+                   MTDTexFieldView = MTDTextFieldViews.Outlined,
+                   Value = Model.EmailMediator.Password
+               })
+                </div>
+                <div class="p-2 d-flex">
+
+                    <div class="p-2">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" name="usessl" @checkedTag>
+                            <label class="form-check-label" for="flexSwitchCheckChecked">Use SSL</label>
+                        </div>
+                    </div>
+
+                    <div class="p-2">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked2" name="active" @activeTag>
+                            <label class="form-check-label" for="flexSwitchCheckChecked2">Active</label>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <input mtd-data-clicker id="formClicker" type="hidden" mtd-data-location="/config/inboxmediator" />
+        </form>
+    </div>
+
+</div>
+
+@section Scripts {
+    <script>
+        new MTDTextField("email");
+        new MTDTextField("server");
+        new MTDTextField("port");
+        new MTDTextField("password");
+    </script>
+}

@@ -1,0 +1,160 @@
+﻿@page
+@model IndexModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> Localizer
+
+
+@{
+    ViewData["Title"] = Localizer["Inbox Mediator"];
+    ViewData["SecondTitle"] = Localizer["Email Receivers of order messages"];
+}
+
+@section Head {
+    <link rel="stylesheet" href="~/lib/mtd-ordermaker/config/css/mtd-config-inbox-mediator.css" asp-append-version="true" />
+}
+
+@section Breadcrumb {
+    <li><a href="~/config">@Localizer["Configurator"]</a></li>
+    <li>@ViewBag.Title</li>
+}
+
+
+<div class="mtd-desk">
+    <div class="mtd-desk-panel">
+        <div style="padding-left: 16px">
+            <button mtd-data-url="/config/inboxmediator/create" class="mdc-fab mdc-fab--extended" aria-label="Create">
+                <div class="mdc-fab__ripple"></div>
+                <span class="material-icons mdc-fab__icon">add</span>
+                <span class="mdc-fab__label">@Localizer["Create"]</span>
+            </button>
+        </div>
+    </div>
+
+    <form mtd-data-form method="post" autocomplete='off' enctype='multipart/form-data' action=''>
+        @Html.AntiForgeryToken()
+        <input id="configEmail" name="email" type="hidden" value="" />
+        <input id="deleteClicker" mtd-data-clicker type="hidden" />
+    </form>
+
+    <form mtd-data-form method="post" autocomplete='off' enctype='multipart/form-data' asp-page-handler="Test">
+        @Html.AntiForgeryToken()
+        <input id="testEmail" name="email" type="hidden" value="" />
+        <input id="testClicker" mtd-data-clicker type="hidden" mtd-data-message="Test successful." />
+    </form>
+
+    <div class="container">
+
+        @foreach(var receiver in Model.EmailMediators)
+        {
+            <div class="inbox-email-item">
+                <div class="inbox-email-header d-flex align-items-center">
+                    <div class="p-1 dropdown">
+                        <button class="btn btn-light text-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                            <i class="bi bi-three-dots-vertical"></i>
+                        </button>
+                        <ul class="dropdown-menu shadow noselect" style="font-size: smaller">
+                            <li>
+                                <a href="/config/inboxmediator/edit?email=@receiver.Email" class="dropdown-item text-primary">
+                                    <i class="bi bi-pencil-square"></i>
+                                    &nbsp;
+                                    @Localizer["Edit"]
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <a mtd-data-delete="@receiver.Email" class="dropdown-item text-danger">
+                                    <i class="bi bi-x-square"></i>
+                                    &nbsp;
+                                    @Localizer["Delete"]
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="inbox-email-name flex-grow-1">@receiver.Email</div>
+                    <button data-test="@receiver.Email" class="btn btn-secondary btn-sm me-2">Test Connection</button>
+                </div>
+                <div class="inbox-email-body">
+                    <div class="row text-center">
+                        <div class="col">
+                            <div class="inbox-email-title">Imap Server</div>
+                            <div class="inbox-email-data">@receiver.Server</div>
+                        </div>
+                        <div class="col">
+                            <div class="inbox-email-title">Port Server</div>
+                            <div class="inbox-email-data">@receiver.Port</div>
+                        </div>
+                        <div class="col">
+                            <div class="inbox-email-title">Use SSL</div>
+                            <div class="inbox-email-data">
+                                @if (receiver.UseSSL)
+                                {
+                                    <i class="bi bi-shield-fill-check h5" style="color: green"></i>
+                                }
+
+                                else
+                                {
+                                    <i class="bi bi-shield-slash-fill h5" style="color: red"></i>
+                                }                               
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="inbox-email-title">Active</div>
+                            <div class="inbox-email-data">
+                                @if (receiver.Active)
+                                {                          
+                                    <i class="bi bi-check2-circle h5" style="color: green"></i>
+                                }
+
+                                else
+                                {
+                                    <i class="bi bi-x-circle-fill h5" style="color: red"></i>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+
+<div id="dialog-delete" class="mdc-dialog"
+     role="alertdialog"
+     aria-modal="true"
+     aria-labelledby="my-dialog-title"
+     aria-describedby="my-dialog-content">
+    <div class="mdc-dialog__container">
+        <div class="mdc-dialog__surface">
+            <h2 class="mdc-dialog__title" id="delete-form-title">
+                @Localizer["Delete inbox mediator"]?
+            </h2>
+            <div class="mdc-dialog__content" id="delete-dialog-content">
+                @Localizer["Do you confirm the deletion?"]
+            </div>
+            <footer class="mdc-dialog__actions">
+                <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="no">
+                    <span class="mdc-button__label">@Localizer["Cancel"]</span>
+                </button>
+                <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="yes">
+                    <span class="mdc-button__label" onclick="document.getElementById('deleteClicker').click();">@Localizer["Delete"]</span>
+                </button>
+            </footer>
+        </div>
+    </div>
+    <div class="mdc-dialog__scrim"></div>
+</div>
+
+
+
+@section Scripts {
+    <script src="~/lib/mtd-ordermaker/config/js/mtd-config-inbox-mediator.js" asp-append-version="true"></script>
+    <script>
+
+        new MTDTextField("email");
+        new MTDTextField("server");
+        new MTDTextField("port");
+        new MTDTextField("password");
+    </script>
+}

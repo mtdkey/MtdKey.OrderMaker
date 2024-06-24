@@ -16,6 +16,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MtdKey.Cipher;
 using MtdKey.EmailBuilder;
+using MtdKey.InboxMediator;
 using MtdKey.OrderMaker.AppConfig;
 using MtdKey.OrderMaker.Areas.Identity.Data;
 using MtdKey.OrderMaker.Core;
@@ -126,7 +127,7 @@ namespace MtdKey.OrderMaker
 
             services.AddScoped<DataConnector>();
             services.AddMvc(options => options.EnableEndpointRouting = false);
-
+            services.AddInboxMediator(options => options.ConnectionString = Configuration.GetConnectionString("InboxMediator"));
 
 #if DEBUG
             services.AddRazorPages().AddRazorRuntimeCompilation();

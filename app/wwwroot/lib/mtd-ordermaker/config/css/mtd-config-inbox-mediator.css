@@ -1,0 +1,29 @@
+﻿.inbox-email-item{
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+}
+
+.inbox-email-header{
+    background-color: whitesmoke;
+    padding: 4px;
+}
+
+.inbox-email-body{
+    padding: 24px;
+}
+
+.inbox-email-title {
+    color: gray;
+    font-size: small;
+    text-transform: uppercase;
+}
+
+.inbox-email-data {
+    color: black;
+    font-weight: 500;
+}
+
+.inbox-email-name{
+    font-weight: bold;
+    font-size: large;
+}

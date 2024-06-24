@@ -984,7 +984,7 @@ namespace MtdKey.OrderMaker.Migrations
 
                     b.HasIndex("FieldId");
 
-                    b.ToTable("mtd_form_part_field_item");
+                    b.ToTable("mtd_form_part_field_item", (string)null);
                 });
 
             modelBuilder.Entity("MtdKey.OrderMaker.Entity.MtdFormPartHeader", b =>
@@ -1551,7 +1551,7 @@ namespace MtdKey.OrderMaker.Migrations
 
                     b.HasIndex(new[] { "Result" }, "IX_DATE_RESULT");
 
-                    b.ToTable("mtd_store_date");
+                    b.ToTable("mtd_store_date", (string)null);
                 });
 
             modelBuilder.Entity("MtdKey.OrderMaker.Entity.MtdStoreDecimal", b =>
@@ -1586,7 +1586,7 @@ namespace MtdKey.OrderMaker.Migrations
 
                     b.HasIndex(new[] { "Result" }, "IX_DECIMAL_RESULT");
 
-                    b.ToTable("mtd_store_decimal");
+                    b.ToTable("mtd_store_decimal", (string)null);
                 });
 
             modelBuilder.Entity("MtdKey.OrderMaker.Entity.MtdStoreFile", b =>
@@ -1633,7 +1633,7 @@ namespace MtdKey.OrderMaker.Migrations
 
                     b.HasIndex("StoreId");
 
-                    b.ToTable("mtd_store_file");
+                    b.ToTable("mtd_store_file", (string)null);
                 });
 
             modelBuilder.Entity("MtdKey.OrderMaker.Entity.MtdStoreFileLink", b =>
@@ -1681,7 +1681,7 @@ namespace MtdKey.OrderMaker.Migrations
 
                     b.HasIndex(new[] { "Result" }, "IX_FILE_LINK_RESULT");
 
-                    b.ToTable("mtd_store_file_links");
+                    b.ToTable("mtd_store_file_links", (string)null);
                 });
 
             modelBuilder.Entity("MtdKey.OrderMaker.Entity.MtdStoreInt", b =>
@@ -1716,7 +1716,7 @@ namespace MtdKey.OrderMaker.Migrations
 
                     b.HasIndex(new[] { "Result" }, "IX_INT_RESULT");
 
-                    b.ToTable("mtd_store_int");
+                    b.ToTable("mtd_store_int", (string)null);
                 });
 
             modelBuilder.Entity("MtdKey.OrderMaker.Entity.MtdStoreItem", b =>
@@ -1758,7 +1758,7 @@ namespace MtdKey.OrderMaker.Migrations
 
                     b.HasIndex(new[] { "Result" }, "IX_TEXT_RESULT");
 
-                    b.ToTable("mtd_store_item");
+                    b.ToTable("mtd_store_item", (string)null);
                 });
 
             modelBuilder.Entity("MtdKey.OrderMaker.Entity.MtdStoreMemo", b =>
@@ -1795,7 +1795,7 @@ namespace MtdKey.OrderMaker.Migrations
 
                     b.HasIndex(new[] { "Result" }, "IX_MEMO_RESULT");
 
-                    b.ToTable("mtd_store_memo");
+                    b.ToTable("mtd_store_memo", (string)null);
                 });
 
             modelBuilder.Entity("MtdKey.OrderMaker.Entity.MtdStoreOwner", b =>
@@ -1861,7 +1861,7 @@ namespace MtdKey.OrderMaker.Migrations
                     b.HasIndex(new[] { "Result" }, "IX_TEXT_RESULT")
                         .HasDatabaseName("IX_TEXT_RESULT1");
 
-                    b.ToTable("mtd_store_text");
+                    b.ToTable("mtd_store_text", (string)null);
                 });
 
             modelBuilder.Entity("MtdKey.OrderMaker.Entity.MtdSysStyle", b =>
@@ -1986,7 +1986,7 @@ namespace MtdKey.OrderMaker.Migrations
 
                     b.HasIndex("Created");
 
-                    b.ToTable("file_storage_items");
+                    b.ToTable("file_storage_items", (string)null);
                 });
 
             modelBuilder.Entity("MtdKey.OrderMaker.Entity.MtdApproval", b =>

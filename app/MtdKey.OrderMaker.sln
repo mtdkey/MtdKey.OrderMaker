@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MtdKey.OrderMaker", "MtdKey
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MtdKey.EmailBuilder", "..\..\MtdKey.EmailBuilder\MtdKey.EmailBuilder\MtdKey.EmailBuilder.csproj", "{DBDF9B6E-A9ED-4427-A4ED-E895AD8105FB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MtdKey.InboxMediator", "..\..\MtdKey.InboxMediator\MtdKey.InboxMediator.csproj", "{4CFCC675-3BB6-465F-AE02-951D74ECF376}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,14 @@ Global
 		{DBDF9B6E-A9ED-4427-A4ED-E895AD8105FB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DBDF9B6E-A9ED-4427-A4ED-E895AD8105FB}.Release|x64.ActiveCfg = Release|Any CPU
 		{DBDF9B6E-A9ED-4427-A4ED-E895AD8105FB}.Release|x64.Build.0 = Release|Any CPU
+		{4CFCC675-3BB6-465F-AE02-951D74ECF376}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CFCC675-3BB6-465F-AE02-951D74ECF376}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CFCC675-3BB6-465F-AE02-951D74ECF376}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{4CFCC675-3BB6-465F-AE02-951D74ECF376}.Debug|x64.Build.0 = Debug|Any CPU
+		{4CFCC675-3BB6-465F-AE02-951D74ECF376}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CFCC675-3BB6-465F-AE02-951D74ECF376}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CFCC675-3BB6-465F-AE02-951D74ECF376}.Release|x64.ActiveCfg = Release|Any CPU
+		{4CFCC675-3BB6-465F-AE02-951D74ECF376}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
