@@ -347,6 +347,7 @@ namespace MtdKey.OrderMaker.Core
                   .Include(x => x.MtdFilterOwner)
                   .Include(x => x.MtdFilterFields)
                   .ThenInclude(x => x.MtdFormPartFieldNavigation)
+                  .AsNoTracking()
                   .AsSplitQuery()
                   .Where(x => x.IdUser == appUser.Id && x.MtdFormId == formId)
                   .FirstOrDefaultAsync();
