@@ -46,7 +46,7 @@ namespace MtdKey.OrderMaker.Areas.Config.Pages.InboxMediator
             {
                 using var client = new ImapClient();
                 client.Connect(mediator.Server, mediator.Port, mediator.UseSSL);
-                client.Authenticate(mediator.Email, mediator.Password);
+                client.Authenticate(mediator.EmailAsKey, mediator.Password);
                 
                 // The Inbox folder is always available on all IMAP servers...
                 var inbox = client.Inbox;

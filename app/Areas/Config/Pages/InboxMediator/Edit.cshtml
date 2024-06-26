@@ -29,8 +29,8 @@
     </div>
     <div class="container">
         <form mtd-data-form method="post">
-            <input asp-asp-for="Model.InboxMediator.Email" type="hidden" value="@Model.EmailMediator.Email"/>
-            <h4>@Model.EmailMediator.Email</h4>
+            <input asp-asp-for="Model.InboxMediator.Email" type="hidden" value="@Model.EmailMediator.EmailAsKey"/>
+            <h4>@Model.EmailMediator.EmailAsKey</h4>
             <div class="p-2">
                 <div class="p-2">
                     @await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags

@@ -55,7 +55,7 @@
                         </button>
                         <ul class="dropdown-menu shadow noselect" style="font-size: smaller">
                             <li>
-                                <a href="/config/inboxmediator/edit?email=@receiver.Email" class="dropdown-item text-primary">
+                                <a href="/config/inboxmediator/edit?email=@receiver.EmailAsKey" class="dropdown-item text-primary">
                                     <i class="bi bi-pencil-square"></i>
                                     &nbsp;
                                     @Localizer["Edit"]
@@ -63,7 +63,7 @@
                             </li>
                             <li><hr class="dropdown-divider"></li>
                             <li>
-                                <a mtd-data-delete="@receiver.Email" class="dropdown-item text-danger">
+                                <a mtd-data-delete="@receiver.EmailAsKey" class="dropdown-item text-danger">
                                     <i class="bi bi-x-square"></i>
                                     &nbsp;
                                     @Localizer["Delete"]
@@ -71,8 +71,8 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="inbox-email-name flex-grow-1">@receiver.Email</div>
-                    <button data-test="@receiver.Email" class="btn btn-secondary btn-sm me-2">Test Connection</button>
+                    <div class="inbox-email-name flex-grow-1">@receiver.EmailAsKey</div>
+                    <button data-test="@receiver.EmailAsKey" class="btn btn-secondary btn-sm me-2">Test Connection</button>
                 </div>
                 <div class="inbox-email-body">
                     <div class="row text-center">
