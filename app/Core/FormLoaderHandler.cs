@@ -1,6 +1,4 @@
-﻿using MailKit;
-using Microsoft.CodeAnalysis.Elfie.Diagnostics;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using MimeKit;
 using MtdKey.InboxMediator;
@@ -8,7 +6,6 @@ using MtdKey.OrderMaker.Entity;
 using MtdKey.OrderMaker.Services.FileStorage;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,10 +15,6 @@ namespace MtdKey.OrderMaker.Core
     {
 
         private IServiceScopeFactory serviceScopeFactory = null;
-        //private readonly string FormId = "16fa1a01-aefa-4582-8e09-86486f6f9378";
-        //private readonly string SenderId = "053ad788-f833-4156-b244-8ab1a7f415d3";
-        //private readonly string SubjectId = "6ab15ecc-6383-4a71-a616-e7b3a36180b1";
-        //private readonly string BodyId = "533395f4-8027-47b0-8c69-2c01ce3247f6";
 
         public override async Task<bool> HandleAsync(EmailModel emailModel)
         {
@@ -72,6 +65,25 @@ namespace MtdKey.OrderMaker.Core
                     Result = emailModel.Subject
                 });
 
+                foreach (var attachment in emailModel.Attachments)
+                {
+                    var guid = await storageService.PutFileAsync(attachment.FileName, attachment.Size, attachment.FileType, attachment.Data);
+
+                    emailModel.Body = emailModel.Body.Replace($"cid:{attachment.ContentId}", $"/api/file/{guid}");
+
+                    if (guid != null || guid != Guid.Empty)
+                        await context.MtdStoreFileLinks.AddAsync(new MtdStoreFileLink()
+                        {
+                            FieldId = targetForm.TargetFields.Where(x => x.Target == (int)RenderTarget.Attachments)
+                                   .Select(x => x.FieldId.ToString()).FirstOrDefault(),
+                            StoreId = mtdStore.Id,
+                            FileName = attachment.FileName,
+                            FileSize = attachment.Size,
+                            FileType = attachment.FileType,
+                            Result = (Guid)guid,
+                        });
+                }
+
 
                 var dataList = emailModel.Body.SplitByLength(255);
                 var memos = new List<MtdStoreMemo>();
@@ -90,49 +102,6 @@ namespace MtdKey.OrderMaker.Core
                 });
 
                 await context.MtdStoreMemos.AddRangeAsync(memos);
-
-                foreach (var attachment in emailModel.Attachments)
-                {
-                    string tempPath = Path.GetTempPath();
-                    string tempFile = Path.Combine(tempPath, Guid.NewGuid().ToString());
-
-                    using var stream = File.Create(tempFile);
-                    if (attachment is MessagePart)
-                    {
-                        var rfc822 = (MessagePart)attachment;
-
-                        rfc822.Message.WriteTo(stream);
-                    }
-                    else
-                    {
-                        var part = (MimePart)attachment;
-                        part.Content.DecodeTo(stream);
-                    }
-                    stream.Close();
-
-                    var fileArray = await File.ReadAllBytesAsync(tempFile);
-
-                    var fileSize = (int)fileArray.Length;
-                    var fileName = attachment.ContentDisposition.FileName;
-                    var fileType = attachment.ContentType.MimeType;
-
-                    var guid = await storageService.PutFileAsync(fileName, fileSize, fileType, fileArray);
-
-
-                    if (guid != null || guid != Guid.Empty)
-                        await context.MtdStoreFileLinks.AddAsync(new MtdStoreFileLink()
-                        {
-                            FieldId = targetForm.TargetFields.Where(x => x.Target == (int)RenderTarget.Attachments)
-                                   .Select(x => x.FieldId.ToString()).FirstOrDefault(),
-                            StoreId = mtdStore.Id,
-                            FileName = fileName,
-                            FileSize = fileSize,
-                            FileType = fileType,
-                            Result = (Guid)guid,
-                        });
-
-                    File.Delete(tempFile);
-                }
 
                 await context.SaveChangesAsync();
 
