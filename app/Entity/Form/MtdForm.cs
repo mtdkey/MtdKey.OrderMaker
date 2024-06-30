@@ -40,6 +40,7 @@ namespace MtdKey.OrderMaker.Entity
         public virtual ICollection<MtdStore> MtdStore { get; set; }
         public virtual ICollection<MtdFilterScript> MtdFilterScript { get; set; }
         public virtual ICollection<MtdEventSubscribe> MtdEventSubscribes { get; set; }
+        public virtual ICollection<TargetForm> TargetForms { get; set; } = [];
     }
 }
 

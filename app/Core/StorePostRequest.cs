@@ -12,7 +12,7 @@ namespace MtdKey.OrderMaker.Core
         public Dictionary<string, string> Fields { get; set; }
         public IFormFileCollection Files { set; get; }
         public ClaimsPrincipal UserPrincipal { get; set; }
-        public Dictionary<string, string> DeleteFields { get; set; } = new();
+        public Dictionary<string, string> DeleteFields { get; set; } = [];
         public ActionTypeRequest ActionType { get; set; } = ActionTypeRequest.Show;
     }
 }

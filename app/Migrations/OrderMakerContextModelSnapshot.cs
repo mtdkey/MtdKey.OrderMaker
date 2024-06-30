@@ -984,7 +984,7 @@ namespace MtdKey.OrderMaker.Migrations
 
                     b.HasIndex("FieldId");
 
-                    b.ToTable("mtd_form_part_field_item", (string)null);
+                    b.ToTable("mtd_form_part_field_item");
                 });
 
             modelBuilder.Entity("MtdKey.OrderMaker.Entity.MtdFormPartHeader", b =>
@@ -1551,7 +1551,7 @@ namespace MtdKey.OrderMaker.Migrations
 
                     b.HasIndex(new[] { "Result" }, "IX_DATE_RESULT");
 
-                    b.ToTable("mtd_store_date", (string)null);
+                    b.ToTable("mtd_store_date");
                 });
 
             modelBuilder.Entity("MtdKey.OrderMaker.Entity.MtdStoreDecimal", b =>
@@ -1586,7 +1586,7 @@ namespace MtdKey.OrderMaker.Migrations
 
                     b.HasIndex(new[] { "Result" }, "IX_DECIMAL_RESULT");
 
-                    b.ToTable("mtd_store_decimal", (string)null);
+                    b.ToTable("mtd_store_decimal");
                 });
 
             modelBuilder.Entity("MtdKey.OrderMaker.Entity.MtdStoreFile", b =>
@@ -1633,7 +1633,7 @@ namespace MtdKey.OrderMaker.Migrations
 
                     b.HasIndex("StoreId");
 
-                    b.ToTable("mtd_store_file", (string)null);
+                    b.ToTable("mtd_store_file");
                 });
 
             modelBuilder.Entity("MtdKey.OrderMaker.Entity.MtdStoreFileLink", b =>
@@ -1681,7 +1681,7 @@ namespace MtdKey.OrderMaker.Migrations
 
                     b.HasIndex(new[] { "Result" }, "IX_FILE_LINK_RESULT");
 
-                    b.ToTable("mtd_store_file_links", (string)null);
+                    b.ToTable("mtd_store_file_links");
                 });
 
             modelBuilder.Entity("MtdKey.OrderMaker.Entity.MtdStoreInt", b =>
@@ -1716,7 +1716,7 @@ namespace MtdKey.OrderMaker.Migrations
 
                     b.HasIndex(new[] { "Result" }, "IX_INT_RESULT");
 
-                    b.ToTable("mtd_store_int", (string)null);
+                    b.ToTable("mtd_store_int");
                 });
 
             modelBuilder.Entity("MtdKey.OrderMaker.Entity.MtdStoreItem", b =>
@@ -1758,7 +1758,7 @@ namespace MtdKey.OrderMaker.Migrations
 
                     b.HasIndex(new[] { "Result" }, "IX_TEXT_RESULT");
 
-                    b.ToTable("mtd_store_item", (string)null);
+                    b.ToTable("mtd_store_item");
                 });
 
             modelBuilder.Entity("MtdKey.OrderMaker.Entity.MtdStoreMemo", b =>
@@ -1795,7 +1795,7 @@ namespace MtdKey.OrderMaker.Migrations
 
                     b.HasIndex(new[] { "Result" }, "IX_MEMO_RESULT");
 
-                    b.ToTable("mtd_store_memo", (string)null);
+                    b.ToTable("mtd_store_memo");
                 });
 
             modelBuilder.Entity("MtdKey.OrderMaker.Entity.MtdStoreOwner", b =>
@@ -1861,7 +1861,7 @@ namespace MtdKey.OrderMaker.Migrations
                     b.HasIndex(new[] { "Result" }, "IX_TEXT_RESULT")
                         .HasDatabaseName("IX_TEXT_RESULT1");
 
-                    b.ToTable("mtd_store_text", (string)null);
+                    b.ToTable("mtd_store_text");
                 });
 
             modelBuilder.Entity("MtdKey.OrderMaker.Entity.MtdSysStyle", b =>
@@ -1960,6 +1960,76 @@ namespace MtdKey.OrderMaker.Migrations
                     b.ToTable("mtd_sys_type", (string)null);
                 });
 
+            modelBuilder.Entity("MtdKey.OrderMaker.Entity.TargetField", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("FieldId")
+                        .IsRequired()
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)");
+
+                    b.Property<string>("FormId")
+                        .IsRequired()
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)");
+
+                    b.Property<int>("Target")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FieldId");
+
+                    b.HasIndex("FormId");
+
+                    b.ToTable("target_fields");
+                });
+
+            modelBuilder.Entity("MtdKey.OrderMaker.Entity.TargetFilter", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("EmailAsKey")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("varchar(128)");
+
+                    b.Property<string>("Filter")
+                        .HasMaxLength(128)
+                        .HasColumnType("varchar(128)");
+
+                    b.Property<string>("FormId")
+                        .IsRequired()
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FormId");
+
+                    b.ToTable("target_filters");
+                });
+
+            modelBuilder.Entity("MtdKey.OrderMaker.Entity.TargetForm", b =>
+                {
+                    b.Property<string>("FormId")
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)");
+
+                    b.HasKey("FormId");
+
+                    b.ToTable("target_forms");
+                });
+
             modelBuilder.Entity("MtdKey.OrderMaker.Services.FileStorage.FileStorageItem", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1986,7 +2056,7 @@ namespace MtdKey.OrderMaker.Migrations
 
                     b.HasIndex("Created");
 
-                    b.ToTable("file_storage_items", (string)null);
+                    b.ToTable("file_storage_items");
                 });
 
             modelBuilder.Entity("MtdKey.OrderMaker.Entity.MtdApproval", b =>
@@ -2571,6 +2641,47 @@ namespace MtdKey.OrderMaker.Migrations
                     b.Navigation("MtdStore");
                 });
 
+            modelBuilder.Entity("MtdKey.OrderMaker.Entity.TargetField", b =>
+                {
+                    b.HasOne("MtdKey.OrderMaker.Entity.MtdFormPartField", "MtdFormPartField")
+                        .WithMany("TargetFields")
+                        .HasForeignKey("FieldId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MtdKey.OrderMaker.Entity.TargetForm", "TargetForm")
+                        .WithMany("TargetFields")
+                        .HasForeignKey("FormId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("MtdFormPartField");
+
+                    b.Navigation("TargetForm");
+                });
+
+            modelBuilder.Entity("MtdKey.OrderMaker.Entity.TargetFilter", b =>
+                {
+                    b.HasOne("MtdKey.OrderMaker.Entity.TargetForm", "TargetForm")
+                        .WithMany("TargetFilters")
+                        .HasForeignKey("FormId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TargetForm");
+                });
+
+            modelBuilder.Entity("MtdKey.OrderMaker.Entity.TargetForm", b =>
+                {
+                    b.HasOne("MtdKey.OrderMaker.Entity.MtdForm", "MtdForm")
+                        .WithMany("TargetForms")
+                        .HasForeignKey("FormId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("MtdForm");
+                });
+
             modelBuilder.Entity("MtdKey.OrderMaker.Entity.MtdApproval", b =>
                 {
                     b.Navigation("MtdApprovalStages");
@@ -2631,6 +2742,8 @@ namespace MtdKey.OrderMaker.Migrations
                     b.Navigation("MtdPolicyForms");
 
                     b.Navigation("MtdStore");
+
+                    b.Navigation("TargetForms");
                 });
 
             modelBuilder.Entity("MtdKey.OrderMaker.Entity.MtdFormPart", b =>
@@ -2665,6 +2778,8 @@ namespace MtdKey.OrderMaker.Migrations
                     b.Navigation("MtdStoreMemos");
 
                     b.Navigation("MtdStoreTexts");
+
+                    b.Navigation("TargetFields");
                 });
 
             modelBuilder.Entity("MtdKey.OrderMaker.Entity.MtdFormPartFieldItem", b =>
@@ -2721,6 +2836,13 @@ namespace MtdKey.OrderMaker.Migrations
             modelBuilder.Entity("MtdKey.OrderMaker.Entity.MtdSysType", b =>
                 {
                     b.Navigation("MtdFormPartField");
+                });
+
+            modelBuilder.Entity("MtdKey.OrderMaker.Entity.TargetForm", b =>
+                {
+                    b.Navigation("TargetFields");
+
+                    b.Navigation("TargetFilters");
                 });
 #pragma warning restore 612, 618
         }

@@ -235,7 +235,6 @@ namespace MtdKey.OrderMaker.Core
                                 fileLink => fileLink.IsDeleted = storeRequest.DeleteFields.Any(deletedFiled => deletedFiled.Key == fileLink.Result.ToString())
                             );
 
-
                             if (partField.Value == null)
                                 break;
 

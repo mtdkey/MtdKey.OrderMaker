@@ -57,7 +57,6 @@ namespace MtdKey.OrderMaker
                 options.UseMySql(orderMakerData, ServerVersion.AutoDetect(orderMakerData)));
             services.AddHostedService<MigrationService>();
 
-
             services.AddDataProtection()
             .SetApplicationName($"{Configuration.GetConnectionString("ClientName")}")
             .PersistKeysToDbContext<IdentityDbContext>();

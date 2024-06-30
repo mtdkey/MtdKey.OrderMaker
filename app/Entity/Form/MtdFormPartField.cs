@@ -49,5 +49,6 @@ namespace MtdKey.OrderMaker.Entity
         public virtual ICollection<MtdFormPartFieldItem> MtdFormPartFieldItems { get; set; }
         public virtual ICollection<MtdStoreItem> MtdStoreItems { get; set; }
         public virtual ICollection<MtdStoreFileLink> MtdStoreFileLinks { get; set; }
+        public virtual ICollection<TargetField> TargetFields { get; set; } 
     }
 }
