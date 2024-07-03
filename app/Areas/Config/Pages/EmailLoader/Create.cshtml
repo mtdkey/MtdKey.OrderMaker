@@ -1,0 +1,50 @@
+﻿@page
+@model MtdKey.OrderMaker.Areas.Config.Pages.EmailLoader.CreateModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> Localizer
+
+@{
+    ViewData["Title"] = Localizer["Import settings"];
+    ViewData["SecondTitle"] = Localizer["Import settings"];
+}
+
+
+@section Breadcrumb {
+    <li><a href="~/config">@Localizer["Configurator"]</a></li>
+    <li><a href="~/config/emailloader">@Localizer["Email Loader"]</a></li>
+    <li>@ViewBag.Title</li>
+}
+
+<div class="mtd-desk">
+    <div class="mtd-desk-panel">
+        <div style="padding-left: 16px">
+            <button mtd-data-clicker-by="clicker-create" type="button" class="mdc-fab mdc-fab--extended">
+                <span class="material-icons mdc-fab__icon">add</span>
+                <span class="mdc-fab__label">@Localizer["Save"]</span>
+            </button>
+        </div>
+    </div>
+    <form mtd-data-form method="post">
+        <button id="clicker-create" mtd-data-clicker type="button" class="d-none" mtd-data-location="/config/emailloader"></button>
+        @await Html.PartialAsync("./_FormEditor", Model.FormEditorModel)
+    </form>
+</div>
+
+@section Scripts {
+    <script>
+        var formSelector = new MTDSelectList("formId");
+
+        formSelector.selector.listen('MDCSelect:change', () => {
+            console.log(formSelector.selector.value);
+            window.location = `/config/emailloader/create?formId=${formSelector.selector.value}`;
+        });
+
+        new MTDSelectList("sender");
+        new MTDSelectList("subject");
+        new MTDSelectList("body");
+        new MTDSelectList("attachments");
+        new MTDSelectList("mediator");
+        new MTDSelectList("searchlocation");
+        new MTDTextField("keyword")
+    </script>
+}

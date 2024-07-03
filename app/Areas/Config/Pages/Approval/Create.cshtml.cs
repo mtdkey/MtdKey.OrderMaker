@@ -49,13 +49,13 @@ namespace MtdKey.OrderMaker.Areas.Config.Pages.Approval
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
-        {
+        //public async Task<IActionResult> OnPostAsync()
+        //{
 
-            _context.MtdApproval.Add(MtdApproval);
-            await _context.SaveChangesAsync();
+        //    _context.MtdApproval.Add(MtdApproval);
+        //    await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Edit", new { id = MtdApproval.Id });
-        }
+        //    return RedirectToPage("./Edit", new { id = MtdApproval.Id });
+        //}
     }
 }

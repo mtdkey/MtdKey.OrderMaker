@@ -1,0 +1,117 @@
+﻿@model  FormEditorModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> Localizer
+
+<div class="container">
+
+
+        <div class="row">
+            <div class="p-2 col">
+
+                @await Component.InvokeAsync(typeof(MTDSelectList), new MTDSelectListTags
+                   {
+                       Id = "formId",
+                       Name = "formId",
+                       Required = true,
+                       Label = "Form Template",
+                       LabelLocalized = true,
+                       MTDSelectListView = MTDSelectListViews.Outlined,
+                       Items = Model.FormItems
+                   })
+
+            </div>
+            <div class="p-2 col">
+                @await Component.InvokeAsync(typeof(MTDSelectList), new MTDSelectListTags
+                   {
+                       Id = "sender",
+                       Name = "sender",
+                       Required = true,
+                       Label = "Sender",
+                       LabelLocalized = true,
+                       MTDSelectListView = MTDSelectListViews.Outlined,
+                       Items = Model.FieldItems,
+                       ValueId = Model.SenderId
+                      
+                   })
+            </div>
+            <div class="p-2 col">
+                @await Component.InvokeAsync(typeof(MTDSelectList), new MTDSelectListTags
+                   {
+                       Id = "subject",
+                       Name = "subject",
+                       Required = true,
+                       Label = "Subject",
+                       LabelLocalized = true,
+                       MTDSelectListView = MTDSelectListViews.Outlined,
+                       Items = Model.FieldItems,
+                       ValueId = Model.SubjectId,
+                   })
+            </div>
+            <div class="p-2 col">
+                @await Component.InvokeAsync(typeof(MTDSelectList), new MTDSelectListTags
+                   {
+                       Id = "body",
+                       Name = "body",
+                       Required = true,
+                       Label = "Body",
+                       LabelLocalized = true,
+                       MTDSelectListView = MTDSelectListViews.Outlined,
+                       Items = Model.FieldItems,
+                       ValueId = Model.BodyId,
+                   })
+            </div>
+            <div class="p-2 col">
+                @await Component.InvokeAsync(typeof(MTDSelectList), new MTDSelectListTags
+                   {
+                       Id = "attachments",
+                       Name = "attachments",
+                       Required = true,
+                       Label = "Attachments",
+                       LabelLocalized = true,
+                       MTDSelectListView = MTDSelectListViews.Outlined,
+                       Items = Model.FieldItems,
+                        ValueId = Model.AttachmentsId,
+                   })
+            </div>
+            <div class="row mt-5">
+                <div class="p-2 col">
+                    @await Component.InvokeAsync(typeof(MTDSelectList), new MTDSelectListTags
+                       {
+                           Id = "mediator",
+                           Name = "mediator",
+                           Required = true,
+                           Label = "Email Mediator",
+                           LabelLocalized = true,
+                           MTDSelectListView = MTDSelectListViews.Default,
+                           Items = Model.MediatorItems,
+                           ValueId = Model.EmailAsKey,
+                       })
+                </div>
+                <div class="p-2 col">
+                    @await Component.InvokeAsync(typeof(MTDSelectList), new MTDSelectListTags
+                       {
+                           Id = "searchlocation",
+                           Name = "searchlocation",
+                           Required = true,
+                           Label = "Search location",
+                           LabelLocalized = true,
+                           MTDSelectListView = MTDSelectListViews.Default,
+                           Items = Model.LocationItems,
+                       })
+                </div>
+                <div class="p-2 col">
+                    @await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags
+                       {
+                           Id = "keyword",
+                           Name = "keyword",
+                           Required = false,
+                           Label = "Keyword",
+                           LabelLocalized = true,
+                           MTDTexFieldView = MTDTextFieldViews.Default,
+                           Value = Model.KeyWord
+                       })
+                </div>
+            </div>
+        </div>
+
+</div>

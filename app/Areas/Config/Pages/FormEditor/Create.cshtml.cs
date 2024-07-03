@@ -20,6 +20,7 @@ namespace MtdKey.OrderMaker.Areas.Config.Pages.FormEditor
 {
     public class CreateModel : PageModel
     {
+
         private readonly DataConnector _context;
         private readonly IStringLocalizer<SharedResource> _localizer;
         private readonly IOptions<LimitSettings> limits;

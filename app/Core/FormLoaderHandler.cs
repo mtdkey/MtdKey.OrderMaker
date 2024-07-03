@@ -13,7 +13,6 @@ namespace MtdKey.OrderMaker.Core
 {
     public class FormLoaderHandler : EmailModelHandler
     {
-
         private IServiceScopeFactory serviceScopeFactory = null;
 
         public override async Task<bool> HandleAsync(EmailModel emailModel)

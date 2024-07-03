@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MtdKey.EmailBuilder", "..\.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MtdKey.InboxMediator", "..\..\MtdKey.InboxMediator\MtdKey.InboxMediator.csproj", "{4CFCC675-3BB6-465F-AE02-951D74ECF376}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MtdKey.InboxMediator.Worker", "..\MtdKey.InboxMediator.Worker\MtdKey.InboxMediator.Worker.csproj", "{7F8C425E-24CB-45E1-A202-5220C1FF1423}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MtdKey.InboxMediator.Worker", "..\MtdKey.InboxMediator.Worker\MtdKey.InboxMediator.Worker.csproj", "{7F8C425E-24CB-45E1-A202-5220C1FF1423}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

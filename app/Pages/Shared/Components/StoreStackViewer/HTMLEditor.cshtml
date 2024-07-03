@@ -23,33 +23,36 @@
 
 @if (value != string.Empty)
 {
-    @switch (ViewBag.typeStyle)
-    {
-        case "Columns":
-            <div class="mtd-store-view-col-root">
-                <div class="mtd-store-view-col-name">
-                    @name
-                </div>
-                <div class="mtd-store-view-col-value">
-                    <div class="p-3">
-                        @Html.Raw(value)
+    <div style="">
+        @switch (ViewBag.typeStyle)
+        {
+            case "Columns":
+                <div class="mtd-store-view-col-root">
+                    <div class="mtd-store-view-col-name">
+                        @name
                     </div>
-@*                     <span style="white-space:pre-line">@value</span> *@
-                </div>
-            </div>
-            break;
-        default:
-            <div class="mtd-store-view-row-line">
-                <div class="mtd-store-view-row-name">
-                    @name
-                </div>
-                <div class="mtd-store-view-row-value">
-                    <div class="p-3">
-                       @Html.Raw(value)
+                    <div class="mtd-store-view-col-value">
+                        <div class="p-3">
+                            @Html.Raw(value)
+                        </div>
+                        @*<span style="white-space:pre-line">@value</span> *@
                     </div>
                 </div>
-            </div>
-            break;
-    }
+                break;
+            default:
+                <div class="mtd-store-view-row-line">
+                    <div class="mtd-store-view-row-name">
+                        @name
+                    </div>
+                    <div class="mtd-store-view-row-value">
+                        <div class="p-3">
+                            @Html.Raw(value)
+                        </div>
+                    </div>
+                </div>
+                break;
+        }
+    </div>
+
 }
 

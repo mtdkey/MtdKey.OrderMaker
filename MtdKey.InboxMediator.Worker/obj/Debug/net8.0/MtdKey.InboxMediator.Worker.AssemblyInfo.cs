@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MtdKey.InboxMediator.Worker")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a22dc75a9432dddee04a5d65db5a430a041d1d83")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8502f13dae9e5d9e4ff48e71110278b2b798b4f5")]
 [assembly: System.Reflection.AssemblyProductAttribute("MtdKey.InboxMediator.Worker")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MtdKey.InboxMediator.Worker")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,0 +1,48 @@
+﻿@page
+@model MtdKey.OrderMaker.Areas.Config.Pages.EmailLoader.IndexModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> Localizer
+
+
+@{
+    ViewData["Title"] = Localizer["Email Loader"];
+    ViewData["SecondTitle"] = Localizer["Importing messages into forms"];
+}
+
+@section Breadcrumb {
+    <li><a href="~/config">@Localizer["Configurator"]</a></li>
+    <li>@ViewBag.Title</li>
+}
+
+
+<div class="mtd-desk">
+    <div class="mtd-desk-panel">
+        <div style="padding-left: 16px">
+            <button mtd-data-url="/config/emailloader/create" class="mdc-fab mdc-fab--extended" aria-label="Create">
+                <div class="mdc-fab__ripple"></div>
+                <span class="material-icons mdc-fab__icon">add</span>
+                <span class="mdc-fab__label">@Localizer["Create"]</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="container">
+        <ul class="mdc-list mdc-list--two-line">
+            @foreach (var form in Model.FormLoaderModels) {
+                <li mtd-data-url="/config/emailloader/edit?formId=@form.FormId" class="mdc-list-item border" tabindex="0">
+                    <span class="mdc-list-item__ripple"></span>
+                    <span class="mdc-list-item__text">
+                        <span class="mdc-list-item__primary-text"><i class="bi bi-file-richtext"></i> @form.Name</span>
+                        <span class="mdc-list-item__secondary-text">@form.Email</span>
+                    </span>
+
+                    <div class="position-absolute" style="right: 12px;">
+                        <i class="bi bi-pencil-square h5" style="color: cornflowerblue"></i>
+                    </div>
+
+                </li>
+            }
+
+        </ul>
+    </div>
+</div>
