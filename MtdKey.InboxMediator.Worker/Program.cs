@@ -1,9 +1,12 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MtdKey.InboxMediator;
 using MtdKey.InboxMediator.Service;
 using MtdKey.InboxMediator.Worker;
+using MtdKey.OrderMaker.Areas.Identity.Data;
 using MtdKey.OrderMaker.Core;
 using MtdKey.OrderMaker.Entity;
+using MtdKey.OrderMaker.Services;
 using MtdKey.OrderMaker.Services.FileStorage;
 using System.Text;
 
@@ -15,11 +18,19 @@ string orderMakerData = builder.Configuration.GetConnectionString("OrderMakerDat
 builder.Services.AddDbContext<OrderMakerContext>(options =>
     options.UseMySql(orderMakerData, ServerVersion.AutoDetect(orderMakerData)));
 
-//builder.Services.AddHostedService<MessageLoader>();
-builder.Services.AddHostedService<FormLoader>();
+
+string orderMakerIdentity = builder.Configuration.GetConnectionString("OrderMakerIdentity") ?? string.Empty;
+builder.Services.AddDbContext<IdentityDbContext>(options =>
+    options.UseMySql(orderMakerIdentity, ServerVersion.AutoDetect(orderMakerIdentity)));
+
+
 builder.Services.AddInboxMediator(options => options.ConnectionString = builder.Configuration.GetConnectionString("InboxMediator") ?? string.Empty);
 builder.Services.Configure<FileStorageOption>(builder.Configuration.GetSection(nameof(FileStorageOption)));
 builder.Services.AddScoped<IFileStorageService, FileStorageService<OrderMakerContext>>();
 builder.Services.AddScoped<IEmailMediatorReader, EmailMediatorReader<FormLoaderHandler>>();
+
+builder.Services.AddHostedService<MessageLoader>();
+builder.Services.AddHostedService<FormLoader>();
+
 var host = builder.Build();
 host.Run();

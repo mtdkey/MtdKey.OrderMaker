@@ -18,7 +18,6 @@ using System.Net.Mail;
 using System.Net;
 using Microsoft.Extensions.Options;
 using System.Security.Claims;
-using System.Text.RegularExpressions;
 
 namespace MtdKey.OrderMaker.Services
 {
@@ -56,7 +55,7 @@ namespace MtdKey.OrderMaker.Services
         public async Task<Dictionary<string, string>> GetPublicFormsAsync()
         {
             var dictionary = new Dictionary<string, string>();
-            var publicPolicyId = await appParams.GetValueAsync(AppConfig.ParamId.RegisterPolicy);
+            var publicPolicyId = await appParams.GetValueAsync(ParamId.RegisterPolicy);
             var policies = await context.MtdPolicyForms.Include(x => x.MtdFormNavigation)
                 .Where(x => x.MtdPolicy == publicPolicyId).ToListAsync();
             policies.ForEach(policy =>

@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using System.Linq;
+﻿using System.Linq;
 using System.Reflection;
 
 namespace MtdKey.OrderMaker.AppConfig

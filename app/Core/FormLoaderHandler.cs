@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using MimeKit;
+using Microsoft.Extensions.Logging;
 using MtdKey.InboxMediator;
 using MtdKey.OrderMaker.Entity;
 using MtdKey.OrderMaker.Services.FileStorage;
@@ -8,22 +8,27 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using IdentityDbContext = MtdKey.OrderMaker.Entity.IdentityDbContext;
 
 namespace MtdKey.OrderMaker.Core
 {
     public class FormLoaderHandler : EmailModelHandler
     {
         private IServiceScopeFactory serviceScopeFactory = null;
+        public override void SetServiceScopeFactory(IServiceScopeFactory serviceScopeFactory)
+        {
+            this.serviceScopeFactory = serviceScopeFactory;
+        }
 
         public override async Task<bool> HandleAsync(EmailModel emailModel)
         {
             using IServiceScope scope = serviceScopeFactory.CreateScope();
+            var context = scope.ServiceProvider.GetRequiredService<OrderMakerContext>();
+            var storageService = scope.ServiceProvider.GetRequiredService<IFileStorageService>();
+            var logger = scope.ServiceProvider.GetRequiredService<ILogger<FormLoaderHandler>>();
 
-            OrderMakerContext context =
-                    scope.ServiceProvider.GetRequiredService<OrderMakerContext>();
+            var identityContext = scope.ServiceProvider.GetRequiredService<IdentityDbContext>();
 
-            IFileStorageService storageService =
-                    scope.ServiceProvider.GetRequiredService<IFileStorageService>();
 
             var targetForms = await context.TargetForms
                 .Include(x => x.TargetFields)
@@ -32,6 +37,25 @@ namespace MtdKey.OrderMaker.Core
                 .AsNoTracking()
                 .ToListAsync();
 
+            try
+            {
+                await context.Database.BeginTransactionAsync();
+                await HandleTargetsAsync(emailModel, identityContext, context, storageService, targetForms);
+                await context.Database.CommitTransactionAsync();
+
+            }
+            catch (Exception ex)
+            {
+                logger.LogError("{message}", ex.Message);
+                return false;
+            }
+
+            return true;
+        }
+
+        private static async Task HandleTargetsAsync(EmailModel emailModel, IdentityDbContext identityContext,
+            OrderMakerContext context, IFileStorageService storageService, List<TargetForm> targetForms)
+        {
             foreach (var targetForm in targetForms)
             {
                 var mtdStore = new MtdStore
@@ -83,7 +107,6 @@ namespace MtdKey.OrderMaker.Core
                         });
                 }
 
-
                 var dataList = emailModel.Body.SplitByLength(255);
                 var memos = new List<MtdStoreMemo>();
                 var fieldId = targetForm.TargetFields.Where(x => x.Target == (int)RenderTarget.Body)
@@ -101,18 +124,30 @@ namespace MtdKey.OrderMaker.Core
                 });
 
                 await context.MtdStoreMemos.AddRangeAsync(memos);
-
                 await context.SaveChangesAsync();
 
+                var user = await identityContext.Users.FirstOrDefaultAsync(x => x.NormalizedEmail == emailModel.EmailAddress.ToUpper());
+
+                if (user != null)
+                {
+                    await context.MtdStoreOwner.AddAsync(new MtdStoreOwner
+                    {
+                        Id = mtdStore.Id,
+                        UserId = user.Id,
+                        UserName = user.GetFullName()
+                    });
+
+                    await context.MtdLogDocument.AddAsync(new MtdLogDocument
+                    {
+                        MtdStore = mtdStore.Id,
+                        UserId = user.Id,
+                        UserName = user.GetFullName(),
+                        TimeCh = DateTime.Now
+                    });
+
+                    await context.SaveChangesAsync();
+                }
             }
-
-            return true;
         }
-
-        public override void SetServiceScopeFactory(IServiceScopeFactory serviceScopeFactory)
-        {
-            this.serviceScopeFactory = serviceScopeFactory;
-        }
-
     }
 }
