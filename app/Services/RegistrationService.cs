@@ -106,11 +106,20 @@ namespace MtdKey.OrderMaker.Services
 
             var requestForm = await tokenService.DecodeTokenAsync<RequestFormToken>(token);
             var user = await userHandler.Users.FirstOrDefaultAsync(x => x.NormalizedEmail == requestForm.Email.ToUpper());
+            var groupId = await appParams.GetValueAsync(ParamId.RegisterGroup) ?? string.Empty;
+
+            var groupName = await context.MtdGroup.Where(x => x.Id == groupId).Select(x=>x.Name).FirstOrDefaultAsync() ?? "No Group";
 
             if (user == null)
-            {
-                
-                user = new WebAppUser { Title = requestForm.UserName, UserName = requestForm.Email, Email = requestForm.Email, EmailConfirmed = true };
+            {                
+                user = new WebAppUser { 
+                    Title = requestForm.UserName, 
+                    UserName = requestForm.Email, 
+                    Email = requestForm.Email, 
+                    EmailConfirmed = true,  
+                    TitleGroup = groupName,
+                };
+
                 var password = userHandler.GeneratePassword();
                 await userHandler.CreateAsync(user, password);
                 user = await userHandler.Users.FirstOrDefaultAsync(x => x.NormalizedEmail == requestForm.Email.ToUpper());
@@ -118,13 +127,11 @@ namespace MtdKey.OrderMaker.Services
                 var publicPolicyId = await appParams.GetValueAsync(ParamId.RegisterPolicy);
                 await userHandler.SetPolicyForUserAsync(user, publicPolicyId);
 
-                var groupId = await appParams.GetValueAsync(ParamId.RegisterGroup);
-                if(groupId != null && groupId != string.Empty)
+                if(!string.IsNullOrEmpty(groupId))
                 {
                     Claim claimGroup = new("group", groupId);
                     await userHandler.AddClaimAsync(user, claimGroup);
                 }
-
             }
 
             await signInManager.SignInAsync(user, isPersistent: true);

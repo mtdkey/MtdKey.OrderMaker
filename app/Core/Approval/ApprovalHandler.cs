@@ -362,6 +362,16 @@ namespace MtdKey.OrderMaker.Core
             return result;
         }
 
+
+        public async Task<string> GetFirstResolutionIdAsync()
+        {
+            var firstStage = await GetFirstStageAsync();
+            var resolution = await _context.MtdApprovalResolution.Where(x => x.MtdApprovalStageId == firstStage.Id && x.Sequence<1)
+                .Select(x=>x.Id)
+                .FirstOrDefaultAsync();
+            return resolution;
+        }
+
         public async Task<bool> ActionApprove(WebAppUser webAppUser, string resolution = null, string comment = null)
         {
 
@@ -415,7 +425,7 @@ namespace MtdKey.OrderMaker.Core
                     mtdLogApproval.Note = Resolution.Name;
                     mtdLogApproval.Color = Resolution.Color;
                 }
-            }
+            } 
 
             await _context.MtdLogApproval.AddAsync(mtdLogApproval);
 

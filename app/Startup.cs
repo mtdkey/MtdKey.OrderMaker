@@ -127,7 +127,7 @@ namespace MtdKey.OrderMaker
             services.AddScoped<DataConnector>();
             services.AddMvc(options => options.EnableEndpointRouting = false);
             services.AddInboxMediator(options => options.ConnectionString = Configuration.GetConnectionString("InboxMediator"));
-
+            
 #if DEBUG
             services.AddRazorPages().AddRazorRuntimeCompilation();
 #endif

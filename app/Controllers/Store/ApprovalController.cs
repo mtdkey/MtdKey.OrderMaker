@@ -21,20 +21,12 @@ namespace MtdKey.OrderMaker.Controllers.Store
     [Route("api/store/approval")]
     [ApiController]
     [Authorize(Roles = "Admin,User")]
-    public class ApprovalController : ControllerBase
+    public class ApprovalController(DataConnector context, UserHandler userHandler, IEmailSenderBlank emailSender, IStringLocalizer<SharedResource> sharedLocalizer) : ControllerBase
     {
-        private readonly DataConnector _context;
-        private readonly UserHandler _userHandler;
-        private readonly IEmailSenderBlank _emailSender;
-        private readonly IStringLocalizer<SharedResource> _localizer;
-
-        public ApprovalController(DataConnector context, UserHandler userHandler, IEmailSenderBlank emailSender, IStringLocalizer<SharedResource> sharedLocalizer)
-        {
-            _context = context;
-            _userHandler = userHandler;
-            _emailSender = emailSender;
-            _localizer = sharedLocalizer;
-        }
+        private readonly DataConnector _context = context;
+        private readonly UserHandler _userHandler = userHandler;
+        private readonly IEmailSenderBlank _emailSender = emailSender;
+        private readonly IStringLocalizer<SharedResource> _localizer = sharedLocalizer;
 
         [HttpPost("start")]
         [ValidateAntiForgeryToken]
