@@ -1,9 +1,11 @@
 ﻿using MtdKey.OrderMaker.AppConfig;
+using System;
 using System.Linq;
 using System.Reflection;
 
 namespace MtdKey.OrderMaker.Core.Approval
 {
+    [Obsolete]
     public class ApprovalOption(int id)
     {
         private readonly int id = id;

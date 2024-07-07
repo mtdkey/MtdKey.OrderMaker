@@ -1,25 +1,19 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using MtdKey.InboxMediator;
 using MtdKey.OrderMaker.AppConfig;
 using MtdKey.OrderMaker.Areas.Identity.Data;
+using MtdKey.OrderMaker.Core;
 using MtdKey.OrderMaker.Core.Approval;
 using MtdKey.OrderMaker.Entity;
 using MtdKey.OrderMaker.Services.FileStorage;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
 using IdentityDbContext = MtdKey.OrderMaker.Entity.IdentityDbContext;
 
-namespace MtdKey.OrderMaker.Core
+namespace MtdKey.InboxMediator.Worker
 {
     public class FormLoaderHandler : EmailModelHandler
     {
-        private IServiceScopeFactory serviceScopeFactory = null;
+        private IServiceScopeFactory? serviceScopeFactory;
         public override void SetServiceScopeFactory(IServiceScopeFactory serviceScopeFactory)
         {
             this.serviceScopeFactory = serviceScopeFactory;
@@ -27,6 +21,7 @@ namespace MtdKey.OrderMaker.Core
 
         public override async Task<bool> HandleAsync(EmailModel emailModel)
         {
+            if (serviceScopeFactory == null) { return false; }
             using IServiceScope scope = serviceScopeFactory.CreateScope();
             var context = scope.ServiceProvider.GetRequiredService<OrderMakerContext>();
             var storageService = scope.ServiceProvider.GetRequiredService<IFileStorageService>();
@@ -45,7 +40,7 @@ namespace MtdKey.OrderMaker.Core
             {
                 await context.Database.BeginTransactionAsync();
                 await identityContext.Database.BeginTransactionAsync();
-                await HandleTargetsAsync(emailModel, identityContext, context, storageService, targetForms, approvalService);      
+                await HandleTargetsAsync(emailModel, identityContext, context, storageService, targetForms, approvalService);
                 await identityContext.Database.CommitTransactionAsync();
                 await context.Database.CommitTransactionAsync();
 
@@ -100,11 +95,11 @@ namespace MtdKey.OrderMaker.Core
 
                 foreach (var attachment in emailModel.Attachments)
                 {
-                    var guid = await storageService.PutFileAsync(attachment.FileName, attachment.Size, attachment.FileType, attachment.Data);
+                    Guid guid = await storageService.PutFileAsync(attachment.FileName, attachment.Size, attachment.FileType, attachment.Data) ?? Guid.Empty;
 
                     emailModel.Body = emailModel.Body.Replace($"cid:{attachment.ContentId}", $"/api/file/{guid}");
 
-                    if (guid != null || guid != Guid.Empty)
+                    if (guid != Guid.Empty)
                         await context.MtdStoreFileLinks.AddAsync(new MtdStoreFileLink()
                         {
                             FieldId = targetForm.TargetFields.Where(x => x.Target == (int)RenderTarget.Attachments)
@@ -113,7 +108,7 @@ namespace MtdKey.OrderMaker.Core
                             FileName = attachment.FileName,
                             FileSize = attachment.Size,
                             FileType = attachment.FileType,
-                            Result = (Guid)guid,
+                            Result = guid,
                         });
                 }
 
@@ -193,7 +188,7 @@ namespace MtdKey.OrderMaker.Core
                 Email = emailModel.EmailAddress,
                 NormalizedEmail = emailModel.EmailAddress.ToUpper(),
                 Title = emailModel.EmailName,
-                TitleGroup = string.IsNullOrEmpty(groupId) ? "No Group" : group.Name,
+                TitleGroup = string.IsNullOrEmpty(groupId) ? "No Group" : group?.Name,
                 UserName = emailModel.EmailAddress,
                 NormalizedUserName = emailModel.EmailAddress.ToUpper(),
                 EmailConfirmed = true,
@@ -227,7 +222,7 @@ namespace MtdKey.OrderMaker.Core
 
             var userRoleId = identityContext.Roles.Where(x => x.NormalizedName == "USER").Select(x => x.Id).FirstOrDefault();
 
-            if(userRoleId != null)
+            if (userRoleId != null)
             {
                 await identityContext.UserRoles.AddAsync(
                     new IdentityUserRole<string>

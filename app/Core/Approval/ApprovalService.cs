@@ -3,6 +3,8 @@ using Microsoft.Extensions.Logging;
 using MtdKey.OrderMaker.Areas.Identity.Data;
 using MtdKey.OrderMaker.Entity;
 using MtdKey.OrderMaker.Services;
+using MtdKey.OrderMaker.Services.EmailService;
+using MtdKey.OrderMaker.Services.EmailService.Templates;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,18 +12,23 @@ using System.Threading.Tasks;
 
 namespace MtdKey.OrderMaker.Core.Approval
 {
-    public class ApprovalService(ILogger<ApprovalService> logger, OrderMakerContext dataContext, IdentityDbContext userContext) : IApprovalService
+    public class ApprovalService(ILogger<ApprovalService> logger, OrderMakerContext dataContext, 
+        IdentityDbContext userContext, IEmailService emailService) : IApprovalService
     {
         private readonly ILogger<ApprovalService> logger = logger;
         private readonly OrderMakerContext dataContext = dataContext;
         private readonly IdentityDbContext userContext = userContext;
+        private readonly IEmailService emailService = emailService;
 
         public async Task<bool> StartApprovalChainAsync(Guid docId)
         {
-            var formId = await dataContext.MtdStore.Where(x=>x.Id == docId.ToString()).Select(x=>x.MtdFormId).FirstOrDefaultAsync();
-            if (formId == null || !await dataContext.MtdApproval.AnyAsync(x => x.MtdForm == formId)) return false;
+            var mtdStore = await dataContext.MtdStore.Where(x => x.Id == docId.ToString()).FirstOrDefaultAsync();
+           
+            if (mtdStore == null || !await dataContext.MtdApproval.AnyAsync(x => x.MtdForm == mtdStore.MtdFormId)) return false;
+            var formId = mtdStore.MtdFormId;
 
-            var docOwnerUserId = await dataContext.MtdStoreOwner
+
+           var docOwnerUserId = await dataContext.MtdStoreOwner
                 .Where(x => x.Id == docId.ToString())
                 .Select(x => x.UserId)
                 .FirstOrDefaultAsync();
@@ -33,7 +40,6 @@ namespace MtdKey.OrderMaker.Core.Approval
                 .AsSplitQuery()
                 .AsNoTracking()
                 .FirstOrDefaultAsync(x => x.MtdForm == formId);
-
 
 
             MtdApprovalStage currentStage = approval.MtdApprovalStages.FirstOrDefault(x => x.Stage == 1);
@@ -76,47 +82,20 @@ namespace MtdKey.OrderMaker.Core.Approval
             await dataContext.SaveChangesAsync();
 
 
-            ///ADD TASK TO SEND EMAIL
+            var recepient = await userContext.Users.FirstOrDefaultAsync(u => u.Id == nextStage.UserId);
+            if (recepient == null) return true;
+
+            var formName = await dataContext.MtdForm.Where(x=>x.Id == formId).Select(x=>x.Name).FirstOrDefaultAsync();
+            await emailService.AddEmailTaskAsync(recepient.Email, new StartApprovalDesigner
+            {
+                DocId = docId,
+                FormId = Guid.Parse(formId),
+                FormName = formName,
+                Created = mtdStore.Timecr,
+                Number = mtdStore.Sequence.ToString("D9"),
+            });
 
             return true;
         }
-
-        //private async Task<bool> SendEmailForUser(string UserId)
-        //{
-
-        //    string storeId = await approvalHandler.GetStoreID();
-        //    MtdForm mtdForm = await approvalHandler.GetFormAsync();
-
-        //    MtdApprovalStage stageNext = await approvalHandler.GetNextStageAsync();
-
-        //    if (await approvalHandler.IsFirstStageAsync())
-        //    {
-        //        WebAppUser userNext = userHandler.Users.Where(x => x.Id == stageNext.UserId).FirstOrDefault();
-        //        BlankEmail blankEmail = new()
-        //        {
-        //            Subject = localizer["Approval event"],
-        //            Email = userNext.Email,
-        //            Header = localizer["Approval required"],
-        //            Content = new List<string> {
-        //                $"<strong>{localizer["Document"]} - {mtdForm.Name}</strong>",
-        //                $"{localizer["User"]} {currentUser.Title} {localizer["started a new approval at"]} {DateTime.UtcNow}"
-        //                }
-        //        };
-
-        //        if (comment != null && comment.Length > 0)
-        //        {
-        //            blankEmail.Content.Add($"{localizer["User's comment"]}: <em>{comment}</em>");
-        //        }
-
-        //        blankEmail.Content.Add($"{localizer["Click on the link to view the document that required to approve."]}");
-        //        blankEmail.Content.Add($"<a href='{httpContextAccessor.HttpContext.Request.Scheme}://" +
-        //            $"{httpContextAccessor.HttpContext.Request.Host}/workplace/store/details?id={storeId}'>" +
-        //            $"{localizer["Document link"]}</a>");
-
-        //        await emailSender.SendEmailBlankAsync(blankEmail);
-        //    }
-
-        //    return true;
-        //}
     }
 }

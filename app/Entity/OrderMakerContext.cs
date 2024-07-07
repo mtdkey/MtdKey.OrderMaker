@@ -4,12 +4,13 @@
 */
 
 using Microsoft.EntityFrameworkCore;
+using MtdKey.OrderMaker.Services.EmailService.Entity;
 using MtdKey.OrderMaker.Services.FileStorage;
 using System;
 
 namespace MtdKey.OrderMaker.Entity
 {
-    public partial class OrderMakerContext : DbContext, IFileStorageContext
+    public partial class OrderMakerContext : DbContext, IFileStorageContext, IEmailServiceContext
     {
         public OrderMakerContext(DbContextOptions<OrderMakerContext> options) : base(options) { }
 
@@ -24,6 +25,7 @@ namespace MtdKey.OrderMaker.Entity
         public virtual DbSet<MtdGroup> MtdGroup { get; set; }
 
         public DbSet<FileStorageItem> FileStorageItems { get; set; }
+        public DbSet<EmailTask> EmailTasks { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

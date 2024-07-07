@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 
 namespace MtdKey.OrderMaker.Core
 {
-    internal static class FuncExtensions
+    public static class FuncExtensions
     {
 
         public static IEnumerable<string> SplitByLength(this string str, int maxLength)

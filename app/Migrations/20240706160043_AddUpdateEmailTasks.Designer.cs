@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MtdKey.OrderMaker.Entity;
 
@@ -11,9 +12,11 @@ using MtdKey.OrderMaker.Entity;
 namespace MtdKey.OrderMaker.Migrations
 {
     [DbContext(typeof(OrderMakerContext))]
-    partial class OrderMakerContextModelSnapshot : ModelSnapshot
+    [Migration("20240706160043_AddUpdateEmailTasks")]
+    partial class AddUpdateEmailTasks
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
