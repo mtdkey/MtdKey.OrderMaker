@@ -10160,7 +10160,6 @@
   "projectFileDependencyGroups": {
     "net8.0": [
       "Microsoft.Extensions.Hosting >= 8.0.0",
-      "MtdKey.InboxMediator >= 1.0.0",
       "MtdKey.OrderMaker >= 3.2.1"
     ]
   },
@@ -10197,9 +10196,6 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\MTDKey\\GitHub\\MtdKey.InboxMediator\\MtdKey.InboxMediator.csproj": {
-              "projectPath": "D:\\MTDKey\\GitHub\\MtdKey.InboxMediator\\MtdKey.InboxMediator.csproj"
-            },
             "D:\\MTDKey\\GitHub\\MtdKey.OrderMaker\\app\\MtdKey.OrderMaker.csproj": {
               "projectPath": "D:\\MTDKey\\GitHub\\MtdKey.OrderMaker\\app\\MtdKey.OrderMaker.csproj"
             }

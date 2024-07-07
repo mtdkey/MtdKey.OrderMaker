@@ -352,6 +352,24 @@ namespace MtdKey.OrderMaker.Core
                   .Where(x => x.IdUser == appUser.Id && x.MtdFormId == formId)
                   .FirstOrDefaultAsync();
 
+
+            if (userFilter == null)
+            {
+                userFilter = new MtdFilter
+                {
+                    IdUser = appUser.Id,
+                    MtdFormId = formId,
+                    SearchNumber = "",
+                    SearchText = "",
+                    Page = 1,
+                    PageSize = 10,
+                    ShowDate = 1,
+                    ShowNumber = 1
+                };
+                await context.MtdFilter.AddAsync(userFilter);
+                await context.SaveChangesAsync();
+            }
+
             return userFilter;
         }
 

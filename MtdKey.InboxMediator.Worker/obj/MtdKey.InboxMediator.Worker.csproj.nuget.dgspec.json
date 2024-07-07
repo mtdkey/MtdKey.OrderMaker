@@ -334,9 +334,6 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\MTDKey\\GitHub\\MtdKey.InboxMediator\\MtdKey.InboxMediator.csproj": {
-                "projectPath": "D:\\MTDKey\\GitHub\\MtdKey.InboxMediator\\MtdKey.InboxMediator.csproj"
-              },
               "D:\\MTDKey\\GitHub\\MtdKey.OrderMaker\\app\\MtdKey.OrderMaker.csproj": {
                 "projectPath": "D:\\MTDKey\\GitHub\\MtdKey.OrderMaker\\app\\MtdKey.OrderMaker.csproj"
               }

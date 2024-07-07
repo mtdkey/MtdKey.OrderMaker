@@ -12,7 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\MtdKey.InboxMediator\MtdKey.InboxMediator.csproj" />
     <ProjectReference Include="..\app\MtdKey.OrderMaker.csproj" />
   </ItemGroup>
 </Project>
