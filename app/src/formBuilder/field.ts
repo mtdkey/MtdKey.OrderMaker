@@ -43,13 +43,23 @@ export class Field {
 
         this.btnEditor.addEventListener("click", (e) => {
 
-            if (this.#data.type === 11) {
-                values.fieldListDialog.setData(binder.#data);
-                values.fieldListDialog.screen.show();
-            } else {
-                values.fieldDialog.setData(binder.#data);
-                values.fieldDialog.screen.show();
+            switch (this.#data.type) {
+                case 11: {
+                    values.fieldListDialog.setData(binder.#data);
+                    values.fieldListDialog.screen.show();
+                    break;
+                }
+                case 15: {
+                    values.fieldHtmlDialog.setData(binder.#data);
+                    values.fieldHtmlDialog.screen.show();
+                    break;
+                }
+                default: {
+                    values.fieldDialog.setData(binder.#data);
+                    values.fieldDialog.screen.show();
+                }
             }
+
         });
 
         this.btnRemover.addEventListener("click", (e) => {

@@ -6,6 +6,7 @@ import { MDCTextField } from '@material/textfield';
 import { PartDialog } from "./partDialog";
 import { FieldDialog } from "./FieldDialog";
 import { FieldListDialog } from "./FieldListDialog";
+import { FieldHtmlDialog } from "./FieldHtmlDialog";
 
 
 export class Values {
@@ -46,6 +47,7 @@ export class Values {
     styleFormPartColumns: string;
     fieldDialog: FieldDialog;
     fieldListDialog: FieldListDialog;
+    fieldHtmlDialog: FieldHtmlDialog;
     FormInfoModels: FormInfoModel[];
 
     constructor() {
@@ -90,5 +92,6 @@ export class Values {
         this.partDialog = new PartDialog(this);
         this.fieldDialog = new FieldDialog(this);
         this.fieldListDialog = new FieldListDialog(this);
+        this.fieldHtmlDialog = new FieldHtmlDialog(this);
     }
 }

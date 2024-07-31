@@ -1,6 +1,4 @@
-﻿
-
-export enum FieldType {
+﻿export enum FieldType {
     Text = 1,
     Integer = 2,
     Money = 3,
@@ -13,6 +11,7 @@ export enum FieldType {
     Checkbox = 12,
     Link = 13,
     FileStorage = 14,
+    HtmlEditor = 15,
 }
 
 export function GetFileTypeInfo(fieldType: FieldType): HTMLDivElement {

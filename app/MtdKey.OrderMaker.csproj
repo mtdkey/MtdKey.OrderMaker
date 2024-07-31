@@ -53,7 +53,7 @@ OrderMaker provides the ability quickly create a solution to consolidate informa
     <PackageReference Include="MtdKey.Cipher" Version="1.1.2" />
     <PackageReference Include="NPOI" Version="2.7.0" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.2" />
-    <PackageReference Include="SixLabors.ImageSharp" Version="3.1.4" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="3.1.5" />
   </ItemGroup>
 
 

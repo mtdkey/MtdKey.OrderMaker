@@ -1,0 +1,53 @@
+﻿@using MtdKey.OrderMaker;
+@using Microsoft.AspNetCore.Mvc.Localization
+@using MtdKey.OrderMaker.Components.Controls;
+@using MtdKey.OrderMaker.Models.Controls.MTDSelectList;
+@using MtdKey.OrderMaker.Models.Controls.MTDTextField;
+@inject IHtmlLocalizer<FormBuilderLocalizer> localizer;
+
+
+<div class="modal fade " id="fieldHtmlDialog" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <div style="display: flex; flex-wrap:wrap;">
+                    <h5 class="modal-title">@localizer["Field Attribute Editor"]</h5>
+                    <div class="formPart_item_title_type ps-2" style="font-size: 1em;">
+                    </div>
+                </div>
+
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                @await Component.InvokeAsync(typeof(MTDTextField), new MTDTextFieldTags
+                   {
+                       Id = "fieldHtmlName",
+                       Name = "fieldHtmlName",
+                       MTDTexFieldView = MTDTextFieldViews.Outlined,
+                       Label = "Field Name",
+                       LabelLocalized = true,
+                       Required = true,
+                   })
+
+                <div class="pt-2">
+                    <div class="block-editor">
+                        <div class="block-editor-title">@localizer["Field Type"]</div>
+                        <div class="form-check form-check-inline form-switch block-editor-checker">
+                            <input class="form-check-input" type="checkbox" role="switch" id="swithHtmlReadonly">
+                            <label class="form-check-label" for="swithHtmlReadonly"> @localizer["Readonly"]</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">@localizer["Close"]</button>
+                @*<button type="button" class="btn btn-light text-primary">@localizer["Apply"]</button>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+

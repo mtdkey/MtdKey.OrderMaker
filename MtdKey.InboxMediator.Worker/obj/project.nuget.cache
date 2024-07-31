@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "agBaXUnxZ9y3FmHgauKUZ//hNEfi+RY+GFA+rcFTTMUCPJm3fpH7DXP2WkJTrXdwRLg3zf/C8sQX+XRk8jaDIg==",
+  "dgSpecHash": "xtbIIb/ihJB2loOwgNJKg5zoKtDNWDdaA2zDdHBMOh3372MXJW6VZ5v+toy3gg8Pucrc1LpI9auhGwYGU0WvCg==",
   "success": true,
   "projectFilePath": "D:\\MTDKey\\GitHub\\MtdKey.OrderMaker\\MtdKey.InboxMediator.Worker\\MtdKey.InboxMediator.Worker.csproj",
   "expectedPackageFiles": [
@@ -170,7 +170,7 @@
     "C:\\Users\\Oleg Bruev\\.nuget\\packages\\pomelo.entityframeworkcore.mysql\\8.0.2\\pomelo.entityframeworkcore.mysql.8.0.2.nupkg.sha512",
     "C:\\Users\\Oleg Bruev\\.nuget\\packages\\sharpziplib\\1.3.3\\sharpziplib.1.3.3.nupkg.sha512",
     "C:\\Users\\Oleg Bruev\\.nuget\\packages\\sixlabors.fonts\\1.0.1\\sixlabors.fonts.1.0.1.nupkg.sha512",
-    "C:\\Users\\Oleg Bruev\\.nuget\\packages\\sixlabors.imagesharp\\3.1.4\\sixlabors.imagesharp.3.1.4.nupkg.sha512",
+    "C:\\Users\\Oleg Bruev\\.nuget\\packages\\sixlabors.imagesharp\\3.1.5\\sixlabors.imagesharp.3.1.5.nupkg.sha512",
     "C:\\Users\\Oleg Bruev\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
     "C:\\Users\\Oleg Bruev\\.nuget\\packages\\system.clientmodel\\1.0.0\\system.clientmodel.1.0.0.nupkg.sha512",
     "C:\\Users\\Oleg Bruev\\.nuget\\packages\\system.codedom\\5.0.0\\system.codedom.5.0.0.nupkg.sha512",

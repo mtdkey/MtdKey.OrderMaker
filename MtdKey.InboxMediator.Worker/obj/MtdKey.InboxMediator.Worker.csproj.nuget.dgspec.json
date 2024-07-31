@@ -97,7 +97,11 @@
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "D:\\MTDKey\\GitHub\\MtdKey.EmailBuilder\\MtdKey.EmailBuilder\\MtdKey.EmailBuilder.csproj": {
+                "projectPath": "D:\\MTDKey\\GitHub\\MtdKey.EmailBuilder\\MtdKey.EmailBuilder\\MtdKey.EmailBuilder.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -279,7 +283,7 @@
             },
             "SixLabors.ImageSharp": {
               "target": "Package",
-              "version": "[3.1.4, )"
+              "version": "[3.1.5, )"
             }
           },
           "imports": [

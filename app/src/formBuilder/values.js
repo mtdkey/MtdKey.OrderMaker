@@ -7,6 +7,7 @@ const textfield_1 = require("@material/textfield");
 const partDialog_1 = require("./partDialog");
 const FieldDialog_1 = require("./FieldDialog");
 const FieldListDialog_1 = require("./FieldListDialog");
+const FieldHtmlDialog_1 = require("./FieldHtmlDialog");
 class Values {
     constructor() {
         this.placeBuilder = document.getElementById("placeBuilder");
@@ -44,6 +45,7 @@ class Values {
         this.partDialog = new partDialog_1.PartDialog(this);
         this.fieldDialog = new FieldDialog_1.FieldDialog(this);
         this.fieldListDialog = new FieldListDialog_1.FieldListDialog(this);
+        this.fieldHtmlDialog = new FieldHtmlDialog_1.FieldHtmlDialog(this);
     }
 }
 exports.Values = Values;
