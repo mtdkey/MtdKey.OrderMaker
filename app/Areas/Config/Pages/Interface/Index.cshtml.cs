@@ -11,7 +11,6 @@ using MtdKey.OrderMaker.AppConfig;
 using MtdKey.OrderMaker.Entity;
 using System;
 using System.Linq;
-using System.Reflection.Metadata;
 using System.Threading.Tasks;
 
 namespace MtdKey.OrderMaker.Areas.Config.Pages.Interface
@@ -38,7 +37,6 @@ namespace MtdKey.OrderMaker.Areas.Config.Pages.Interface
             ViewData["IconColor"] = iconColor ?? "#ffffff";
             return Page();
         }
-
 
         public async Task<IActionResult> OnPostAsync()
         {

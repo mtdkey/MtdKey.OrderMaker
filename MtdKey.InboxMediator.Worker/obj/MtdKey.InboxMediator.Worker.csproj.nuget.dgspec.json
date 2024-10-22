@@ -10,14 +10,14 @@
         "projectUniqueName": "D:\\MTDKey\\GitHub\\MtdKey.EmailBuilder\\MtdKey.EmailBuilder\\MtdKey.EmailBuilder.csproj",
         "projectName": "MtdKey.EmailBuilder",
         "projectPath": "D:\\MTDKey\\GitHub\\MtdKey.EmailBuilder\\MtdKey.EmailBuilder\\MtdKey.EmailBuilder.csproj",
-        "packagesPath": "C:\\Users\\Oleg Bruev\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\job4b\\.nuget\\packages\\",
         "outputPath": "D:\\MTDKey\\GitHub\\MtdKey.EmailBuilder\\MtdKey.EmailBuilder\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Oleg Bruev\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\job4b\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -65,7 +65,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.205/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
@@ -75,14 +75,14 @@
         "projectUniqueName": "D:\\MTDKey\\GitHub\\MtdKey.InboxMediator\\MtdKey.InboxMediator.csproj",
         "projectName": "MtdKey.InboxMediator",
         "projectPath": "D:\\MTDKey\\GitHub\\MtdKey.InboxMediator\\MtdKey.InboxMediator.csproj",
-        "packagesPath": "C:\\Users\\Oleg Bruev\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\job4b\\.nuget\\packages\\",
         "outputPath": "D:\\MTDKey\\GitHub\\MtdKey.InboxMediator\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Oleg Bruev\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\job4b\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -156,7 +156,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.205/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
@@ -166,14 +166,14 @@
         "projectUniqueName": "D:\\MTDKey\\GitHub\\MtdKey.OrderMaker\\app\\MtdKey.OrderMaker.csproj",
         "projectName": "MtdKey.OrderMaker",
         "projectPath": "D:\\MTDKey\\GitHub\\MtdKey.OrderMaker\\app\\MtdKey.OrderMaker.csproj",
-        "packagesPath": "C:\\Users\\Oleg Bruev\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\job4b\\.nuget\\packages\\",
         "outputPath": "D:\\MTDKey\\GitHub\\MtdKey.OrderMaker\\app\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Oleg Bruev\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\job4b\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -215,7 +215,7 @@
           "dependencies": {
             "Azure.Identity": {
               "target": "Package",
-              "version": "[1.11.4, )"
+              "version": "[1.13.0, )"
             },
             "BouncyCastle.Cryptography": {
               "target": "Package",
@@ -223,51 +223,51 @@
             },
             "HtmlSanitizer": {
               "target": "Package",
-              "version": "[8.0.865, )"
+              "version": "[8.1.870, )"
             },
             "MailKit": {
               "target": "Package",
-              "version": "[4.6.0, )"
+              "version": "[4.8.0, )"
             },
             "Microsoft.AspNetCore.DataProtection.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[8.0.6, )"
+              "version": "[8.0.10, )"
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[8.0.6, )"
+              "version": "[8.0.10, )"
             },
             "Microsoft.AspNetCore.Identity.UI": {
               "target": "Package",
-              "version": "[8.0.6, )"
+              "version": "[8.0.10, )"
             },
             "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": {
               "target": "Package",
-              "version": "[8.0.6, )"
+              "version": "[8.0.10, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[8.0.6, )"
+              "version": "[8.0.10, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[8.0.6, )"
+              "version": "[8.0.10, )"
             },
             "Microsoft.TypeScript.MSBuild": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[5.4.5, )"
+              "version": "[5.6.2, )"
             },
             "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
               "target": "Package",
-              "version": "[1.20.1, )"
+              "version": "[1.21.0, )"
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
-              "version": "[8.0.2, )"
+              "version": "[8.0.6, )"
             },
             "MtdKey.Cipher": {
               "target": "Package",
@@ -275,7 +275,7 @@
             },
             "NPOI": {
               "target": "Package",
-              "version": "[2.7.0, )"
+              "version": "[2.7.1, )"
             },
             "Pomelo.EntityFrameworkCore.MySql": {
               "target": "Package",
@@ -284,6 +284,10 @@
             "SixLabors.ImageSharp": {
               "target": "Package",
               "version": "[3.1.5, )"
+            },
+            "System.Text.Json": {
+              "target": "Package",
+              "version": "[8.0.5, )"
             }
           },
           "imports": [
@@ -305,7 +309,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.205/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
@@ -315,14 +319,14 @@
         "projectUniqueName": "D:\\MTDKey\\GitHub\\MtdKey.OrderMaker\\MtdKey.InboxMediator.Worker\\MtdKey.InboxMediator.Worker.csproj",
         "projectName": "MtdKey.InboxMediator.Worker",
         "projectPath": "D:\\MTDKey\\GitHub\\MtdKey.OrderMaker\\MtdKey.InboxMediator.Worker\\MtdKey.InboxMediator.Worker.csproj",
-        "packagesPath": "C:\\Users\\Oleg Bruev\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\job4b\\.nuget\\packages\\",
         "outputPath": "D:\\MTDKey\\GitHub\\MtdKey.OrderMaker\\MtdKey.InboxMediator.Worker\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Oleg Bruev\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\job4b\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -380,7 +384,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.205/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
