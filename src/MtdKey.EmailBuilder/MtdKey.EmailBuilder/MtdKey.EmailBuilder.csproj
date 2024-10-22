@@ -1,0 +1,49 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="TemplateStorage\button.html" />
+    <None Remove="TemplateStorage\columns.html" />
+    <None Remove="TemplateStorage\container.html" />
+    <None Remove="TemplateStorage\divider.html" />
+    <None Remove="TemplateStorage\heading.html" />
+    <None Remove="TemplateStorage\image.html" />
+    <None Remove="TemplateStorage\infoLine.html" />
+    <None Remove="TemplateStorage\link.html" />
+    <None Remove="TemplateStorage\logo.html" />
+    <None Remove="TemplateStorage\spacer.html" />
+    <None Remove="TemplateStorage\text.html" />
+    <None Remove="TemplateStorage\textBold.html" />
+    <None Remove="TemplateStorage\userName.html" />
+    <None Remove="TemplateStorage\_layout.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="TemplateStorage\button.html" />
+    <EmbeddedResource Include="TemplateStorage\columns.html" />
+    <EmbeddedResource Include="TemplateStorage\divider.html" />
+    <EmbeddedResource Include="TemplateStorage\image.html" />
+    <EmbeddedResource Include="TemplateStorage\link.html" />
+    <EmbeddedResource Include="TemplateStorage\logo.html" />
+    <EmbeddedResource Include="TemplateStorage\spacer.html" />
+    <EmbeddedResource Include="TemplateStorage\userName.html" />
+    <EmbeddedResource Include="TemplateStorage\textBold.html" />
+    <EmbeddedResource Include="TemplateStorage\text.html" />
+    <EmbeddedResource Include="TemplateStorage\heading.html" />
+    <EmbeddedResource Include="TemplateStorage\_layout.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="TemplateStorage\container.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="TemplateStorage\infoLine.html" />
+  </ItemGroup>
+
+</Project>
