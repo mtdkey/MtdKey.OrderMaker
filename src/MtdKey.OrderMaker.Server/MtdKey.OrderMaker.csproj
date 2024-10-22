@@ -74,6 +74,7 @@ OrderMaker provides the ability quickly create a solution to consolidate informa
 	  <EmbeddedResource Remove=".github\**" />
 	  <None Remove=".github\**" />
 	  <TypeScriptCompile Remove=".github\**" />
+	  <TypeScriptCompile Remove="node_modules\**" />
 	</ItemGroup>
 
 	<ItemGroup>
