@@ -154,7 +154,7 @@ const RequestFieldList = (idField, selectValue) => {
 
                 selectValue.RemoveItems();
                 data.value.forEach((item, index) => {
-                    selected = false;
+                    var selected = false;
                     if (index === 0) { selected = true; }
                     selectValue.AddItem(item.id, item.name, selected);
                 });

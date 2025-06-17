@@ -97,7 +97,7 @@ namespace MtdKey.OrderMaker.Controllers.Index
             string value = Request.Form["searchNumber"];
 
             WebAppUser user = await _userHandler.GetUserAsync(User);
-            MtdFilter filter = await _context.MtdFilter.FirstOrDefaultAsync(x => x.IdUser == user.Id & x.MtdFormId == form);
+            MtdFilter filter = await _context.MtdFilter.FirstOrDefaultAsync(x => x.IdUser == user.Id && x.MtdFormId == form);
             bool old = true;
             if (filter == null)
             {
@@ -304,7 +304,7 @@ namespace MtdKey.OrderMaker.Controllers.Index
             if (data != null && data.Length > 0) fieldIds = data.Split(",").ToList();
             WebAppUser user = await _userHandler.GetUserAsync(User);
             MtdFilter filter = await _context.MtdFilter
-                .FirstOrDefaultAsync(x => x.IdUser == user.Id & x.MtdFormId == formId);
+                .FirstOrDefaultAsync(x => x.IdUser == user.Id && x.MtdFormId == formId);
 
             if (filter == null)
             {

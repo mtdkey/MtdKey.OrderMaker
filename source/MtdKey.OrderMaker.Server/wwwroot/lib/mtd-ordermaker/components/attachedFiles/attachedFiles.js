@@ -29,7 +29,7 @@ document.querySelectorAll(".attachedFiles").forEach(dropZone => {
 
     FileStorages.push(new FileStorage(dropZone.id));
 
-    buttonExplorer = document.getElementById(`${id}-addExplorer`);
+    var buttonExplorer = document.getElementById(`${id}-addExplorer`);
     buttonExplorer.addEventListener("click", () => {
         input.click();
     });

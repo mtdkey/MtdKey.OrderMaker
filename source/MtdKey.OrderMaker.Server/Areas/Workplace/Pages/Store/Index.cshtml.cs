@@ -38,7 +38,7 @@ namespace MtdKey.OrderMaker.Areas.Workplace.Pages.Store
             bool GroupRight = await _userHandler.CheckUserPolicyAsync(user, indexForm, RightsType.ViewGroup);
             bool OwnerRight = await _userHandler.CheckUserPolicyAsync(user, indexForm, RightsType.ViewOwn);
 
-            if (!isViewer & !OwnerRight & !GroupRight)
+            if (!isViewer && !OwnerRight && !GroupRight)
             {
                 return Forbid();
             }
