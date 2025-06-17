@@ -1,0 +1,33 @@
+﻿version: "3.9"
+
+services:
+  mysql:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_USER: ordermaker
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: ordermaker_identity
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./mysql-init:/docker-entrypoint-initdb.d
+      - ./mysql-config/my.cnf:/etc/mysql/conf.d/my.cnf
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build: .
+    depends_on:
+      mysql:
+        condition: service_healthy
+    ports:
+      - "8080:5000"
+    environment:
+      ConnectionStrings__OrderMakerIdentity: "Server=mysql;Port=3306;Database=ordermaker_identity;User=ordermaker;Password=password;SslMode=none;"
+      ConnectionStrings__OrderMakerData: "Server=mysql;Port=3306;Database=ordermaker_database;User=ordermaker;Password=password;SslMode=none;"
+      ConnectionStrings__InboxMediator: "Server=mysql;Port=3306;Database=ordermaker-inbox;User=ordermaker;Password=password;SslMode=none;"
