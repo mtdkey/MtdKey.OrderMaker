@@ -9,7 +9,8 @@ using System.Net.Mail;
 
 namespace MtdKey.InboxMediator.Service
 {
-    public class EmailMediatorReader<THandler>(InboxMediatorContext context, ILogger<EmailMediatorWorker> logger, IServiceScopeFactory serviceScopeFactory)
+    public class EmailMediatorReader<THandler>(InboxMediatorContext context, 
+        ILogger<EmailMediatorWorker> logger, IServiceScopeFactory serviceScopeFactory)
         : IEmailMediatorReader where THandler : EmailModelHandler, new()
     {
         private readonly InboxMediatorContext context = context;
@@ -22,16 +23,16 @@ namespace MtdKey.InboxMediator.Service
             var flag = await GetReaderFlagAsync(readerModel);
             var emailModelHandler = new THandler();
 
-            var headers = await context.InboxHeaders
-                .AsNoTracking()
+            uint[] uids = await context.InboxHeaders
                 .Where(x => x.EmailAsKey == readerModel.EmailMediator.EmailAsKey && x.UID > flag.MaxUID)
-                .ToArrayAsync();
+                .Select(x => x.UID)
+                .ToArrayAsync() ?? [];
 
-            foreach (var header in headers)
+            foreach (var uid in uids)
             {
                 try
                 {
-                    var emailModel = await GetMessageAsync(readerModel, header.UID);
+                    var emailModel = await GetMessageAsync(readerModel, uid);
                     if (emailModel == null) continue;
 
                     emailModelHandler.SetServiceScopeFactory(serviceProvider);
@@ -39,7 +40,7 @@ namespace MtdKey.InboxMediator.Service
 
                     if (complete)
                     {
-                        flag.MaxUID = header.UID;
+                        flag.MaxUID = uid;
                         context.ReaderFlags.Update(flag);
                         await context.SaveChangesAsync();
                     }
@@ -48,7 +49,7 @@ namespace MtdKey.InboxMediator.Service
                 }
                 catch (Exception ex)
                 {
-                    logger.LogError("{message}", ex.Message);
+                    logger.LogError(ex, "{message}", ex.Message);
                     break;
                 }
             }
@@ -94,7 +95,7 @@ namespace MtdKey.InboxMediator.Service
 
                 if (bodyPart.ContentDisposition?.Disposition == ContentDisposition.Inline || bodyPart.IsAttachment)
                 {
-                    var tempFile = Path.GetTempFileName();
+                    var tempFile = Path.GetRandomFileName();
 
                     using var stream = File.Create(tempFile);
                     await ((MimePart)bodyPart).Content.DecodeToAsync(stream);
