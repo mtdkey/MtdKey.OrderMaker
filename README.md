@@ -62,7 +62,7 @@ Built with enterprise use in mind, it offers fine-grained control over authoriza
 
 - Containerized with **Docker Compose** for easy enterprise-wide delivery
 - Create your `appsettings.json` before starting the application
-- [Read the Wiki](wiki link) for more details
+- [Read the Wiki](https://github.com/mtdkey/MtdKey.OrderMaker/wiki) for more details
 
 ---
 
