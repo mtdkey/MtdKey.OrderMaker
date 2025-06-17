@@ -96,12 +96,9 @@ You can find the administrator’s login and password in appsettings.Docker.json
 
 ## 🔹 License
 
-© Oleg Bruev — **MTD Key OrderMaker** is free and open-source software licensed under the [MIT License](LICENSE).
-
-
-## License
-
-Copyright (c) – presented by [Oleg Bruev](https://github.com/olegbruev/).  
+Copyright (c) presented by [Oleg Bruev](https://github.com/olegbruev/).  
 MTD Key OrderMaker is free and open-source software licensed under the MIT License.
+
+
 
 
